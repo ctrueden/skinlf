@@ -60,7 +60,7 @@ import java.awt.event.*;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 19:47:23 $
+ * @version   $Revision: 1.2 $, $Date: 2003-10-24 20:28:19 $
  */
 public class SkinInternalFrameUI extends BasicInternalFrameUI {
 
@@ -131,7 +131,9 @@ public class SkinInternalFrameUI extends BasicInternalFrameUI {
      */
     public void mouseMoved(MouseEvent e) {
       JComponent pane = getNorthPane();
-      if (pane instanceof SkinTitlePane && ((SkinTitlePane) pane).getWindow().isShaded()) {
+      if (e.getSource()==frame &&
+          pane instanceof SkinTitlePane &&
+          ((SkinTitlePane) pane).getWindow().isShaded()) {
         return;
       }
       super.mouseMoved(e);
@@ -144,6 +146,13 @@ public class SkinInternalFrameUI extends BasicInternalFrameUI {
      */
     public void mouseDragged(MouseEvent e) {
       try {
+        // do not resize the frame if it is shaded
+        JComponent pane = getNorthPane();
+        if (e.getSource()==frame &&
+            pane instanceof SkinTitlePane &&
+            ((SkinTitlePane) pane).getWindow().isShaded()) {
+          return;
+        }
         super.mouseDragged(e);
       } catch (NullPointerException ex) {
         // the nullpointerexception may be thrown by bug id 4383371
