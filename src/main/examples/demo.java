@@ -144,11 +144,6 @@ public class demo extends JApplet {
 
     f.setVisible(true);
 
-    JDialog dialog = new JDialog(f, "title", true);
-    dialog.setResizable(true);
-    dialog.setSize(100, 100);
-    dialog.setVisible(true);
-
     f.addWindowListener(new WindowAdapter() {
       public void windowClosing(WindowEvent event) {
         System.exit(0);
