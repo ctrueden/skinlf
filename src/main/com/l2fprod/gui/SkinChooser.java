@@ -47,17 +47,22 @@
  */
 package com.l2fprod.gui;
 
-import java.awt.*;
+import com.l2fprod.gui.plaf.skin.CompoundSkin;
+import com.l2fprod.gui.plaf.skin.Skin;
+import com.l2fprod.gui.plaf.skin.SkinLookAndFeel;
+import com.l2fprod.gui.plaf.skin.SkinPreviewWindow;
+import com.l2fprod.util.OS;
+
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.Window;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
-import java.util.Vector;
 import java.util.ResourceBundle;
-import javax.swing.*;
+import java.util.Vector;
 
-import com.l2fprod.util.OS;
-import com.l2fprod.gui.plaf.skin.*;
+import javax.swing.*;
 
 /**
  * Skin Chooser. <br>
@@ -65,7 +70,7 @@ import com.l2fprod.gui.plaf.skin.*;
  *
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.2 $, $Date: 2003-12-06 21:46:21 $
+ * @version   $Revision: 1.3 $, $Date: 2004-07-18 16:54:48 $
  */
 public class SkinChooser extends JPanel {
 
