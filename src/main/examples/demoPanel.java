@@ -72,7 +72,7 @@ import com.l2fprod.util.*;
  *
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-02 14:23:02 $
+ * @version   $Revision: 1.2 $, $Date: 2003-08-20 10:49:34 $
  */
 public class demoPanel extends JPanel {
 
@@ -281,7 +281,7 @@ public class demoPanel extends JPanel {
         public void actionPerformed(ActionEvent event) {
           JOptionPane.showMessageDialog(null,
               "SkinLookAndFeel " + SkinLookAndFeel.VERSION + "\n" +
-              "(c) 2000-2002 L2FProd.com");
+              "(c) @YEAR@ L2FProd.com");
         }
       });
     menubar.add(menu);
