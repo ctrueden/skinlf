@@ -77,79 +77,28 @@ public class SkinTitlePane extends BasicInternalFrameTitlePane {
   /**
    * Description of the Field
    */
-  //  protected JMenuBar menuBar;
+  protected Window m_Window;
 
   /**
    * Description of the Field
    */
-  //  protected JMenu windowMenu;
-  /**
-   * Description of the Field
-   */
-  protected Window frame;
+  private Action shadeAction;
 
-  /**
-   * Description of the Field
-   */
-  //  protected Color selectedTitleColor;
-  /**
-   * Description of the Field
-   */
-  //  protected Color selectedTextColor;
-  /**
-   * Description of the Field
-   */
-  //  protected Color notSelectedTitleColor;
-  /**
-   * Description of the Field
-   */
-  //  protected Color notSelectedTextColor;
+  private boolean systemMenuAdded = false;
 
-  /**
-   * Description of the Field
-   */
-  //  protected PropertyChangeListener propertyChangeListener;
+  private Skin skin;
 
-  /**
-   * Description of the Field
-   */
-  //  protected Action closeAction;
-  /**
-   * Description of the Field
-   */
-  //  protected Action maximizeAction;
-  /**
-   * Description of the Field
-   */
-  //  protected Action iconifyAction;
-  /**
-   * Description of the Field
-   */
-  //  protected Action restoreAction;
-  /**
-   * Description of the Field
-   */
-  protected Action shadeAction;
-
-  boolean systemMenuAdded = false;
-
-  private Skin skin = SkinLookAndFeel.getSkin();
-
-  /**
-   * Description of the Field
-   */
   public final static int ICON_OFFSET = 16;
 
   /**
-   * Description of the Field
+   * Align button relative to top left of window
    */
   public final static int ALIGN_TOP_LEFT = 0;
-  // Align button relative to top left of window
+
   /**
-   * Description of the Field
+   * Align button relative to the top right of window
    */
   public final static int ALIGN_TOP_RIGHT = 1;
-  // Align button relative to the top right of window
 
   /**
    * Description of the Field
@@ -160,6 +109,7 @@ public class SkinTitlePane extends BasicInternalFrameTitlePane {
    * Description of the Field
    */
   public final static int MAXIMIZE_ACTION = 22;
+
   /**
    * Description of the Field
    */
@@ -169,27 +119,6 @@ public class SkinTitlePane extends BasicInternalFrameTitlePane {
    * Description of the Field
    */
   public final static int NO_ACTION = -1;
-
-  /**
-   * Description of the Field
-   */
-  protected final static String CLOSE_CMD = "Close";
-  /**
-   * Description of the Field
-   */
-  protected final static String ICONIFY_CMD = "Minimize";
-  /**
-   * Description of the Field
-   */
-  protected final static String RESTORE_CMD = "Restore";
-  /**
-   * Description of the Field
-   */
-  protected final static String MAXIMIZE_CMD = "Maximize";
-  /**
-   * Description of the Field
-   */
-  protected final static String SHADE_CMD = "Shade";
 
   /**
    * Constructor for the SkinTitlePane object
@@ -216,8 +145,7 @@ public class SkinTitlePane extends BasicInternalFrameTitlePane {
    */
   public SkinTitlePane(Window f) {
     super(null);
-    frame = f;
-    install();
+    m_Window = f;
   }
 
   /**
@@ -226,7 +154,7 @@ public class SkinTitlePane extends BasicInternalFrameTitlePane {
    * @return   The Window value
    */
   public Window getWindow() {
-    return frame;
+    return m_Window;
   }
 
   /**
@@ -247,39 +175,17 @@ public class SkinTitlePane extends BasicInternalFrameTitlePane {
     return skin.getFrame().getTopPreferredSize();
   }
 
-
-  /**
-   * Adds a feature to the Notify attribute of the SkinTitlePane object
-   */
-  public void addNotify() {
-    super.addNotify();
-    addSystemMenuItems(windowMenu);
-    enableActions();
-  }
-
-  /**
-   * Description of the Method
-   */
-  public void removeNotify() {
-    super.removeNotify();
-    if (windowMenu != null) {
-      windowMenu.removeAll();
-      systemMenuAdded = false;
-    }
-    uninstallDefaults();
-  }
-
   /**
    * Description of the Method
    *
    * @param g  Description of Parameter
    */
   public void paintComponent(Graphics g) {
-    boolean isSelected = frame.isSelected();
+    boolean isSelected = m_Window.isSelected();
 
     Font f = g.getFont();
 
-    if (frame.getTitle() != null) {
+    if (m_Window.getTitle() != null) {
       if (isSelected) {
         g.setColor(selectedTextColor);
       }
@@ -289,7 +195,7 @@ public class SkinTitlePane extends BasicInternalFrameTitlePane {
       g.setFont(UIManager.getFont("InternalFrame.titleFont"));
     }
 
-    skin.getFrame().paintTop(g, this, isSelected, frame.getTitle());
+    skin.getFrame().paintTop(g, this, isSelected, m_Window.getTitle());
 
     g.setFont(f);
 
@@ -315,12 +221,10 @@ public class SkinTitlePane extends BasicInternalFrameTitlePane {
     add(menuBar);
 
     setOpaque(true);
-  }
 
-  protected void install() {
+    skin = SkinLookAndFeel.getSkin();
+
     createButtons();
-    enableActions();
-    installListeners();
   }
 
   /**
@@ -340,32 +244,30 @@ public class SkinTitlePane extends BasicInternalFrameTitlePane {
   }
 
   /**
-   * Description of the Method
+   * Overriden to register on the window
    */
   protected void installListeners() {
-    propertyChangeListener = createPropertyChangeListener();
-    frame.addPropertyChangeListener(propertyChangeListener);
-  }
-
-  protected void uninstallListeners() {
-    frame.removePropertyChangeListener(propertyChangeListener);
+    if (propertyChangeListener == null) {
+      propertyChangeListener = createPropertyChangeListener();
+    }
+    m_Window.addPropertyChangeListener(propertyChangeListener);
   }
 
   /**
-   * Description of the Method
+   * Overriden to unregister on the window
+   */
+  protected void uninstallListeners() {
+    m_Window.removePropertyChangeListener(propertyChangeListener);
+  }
+
+  /**
+   * Same as parent class except it does not initialize the icons
    */
   protected void installDefaults() {
     selectedTitleColor = UIManager.getColor("InternalFrame.activeTitleBackground");
     selectedTextColor = UIManager.getColor("InternalFrame.activeTitleForeground");
     notSelectedTitleColor = UIManager.getColor("InternalFrame.inactiveTitleBackground");
     notSelectedTextColor = UIManager.getColor("InternalFrame.inactiveTitleForeground");
-  }
-
-
-  /**
-   * Description of the Method
-   */
-  protected void uninstallDefaults() {
   }
 
   /**
@@ -395,7 +297,7 @@ public class SkinTitlePane extends BasicInternalFrameTitlePane {
    * @param button  The feature to be added to the Button attribute
    */
   protected void addButton(SkinWindowButton button) {
-    button.setWindow(frame);
+    button.setWindow(m_Window);
     switch (button.getWindowAction()) {
       case CLOSE_ACTION:
         button.addActionListener(closeAction);
@@ -413,53 +315,24 @@ public class SkinTitlePane extends BasicInternalFrameTitlePane {
     add(button);
   }
 
-
-  /**
-   * Description of the Method
-   */
-  protected void assembleSystemMenu() {
-    if (menuBar == null) menuBar = createSystemMenuBar();
-    if (windowMenu == null) windowMenu = createSystemMenu();
-    menuBar.add(windowMenu);
-    // moved to addNotify - addSystemMenuItems(windowMenu);
-    enableActions();
-  }
-
   /**
    * Adds a feature to the SystemMenuItems attribute of the SkinTitlePane object
    *
    * @param systemMenu  The feature to be added to the SystemMenuItems attribute
    */
   protected void addSystemMenuItems(JMenu systemMenu) {
-    if (!systemMenuAdded) {
-      JMenuItem mi = systemMenu.add(restoreAction);
-      mi.setMnemonic('R');
-      mi = systemMenu.add(iconifyAction);
-      mi.setMnemonic('n');
-      mi = systemMenu.add(maximizeAction);
-      mi.setMnemonic('x');
-      systemMenu.add(shadeAction);
-      systemMenu.add(new JSeparator());
-      mi = systemMenu.add(closeAction);
-      mi.setMnemonic('C');
-      systemMenuAdded = true;
-    }
+    JMenuItem mi = systemMenu.add(restoreAction);
+    mi.setMnemonic('R');
+    mi = systemMenu.add(iconifyAction);
+    mi.setMnemonic('n');
+    mi = systemMenu.add(maximizeAction);
+    mi.setMnemonic('x');
+    systemMenu.add(shadeAction);
+    systemMenu.add(new JSeparator());
+    mi = systemMenu.add(closeAction);
+    mi.setMnemonic('C');
   }
 
-  /**
-   * Description of the Method
-   *
-   * @return   Description of the Returned Value
-   */
-  protected JMenu createSystemMenu() {
-    return new JMenu("    ");
-  }
-
-  /**
-   * Description of the Method
-   *
-   * @return   Description of the Returned Value
-   */
   protected JMenuBar createSystemMenuBar() {
     menuBar = new SystemMenuBar();
     menuBar.setBorderPainted(false);
@@ -469,49 +342,17 @@ public class SkinTitlePane extends BasicInternalFrameTitlePane {
   /**
    * Description of the Method
    */
-  protected void showSystemMenu() {
-    //      windowMenu.setPopupMenuVisible(true);
-    //      windowMenu.setVisible(true);
-    windowMenu.doClick();
-  }
-
-  /**
-   * Post a WINDOW_CLOSING-like event to the frame, so that it can be treated
-   * like a regular Frame.
-   *
-   * @param frame  Description of Parameter
-   */
-  protected void postClosingEvent(JInternalFrame frame) {
-    InternalFrameEvent e = new InternalFrameEvent(
-        frame, InternalFrameEvent.INTERNAL_FRAME_CLOSING);
-    // Try posting event, unless there's a SecurityManager.
-    if (JInternalFrame.class.getClassLoader() == null) {
-      try {
-        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(e);
-        return;
-      } catch (SecurityException se) {
-        // Use dispatchEvent instead.
-      }
-    }
-    frame.dispatchEvent(e);
-  }
-
-
-  /**
-   * Description of the Method
-   */
   protected void enableActions() {
-    if (frame == null) {
+    if (m_Window == null) {
       return;
     }    
-    restoreAction.setEnabled(frame.isMaximum() || frame.isIcon());
-    maximizeAction.setEnabled(frame.isMaximizable());
-    iconifyAction.setEnabled(frame.isIconifiable() && !frame.isIcon());
-    closeAction.setEnabled(frame.isClosable());
-    shadeAction.setEnabled(!frame.isMaximum() && !frame.isIcon());
+    restoreAction.setEnabled(m_Window.isMaximum() || m_Window.isIcon());
+    maximizeAction.setEnabled(m_Window.isMaximizable());
+    iconifyAction.setEnabled(m_Window.isIconifiable() && !m_Window.isIcon());
+    closeAction.setEnabled(m_Window.isClosable());
+    shadeAction.setEnabled(!m_Window.isMaximum() && !m_Window.isIcon());
     doLayout();
   }
-
 
   /**
    * Description of the Method
@@ -689,7 +530,7 @@ public class SkinTitlePane extends BasicInternalFrameTitlePane {
      * Constructor for the CloseAction object
      */
     public CloseAction() {
-      super(CLOSE_CMD);
+      super("Close");
     }
 
     /**
@@ -698,9 +539,9 @@ public class SkinTitlePane extends BasicInternalFrameTitlePane {
      * @param e  Description of Parameter
      */
     public void actionPerformed(ActionEvent e) {
-      if (frame.isClosable()) {
+      if (m_Window.isClosable()) {
         try {
-          frame.setClosed(true);
+          m_Window.setClosed(true);
         } catch (PropertyVetoException e0) {
         }
       }
@@ -721,7 +562,7 @@ public class SkinTitlePane extends BasicInternalFrameTitlePane {
      * Constructor for the MaximizeAction object
      */
     public MaximizeAction() {
-      super(MAXIMIZE_CMD);
+      super("Maximize");
     }
 
     /**
@@ -730,18 +571,18 @@ public class SkinTitlePane extends BasicInternalFrameTitlePane {
      * @param e  Description of Parameter
      */
     public void actionPerformed(ActionEvent e) {
-      if (frame.isMaximizable()) {
-        if (!frame.isMaximum()) {
+      if (m_Window.isMaximizable()) {
+        if (!m_Window.isMaximum()) {
           try {
-            frame.setMaximum(true);
+            m_Window.setMaximum(true);
           } catch (PropertyVetoException e5) {
           }
         }
         else {
           try {
-            frame.setMaximum(false);
-            if (frame.isIconifiable() && frame.isIcon()) {
-              frame.setIcon(false);
+            m_Window.setMaximum(false);
+            if (m_Window.isIconifiable() && m_Window.isIcon()) {
+              m_Window.setIcon(false);
             }
           } catch (PropertyVetoException e6) {
           }
@@ -765,7 +606,7 @@ public class SkinTitlePane extends BasicInternalFrameTitlePane {
      * Constructor for the IconifyAction object
      */
     public IconifyAction() {
-      super(ICONIFY_CMD);
+      super("Minimize");
     }
 
     /**
@@ -774,18 +615,18 @@ public class SkinTitlePane extends BasicInternalFrameTitlePane {
      * @param e  Description of Parameter
      */
     public void actionPerformed(ActionEvent e) {
-      if (frame.isIconifiable()) {
-        if (!frame.isIcon()) {
+      if (m_Window.isIconifiable()) {
+        if (!m_Window.isIcon()) {
           try {
-            frame.setIcon(true);
+            m_Window.setIcon(true);
           } catch (PropertyVetoException e1) {
           }
         }
         else {
           try {
-            frame.setIcon(false);
-            if (frame.isMaximizable() && frame.isMaximum()) {
-              frame.setMaximum(false);
+            m_Window.setIcon(false);
+            if (m_Window.isMaximizable() && m_Window.isMaximum()) {
+              m_Window.setMaximum(false);
             }
           } catch (PropertyVetoException e1) {
           }
@@ -809,7 +650,7 @@ public class SkinTitlePane extends BasicInternalFrameTitlePane {
      * Constructor for the RestoreAction object
      */
     public RestoreAction() {
-      super(RESTORE_CMD);
+      super("Restore");
     }
 
     /**
@@ -818,15 +659,15 @@ public class SkinTitlePane extends BasicInternalFrameTitlePane {
      * @param e  Description of Parameter
      */
     public void actionPerformed(ActionEvent e) {
-      if (frame.isMaximizable() && frame.isMaximum()) {
+      if (m_Window.isMaximizable() && m_Window.isMaximum()) {
         try {
-          frame.setMaximum(false);
+          m_Window.setMaximum(false);
         } catch (PropertyVetoException e4) {
         }
       }
-      else if (frame.isIconifiable() && frame.isIcon()) {
+      else if (m_Window.isIconifiable() && m_Window.isIcon()) {
         try {
-          frame.setIcon(false);
+          m_Window.setIcon(false);
         } catch (PropertyVetoException e4) {
         }
       }
@@ -846,7 +687,7 @@ public class SkinTitlePane extends BasicInternalFrameTitlePane {
      * Constructor for the ShadeAction object
      */
     public ShadeAction() {
-      super(SHADE_CMD);
+      super("Shade");
     }
 
     /**
@@ -855,7 +696,7 @@ public class SkinTitlePane extends BasicInternalFrameTitlePane {
      * @param event  Description of Parameter
      */
     public void actionPerformed(ActionEvent event) {
-      frame.setShaded(!frame.isShaded());
+      m_Window.setShaded(!m_Window.isShaded());
     }
   }
 
@@ -898,7 +739,7 @@ public class SkinTitlePane extends BasicInternalFrameTitlePane {
      * @param g  Description of Parameter
      */
     public void paint(Graphics g) {
-      Icon icon = frame.getFrameIcon();
+      Icon icon = m_Window.getFrameIcon();
       if (icon == null) {
         icon = UIManager.getIcon("InternalFrame.icon");
       }

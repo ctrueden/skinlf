@@ -67,12 +67,12 @@ import com.l2fprod.gui.WindowManager;
  * @author    fred
  * @created   27 avril 2002
  */
-public class SkinWindowTitlePane extends SkinTitlePane {
+class SkinWindowTitlePane extends SkinTitlePane {
 
   /**
    * Description of the Field
    */
-  protected MouseInputListener borderListener;
+  private MouseInputListener borderListener;
 
   /**
    * Constructor for the SkinWindowTitlePane object
@@ -89,19 +89,15 @@ public class SkinWindowTitlePane extends SkinTitlePane {
   protected void installListeners() {
     super.installListeners();
     borderListener = new BorderListener();
-    frame.getContainer().addMouseListener(borderListener);
-    frame.getContainer().addMouseMotionListener(borderListener);
+    m_Window.getContainer().addMouseListener(borderListener);
+    m_Window.getContainer().addMouseMotionListener(borderListener);
 
     addMouseListener(borderListener);
     addMouseMotionListener(borderListener);
 
-    //Container contentPane = ((JWindow)frame.getContainer()).getContentPane();
-    //contentPane.addMouseListener(borderListener);
-    //contentPane.addMouseMotionListener(borderListener);
-
     MouseInputListener glassPaneDispatcher = createGlassPaneDispatcher();
-    ((JWindow) frame.getContainer()).getGlassPane().addMouseListener(glassPaneDispatcher);
-    ((JWindow) frame.getContainer()).getGlassPane().addMouseMotionListener(glassPaneDispatcher);
+    ((JWindow) m_Window.getContainer()).getGlassPane().addMouseListener(glassPaneDispatcher);
+    ((JWindow) m_Window.getContainer()).getGlassPane().addMouseMotionListener(glassPaneDispatcher);
   }
 
   /**
@@ -273,7 +269,7 @@ public class SkinWindowTitlePane extends SkinTitlePane {
      * @param e   Description of Parameter
      */
     void retargetMouseEvent(int id, MouseEvent e) {
-      Point p = SwingUtilities.convertPoint(((JWindow) frame.getContainer()).getContentPane(),
+      Point p = SwingUtilities.convertPoint(((JWindow) m_Window.getContainer()).getContentPane(),
           e.getX(), e.getY(),
           mouseEventTarget);
       MouseEvent retargeted = new MouseEvent(mouseEventTarget,
@@ -313,7 +309,7 @@ public class SkinWindowTitlePane extends SkinTitlePane {
      * @param e  Description of Parameter
      */
     private void forwardMouseEvent(MouseEvent e) {
-      Component target = SkinUtils.findComponentAt(((JWindow) frame.getContainer()).getContentPane(), e.getX(), e.getY());
+      Component target = SkinUtils.findComponentAt(((JWindow) m_Window.getContainer()).getContentPane(), e.getX(), e.getY());
       if (target != null) {
         if (target != mouseEventTarget) {
           setMouseTarget(target, e);
@@ -355,22 +351,22 @@ public class SkinWindowTitlePane extends SkinTitlePane {
      */
     public void mouseClicked(MouseEvent e) {
       if (e.getClickCount() > 1 && e.getSource() == SkinWindowTitlePane.this) {
-        if (frame.isIconifiable() && frame.isIcon()) {
+        if (m_Window.isIconifiable() && m_Window.isIcon()) {
           try {
-            frame.setIcon(false);
+            m_Window.setIcon(false);
           } catch (PropertyVetoException e2) {
           }
         }
-        else if (frame.isMaximizable()) {
-          if (!frame.isMaximum()) {
+        else if (m_Window.isMaximizable()) {
+          if (!m_Window.isMaximum()) {
             try {
-              frame.setMaximum(true);
+              m_Window.setMaximum(true);
             } catch (PropertyVetoException e2) {
             }
           }
           else {
             try {
-              frame.setMaximum(false);
+              m_Window.setMaximum(false);
             } catch (PropertyVetoException e3) {
             }
           }
@@ -388,10 +384,10 @@ public class SkinWindowTitlePane extends SkinTitlePane {
         case NO_ACTION:
           break;
         case RESIZE_NONE:
-          WindowManager.getWindowManager().endDraggingWindow((SkinWindow) frame.getContainer());
+          WindowManager.getWindowManager().endDraggingWindow((SkinWindow) m_Window.getContainer());
           break;
         default:
-          WindowManager.getWindowManager().endResizingWindow((SkinWindow) frame.getContainer());
+          WindowManager.getWindowManager().endResizingWindow((SkinWindow) m_Window.getContainer());
       }
 
       startingBounds = null;
@@ -407,22 +403,22 @@ public class SkinWindowTitlePane extends SkinTitlePane {
       startX = e.getX();
       startY = e.getY();
 
-      startingBounds = frame.getContainer().getBounds();
+      startingBounds = m_Window.getContainer().getBounds();
 
-      if (!frame.isSelected()) {
+      if (!m_Window.isSelected()) {
         try {
-          frame.setSelected(true);
+          m_Window.setSelected(true);
         } catch (PropertyVetoException e1) {
         }
       }
-      if ((!frame.isResizable() || frame.isShaded()) || e.getSource() == SkinWindowTitlePane.this) {
+      if ((!m_Window.isResizable() || m_Window.isShaded()) || e.getSource() == SkinWindowTitlePane.this) {
         resizeDir = RESIZE_NONE;
-        WindowManager.getWindowManager().beginDraggingWindow((SkinWindow) frame.getContainer());
+        WindowManager.getWindowManager().beginDraggingWindow((SkinWindow) m_Window.getContainer());
         return;
       }
 
-      if (e.getSource() == frame.getContainer()) {
-        Dimension dim = frame.getContainer().getSize();
+      if (e.getSource() == m_Window.getContainer()) {
+        Dimension dim = m_Window.getContainer().getSize();
         if (e.getX() <= resizeCornerSize) {
           if (e.getY() < resizeCornerSize) {
             resizeDir = NORTH_WEST;
@@ -468,7 +464,7 @@ public class SkinWindowTitlePane extends SkinTitlePane {
           }
         }
         if ((resizeDir != RESIZE_NONE) && (resizeDir != NO_ACTION)) {
-          WindowManager.getWindowManager().beginResizingWindow((SkinWindow) frame.getContainer(),
+          WindowManager.getWindowManager().beginResizingWindow((SkinWindow) m_Window.getContainer(),
               resizeDir);
         }
         return;
@@ -501,50 +497,32 @@ public class SkinWindowTitlePane extends SkinTitlePane {
       deltaX = e.getX() - startX;
       deltaY = e.getY() - startY;
 
-      p = frame.getContainer().getLocation();
+      p = m_Window.getContainer().getLocation();
 
       // Handle a MOVE
       if (e.getSource() == SkinWindowTitlePane.this) {
-        if (frame.isMaximum()) {
+        if (m_Window.isMaximum()) {
           return;
-          // don't allow moving of maximized frames.
+          // don't allow moving of maximized m_Windows.
         }
 
-        WindowManager.getWindowManager().dragWindow((SkinWindow) frame.getContainer(),
+        WindowManager.getWindowManager().dragWindow((SkinWindow) m_Window.getContainer(),
             p.x + deltaX, p.y + deltaY);
 
-        /*
-         *  Insets i = frame.getContainer().getInsets();
-         *  int pWidth, pHeight;
-         *  Dimension s = frame.getContainer().getSize();
-         *  pWidth = s.width;
-         *  pHeight = s.height;
-         *  newX = startingBounds.x - (_x - p.x);
-         *  newY = startingBounds.y - (_y - p.y);
-         *  / Make sure we stay in-bounds
-         *  if(newX + i.left <= -__x)
-         *  newX = -__x - i.left;
-         *  if(newY + i.top <= -__y)
-         *  newY = -__y - i.top;
-         *  if(newX + __x + i.right > pWidth)
-         *  newX = pWidth - __x - i.right;
-         *  if(newY + __y + i.bottom > pHeight)
-         *  newY =  pHeight - __y - i.bottom;
-         */
         return;
       }
 
-      if (!frame.isResizable() || frame.isShaded()) {
+      if (!m_Window.isResizable() || m_Window.isShaded()) {
         return;
       }
 
-      min = frame.getContainer().getMinimumSize();
-      max = frame.getContainer().getMaximumSize();
+      min = m_Window.getContainer().getMinimumSize();
+      max = m_Window.getContainer().getMaximumSize();
 
       newX = p.x;
       newY = p.y;
-      newW = frame.getContainer().getSize().width;
-      newH = frame.getContainer().getSize().height;
+      newW = m_Window.getContainer().getSize().width;
+      newH = m_Window.getContainer().getSize().height;
 
       switch (resizeDir) {
         case RESIZE_NONE:
@@ -664,7 +642,7 @@ public class SkinWindowTitlePane extends SkinTitlePane {
       newBounds.width = newW;
       newBounds.height = newH;
 
-      WindowManager.getWindowManager().resizeWindow((SkinWindow) frame.getContainer(),
+      WindowManager.getWindowManager().resizeWindow((SkinWindow) m_Window.getContainer(),
           newX, newY, newW, newH);
     }
 
@@ -674,12 +652,12 @@ public class SkinWindowTitlePane extends SkinTitlePane {
      * @param e  Description of Parameter
      */
     public void mouseMoved(MouseEvent e) {
-      if (!frame.isResizable()) {
+      if (!m_Window.isResizable()) {
         return;
       }
 
-      if (e.getSource() == frame.getContainer()) {
-        Component comp = frame.getContainer();
+      if (e.getSource() == m_Window.getContainer()) {
+        Component comp = m_Window.getContainer();
         Dimension dim = comp.getSize();
         if (e.getX() <= resizeCornerSize) {
           if (e.getY() < resizeCornerSize) {
@@ -731,7 +709,7 @@ public class SkinWindowTitlePane extends SkinTitlePane {
         return;
       }
 
-      frame.getContainer().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+      m_Window.getContainer().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }
 
     /**
@@ -740,7 +718,7 @@ public class SkinWindowTitlePane extends SkinTitlePane {
      * @param e  Description of Parameter
      */
     public void mouseExited(MouseEvent e) {
-      frame.getContainer().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+      m_Window.getContainer().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }
   }
   /// End BorderListener Class
