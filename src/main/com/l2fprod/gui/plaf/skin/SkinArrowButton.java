@@ -59,16 +59,16 @@ import javax.swing.*;
  * @author    fred
  * @created   27 avril 2002
  */
-public class SkinArrowButton extends JButton implements SwingConstants {
+final class SkinArrowButton extends JButton implements SwingConstants {
 
   /**
    * Description of the Field
    */
-  protected int direction;
+  private int direction;
   /**
    * Description of the Field
    */
-  protected Skin skin = SkinLookAndFeel.getSkin();
+  private Skin skin = SkinLookAndFeel.getSkin();
 
   /**
    * Constructor for the SkinArrowButton object
