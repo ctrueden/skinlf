@@ -52,6 +52,7 @@ import java.awt.image.*;
 import java.io.*;
 import java.net.URL;
 import java.util.Enumeration;
+import java.util.StringTokenizer;
 import javax.swing.*;
 import javax.swing.plaf.*;
 import com.l2fprod.util.ImageUtils;
@@ -61,7 +62,7 @@ import com.l2fprod.util.OS;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 20:04:39 $
+ * @version   $Revision: 1.2 $, $Date: 2003-08-16 15:40:45 $
  */
 public class SkinUtils {
 
@@ -288,5 +289,18 @@ public class SkinUtils {
 			return Integer.toHexString(i).toUpperCase();
 		}
 	}
+
+  /**
+   * Convert strings like 12, 12, 54, 45 to an insets
+   * where values are LEFT, RIGHT, TOP, BOTTOM
+   */
+  public static Insets stringToInsets(String border) {
+    StringTokenizer token = new StringTokenizer(border, ",");
+    int left = Integer.parseInt(token.nextToken().trim());
+    int right = Integer.parseInt(token.nextToken().trim());
+    int top = Integer.parseInt(token.nextToken().trim());
+    int bottom = Integer.parseInt(token.nextToken().trim());
+    return new Insets(top, left, bottom, right);
+  }
 
 }
