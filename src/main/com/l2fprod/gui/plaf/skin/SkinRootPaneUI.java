@@ -671,7 +671,7 @@ public class SkinRootPaneUI extends BasicRootPaneUI {
 				Math.max(Math.max(cpWidth, mbWidth), tpWidth)
 					+ i.left
 					+ i.right,
-				cpHeight + mbHeight + tpWidth + i.top + i.bottom);
+				cpHeight + mbHeight + tpHeight + i.top + i.bottom);
 		}
 
 		/**
@@ -693,6 +693,10 @@ public class SkinRootPaneUI extends BasicRootPaneUI {
 
       // It seems some content pane returns the preferred size as the
       // minimum size. We will just ignore the content pane for now.
+      // if the following code is enabled, a JFrame/JDialog using look
+      // and feel decoration gets resized badly. The height changes
+      // even if only the width is being changed. However it does not
+      // happen with preferredLayoutSize()!?
       /*
 			if (root.getContentPane() != null) {
 				cpd = root.getContentPane().getMinimumSize();
@@ -727,6 +731,7 @@ public class SkinRootPaneUI extends BasicRootPaneUI {
 
       // FYI, MetalRootLayout has a bug in the dimension as it uses
       // tpWidth in the height calculation
+      // Now logged as http://developer.java.sun.com/developer/bugParade/bugs/4916923.html
       return new Dimension(
 				Math.max(Math.max(cpWidth, mbWidth), tpWidth)
 					+ i.left
