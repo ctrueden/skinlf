@@ -61,7 +61,7 @@ import com.l2fprod.gui.plaf.skin.*;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.2 $, $Date: 2003-08-17 18:06:22 $
+ * @version   $Revision: 1.3 $, $Date: 2003-08-19 12:48:56 $
  */
 class GtkUtils {
 
@@ -190,7 +190,9 @@ class GtkUtils {
                                           border.top, border.right, border.bottom, border.left);
             button.setCenterFill("TRUE".equals(image.getProperty(useOverlay ? "overlay_stretch" : "stretch")) ?
                                  ImageUtils.PAINT_STRETCH : ImageUtils.PAINT_TILE);
-            button.parserItem = image;
+            // use by combobox to know if arrow has to be painted
+            // big hack here!
+            button.hasArrow = !"false".equals(image.getProperty("arrow"));
             break;
           }
         }
@@ -200,14 +202,14 @@ class GtkUtils {
       // try more general style, this can give unpredictable result,
       // keys must be sorted by importance
       if (button == null && (!"default".equals(style)) && useDefault) {
-        button = newButton(parser, "default", keys, values);
+        button = newButton(parser, "default", keys, values, false, true, false);
 
         int length = keys.length;
         while ((length > 0) && (button == null)) {
           length--;
           String[] subkeys = new String[length];
           System.arraycopy(keys, 0, subkeys, 0, length);
-          button = newButton(parser, "default", subkeys, values);
+          button = newButton(parser, "default", subkeys, values, false, true, false);
         }
 
         // if the button is still null, our latest try is exactMatch in default

@@ -60,7 +60,7 @@ import com.l2fprod.gui.plaf.skin.impl.gtk.parser.*;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 20:05:45 $
+ * @version   $Revision: 1.2 $, $Date: 2003-08-19 12:48:56 $
  */
 class GtkProgress extends AbstractSkinProgress implements SkinProgress, SwingConstants {
 
@@ -80,14 +80,14 @@ class GtkProgress extends AbstractSkinProgress implements SkinProgress, SwingCon
     //PENDING(fred): progress needs to be improved with vertical and horizontal progress
     hprogressBar = GtkUtils.newButton(parser, "GtkProgressBar",
         new String[]{"function", "detail"},
-        new String[]{"BOX", "bar"});
+        new String[]{"BOX", "bar"}, false, true, true);
 
     hprogressBack = GtkUtils.newButton(parser, "GtkProgressBar",
         new String[]{"function", "detail"},
-        new String[]{"BOX", "trough"});
+        new String[]{"BOX", "trough"}, false, true, true);
 
-    vprogressBar = hprogressBar.rotateCounterClockWise();
-    vprogressBack = hprogressBack.rotateCounterClockWise();
+    vprogressBar = hprogressBar.rotateClockWise();
+    vprogressBack = hprogressBack.rotateClockWise();
   }
 
   /**

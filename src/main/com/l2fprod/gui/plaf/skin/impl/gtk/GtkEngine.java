@@ -50,7 +50,7 @@ package com.l2fprod.gui.plaf.skin.impl.gtk;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 20:05:45 $
+ * @version   $Revision: 1.2 $, $Date: 2003-08-19 12:48:56 $
  */
 public class GtkEngine {
 
@@ -115,15 +115,24 @@ public class GtkEngine {
 
       if (j == keys.length) {
         image = currentImage;
+        imageMatchKeys = j;
         break;
       }
-      else if (exactMatch && (j > imageMatchKeys)) {
+      else if (j>0 && j>= imageMatchKeys) {
         image = currentImage;
         imageMatchKeys = j;
       }
     }
 
-    return image;
+    if (exactMatch) {
+      if (imageMatchKeys < keys.length) {
+        return null;
+      } else {
+        return image;
+      }
+    } else {
+      return image;
+    }
   }
 
 }

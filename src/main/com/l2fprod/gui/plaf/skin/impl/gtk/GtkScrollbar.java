@@ -63,7 +63,7 @@ import com.l2fprod.gui.plaf.skin.impl.gtk.parser.*;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 20:05:45 $
+ * @version   $Revision: 1.2 $, $Date: 2003-08-19 12:48:56 $
  */
 class GtkScrollbar extends AbstractSkinScrollbar implements SkinScrollbar, SwingConstants {
 
@@ -84,30 +84,30 @@ class GtkScrollbar extends AbstractSkinScrollbar implements SkinScrollbar, Swing
    */
   public GtkScrollbar(GtkParser parser) throws Exception {
     h_thumb = GtkUtils.newButton(parser, "GtkScrollbar",
-        new String[]{"function", "detail", "orientation"},
-        new String[]{"BOX", "slider", "HORIZONTAL"});
+        new String[]{"function", "detail", "orientation", "state"},
+        new String[]{"BOX", "slider", "HORIZONTAL", "NORMAL"}, false, true, true);
     v_thumb = GtkUtils.newButton(parser, "GtkScrollbar",
         new String[]{"function", "detail", "orientation"},
-        new String[]{"BOX", "slider", "VERTICAL"});
+        new String[]{"BOX", "slider", "VERTICAL"}, false, true, true);
 
     h_track = GtkUtils.newButton(parser, "GtkScrollbar",
         new String[]{"function", "detail", "orientation"},
-        new String[]{"BOX", "trough", "HORIZONTAL"});
+        new String[]{"BOX", "trough", "HORIZONTAL"}, false, true, true);
 
     v_track = GtkUtils.newButton(parser, "GtkScrollbar",
         new String[]{"function", "detail", "orientation"},
-        new String[]{"BOX", "trough", "VERTICAL"});
+        new String[]{"BOX", "trough", "VERTICAL"}, false, true, true);
 
     h_handle = GtkUtils.newButton(parser, "default",
         new String[]{"function", "orientation"},
-        new String[]{"HANDLE", "HORIZONTAL"}, true);
+        new String[]{"HANDLE", "HORIZONTAL"}, true, true);
     if (h_handle != null) {
       h_handle.setCenterFill(ImageUtils.PAINT_STRETCH);
     }
 
     v_handle = GtkUtils.newButton(parser, "default",
         new String[]{"function", "orientation"},
-        new String[]{"HANDLE", "VERTICAL"}, true);
+        new String[]{"HANDLE", "VERTICAL"}, true, true);
     if (v_handle != null) {
       v_handle.setCenterFill(ImageUtils.PAINT_STRETCH);
     }

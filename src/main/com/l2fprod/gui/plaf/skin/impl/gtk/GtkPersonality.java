@@ -66,7 +66,7 @@ import com.l2fprod.util.ImageUtils;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 20:05:45 $
+ * @version   $Revision: 1.2 $, $Date: 2003-08-19 12:48:56 $
  */
 class GtkPersonality extends AbstractSkinPersonality {
 
@@ -165,22 +165,22 @@ class GtkPersonality extends AbstractSkinPersonality {
 
     comboBox = GtkUtils.newButton(parser, "GtkOptionMenu",
         new String[]{"function", "state"},
-        new String[]{"BOX", null});
+        new String[]{"BOX", null}, false, true, false);
     if (comboBox == null) {
       comboBox = GtkUtils.newButton(parser, "GtkOptionMenu",
           new String[]{"function"},
-          new String[]{"TAB"}, true);
+          new String[]{"TAB"}, false, true, true);
     }
 
     rolloverComboBox =
       GtkUtils.newButton(parser, "GtkOptionMenu",
                          new String[]{"function", "state"},
-                         new String[]{"BOX", "PRELIGHT"}, false, true, true);
+                         new String[]{"BOX", "PRELIGHT"}, false, true, false);
 
     disabledComboBox =
       GtkUtils.newButton(parser, "GtkOptionMenu",
                          new String[]{"function", "state"},
-                         new String[]{"BOX", "INSENSITIVE"}, false, true, true);
+                         new String[]{"BOX", "INSENSITIVE"}, false, true, false);
 
     focus = GtkUtils.newButton(parser, "default",
         new String[]{"function"},

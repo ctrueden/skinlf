@@ -58,7 +58,7 @@ import javax.swing.SwingConstants;
 class GtkDefaultButton extends DefaultButton {
 
   /** mainly used by optionmenu */
-  GtkProps parserItem;
+  boolean hasArrow = true;
 
   public GtkDefaultButton(Image bitmap, int imageWidth, int imageHeight,
                           int topHeight, int rightWidth, int bottomHeight, int leftWidth) {
@@ -80,7 +80,7 @@ class GtkDefaultButton extends DefaultButton {
       
   public void paint(Graphics g, Component c) {
     super.paint(g, c);
-    if ("false".equals(parserItem.getProperty("arrow"))) {
+    if (!hasArrow) {
       ArrowIcon.paintArrow(g, 5,
                            c.getWidth() - rightWidth,
                            c.getHeight() / 2 - 3,
