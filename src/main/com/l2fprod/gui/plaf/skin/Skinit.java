@@ -66,7 +66,7 @@ import com.l2fprod.gui.plaf.skin.CompoundSkin;
  * Feel. Once Skin Look And Feel is set, it can't be removed. <br>
  *
  * @author    $Author: l2fprod $
- * @version   $Revision: 1.2 $, $Date: 2003-12-06 21:54:35 $
+ * @version   $Revision: 1.3 $, $Date: 2004-05-07 18:59:00 $
  */
 public class Skinit {
 
@@ -227,7 +227,8 @@ public class Skinit {
    * Description of the Method
    */
   static void printUsage() {
-    String usage = "Skinit - Skin Look And Feel wrapper\n" +
+    String usage = "Skinit - Skin Look And Feel " +
+        SkinLookAndFeel.version() + " wrapper\n" +
         "Usage: skinit [options] class [args...]\n" +
         "\n" +
         "where options include:\n" +
