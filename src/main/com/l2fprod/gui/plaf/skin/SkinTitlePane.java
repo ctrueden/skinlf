@@ -66,6 +66,7 @@ import javax.swing.event.InternalFrameEvent;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 
 import com.l2fprod.gui.SkinWindow;
+import com.l2fprod.util.OS;
 
 /**
  * Description of the Class
@@ -146,6 +147,13 @@ public class SkinTitlePane extends BasicInternalFrameTitlePane {
   public SkinTitlePane(Window f) {
     super(null);
     m_Window = f;
+
+    // in JDK1.4 Sun changed the way listener is added remove before
+    // it was in add/remove notify now add is made in installDefaults
+    // and remove by BasicInternalFrameUI
+    if (OS.isOneDotFour()) {
+      installListeners();
+    }
   }
 
   /**
@@ -212,7 +220,7 @@ public class SkinTitlePane extends BasicInternalFrameTitlePane {
    */
   protected void installTitlePane() {
     installDefaults();
-
+    
     createActions();
     enableActions();
     assembleSystemMenu();
@@ -417,16 +425,11 @@ public class SkinTitlePane extends BasicInternalFrameTitlePane {
         return;
       }
 
-      /*
-       *  if(JInternalFrame.IS_ICON_PROPERTY.equals(prop) ||
-       *  JInternalFrame.IS_MAXIMUM_PROPERTY.equals(prop)) {
-       *  setButtonIcons();
-       *  return;
-       *  }
-       */
-      enableActions();
+	    enableActions();
+            
+      revalidate();
+      repaint();
     }
-
   }
 
   /**
