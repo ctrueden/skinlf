@@ -82,7 +82,7 @@ import javax.swing.text.JTextComponent;
  * website</a> for the complete description of a theme pack.
  * 
  * @author $Author: l2fprod $
- * @version $Revision: 1.13 $, $Date: 2004-07-29 21:38:38 $
+ * @version $Revision: 1.14 $, $Date: 2004-08-13 19:26:21 $
  */
 public class SkinLookAndFeel extends BasicLookAndFeel {
 
@@ -1125,11 +1125,11 @@ public class SkinLookAndFeel extends BasicLookAndFeel {
    * @param required Description of Parameter
    * @exception Exception Description of Exception
    */
-  public static void checkRequiredVersion(String required) throws Exception {
+  public static void checkRequiredVersion(String required) throws IncorrectVersionException {
     if ((required == null) || ("".equals(required))) {
       return;
     }
-    checkRequiredVersion(version(), required);
+    IncorrectVersionException.checkRequiredVersion(version(), required);
   }
 
   /**
@@ -1198,42 +1198,6 @@ public class SkinLookAndFeel extends BasicLookAndFeel {
       insets[i] = Integer.parseInt(insetsString[i]);
     }
     return new Insets(insets[0], insets[1], insets[2], insets[3]);
-  }
-
-  /**
-   * Description of the Method
-   * 
-   * @param current Description of Parameter
-   * @param required Description of Parameter
-   * @exception Exception Description of Exception
-   */
-  private static void checkRequiredVersion(String current, String required)
-    throws Exception {
-    java.util.StringTokenizer currentToken =
-      new java.util.StringTokenizer(current, ".");
-    java.util.StringTokenizer requiredToken =
-      new java.util.StringTokenizer(required, ".");
-
-    int currentCount = currentToken.countTokens();
-    int requiredCount = requiredToken.countTokens();
-
-    int min = Math.min(currentCount, requiredCount);
-
-    for (int i = 0; i < min; i++) {
-      String cTok = currentToken.nextToken();
-      String rTok = requiredToken.nextToken();
-      // the current version is bigger than the required
-      if (cTok.compareTo(rTok) > 0) {
-        break;
-      }
-      if (cTok.compareTo(rTok) < 0) {
-        throw new IncorrectVersionException(required, current);
-      }
-      if ((i == min - 1) && (currentCount < requiredCount)) {
-        throw new IncorrectVersionException(required, current);
-      }
-    }
-
   }
 
   /**

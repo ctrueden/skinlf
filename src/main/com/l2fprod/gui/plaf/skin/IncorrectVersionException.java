@@ -54,7 +54,7 @@ package com.l2fprod.gui.plaf.skin;
  *
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.2 $, $Date: 2003-10-24 20:29:55 $
+ * @version   $Revision: 1.3 $, $Date: 2004-08-13 19:26:21 $
  */
 public final class IncorrectVersionException extends Exception {
 
@@ -69,4 +69,46 @@ public final class IncorrectVersionException extends Exception {
         "current version is " + current + ", required version is " + required);
   }
 
+  /**
+   * Check if the current version is bigger or equals to the required
+   * version. If this is not the case an
+   * <code>IncorrectVersionException</code> is thrown.
+   * 
+   * @param current Description of Parameter
+   * @param required Description of Parameter
+   * @exception IncorrectVersionException if the current version does not fit
+   */
+  public static void checkRequiredVersion(String current, String required)
+    throws IncorrectVersionException {
+    java.util.StringTokenizer currentToken =
+      new java.util.StringTokenizer(current, ".");
+    java.util.StringTokenizer requiredToken =
+      new java.util.StringTokenizer(required, ".");
+
+    int currentCount = currentToken.countTokens();
+    int requiredCount = requiredToken.countTokens();
+
+    int min = Math.min(currentCount, requiredCount);
+
+    for (int i = 0; i < min; i++) {
+      String cTok = currentToken.nextToken();
+      String rTok = requiredToken.nextToken();
+      
+      int cValue = Integer.parseInt(cTok);
+      int rValue = Integer.parseInt(rTok);
+      
+      // the current version is bigger than the required
+      if (cValue > rValue) {
+        break;
+      }
+      if (cValue < rValue) {
+        throw new IncorrectVersionException(required, current);
+      }
+      if ((i == min - 1) && (currentCount < requiredCount)) {
+        throw new IncorrectVersionException(required, current);
+      }
+    }
+
+  }
+  
 }
