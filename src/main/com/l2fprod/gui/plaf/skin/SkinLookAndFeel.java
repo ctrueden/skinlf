@@ -81,7 +81,7 @@ import com.l2fprod.util.*;
  * L2FProd.com website</a> for the complete description of a theme pack.
  *
  * @author    $Author: l2fprod $
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 19:47:23 $
+ * @version   $Revision: 1.2 $, $Date: 2003-08-17 20:48:03 $
  */
 public class SkinLookAndFeel extends BasicLookAndFeel {
 
@@ -734,6 +734,7 @@ public class SkinLookAndFeel extends BasicLookAndFeel {
           boolean rounded = false;
           Color color = Color.black;
           int thickness = 1;
+          int padding = 0;
           String temp;
 
           temp = element.getProperty("ROUNDED");
@@ -747,11 +748,24 @@ public class SkinLookAndFeel extends BasicLookAndFeel {
             thickness = Integer.parseInt(temp);
           }
 
+          temp = element.getProperty("PADDING");
+          if (temp !=null) {
+            padding = Integer.parseInt(temp);
+          }
+          
           temp = element.getProperty("COLOR");
           if (temp != null) {
             color = Color.decode(temp);
           }
           Border border = new com.l2fprod.gui.border.LineBorder(color, thickness, rounded);
+          if (padding > 0) {
+            border =
+              new CompoundBorder(border,
+                                 BorderFactory.createEmptyBorder(padding,
+                                                                 padding,
+                                                                 padding,
+                                                                 padding));
+          }
           UIManager.put(element.getProperty("NAME"), border);
         }
         else if ("EmptyBorder".equalsIgnoreCase(type) || "javax.swing.border.EmptyBorder".equalsIgnoreCase(type)) {
