@@ -4,6 +4,8 @@ import java.awt.*;
 import java.awt.image.*;
 import java.io.File;
 
+import javax.swing.ImageIcon;
+
 import com.ibm.imageconversion.*;
 import com.sun.jimi.core.*;
 
@@ -15,7 +17,8 @@ public class ImageUtils {
   static BMPEncoder encoder = new BMPEncoder();
 
   public static Image loadPng(String pathToImage) throws Exception {
-    return Toolkit.getDefaultToolkit().createImage(new File(pathToImage).toURL());
+    ImageIcon icon = new ImageIcon(new File(pathToImage).toURL());
+    return icon.getImage();
   }
 
   public static void savePng(Image image, String pathToImage) throws Exception {
@@ -28,7 +31,8 @@ public class ImageUtils {
       System.out.println("working with " + pathToImage);
       Image image = null;
 
-      if (pathToImage.toLowerCase().endsWith(".png")) {
+      if (pathToImage.toLowerCase().endsWith(".png") ||
+        	pathToImage.toLowerCase().endsWith(".gif")) {
         image = loadPng(pathToImage);
       } else if (pathToImage.toLowerCase().endsWith(".bmp")) {
         decoder.setInputFilename(pathToImage);
