@@ -81,14 +81,24 @@ import com.l2fprod.util.*;
  * L2FProd.com website</a> for the complete description of a theme pack.
  *
  * @author    $Author: l2fprod $
- * @version   $Revision: 1.5 $, $Date: 2003-09-07 18:06:11 $
+ * @version   $Revision: 1.6 $, $Date: 2003-10-10 20:49:05 $
  */
 public class SkinLookAndFeel extends BasicLookAndFeel {
 
   /**
    * Description of the Field
+   * @deprecated Will be soon replaced by {@link #version()}
    */
-  public final static String VERSION = "@VERSION@";
+  public final static String VERSION = version();
+
+  /**
+   * Returns the Skin Look And Feel version
+   *
+   * @return the Skin Look And Feel version
+   */
+  public static String version() {
+    return "@VERSION@";
+  }
 
   final static String SKIN_KEY = new String("SkinLookAndFeel.Skin");
   final static String SKIN_LOADER_KEY = new String("SkinLookAndFeel.SkinLoader");
@@ -827,7 +837,7 @@ public class SkinLookAndFeel extends BasicLookAndFeel {
     if ((required == null) || ("".equals(required))) {
       return;
     }
-    checkRequiredVersion(VERSION, required);
+    checkRequiredVersion(version(), required);
   }
 
   /**

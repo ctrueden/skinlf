@@ -102,7 +102,7 @@ public class demoWelcome extends JPanel {
     area.setBorder(null);
     area.setEditable(false);
     area.setOpaque(false);
-    area.setText("Welcome to Skin Look And Feel " + SkinLookAndFeel.VERSION + "\n" +
+    area.setText("Welcome to Skin Look And Feel " + SkinLookAndFeel.version() + "\n" +
         "Use the combobox above to test the various themepacks available.\n");
     area.setBackground(getBackground());
     p.add(area);

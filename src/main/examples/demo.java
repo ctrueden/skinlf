@@ -127,7 +127,7 @@ public class demo extends JApplet {
       method.invoke(null, new Object[]{Boolean.TRUE});
     }
 
-    JFrame f = new JFrame("Skin Look And Feel " + SkinLookAndFeel.VERSION);
+    JFrame f = new JFrame("Skin Look And Feel " + SkinLookAndFeel.version());
 
     f.getContentPane().setLayout(new BorderLayout());
     f.getContentPane().add("Center", d);
