@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article id="tutorial-msstyle">
+  <properties>
+    <title>Converting a Microsoft Visual Style to a SkinLF themepack</title>
+  </properties>
+
+  <body>
+    <section>
+      <title>Converting a Microsoft Visual Style to a SkinLF themepack</title>
+      <p>
+        I've been asked by a user how to convert a Microsoft Visual
+        Style to SkinLF. My first answer was: <i>you have to get the
+        source code to get the converter, then to use StyleBuilderXP
+        to extract the visual style, it generates an XML file along
+        with a couple of BMP files, you run the converter on the xml,
+        then there are final steps to perform by hand.</i> I do not
+        know if the user manages to create its own SkinLF themepack
+        but I promess he will get a tutorial on creating a themepack
+        from a visual style so here it is.
+      </p>
+      <section>
+        <title>Step 1 - Find the Visual Style</title>
+        <p>
+          There are several sites hosting visual styles, go to one of
+          them and grab a visual style:
+          <ul>
+            <li><a href="http://www.themexp.org">ThemeXP.org</a></li>
+            <li><a href="http://skins.deviantart.com/visualstyle/">deviantART</a></li>
+            <li><a href="http://www.studiotwentyeight.com/">StudioTwentyEight</a></li>
+            <li><a href="http://www.aqua-soft.org/">Aqua Soft</a></li>
+          </ul>
+        </p>
+        <p>
+          If your visual style comes in a ZIP file, unzip it. Once
+          done, you should find a file ending with .msstyles
+          extension.
+          <note>
+            If you plan to distribute your themepack, make sure to get
+            the agreement of the Visual Style creator first.
+          </note>
+        </p>
+      </section>
+      <section>
+        <title>Step 2 - Extract the .msstyle</title>
+        <p>
+          Download and install the evaluation of StyleBuilder at <a
+          href="http://www.tgtsoft.com/download.php">TGTSoft.com</a>. Start
+          StyleBuilder. From the File menu, select "Import .msstyles
+          file". In the popup window, select the .msstyles previously
+          downloaded and a folder when the theme will be extracted
+          (make sure the folder exists - I usually created a folder
+          named "extracted" in the folder of the .msstyles). If the
+          import goes fine, a window will ask whether you want to open
+          the theme, say "Yes".
+        </p>
+        <p>
+          In the "extracted" folder, you will find a bunch of files
+          and folders. There are XML files describing the theme and
+          png, bmp image files which are the actual pixmaps to paint
+          the theme (as in a themepack, there is nothing new here).
+        </p>
+        <p>
+          Some visual styles embed several variations of the same
+          theme, in such case there will be several .xml files, one
+          for each variation.
+        </p>
+      </section>
+      <section>
+        <title>Step 3 - Converting to themepack</title>
+        <p>
+          The converters are not yet bundled with the distribution of
+          SkinLF but are available when doing a checkout of the code
+          from the CVS repository (See <a
+          href="http://skinlf.dev.java.net">skinlf @
+          dev.java.net</a>).
+        </p>
+        <p>
+          To convert the visual style to a themepack, open a terminal
+          from the "bin" folder of the SkinLF distribution and run:
+          <pre class="code">
+            msstyle.bat &lt;path-to-the-visualstyle.xml&gt; &lt;path-to-the-themepack-folder-to-create&gt;
+          </pre>
+          In the target folder, it will generate the directory
+          structure of a themepack including skinlf-themepack.xml,
+          gtk, icons, kde.
+        </p>
+        <p>
+          At this point, you should be able to get a preview of how
+          your theme will look like. You can try it with the SkinLF
+          demo:
+          <pre class="code">
+            demo.bat &lt;path-to-the-themepack-folder-to-create&gt;\skinlf-themepack.xml
+          </pre>
+        </p>
+      </section>
+      <section>
+        <title>Step 4 - Finalizing the themepack</title>
+        <p>
+          However, the theme might not be usable yet as the converter
+          is not yet top-class converter. It does the basic and let
+          you do the fine tuning of the theme, this way you become an
+          artist :).
+        </p>
+        <p>
+          The most common problems are:
+          <ul>
+            <li>Combobox looks bad</li>
+            <li>Menu border is the default border</li>
+            <li>Internal frame border is incorrect</li>
+            <li>Some transparency issues with check or radio buttons</li>
+            <li>Icons for FileChooser, Internal Frames are set to default</li>
+            <li>Font size is set to default</li>
+          </ul>
+        </p>
+      </section>
+      <section>
+        <title>Step 5 - Ready for prime time</title>
+        <p>
+          You have successfully created a new themepack. Make the
+          community benefits from your effort by contributing the
+          themepack to <a
+          href="http://www.javootoo.com">javootoo.com</a> by sending
+          an email to <i>webmaster at javootoo.com</i>.
+        </p>
+      </section>
+    </section>
+  </body>
+</article>
