@@ -56,7 +56,7 @@
                 <tr>
                   <td width="50">
                   </td>
-                  <td width="10">.
+                  <td width="10">
                   </td>
                   <td width="580">
                     <xsl:apply-templates select="body"/>
@@ -64,7 +64,7 @@
                       <a href="#TOP">top</a>
                     </div>
                   </td>
-                  <td width="10">.
+                  <td width="10">
                   </td>
                   <td width="150">
                   </td>
