@@ -17,6 +17,11 @@
         <xsl:call-template name="document.html" />
       </redirect:write>
     </xsl:for-each>
+    <xsl:for-each select="article">
+      <redirect:write file="{$output.dir}/{@id}.html">
+        <xsl:call-template name="document.html" />
+      </redirect:write>
+    </xsl:for-each>
   </xsl:template>
 
   <!--
@@ -134,6 +139,20 @@
     <xsl:apply-templates/>
   </xsl:template>
 
+  <xsl:template match="xref">
+    <xsl:variable name="linkend" select="@linkend"/>
+    <xsl:for-each select="//*[@id=$linkend]">
+      <xsl:choose>
+        <xsl:when test="name()='article' or name()='document'">
+          <a href="{@id}.html"><xsl:value-of select="properties/title"/></a>
+        </xsl:when>
+        <xsl:otherwise>
+          xref not handled for <xsl:value-of select="name()"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:for-each>
+  </xsl:template>
+
   <!--
        The stylesheet used by all pages
        -->
@@ -161,6 +180,7 @@ a:visited.banner {
       color: #FFFFFF;
       text-decoration: none;
 }
+.code {  font-family: "Courier New", Courier, mono; font-size: 9pt; border-color: #666666 #000000 #000000 #666666; background-color: #FFFFCC; padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px; border-style: solid; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px}
     </style>
   </xsl:template>
 
