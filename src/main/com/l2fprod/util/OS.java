@@ -50,7 +50,7 @@ package com.l2fprod.util;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 20:15:34 $
+ * @version   $Revision: 1.2 $, $Date: 2004-05-07 18:55:31 $
  */
 public final class OS {
 
@@ -254,7 +254,8 @@ public final class OS {
       // win95 or win98
       isWindows95 = true;
     }
-    else if (s.equals("macintosh") || s.equals("macos") || s.equals("mac os")) {
+    else if (s.equals("macintosh") || s.equals("macos") ||
+        s.equals("mac os") || s.equals("mac os x")) {
       isMacintosh = true;
     }
     else if (s.equals("sunos") || s.equals("solaris")) {
