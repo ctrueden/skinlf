@@ -682,6 +682,9 @@ public class SkinRootPaneUI extends BasicRootPaneUI {
 			Insets i = parent.getInsets();
 			JRootPane root = (JRootPane) parent;
 
+      // It seems some content pane returns the preferred size as the
+      // minimum size. We will just ignore the content pane for now.
+      /*
 			if (root.getContentPane() != null) {
 				cpd = root.getContentPane().getMinimumSize();
 			} else {
@@ -691,6 +694,7 @@ public class SkinRootPaneUI extends BasicRootPaneUI {
 				cpWidth = cpd.width;
 				cpHeight = cpd.height;
 			}
+      */
 
 			if (root.getJMenuBar() != null) {
 				mbd = root.getJMenuBar().getMinimumSize();
@@ -712,11 +716,13 @@ public class SkinRootPaneUI extends BasicRootPaneUI {
 				}
 			}
 
-			return new Dimension(
+      // FYI, MetalRootLayout has a bug in the dimension as it uses
+      // tpWidth in the height calculation
+      return new Dimension(
 				Math.max(Math.max(cpWidth, mbWidth), tpWidth)
 					+ i.left
 					+ i.right,
-				cpHeight + mbHeight + tpWidth + i.top + i.bottom);
+				cpHeight + mbHeight + tpHeight + i.top + i.bottom);
 		}
 
 		/**
@@ -1025,7 +1031,7 @@ public class SkinRootPaneUI extends BasicRootPaneUI {
 		public void mouseDragged(MouseEvent ev) {
 			java.awt.Window w = translateSource(ev);
 			Point pt = ev.getPoint();
-			//System.out.println("MovingWindow:"+isMovingWindow+" dragcursor:"+dragCursor);
+      //			System.out.println("MovingWindow:"+isMovingWindow+" dragcursor:"+dragCursor);
 			if (isMovingWindow) {
 				Point windowPt = w.getLocationOnScreen();
 
