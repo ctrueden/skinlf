@@ -76,51 +76,18 @@ public class SkinSplitPaneDivider extends BasicSplitPaneDivider implements javax
   public SkinSplitPaneDivider(BasicSplitPaneUI ui) {
     super(ui);
     setLayout(new DividerLayout());
-    setBasicSplitPaneUI(ui);
-    orientation = splitPane.getOrientation();
-    setBackground(UIManager.getColor("SplitPane.background"));
   }
 
   /**
-   * Sets the Bounds attribute of the SkinSplitPaneDivider object
-   *
-   * @param x  The new Bounds value
-   * @param y  The new Bounds value
-   * @param w  The new Bounds value
-   * @param h  The new Bounds value
-   */
-  public void setBounds(int x, int y, int w, int h) {
-    super.setBounds(x, y, w, h);
-  }
-
-  /**
-   * Sets the size of the divider to <code>newSize</code>. That is the width if
-   * the splitpane is <code>HORIZONTAL_SPLIT</code>, or the height of <code>VERTICAL_SPLIT</code>
-   * .
+   * Sets the size of the divider to <code>newSize</code>. That is the
+   * width if the splitpane is <code>HORIZONTAL_SPLIT</code>, or the
+   * height of <code>VERTICAL_SPLIT</code> .
    *
    * @param newSize  The new DividerSize value
    */
   public void setDividerSize(int newSize) {
     dividerSize = newSize;
     splitPane.setDividerSize(newSize);
-  }
-
-  /**
-   * Returns dividerSize x dividerSize
-   *
-   * @return   The PreferredSize value
-   */
-  public Dimension getPreferredSize() {
-    return getLayout().preferredLayoutSize(splitPane);
-  }
-
-  /**
-   * Returns dividerSize x dividerSize
-   *
-   * @return   The MinimumSize value
-   */
-  public Dimension getMinimumSize() {
-    return getLayout().preferredLayoutSize(splitPane);
   }
 
   /**
@@ -197,7 +164,7 @@ public class SkinSplitPaneDivider extends BasicSplitPaneDivider implements javax
    * @param d  Description of Parameter
    */
   protected void updateDividerSize(Dimension d) {
-    int buttonSize = 0;
+    int buttonSize;
     if (orientation == JSplitPane.HORIZONTAL_SPLIT) {
       buttonSize = d.width;
     }
@@ -218,7 +185,7 @@ public class SkinSplitPaneDivider extends BasicSplitPaneDivider implements javax
    * @author    fred
    * @created   27 avril 2002
    */
-  protected class DividerLayout extends BasicSplitPaneDivider.DividerLayout {
+  protected class DividerLayout implements LayoutManager {
     /**
      * Description of the Method
      *
@@ -258,58 +225,17 @@ public class SkinSplitPaneDivider extends BasicSplitPaneDivider implements javax
       }
     }
 
-    /**
-     * Description of the Method
-     *
-     * @param c  Description of Parameter
-     * @return   Description of the Returned Value
-     */
     public Dimension minimumLayoutSize(Container c) {
-      if (splitPane.isOneTouchExpandable()) {
-        Dimension leftSize = leftButton.getPreferredSize();
-        Dimension rightSize = rightButton.getPreferredSize();
-        Insets insets = getInsets();
-        if (insets == null) {
-          insets = NO_INSETS;
-        }
-        int x;
-        int y;
-
-        if (orientation == JSplitPane.VERTICAL_SPLIT) {
-
-          y = Math.max(leftSize.height, rightSize.height) + insets.top + insets.bottom;
-          x = insets.left + leftSize.width + insets.left + rightSize.width + insets.right;
-
-        }
-        else {
-          x = Math.max(leftSize.width, rightSize.width) + insets.left + insets.right;
-          y = insets.top + leftSize.height + insets.top + rightSize.height + insets.bottom;
-        }
-        return new Dimension(x, y);
-      }
-      else {
-        int divSize = ((Integer) (UIManager.get("SplitPane.dividerSize"))).intValue();
-        if (orientation == JSplitPane.VERTICAL_SPLIT) {
-          return new Dimension(splitPane.getSize().height, divSize);
-        }
-        else {
-          return new Dimension(divSize, splitPane.getSize().width);
-        }
-      }
+      return new Dimension(0,0);
     }
-
-
-    /**
-     * Description of the Method
-     *
-     * @param c  Description of Parameter
-     * @return   Description of the Returned Value
-     */
+    
     public Dimension preferredLayoutSize(Container c) {
-      return minimumLayoutSize(c);
+      return new Dimension(0, 0);
     }
-
+    
+    public void removeLayoutComponent(Component c) {}
+    
+    public void addLayoutComponent(String string, Component c) {}
   }
-  // End of class DividerLayout
 
 }
