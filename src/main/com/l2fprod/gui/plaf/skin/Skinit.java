@@ -47,6 +47,7 @@
  */
 package com.l2fprod.gui.plaf.skin;
 
+import java.io.File;
 import java.lang.reflect.Method;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
@@ -66,7 +67,7 @@ import com.l2fprod.gui.plaf.skin.CompoundSkin;
  * Feel. Once Skin Look And Feel is set, it can't be removed. <br>
  *
  * @author    $Author: l2fprod $
- * @version   $Revision: 1.3 $, $Date: 2004-05-07 18:59:00 $
+ * @version   $Revision: 1.4 $, $Date: 2004-07-09 16:11:30 $
  */
 public class Skinit {
 
@@ -162,9 +163,13 @@ public class Skinit {
         if (SkinUtils.DEBUG) {
           System.out.println("Loading themepack " + packtheme);
         }
-        skin = SkinLookAndFeel.loadThemePack(packtheme);
-      }
-      else if (gtktheme != null) {
+        if (packtheme.toLowerCase().endsWith(".xml")) {
+          skin = SkinLookAndFeel.loadThemePackDefinition(new File(packtheme)
+            .toURL());
+        } else {
+          skin = SkinLookAndFeel.loadThemePack(packtheme);
+        }
+      } else if (gtktheme != null) {
         if (kdetheme != null) {
           skin = new CompoundSkin(SkinLookAndFeel.loadSkin(gtktheme),
                                   SkinLookAndFeel.loadSkin(kdetheme));
