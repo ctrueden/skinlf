@@ -47,8 +47,14 @@
  */
 package com.l2fprod.gui.plaf.skin;
 
+import com.l2fprod.util.OS;
+
+import java.io.File;
+
+import javax.swing.Icon;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileView;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.metal.MetalFileChooserUI;
 
@@ -57,9 +63,15 @@ import javax.swing.plaf.metal.MetalFileChooserUI;
  *
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.2 $, $Date: 2003-12-06 21:46:29 $
+ * @version   $Revision: 1.3 $, $Date: 2004-07-18 19:14:56 $
  */
 public final class SkinFileChooserUI extends MetalFileChooserUI {
+
+  private BasicFileView fileView = new SystemFileView();
+
+  public static ComponentUI createUI(JComponent c) {
+    return new SkinFileChooserUI((JFileChooser) c);
+  }
 
   /**
    * Constructor for the SkinFileChooserUI object
@@ -70,24 +82,26 @@ public final class SkinFileChooserUI extends MetalFileChooserUI {
     super(filechooser);
   }
 
-  /**
-   * Description of the Method
-   *
-   * @param fc  Description of Parameter
-   */
-  public void installComponents(JFileChooser fc) {
-    super.installComponents(fc);
-    // we need to traverse the component tree and replace all combo renderers with our own.
+  public FileView getFileView(JFileChooser fc) {    
+  	return fileView;
   }
 
   /**
-   * Description of the Method
-   *
-   * @param c  Description of Parameter
-   * @return   Description of the Returned Value
+   * return "native" icons for Files
    */
-  public static ComponentUI createUI(JComponent c) {
-    return new SkinFileChooserUI((JFileChooser) c);
+  protected class SystemFileView extends BasicFileView {
+    public Icon getIcon(File f) {
+      Icon icon = getCachedIcon(f);
+      if (icon != null) { return icon; }
+      if (OS.isOneDotFourOrMore() && f != null) {
+        icon = getFileChooser().getFileSystemView().getSystemIcon(f);
+      }
+      if (icon == null) {
+        icon = super.getIcon(f);
+      }
+      cacheIcon(f, icon);
+      return icon;
+    }
   }
 
 }
