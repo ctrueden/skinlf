@@ -1,4 +1,4 @@
-<!DOCTYPE DOCUMENT [
+<!DOCTYPE project [
   <!ENTITY build-COMMON SYSTEM "common.xml">
 ]>
 
@@ -31,9 +31,17 @@
 
   &build-COMMON;
 
-  <target name="compile" depends="init">
+  <target name="compile.javacc" depends="init">
+    <javacc target="src/main/com/l2fprod/gui/plaf/skin/impl/gtk/parser/GtkParser.jj"
+            outputdirectory="src/main/com/l2fprod/gui/plaf/skin/impl/gtk/parser"
+            javacchome="lib"
+            static="false"
+            javaunicodeescape="true" />
   </target>
 
+  <target name="compile" depends="init">
+  </target>
+   
   <!--
     Utility targets to use the style converters
   -->
@@ -43,6 +51,17 @@
           fork="yes">
       <arg value="${msstyle}" />
       <arg value="${msstyle}.xml" />
+      <arg value="${skin}" />
+    </java>
+  </target>
+
+  <!--
+    Start Demos
+  -->
+  <target name="demo">
+    <java classname="examples.demo"
+          classpath="${classpath.asprop}:${java.src.dir}:${build.classes}"
+          fork="yes">
       <arg value="${skin}" />
     </java>
   </target>
