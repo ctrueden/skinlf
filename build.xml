@@ -117,16 +117,17 @@
     <taskdef name="proguard"
              classname="proguard.ant.ProGuardTask"
              classpath="lib/proguard.jar"/>
-    <delete file="${build.dir}/${project}-obfuscated.jar"/>
+    <move file="${build.dir}/${project}.jar"
+    	  tofile="${build.dir}/${project}-toobfuscate.jar"/>
     <proguard
-              outjar="${build.dir}/${project}-obfuscated.jar"
+              outjar="${build.dir}/${project}.jar"
               obfuscate="yes"
               usemixedclassnames="no"
               overloadaggressively="yes"
               printmapping="obfuscatemapping.txt"
               printusage="obfuscateusage.txt">
       <libraryjar name="${java.home}/lib/rt.jar"/>
-      <injar name="${build.dir}/${project}.jar"/>
+      <injar name="${build.dir}/${project}-toobfuscate.jar"/>
       <keep access="public" type="class" name="Skinit">
         <method name="*"/>
       </keep>
@@ -193,6 +194,12 @@
       <keep access="public" type="class" name="com.l2fprod.gui.plaf.skin.impl.*">
         <method name="*"/>
       </keep>
+      <keep access="public" type="class" name="com.l2fprod.gui.plaf.skin.impl.gtk.GtkSkin">
+        <method name="*"/>
+      </keep>
+      <keep access="public" type="class" name="com.l2fprod.gui.plaf.skin.impl.kde.KdeSkin">
+        <method name="*"/>
+      </keep>
       <keep access="public" type="class" name="com.l2fprod.gui.region.*">
         <method name="*"/>
       </keep>
@@ -205,7 +212,7 @@
     </proguard>
   </target>
 
-  <target name="dist.pre">
+  <target name="dist.pre" depends="obfuscate">
     <!-- examples.jar -->
     <jar destfile="${build.dist.lib}/examples.jar">
       <fileset dir="${build.classes}" includes="examples/**.class"/>
