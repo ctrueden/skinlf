@@ -134,6 +134,18 @@
         <include name="**.java"/>
       </fileset>
     </copy>
+    <mkdir dir="${build.www.dir}/javadoc"/>
+    <javadoc sourcepath="${build.src}"
+             classpath="${classpath}"
+             destdir="${build.www.dir}/javadoc"
+             packagenames="${javadoc.packagenames}"
+             private="false" protected="true"
+             windowtitle="${project.fullname} ${version} API"
+             doctitle="${project.fullname} ${version}"
+             version="false" author="false" use="false"
+             stylesheetfile="xdocs/javadoc.css"
+             splitindex="true"
+             bottom="Copyright &#169; ${year} L2FProd.com. All Rights Reserved."/>
     <delete file="${build.www.dir}/empty.html"/>
   </target>
 
