@@ -59,7 +59,7 @@ import com.l2fprod.util.ImageUtils;
  *
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 20:13:03 $
+ * @version   $Revision: 1.2 $, $Date: 2003-08-17 18:07:07 $
  */
 public class DefaultButton implements Icon, Border, UIResource, java.io.Serializable {
 
@@ -84,18 +84,18 @@ public class DefaultButton implements Icon, Border, UIResource, java.io.Serializ
    */
   public transient Image top, right, bottom, left, center;
 
-  int topHeight, bottomHeight, leftWidth, rightWidth;
-  int imageWidth, imageHeight;
+  protected int topHeight, bottomHeight, leftWidth, rightWidth;
+  protected int imageWidth, imageHeight;
 
-  int top_fill = ImageUtils.PAINT_STRETCH;
-  int right_fill = ImageUtils.PAINT_STRETCH;
-  int bottom_fill = ImageUtils.PAINT_STRETCH;
-  int left_fill = ImageUtils.PAINT_STRETCH;
-  int center_fill = ImageUtils.PAINT_STRETCH;
+  protected int top_fill = ImageUtils.PAINT_STRETCH;
+  protected int right_fill = ImageUtils.PAINT_STRETCH;
+  protected int bottom_fill = ImageUtils.PAINT_STRETCH;
+  protected int left_fill = ImageUtils.PAINT_STRETCH;
+  protected int center_fill = ImageUtils.PAINT_STRETCH;
 
-  boolean tile;
+  protected boolean tile;
 
-  Insets insets;
+  protected Insets insets;
 
   /**
    * Constructor for the DefaultButton object
@@ -309,6 +309,82 @@ public class DefaultButton implements Icon, Border, UIResource, java.io.Serializ
   }
 
   /**
+   * Description of the Method
+   *
+   * @return   Description of the Returned Value
+   */
+  public DefaultButton rotateCounterClockWise() {
+    DefaultButton b = new DefaultButton();
+    b.top = ImageUtils.rotateLeft(right);
+    b.topHeight = rightWidth;
+    b.top_fill = right_fill;
+
+    b.topleft = ImageUtils.rotateLeft(topright);
+
+    b.bottomleft = ImageUtils.rotateLeft(topleft);
+
+    b.topright = ImageUtils.rotateLeft(bottomright);
+
+    b.bottomright = ImageUtils.rotateLeft(bottomleft);
+
+    b.bottom = ImageUtils.rotateLeft(left);
+    b.bottomHeight = leftWidth;
+    b.bottom_fill = left_fill;
+
+    b.left = ImageUtils.rotateLeft(top);
+    b.leftWidth = topHeight;
+    b.left_fill = top_fill;
+
+    b.right = ImageUtils.rotateLeft(bottom);
+    b.rightWidth = bottomHeight;
+    b.right_fill = bottom_fill;
+
+    b.center = ImageUtils.rotateLeft(center);
+    b.center_fill = center_fill;
+
+    b.imageWidth = imageHeight;
+    b.imageHeight = imageWidth;
+    b.tile = tile;
+    b.insets = new Insets(insets.left, insets.top, insets.right, insets.bottom);
+    return b;
+  }
+
+  public DefaultButton rotateClockWise() {
+    DefaultButton b = new DefaultButton();
+
+    b.center = ImageUtils.rotateRight(center);
+    b.center_fill = center_fill;
+
+    b.top = ImageUtils.rotateRight(left);
+    b.topHeight = leftWidth;
+    b.top_fill = left_fill;
+
+    b.right = ImageUtils.rotateRight(top);
+    b.rightWidth = topHeight;
+    b.right_fill = top_fill;
+
+    b.bottom = ImageUtils.rotateRight(right);
+    b.bottomHeight = rightWidth;
+    b.bottom_fill = right_fill;
+
+    b.left = ImageUtils.rotateRight(bottom);
+    b.leftWidth = bottomHeight;
+    b.left_fill = bottom_fill;
+    
+    b.topleft = ImageUtils.rotateRight(bottomleft);
+    b.topright = ImageUtils.rotateRight(topleft);
+    b.bottomleft = ImageUtils.rotateRight(bottomright);
+    b.bottomright = ImageUtils.rotateRight(topright);
+
+    b.imageWidth = imageHeight;
+    b.imageHeight = imageWidth;
+    b.tile = tile;
+    b.insets = new Insets(leftWidth, bottomHeight, rightWidth, topHeight);
+
+    return b;
+  }
+
+  /**
    * Gets the MinimumSize attribute of the DefaultButton object
    *
    * @return   The MinimumSize value
@@ -390,47 +466,6 @@ public class DefaultButton implements Icon, Border, UIResource, java.io.Serializ
    */
   public boolean isBorderOpaque() {
     return false;
-  }
-
-  /**
-   * Description of the Method
-   *
-   * @return   Description of the Returned Value
-   */
-  public DefaultButton rotateCounterClockWise() {
-    DefaultButton b = new DefaultButton();
-    b.top = ImageUtils.rotateLeft(right);
-    b.topHeight = rightWidth;
-    b.top_fill = right_fill;
-
-    b.topleft = ImageUtils.rotateLeft(topright);
-
-    b.bottomleft = ImageUtils.rotateLeft(topleft);
-
-    b.topright = ImageUtils.rotateLeft(bottomright);
-
-    b.bottomright = ImageUtils.rotateLeft(bottomleft);
-
-    b.bottom = ImageUtils.rotateLeft(left);
-    b.bottomHeight = leftWidth;
-    b.bottom_fill = left_fill;
-
-    b.left = ImageUtils.rotateLeft(top);
-    b.leftWidth = topHeight;
-    b.left_fill = top_fill;
-
-    b.right = ImageUtils.rotateLeft(bottom);
-    b.rightWidth = bottomHeight;
-    b.right_fill = bottom_fill;
-
-    b.center = ImageUtils.rotateLeft(center);
-    b.center_fill = center_fill;
-
-    b.imageWidth = imageHeight;
-    b.imageHeight = imageWidth;
-    b.tile = tile;
-    b.insets = new Insets(insets.left, insets.top, insets.right, insets.bottom);
-    return b;
   }
 
   /**
