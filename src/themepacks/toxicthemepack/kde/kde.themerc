@@ -54,7 +54,7 @@ StickyButton=sticky.xpm
 StickyDownButton=stickydown.xpm
 
 TitlebarPixmapActive=titlebar_selected.png
-TitlebarPixmapActiveBorder=80, 80, 0, 23
+TitlebarPixmapActiveBorder=80, 80, 0, 16
 TitlebarPixmapActiveLeft=
 TitlebarPixmapActiveRight=
 TitlebarPixmapActiveTop=
