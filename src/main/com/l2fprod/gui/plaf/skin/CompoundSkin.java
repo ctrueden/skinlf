@@ -60,7 +60,7 @@ import com.l2fprod.gui.plaf.skin.impl.AbstractSkin;
  *
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.2 $, $Date: 2003-10-24 20:30:22 $
+ * @version   $Revision: 1.3 $, $Date: 2003-11-23 14:47:45 $
  */
 public final class CompoundSkin extends AbstractSkin {
 
@@ -659,6 +659,20 @@ public final class CompoundSkin extends AbstractSkin {
       }
       return result;
     }
+
+	/* (non-Javadoc)
+	 * @see com.l2fprod.gui.plaf.skin.SkinProgress#paintIndeterminateProgress(java.awt.Graphics, javax.swing.JProgressBar, java.awt.Rectangle)
+	 */
+	public boolean paintIndeterminateProgress(Graphics g, JProgressBar progress, Rectangle rec) {
+		boolean result = false;
+	  if (skina.getProgress() != null) {
+		result = skina.getProgress().paintIndeterminateProgress(g, progress,rec);
+	  }
+	  if (!result && (skinb.getProgress() != null)) {
+		result = skinb.getProgress().paintIndeterminateProgress(g, progress,rec);
+	  }
+	  return result;
+	}
   }
 
   /**

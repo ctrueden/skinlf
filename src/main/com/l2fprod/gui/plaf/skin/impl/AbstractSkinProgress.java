@@ -48,6 +48,7 @@
 package com.l2fprod.gui.plaf.skin.impl;
 
 import java.awt.*;
+
 import javax.swing.*;
 
 import com.l2fprod.gui.plaf.skin.*;
@@ -55,48 +56,135 @@ import com.l2fprod.gui.plaf.skin.*;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 20:05:29 $
+ * @version   $Revision: 1.2 $, $Date: 2003-11-23 14:47:53 $
  */
-public class AbstractSkinProgress extends AbstractSkinComponent implements SkinProgress {
+public abstract class AbstractSkinProgress extends AbstractSkinComponent implements SkinProgress {
+
+	protected DefaultButton progressBarBackHorizontal;
+	protected DefaultButton progressBarHorizontal;
+
+	protected DefaultButton progressBarBackVertical;
+	protected DefaultButton progressBarVertical;
+
+	protected int orientation = JProgressBar.HORIZONTAL;
+	protected final Dimension minimumSize = new Dimension(50, 17);
 
   /**
-   * Gets the MinimumSize attribute of the AbstractSkinProgress object
-   *
-   * @param progress  Description of Parameter
-   * @return          The MinimumSize value
+   * Set UIManager.put("ProgressBar.windowAnimation", Boolean.TRUE) to
+   * use the window painting mode if the progress bar is inderterminate.
    */
-  public Dimension getMinimumSize(javax.swing.JProgressBar progress) {
-    return null;
+  protected boolean useWindow;
+
+  public AbstractSkinProgress() {
+    useWindow = Boolean.TRUE.
+      equals(UIManager.get("ProgressBar.windowAnimation"));
   }
 
-  /**
-   * Description of the Method
-   *
-   * @return   Description of the Returned Value
-   */
-  public boolean status() {
-    return false;
+	/**
+	 * Gets the MinimumSize attribute of the AbstractSkinProgress object
+	 *
+	 * @param progress  Description of Parameter
+	 * @return          The MinimumSize value
+	 */
+	public final Dimension getMinimumSize(javax.swing.JProgressBar progress) {
+    if (JProgressBar.VERTICAL == progress.getOrientation()) {
+      return progressBarBackVertical.getMinimumSize();
+    } else {
+      return progressBarBackHorizontal.getMinimumSize();
+    }
   }
 
-  /**
-   * Description of the Method
-   *
-   * @param c  Description of Parameter
-   * @return   Description of the Returned Value
-   */
-  public boolean installSkin(JComponent c) {
-    return false;
-  }
+	/**
+	 * Description of the Method
+	 *
+	 * @return   Description of the Returned Value
+	 */
+	public final boolean status() {
+		return progressBarHorizontal != null;
+	}
 
-  /**
+	/**
+	 * Description of the Method
+	 *
+	 * @param c  Description of Parameter
+	 * @return   Description of the Returned Value
+	 */
+	public final boolean installSkin(JComponent c) {
+		return true;
+	}
+
+	protected final void paintBackBar(Graphics g, JProgressBar progress) {
+    if (JProgressBar.VERTICAL == progress.getOrientation()) {
+      if (progressBarBackVertical != null) {
+        progressBarBackVertical.paint(g, 0, 0,
+                              progress.getWidth(),
+                              progress.getHeight(),
+                              progress);
+      }
+    } else {
+      if (progressBarBackHorizontal != null) {
+        progressBarBackHorizontal.paint(g, 0, 0,
+                                        progress.getWidth(),
+                                        progress.getHeight(),
+                                        progress);
+      }
+    }
+	}
+
+	/**
    * Description of the Method
    *
    * @param g         Description of Parameter
    * @param progress  Description of Parameter
    * @return          Description of the Returned Value
    */
-  public boolean paintProgress(Graphics g, JProgressBar progress) {
-    return false;
-  }
+	public final boolean paintProgress(java.awt.Graphics g, javax.swing.JProgressBar progress) {
+		int x, y, width, height;
+		x = y = width = height = 0;
 
+		paintBackBar(g, progress);
+
+    if (JProgressBar.VERTICAL == progress.getOrientation()) {
+      height = (int)((double)progress.getValue() * progress.getHeight() /
+                     (double)progress.getMaximum());
+      y = progress.getHeight() - height;
+      width = progress.getWidth();
+      progressBarVertical.paint(g, x, y, width, height, progress);
+    } else {
+      y = 0;
+      width = (int)((double)progress.getValue() * progress.getWidth() /
+                    (double)progress.getMaximum());
+      height = progress.getHeight();
+      progressBarHorizontal.paint(g, x, y, width, height, progress);
+    }
+
+		return true;
+	}
+
+	
+	public final boolean paintIndeterminateProgress(Graphics g, JProgressBar progress, Rectangle rec) {
+		paintBackBar(g, progress);
+
+    if (JProgressBar.VERTICAL == progress.getOrientation()) {
+      if (useWindow) {
+        progressBarVertical.paintWindow(g, progress.getWidth(),
+                                        progress.getHeight(),
+                                        rec.x, rec.y,
+                                        rec.width, rec.height, progress);
+      } else {
+        progressBarVertical.paint(g, rec.x, rec.y, rec.width, rec.height, progress);
+      }
+    } else {
+      if (useWindow) {
+        progressBarHorizontal.paintWindow(g, progress.getWidth(),
+                                          progress.getHeight(),
+                                          rec.x, rec.y,
+                                          rec.width, rec.height, progress);
+      } else {
+        progressBarHorizontal.paint(g, rec.x, rec.y,
+                                    rec.width, rec.height, progress);
+      }
+    }
+		return true;
+	}
 }

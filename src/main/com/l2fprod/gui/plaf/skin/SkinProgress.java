@@ -47,13 +47,15 @@
  */
 package com.l2fprod.gui.plaf.skin;
 
+import java.awt.Rectangle;
+
 /**
  * Skin Progress. <br>
  *
  *
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 19:47:23 $
+ * @version   $Revision: 1.2 $, $Date: 2003-11-23 14:47:45 $
  */
 public interface SkinProgress extends SkinComponent {
 
@@ -73,5 +75,5 @@ public interface SkinProgress extends SkinComponent {
    * @return          Description of the Returned Value
    */
   boolean paintProgress(java.awt.Graphics g, javax.swing.JProgressBar progress);
-
+  boolean paintIndeterminateProgress(java.awt.Graphics g, javax.swing.JProgressBar progress, Rectangle rec);
 }

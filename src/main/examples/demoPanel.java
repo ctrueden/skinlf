@@ -72,7 +72,7 @@ import com.l2fprod.util.*;
  *
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.5 $, $Date: 2003-10-10 20:49:15 $
+ * @version   $Revision: 1.6 $, $Date: 2003-11-23 14:48:11 $
  */
 public class demoPanel extends JPanel {
 
@@ -215,7 +215,16 @@ public class demoPanel extends JPanel {
     common.add(toggle);
     toggleGroup.add(toggle);
 
-    JPanel grid = new JPanel(new GridLayout(2, 1));
+    JPanel grid = new JPanel(new GridLayout(OS.isOneDotFour()?3:2, 1));
+    // add the progress bar with indeterminate state if JDK1.4
+    if (OS.isOneDotFour()) {
+      JProgressBar indeterminate = new JProgressBar(JProgressBar.HORIZONTAL, 0, 100);
+      AccessUtils.invoke(indeterminate, "setIndeterminate",
+                         new Class[]{boolean.class},
+                         new Object[]{Boolean.TRUE});
+      grid.add(indeterminate);
+    }
+
     JProgressBar progress = new JProgressBar(JProgressBar.HORIZONTAL, 0, 100);
     progress.setValue(75);
     progress.setPreferredSize(new Dimension(10, 25));

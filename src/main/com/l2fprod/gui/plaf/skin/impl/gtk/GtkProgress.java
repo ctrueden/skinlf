@@ -47,126 +47,45 @@
  */
 package com.l2fprod.gui.plaf.skin.impl.gtk;
 
-import java.awt.Image;
-import java.awt.Dimension;
-import javax.swing.SwingConstants;
-import javax.swing.JComponent;
+import java.awt.Graphics;
+import java.awt.Rectangle;
 
-import com.l2fprod.util.ImageUtils;
-import com.l2fprod.gui.plaf.skin.*;
+import javax.swing.JProgressBar;
+import javax.swing.SwingConstants;
 import com.l2fprod.gui.plaf.skin.impl.*;
 import com.l2fprod.gui.plaf.skin.impl.gtk.parser.*;
 
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.2 $, $Date: 2003-08-19 12:48:56 $
+ * @version   $Revision: 1.3 $, $Date: 2003-11-23 14:47:57 $
  */
-class GtkProgress extends AbstractSkinProgress implements SkinProgress, SwingConstants {
+final class GtkProgress extends AbstractSkinProgress implements SwingConstants {
 
-  DefaultButton hprogressBar;
-  DefaultButton hprogressBack;
+	/**
+	 * Constructor for the GtkProgress object
+	 *
+	 * @param parser         Description of Parameter
+	 * @exception Exception  Description of Exception
+	 */
+	public GtkProgress(GtkParser parser) throws Exception {
+		//PENDING(fred): progress needs to be improved with vertical and horizontal progress
+		progressBarHorizontal =
+      GtkUtils.newButton(parser, "GtkProgressBar",
+                         new String[]{"function", "detail"},
+                         new String[]{"BOX", "bar"},
+                         false, true, true);
 
-  DefaultButton vprogressBar;
-  DefaultButton vprogressBack;
+		progressBarBackHorizontal =
+      GtkUtils.newButton(parser, "GtkProgressBar",
+                         new String[]{"function", "detail"},
+                         new String[]{"BOX", "trough"},
+                         false, true, true);
 
-  /**
-   * Constructor for the GtkProgress object
-   *
-   * @param parser         Description of Parameter
-   * @exception Exception  Description of Exception
-   */
-  public GtkProgress(GtkParser parser) throws Exception {
-    //PENDING(fred): progress needs to be improved with vertical and horizontal progress
-    hprogressBar = GtkUtils.newButton(parser, "GtkProgressBar",
-        new String[]{"function", "detail"},
-        new String[]{"BOX", "bar"}, false, true, true);
-
-    hprogressBack = GtkUtils.newButton(parser, "GtkProgressBar",
-        new String[]{"function", "detail"},
-        new String[]{"BOX", "trough"}, false, true, true);
-
-    vprogressBar = hprogressBar.rotateClockWise();
-    vprogressBack = hprogressBack.rotateClockWise();
-  }
-
-  /**
-   * Gets the MinimumSize attribute of the GtkProgress object
-   *
-   * @param progress  Description of Parameter
-   * @return          The MinimumSize value
-   */
-  public java.awt.Dimension getMinimumSize(javax.swing.JProgressBar progress) {
-    if (VERTICAL == progress.getOrientation()) {
-      if (vprogressBack != null) {
-        return vprogressBack.getMinimumSize();
-      }
-      else {
-        return new Dimension(17, 50);
-      }
-    }
-    else {
-      if (hprogressBack != null) {
-        return hprogressBack.getMinimumSize();
-      }
-      else {
-        return new Dimension(50, 17);
-      }
-    }
-  }
-
-  /**
-   * Description of the Method
-   *
-   * @return   Description of the Returned Value
-   */
-  public boolean status() {
-    return hprogressBar != null;
-  }
-
-  /**
-   * Description of the Method
-   *
-   * @param c  Description of Parameter
-   * @return   Description of the Returned Value
-   */
-  public boolean installSkin(JComponent c) {
-    return true;
-  }
-
-  /**
-   * Description of the Method
-   *
-   * @param g         Description of Parameter
-   * @param progress  Description of Parameter
-   * @return          Description of the Returned Value
-   */
-  public boolean paintProgress(java.awt.Graphics g, javax.swing.JProgressBar progress) {
-    if (VERTICAL == progress.getOrientation()) {
-      if (vprogressBack != null) {
-        vprogressBack.paint(g, 0, 0, progress.getWidth(), progress.getHeight(), progress);
-      }
-
-      if ((vprogressBar != null) && (progress.getValue() > progress.getMinimum())) {
-        int size = (int) ((double) progress.getValue() * progress.getHeight() / (double) progress.getMaximum());
-        vprogressBar.paint(g, 0,
-            progress.getHeight() - size,
-            progress.getWidth(), size, progress);
-      }
-      return true;
-    }
-    else {
-      if (hprogressBack != null) {
-        hprogressBack.paint(g, 0, 0, progress.getWidth(), progress.getHeight(), progress);
-      }
-
-      if ((hprogressBar != null) && (progress.getValue() > progress.getMinimum())) {
-        hprogressBar.paint(g, 0, 0,
-            (int) ((double) progress.getValue() * progress.getWidth() / (double) progress.getMaximum()),
-            progress.getHeight(), progress);
-      }
-      return true;
-    }
-  }
+    progressBarVertical = progressBarHorizontal.
+      rotateCounterClockWise();
+    progressBarBackVertical = progressBarBackHorizontal.
+      rotateCounterClockWise();
+	}
 
 }

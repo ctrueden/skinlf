@@ -47,6 +47,9 @@
  */
 package com.l2fprod.gui.plaf.skin;
 
+import com.l2fprod.util.AccessUtils;
+import com.l2fprod.util.OS;
+
 import javax.swing.plaf.basic.*;
 import javax.swing.plaf.*;
 import javax.swing.*;
@@ -55,7 +58,7 @@ import java.awt.*;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 19:47:23 $
+ * @version   $Revision: 1.2 $, $Date: 2003-11-23 14:47:45 $
  */
 public class SkinProgressBarUI extends BasicProgressBarUI {
 
@@ -68,14 +71,22 @@ public class SkinProgressBarUI extends BasicProgressBarUI {
    * @param c  Description of Parameter
    */
   public void paint(Graphics g, JComponent c) {
-
-    skin.getProgress().paintProgress(g, progressBar);
+  	//if the progessBar is indererminate draw a window on the full 
+  	//progressBar the size of the box to be shown.  That box is determine
+  	//in the basicprogressbarui getBox() method
+    if (OS.isOneDotFour() && progressBar.isIndeterminate()) {
+      skin.getProgress().
+        paintIndeterminateProgress(g, progressBar, getBox(new Rectangle()));
+    } else {
+	    skin.getProgress().paintProgress(g, progressBar);
+    }
 
     int barRectX = 0;
     int barRectY = 0;
     int barRectWidth = progressBar.getWidth();
     int barRectHeight = progressBar.getHeight();
     Insets b = progressBar.getInsets();
+    
     // area for border
     barRectX += b.left;
     barRectY += b.top;
