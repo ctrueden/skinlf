@@ -105,7 +105,7 @@ public class demo extends JApplet {
         MetalLookAndFeel.setCurrentTheme(theme);
         UIManager.setLookAndFeel(metal);
       } else {
-        System.getProperties().put("skinlf.themepack", args[0]);
+        SkinLookAndFeel.setSkin(SkinLookAndFeel.loadThemePack(args[0]));
         UIManager.setLookAndFeel("com.l2fprod.gui.plaf.skin.SkinLookAndFeel");
       }
     }
