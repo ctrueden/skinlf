@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+
+<todo title="Things to do">
+  
+  <devs>
+    <person name="Frederic Lavigne" email="fred@L2FProd.com" id="FL"/>
+  </devs>
+  
+  <actions priority="low">
+    <action context="code">
+      support for background color on widgets (need testing)
+    </action>
+    <action context="code">
+      kdeframeborder: if pixmap bottom left/right and top left/right are null, left and right should be used to replace them
+    </action>
+    <action context="code">
+      add double arrow to scrollbar (for page up down)
+      => how to create the double arrow (what graphic to use ?)
+    </action>
+    <action context="code">
+      WIN32: when using a java.awt.Window, there is no taskbar item associated, so the window is like a ghost and only visible in our WindowList or with Alt+Tab (but with no title)
+    </action>
+  </actions>
+  
+  <actions priority="high">
+    <action context="web">
+      add a tutorial/making-off with javawebstart demo
+    </action>
+    <action context="code">
+      compile and test skinregionlinux.so
+    </action>
+  </actions>
+
+</todo>
