@@ -58,7 +58,6 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 
 import com.l2fprod.gui.plaf.skin.SkinLookAndFeel;
-import com.l2fprod.gui.plaf.skin.SkinWindowTitlePane;
 import com.l2fprod.gui.event.*;
 
 /**
@@ -72,7 +71,7 @@ import com.l2fprod.gui.event.*;
  *
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 20:33:31 $
+ * @version   $Revision: 1.2 $, $Date: 2003-10-24 20:30:47 $
  */
 public class SkinWindow extends com.l2fprod.gui.grieves.graphics.JExternalFrame {
 
