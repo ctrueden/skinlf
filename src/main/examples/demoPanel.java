@@ -47,25 +47,32 @@
  */
 package examples;
 
-import com.l2fprod.gui.plaf.skin.*;
-import com.l2fprod.util.*;
+import com.l2fprod.gui.plaf.skin.SkinLookAndFeel;
+import com.l2fprod.util.AccessUtils;
+import com.l2fprod.util.OS;
 
 import java.awt.*;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.event.*;
-import java.beans.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyVetoException;
+import java.beans.VetoableChangeListener;
 import java.util.Enumeration;
+
 import javax.swing.*;
-import javax.swing.border.*;
-import javax.swing.table.*;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
 
 /**
  * Simple Test Panel for a Look And Feel
  *
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.8 $, $Date: 2004-02-14 11:21:22 $
+ * @version   $Revision: 1.9 $, $Date: 2004-07-18 16:54:13 $
  */
 public class demoPanel extends JPanel {
 
@@ -144,7 +151,7 @@ public class demoPanel extends JPanel {
     button.setModel(model);
     buttonPane.add(button);
     buttonPane.add(button = new JButton("Normal"));
-    button.setBackground(Color.red);
+    button.setBackground(Color.green);
 
     button = new JButton("Pressed");
     model =
@@ -222,6 +229,7 @@ public class demoPanel extends JPanel {
     progress.setValue(75);
     progress.setPreferredSize(new Dimension(10, 25));
     JSlider slider = new JSlider(progress.getModel());
+    slider.setPaintTicks(true);
     grid.add(progress);
     grid.add(slider);
 
@@ -678,10 +686,6 @@ public class demoPanel extends JPanel {
       list.setFixedCellWidth(272);
       list.setFixedCellHeight(21);
       JScrollPane listScrollPane = new JScrollPane(list);
-      listScrollPane.setBorder(BorderFactory.
-                               createCompoundBorder(listScrollPane.getBorder(),
-                                                    BorderFactory.
-                                                    createEmptyBorder(2, 2, 2, 2)));
       add("Center", listScrollPane);
     }
   }
