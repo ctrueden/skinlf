@@ -102,6 +102,7 @@
       <fileset dir="${java.src.dir}" includes="com/**/*.gif"/>
       <manifest>
         <attribute name="Built-by" value="${user.name}"/>
+        <attribute name="Main-Class" value="com.l2fprod.gui.plaf.skin.Skinit"/>
         <section name="com/l2fprod/gui/plaf/skin">
           <attribute name="Specification-Title" value="${project.fullname}"/>
           <attribute name="Specification-Version" value="${version}"/>
@@ -213,7 +214,7 @@
     </proguard>
   </target>
 
-  <target name="dist.pre" depends="obfuscate">
+  <target name="dist.pre" depends="jar">
     <!-- examples.jar -->
     <jar destfile="${build.dist.lib}/examples.jar">
       <fileset dir="${build.classes}" includes="examples/**.class"/>
