@@ -28,6 +28,12 @@
               Support new skin format like MSVisualStyles, ICEwm
               (www.icewm.org)
             </li>
+            <li>
+              can this program place the window decorations
+              (iconize,close, maximize) and place the title bar
+              vertically on one side of a jInternalFrame? why not,
+              either on a theme basis or a jinternalframe basis.
+            </li>
           </ul>
         </p>
       </section>
