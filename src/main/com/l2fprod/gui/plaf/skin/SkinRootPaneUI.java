@@ -404,7 +404,16 @@ public class SkinRootPaneUI extends BasicRootPaneUI {
 	 * style.
 	 */
 	private JComponent createTitlePane(JRootPane root) {
-		JComponent titlePane = new SkinTitlePane(title = new FrameWindow());
+		JComponent titlePane = new SkinTitlePane(title = new FrameWindow()) {
+        // overriden to set the popup to not be lightweight. it
+        // resulted in the popupmenu being hidden, not correctly
+        // z-ordered. Using a JWindow does the trick
+        protected JMenu createSystemMenu() {
+          JMenu menu = new JMenu("    ");
+          menu.getPopupMenu().setLightWeightPopupEnabled(false);
+          return menu;
+        }
+      };
 		return titlePane;
 	}
 
@@ -1123,7 +1132,7 @@ public class SkinRootPaneUI extends BasicRootPaneUI {
 					w.setBounds(r);
 					// Defer repaint/validate on mouseReleased unless dynamic
 					// layout is active.
-					if (Boolean.TRUE.equals(AccessUtils.invoke(Toolkit.getDefaultToolkit(), "isDynamicLayoutActive", null))) {
+					if (Boolean.TRUE.equals(AccessUtils.invoke(Toolkit.getDefaultToolkit(), "isDynamicLayoutActive", null, null))) {
 						w.validate();
 						getRootPane().repaint();
 
