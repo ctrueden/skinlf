@@ -62,7 +62,7 @@ import javax.swing.WindowConstants;
  * Created on 27/05/2000 by Frederic Lavigne, fred@L2FProd.com
  * 
  * @author $Author: l2fprod $ @created 27 avril 2002
- * @version $Revision: 1.3 $, $Date: 2004-02-14 11:06:52 $
+ * @version $Revision: 1.4 $, $Date: 2004-05-07 18:58:22 $
  */
 public interface Window {
 
@@ -581,7 +581,6 @@ public interface Window {
         } else if (restoreBounds != null) {
           frame.setBounds(restoreBounds);
         }
-        frame.show();
         dispatchEvent(
           new ComponentEvent(frame, ComponentEvent.COMPONENT_RESIZED));
       } else if (dialog != null) {
