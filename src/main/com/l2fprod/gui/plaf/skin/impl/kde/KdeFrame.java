@@ -72,7 +72,7 @@ import javax.swing.plaf.BorderUIResource;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.6 $, $Date: 2004-07-18 19:20:21 $
+ * @version   $Revision: 1.7 $, $Date: 2004-07-29 21:37:08 $
  */
 final class KdeFrame extends AbstractSkinFrame {
 
@@ -373,6 +373,7 @@ final class KdeFrame extends AbstractSkinFrame {
         selectedIcon = new ImageIcon(SkinUtils.loadImage(new URL(skinURL, path)));
         unselectedIcon = selectedIcon;
         downIcon = selectedIcon;
+        rolloverIcon = selectedIcon;
       }
       path = ini.getKeyValue("Window Titlebar", command + "DownButton");
       if (path != null) {
@@ -430,6 +431,8 @@ final class KdeFrame extends AbstractSkinFrame {
         button.setRolloverSelectedIcon(rolloverIcon!=null?rolloverIcon:selectedIcon);
         button.setPressedIcon(downIcon);
         button.setSelectedIcon(selectedIcon);
+        button.setDisabledIcon(unselectedIcon);
+        button.setDisabledSelectedIcon(unselectedIcon);
       }
       return button;
     }
