@@ -93,16 +93,59 @@
       <fileset dir="${build.classes}" includes="examples/**.class"/>
       <fileset dir="${java.src.dir}" includes="examples/**.properties,examples/**.gif,examples/**.jpg"/>
     </jar>
+    <!-- nativeskin.jar -->
+    <jar jarfile="${build.dist.lib}/nativeskin.jar">
+      <fileset dir="${build.classes}"
+               includes="com/l2fprod/gui/region/**,com/l2fprod/gui/nativeskin/**,com/l2fprod/util/OS**"
+               excludes="**/*.html"/>
+    </jar>
     <!-- batch files -->
     <copy todir="${build.dist.bin}"
 	  flatten="yes"
 	  preservelastmodified="yes">
       <fileset dir="src" includes="**/*.bat"/>
     </copy>
+    <!-- dlls -->
+    <copy todir="${build.dist.lib}">
+      <fileset dir="src/native/win32" includes="*.dll"/>
+    </copy>
     <!-- default theme -->
     <zip destfile="${build.dist.lib}/themepack.zip">
       <zipfileset dir="src/themepacks/whistlerthemepack"/>
     </zip>
+  </target>
+
+  <!--
+    Publish the new version of SKinLF
+  -->
+  <target name="publish" depends="init">
+    <!-- copy zip to dist folder -->
+    <copy todir="${publish.download.dir}"
+          file="${project}-${version}-${build.version}.zip"/>
+
+    <filter token="WEB" value="${publish.web.url}"/>
+    <!-- update the jnlp website with the new release -->
+    <!-- put skinlf.jar in jnlp folder -->
+    <copy todir="${publish.skinlf.home}/jnlp/" filtering="on" overwrite="yes">
+      <fileset dir="src/jnlp" includes="*.jnlp"/>
+    </copy>
+    <copy file="${build.dist.lib}/${project}.jar" todir="${publish.skinlf.home}/jnlp/"/>
+    <copy file="${build.dist.lib}/examples.jar" todir="${publish.skinlf.home}/jnlp/"/>
+    <copy file="${build.dist.lib}/themepack.zip" todir="${publish.skinlf.home}/jnlp/"/>
+    <copy file="${build.dist.lib}/nativeskin.jar" todir="${publish.skinlf.home}/jnlp"/>
+    <jar destfile="${publish.skinlf.home}/jnlp/nativeskinlibs.jar"
+         basedir="${build.dist.lib}" includes="*.dll"/>
+
+    <!-- copy the documentation
+    <copy todir="${web.skinlf.home}/documentation">
+      <fileset dir="${javadoc.destdir}"/>
+    </copy>
+    -->
+    <!-- Sign all Jars -->
+    <signjar keystore="../common/keystore" alias="L2FProd.com" storepass="L2FProd.com">
+       <fileset dir="${publish.skinlf.home}/jnlp" includes="*.jar"/>
+    </signjar>
+
   </target>
 
   <target name="themes">
@@ -112,8 +155,12 @@
 	 basedir="src/themepacks/whistlerthemepack"/>
     <zip destfile="${build.www.themedir}/xplunathemepack.zip"
 	 basedir="src/themepacks/xplunathemepack"/>
+
+    <!-- png for these themepacks are not in cvs -->
     <zip destfile="${build.www.themedir}/aquathemepack.zip"
 	 basedir="src/themepacks/aquathemepack"/>
+    <zip destfile="${build.www.themedir}/alloythemepack.zip"
+	 basedir="src/themepacks/alloythemepack"/>
   </target>
 
 </project>
