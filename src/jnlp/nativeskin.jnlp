@@ -3,7 +3,7 @@
 <jnlp
 	spec="1.0+"
 	codebase="@WEB@/software/skinlf/jnlp"
-	href="nativeskin.php">
+	href="nativeskin.jnlp">
 	<information>
 		<title>NativeSkin @VERSION@</title>
 		<vendor>L2FProd.com</vendor>

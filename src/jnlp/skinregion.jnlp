@@ -3,7 +3,7 @@
 <jnlp
 	spec="1.0+"
 	codebase="@WEB@/software/skinlf/jnlp"
-	href="skinregion.php">
+	href="skinregion.jnlp">
 	<information>
 		<title>Skin Region @VERSION@</title>
 		<vendor>L2FProd.com</vendor>

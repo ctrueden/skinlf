@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- JNLP File for Skin Region Demo -->
-<jnlp spec="1.0+" codebase="@WEB@/software/skinlf/jnlp" href="clock.php">
+<jnlp spec="1.0+" codebase="@WEB@/software/skinlf/jnlp" href="clock.jnlp">
 	<information>
 		<title>NativeSkin Clock</title>
 		<vendor>L2FProd.com</vendor>
@@ -15,7 +15,7 @@
 	<resources>
 		<j2se version="1.2+"/> 
 		<jar href="examples.jar"/>
-		<extension name="NativeSkin" href="nativeskin.php"/>
+		<extension name="NativeSkin" href="nativeskin.jnlp"/>
 	</resources> 
 	<application-desc main-class="examples.Clock">
 		<argument>@WEB@/software/skinlf/jnlp/clock.gif</argument>

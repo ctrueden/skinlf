@@ -3,7 +3,7 @@
 <jnlp
 	spec="1.0+"
 	codebase="@WEB@/software/skinlf/jnlp"
-	href="skinlf.php">
+	href="skinlf.jnlp">
 	<information>
 		<title>Skin Look And Feel @VERSION@</title>
 		<vendor>L2FProd.com</vendor>
