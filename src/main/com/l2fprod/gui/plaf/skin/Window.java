@@ -66,7 +66,7 @@ import javax.swing.WindowConstants;
  * Created on 27/05/2000 by Frederic Lavigne, fred@L2FProd.com
  * 
  * @author $Author: zombi $ @created 27 avril 2002
- * @version $Revision: 1.8 $, $Date: 2005-02-08 23:40:23 $
+ * @version $Revision: 1.9 $, $Date: 2005-03-16 01:49:33 $
  */
 public interface Window {
 
@@ -579,12 +579,13 @@ public interface Window {
      */
     public void setMaximum(boolean b) throws PropertyVetoException {
       if (frame != null) {
-        if (SkinRootPaneUI.getExtendedState(frame) != SkinRootPaneUI.Frame_MAXIMIZED_BOTH) {
+        if (b && SkinRootPaneUI.getExtendedState(frame) != SkinRootPaneUI.Frame_MAXIMIZED_BOTH) {
           restoreBounds = frame.getBounds();
           SkinRootPaneUI.setExtendedState(frame,
               SkinRootPaneUI.Frame_MAXIMIZED_BOTH);
-        } else if (restoreBounds != null) {
-          frame.setBounds(restoreBounds);
+        } else if (!b) {
+            SkinRootPaneUI.setExtendedState(frame,
+                    Frame.NORMAL);
         }
         dispatchEvent(new ComponentEvent(frame,
             ComponentEvent.COMPONENT_RESIZED));
