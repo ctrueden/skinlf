@@ -85,6 +85,15 @@ public class ArrowIcon implements Icon, SwingConstants {
 
   private void paintTriangle(Graphics g, int x, int y, int width, int height,
 			     int direction, boolean isEnabled) {
+    paintArrow(g, size,
+               x, y, width, height,
+               direction, isEnabled);
+  }
+
+  public static void paintArrow(Graphics g,
+                                int size,
+                                int x, int y, int width, int height,
+                                int direction, boolean isEnabled) {
     Color oldColor = g.getColor();
     int midW, midH, i, j, maxSize;
 
