@@ -60,57 +60,12 @@ import java.awt.*;
 public class SkinSplitPaneUI extends BasicSplitPaneUI {
 
   /**
-   * Description of the Field
-   */
-	private Skin skin = SkinLookAndFeel.getSkin();
-
-  /**
    * Creates the default divider.
    *
    * @return   Description of the Returned Value
    */
   public BasicSplitPaneDivider createDefaultDivider() {
     return new SkinSplitPaneDivider(this);
-  }
-
-  /**
-   * Installs the UI defaults.
-   */
-  protected void installDefaults() {
-    if (divider == null) {
-      divider = createDefaultDivider();
-    }
-    divider.setBasicSplitPaneUI(this);
-
-    int orientation = splitPane.getOrientation();
-    setOrientation(orientation);
-
-    if (orientation == JSplitPane.HORIZONTAL_SPLIT) {
-      splitPane.setDividerSize(divider.getPreferredSize().width);
-
-    }
-    else {
-      splitPane.setDividerSize(divider.getPreferredSize().height);
-    }
-    divider.setDividerSize(splitPane.getDividerSize());
-    dividerSize = divider.getDividerSize();
-
-    splitPane.add(divider, JSplitPane.DIVIDER);
-
-    setContinuousLayout(splitPane.isContinuousLayout());
-
-    resetLayoutManager();
-
-    /*
-     *  Install the nonContinuousLayoutDivider here to avoid having to
-     *  add/remove everything later.
-     */
-    if (nonContinuousLayoutDivider == null) {
-      setNonContinuousLayoutDivider(createDefaultNonContinuousLayoutDivider(), true);
-    }
-    else {
-      setNonContinuousLayoutDivider(nonContinuousLayoutDivider, true);
-    }
   }
 
   /**
