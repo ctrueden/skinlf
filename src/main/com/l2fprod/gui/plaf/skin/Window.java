@@ -66,7 +66,7 @@ import javax.swing.WindowConstants;
  * Created on 27/05/2000 by Frederic Lavigne, fred@L2FProd.com
  * 
  * @author $Author: l2fprod $ @created 27 avril 2002
- * @version $Revision: 1.6 $, $Date: 2004-07-29 20:32:06 $
+ * @version $Revision: 1.7 $, $Date: 2004-11-11 17:00:38 $
  */
 public interface Window {
 
@@ -505,6 +505,10 @@ public interface Window {
 
     private boolean selected = true;
     
+    private Image cachedFrameImage = null;
+    
+    private Icon cachedFrameIcon = null;
+    
     /**
      * Constructor for the SkinWindowWindow object
      * 
@@ -755,7 +759,6 @@ public interface Window {
      */
     public Icon getFrameIcon() {
       Icon toreturn = null;
-
       Image frameImage = null;
 
       if (frame != null) {
@@ -770,10 +773,16 @@ public interface Window {
       }
 
       if (frameImage != null) {
+        if (frameImage==cachedFrameImage) {
+          return cachedFrameIcon;
+        }
         toreturn = new ImageIcon(frameImage);
+        cachedFrameImage = frameImage;
+        cachedFrameIcon = toreturn;
       }
 
       return toreturn;
+
     }
 
     /**
