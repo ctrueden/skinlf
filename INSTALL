@@ -3,13 +3,12 @@ Requirements
 
 In order to use SkinLF, you will need:
 
-	JRE1.1.7B and Swing1.1.1 or later
+	JRE1.3 or later
 
 SkinLF has been tested with:
 
-	JDK1.1.7B/Swing1.1.1 (Windows),
-	JDK1.2.2 (Windows,Solaris,Linux)
-	and JDK 1.3 (Windows)
+	JDK1.3 (Windows,Solaris,Linux)
+	and JDK 1.4 (Windows)
 
 Installation
 ------------
