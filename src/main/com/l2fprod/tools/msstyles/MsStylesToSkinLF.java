@@ -135,6 +135,10 @@ public class MsStylesToSkinLF extends ThemeConverter {
     // if the .BMP is not found, try the .png
     if (file.exists() == false && imageFile.toLowerCase().endsWith(".bmp")) {
       imageFile = imageFile.substring(0, imageFile.length() - 4) + ".png";
+      file = new File(getMsStyleDirectory(), imageFile);
+      if (!file.exists()) {
+        imageFile = imageFile.substring(0, imageFile.length() - 4) + ".gif";        
+      }
     }
 
     ImageUtils.createPicture(getMsStyleDirectory() + File.separator + imageFile,
