@@ -102,8 +102,7 @@ public class SkinApplet extends JApplet {
 
     Skin skin = SkinLookAndFeel.loadThemePack(themepackURL);
     SkinLookAndFeel.setSkin(skin);
-
-    SkinLookAndFeel.enable();
+    UIManager.setLookAndFeel(new SkinLookAndFeel());
   }
 
 }
