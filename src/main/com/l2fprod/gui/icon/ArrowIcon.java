@@ -56,7 +56,6 @@ public class ArrowIcon implements Icon, SwingConstants {
 
   private int size;
   private int direction;
-  private int nbOfIcon = 1;
 
   public ArrowIcon(int direction) {
     this(DEFAULT_SIZE, direction);
