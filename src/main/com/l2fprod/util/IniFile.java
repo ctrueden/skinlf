@@ -54,7 +54,7 @@ import java.net.URL;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.2 $, $Date: 2003-08-16 15:33:02 $
+ * @version   $Revision: 1.3 $, $Date: 2004-07-29 19:11:04 $
  */
 public class IniFile {
 
@@ -95,7 +95,7 @@ public class IniFile {
    * @param input            Description of Parameter
    * @exception IOException  Description of Exception
    */
-  public IniFile(InputStream input) throws IOException {
+  public IniFile(InputStream input) {
     this();
     load(input);
   }

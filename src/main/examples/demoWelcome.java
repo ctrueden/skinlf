@@ -203,8 +203,6 @@ public class demoWelcome extends JPanel {
      * @param g  Description of Parameter
      */
     protected void paintComponent(Graphics g) {
-      Graphics2D g2d = (Graphics2D) g;
-
       g.setColor(getParent().getBackground());
       g.fillRect(0, 0, getWidth(), getHeight());
 

@@ -75,7 +75,7 @@ import javax.swing.plaf.ColorUIResource;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.5 $, $Date: 2004-07-18 11:20:16 $
+ * @version   $Revision: 1.6 $, $Date: 2004-07-29 19:10:28 $
  */
 public final class ImageUtils implements SwingConstants {
 
@@ -126,30 +126,6 @@ public final class ImageUtils implements SwingConstants {
 	 * Description of the Field
 	 */
 	public final static int TRANSPARENT_PIXEL = new Color(255, 0, 0, 0).getRGB();
-
-	/**
-	 * Description of the Method
-	 *
-	 * @param s  Description of Parameter
-	 * @return   Description of the Returned Value
-	 */
-	private Color decodeColor(String s) {
-		int val = 0;
-		try {
-			if (s.startsWith("0x")) {
-				val = Integer.parseInt(s.substring(2), 16);
-			} else if (s.startsWith("#")) {
-				val = Integer.parseInt(s.substring(1), 16);
-			} else if (s.startsWith("0") && s.length() > 1) {
-				val = Integer.parseInt(s.substring(1), 8);
-			} else {
-				val = Integer.parseInt(s, 10);
-			}
-			return new Color(val);
-		} catch (NumberFormatException e) {
-			return null;
-		}
-	}
 
 	/**
 	 * Gets the DisabledIcon attribute of the ImageUtils class
@@ -523,19 +499,11 @@ public final class ImageUtils implements SwingConstants {
 			e.printStackTrace();
 		}
 
-		int pixel;
-
-		int alpha;
-
-		int red;
-
-		int green;
-
-		int blue;
+		int pixel, red, green, blue;
+		
 		for (int j = 0; j < height; j++) {
 			for (int i = 0; i < width; i++) {
 				pixel = pixels[j * width + i];
-				alpha = (pixel >> 24) & 0xff;
 				red = (pixel >> 16) & 0xff;
 				green = (pixel >> 8) & 0xff;
 				blue = (pixel) & 0xff;
@@ -669,29 +637,6 @@ public final class ImageUtils implements SwingConstants {
 		AffineTransform transform = PanelArtistUtilities.getCWRotateTransform(anImage.getWidth(producer), anImage.getHeight(producer));
 		AffineTransformOp operation = new AffineTransformOp(transform, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
 		return transparent(operation.filter((BufferedImage)anImage, null));
-	}
-
-	/**
-	 * Description of the Method
-	 *
-	 * @param component  Description of Parameter
-	 * @param g          Description of Parameter
-	 * @param image      Description of Parameter
-	 */
-	private static void paintTile(Component component, Graphics g, Image image) {
-		paintTile(component, g, image, 0, 0, ((JComponent)component).getWidth(), ((JComponent)component).getHeight(), true);
-	}
-
-	/**
-	 * Description of the Method
-	 *
-	 * @param component        Description of Parameter
-	 * @param g                Description of Parameter
-	 * @param image            Description of Parameter
-	 * @param alignWithParent  Description of Parameter
-	 */
-	private static void paintTile(Component component, Graphics g, Image image, boolean alignWithParent) {
-		paintTile(component, g, image, 0, 0, ((JComponent)component).getWidth(), ((JComponent)component).getHeight(), alignWithParent);
 	}
 
 	/**

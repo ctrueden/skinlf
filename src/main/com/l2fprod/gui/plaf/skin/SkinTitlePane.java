@@ -69,7 +69,6 @@ import javax.swing.AbstractButton;
 import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -876,48 +875,6 @@ public class SkinTitlePane extends BasicInternalFrameTitlePane {
       }
     }
   }
-
-  // end SystemMenuBar
-
-  /**
-   * Description of the Class
-   *
-   * @author    fred
-   * @created   27 avril 2002
-   */
-  private class NoFocusButton extends JButton {
-    /**
-     * Constructor for the NoFocusButton object
-     */
-    public NoFocusButton() {
-      setFocusPainted(false);
-    }
-
-    /**
-     * Gets the FocusTraversable attribute of the NoFocusButton object
-     *
-     * @return   The FocusTraversable value
-     */
-    public boolean isFocusTraversable() {
-      return false;
-    }
-
-    /**
-     * Gets the Opaque attribute of the NoFocusButton object
-     *
-     * @return   The Opaque value
-     */
-    public boolean isOpaque() {
-      return true;
-    }
-
-    /**
-     * Description of the Method
-     */
-    public void requestFocus() {
-    }
-  }
-  // end NoFocusButton
 
 }
 // End Title Pane Class

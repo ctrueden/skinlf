@@ -302,7 +302,7 @@ public class ZipResourceLoader {
      * @return                 The InputStream value
      * @exception IOException  Description of Exception
      */
-    public InputStream getInputStream() throws IOException {
+    public InputStream getInputStream() {
       ByteArrayInputStream input = new ByteArrayInputStream((byte[]) resources.get(getURL().getFile()));
       return input;
     }

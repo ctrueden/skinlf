@@ -59,7 +59,7 @@ import java.awt.event.*;
  *
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 20:14:06 $
+ * @version   $Revision: 1.2 $, $Date: 2004-07-29 19:09:27 $
  */
 public class XTraScrollBarUI extends BasicScrollBarUI {
 
@@ -405,7 +405,6 @@ public class XTraScrollBarUI extends BasicScrollBarUI {
 
       BoundedRangeModel model = XTraScrollBarUI.this.scrollbar().getModel();
       Rectangle thumbR = XTraScrollBarUI.this.getThumbBounds();
-      float trackLength;
       int thumbMin;
       int thumbMax;
       int thumbPos;
@@ -420,7 +419,6 @@ public class XTraScrollBarUI extends BasicScrollBarUI {
             - XTraScrollBarUI.this.getThumbBounds().height;
         thumbPos = Math.min(thumbMax, Math.max(thumbMin, (e.getY() - offset)));
         XTraScrollBarUI.this.setThumbBounds(thumbR.x, thumbPos, thumbR.width, thumbR.height);
-        trackLength = XTraScrollBarUI.this.getTrackBounds().height;
       }
       else {
         thumbMin = sbInsets.left;
@@ -432,7 +430,6 @@ public class XTraScrollBarUI extends BasicScrollBarUI {
             - XTraScrollBarUI.this.getThumbBounds().width;
         thumbPos = Math.min(thumbMax, Math.max(thumbMin, (e.getX() - offset)));
         XTraScrollBarUI.this.setThumbBounds(thumbPos, thumbR.y, thumbR.width, thumbR.height);
-        trackLength = XTraScrollBarUI.this.getTrackBounds().width;
       }
 
       /*

@@ -95,40 +95,10 @@ public class NativeSplashScreen extends Window
                                     slider.getValue());
       slider.addChangeListener(new ChangeListener() {
           public void stateChanged(ChangeEvent e) {
-            final int value = slider.getValue();
             builder.setWindowTransparency(NativeSplashScreen.this,
                                           slider.getValue());
           }
         });
-
-      Thread thread = new Thread() {
-          public void run() {
-            builder.setWindowTransparency(NativeSplashScreen.this, 0);
-            try {
-              Thread.sleep(1000);
-              int transparency = 0;
-              int direction = 10;
-              while (true) {
-                builder.setWindowTransparency(NativeSplashScreen.this, transparency);
-                Thread.sleep(25);
-                transparency+=direction;
-
-                if (transparency < 0) {
-                  transparency = 0;
-                  direction = -direction;
-                }                
-                if (transparency > 255) {
-                  transparency = 255;
-                  direction = -direction;
-                }                
-              }
-            } catch (Exception e) {
-              
-            } // end of try-catch
-          }
-        };
-      //      thread.start();
-
     } else {
       System.err.println("NativeSkin not supported on this platform");
     }

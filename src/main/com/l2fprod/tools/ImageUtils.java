@@ -74,12 +74,6 @@ public class ImageUtils {
     } catch (Exception e) {
 	    e.printStackTrace();
     }
-    int pixel, alpha, red, green, blue;
-    for (int j = 0; j < height; j++) {
-	    for (int i = 0; i < width; i++) {
-        pixel = pixels[j * width + i];
-	    }
-    } 
     return bitmapCreator.createImage(new MemoryImageSource(width, height, pixels, 0, width));
   }
 
