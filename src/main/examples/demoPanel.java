@@ -72,7 +72,7 @@ import com.l2fprod.util.*;
  *
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.2 $, $Date: 2003-08-20 10:49:34 $
+ * @version   $Revision: 1.3 $, $Date: 2003-08-25 20:04:26 $
  */
 public class demoPanel extends JPanel {
 
@@ -94,7 +94,18 @@ public class demoPanel extends JPanel {
     menu.add(
       new AbstractAction("Open") {
         public void actionPerformed(ActionEvent event) {
-          new JFileChooser().showDialog(demoPanel.this, "Ok");
+          try {
+            // are we running in JavaWebStart?
+            Class serviceClass = Class.forName("javax.jnlp.ServiceManager");
+            Object fileOpenService = serviceClass.
+              getMethod("lookup", new Class[]{String.class}).
+              invoke(null, new Object[]{"javax.jnlp.FileOpenService"});
+            fileOpenService.getClass().
+              getMethod("openFileDialog", new Class[]{String.class, String[].class}).
+              invoke(fileOpenService, new Object[]{null, null});
+          } catch (Exception e) {
+            new JFileChooser().showDialog(demoPanel.this, "Ok");
+          }
         }
       });
     menu.addSeparator();
