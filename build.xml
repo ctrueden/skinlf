@@ -8,7 +8,8 @@
 <project name="skinlf" default="compile.java" basedir=".">
 
   <!-- Allow user to override settings -->
-  <property file="${user.home}/ant.properties" />
+  <property file="${user.home}/skinlf-ant.properties" />
+  <property file="build.properties" />
 
   <!-- Project Identification -->
   <property name="project" value="skinlf"/>
@@ -19,11 +20,31 @@
 
   <path id="classpath">
     <pathelement location="lib/png.jar"/>
+    <pathelement location="lib/imageconversion.jar"/>
+    <pathelement location="lib/JimiProClasses.zip"/>
+    <pathelement location="lib/xalan.jar"/>
+    <pathelement location="lib/xercesImpl.jar"/>
+    <pathelement location="lib/xml-apis.jar"/>
   </path>
+
+  <property name="classpath.asprop" refid="classpath"/>
 
   &build-COMMON;
 
   <target name="compile" depends="init">
+  </target>
+
+  <!--
+    Utility targets to use the style converters
+  -->
+  <target name="convert.msstyles">
+    <java classname="com.l2fprod.tools.msstyles.MsStylesToSkinLF"
+          classpath="${classpath.asprop}:${java.src.dir}:${build.classes}"
+          fork="yes">
+      <arg value="${msstyle}" />
+      <arg value="${msstyle}.xml" />
+      <arg value="${skin}" />
+    </java>
   </target>
 
 </project>
