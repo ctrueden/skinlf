@@ -2,9 +2,11 @@ package com.l2fprod.tools;
 
 import java.awt.*;
 import java.awt.image.*;
+import java.io.FileInputStream;
 
 import com.ibm.imageconversion.*;
 import com.sun.jimi.core.*;
+import com.sixlegs.image.png.PngImage;
 
 public class ImageUtils {
 
@@ -12,15 +14,32 @@ public class ImageUtils {
   
   static BMPDecoder decoder = new BMPDecoder();
   static BMPEncoder encoder = new BMPEncoder();
-  
+
+  public static Image loadPng(String pathToImage) throws Exception {
+    PngImage png = new PngImage(new FileInputStream(pathToImage));
+    return Toolkit.getDefaultToolkit().createImage(png);
+  }
+
+  public static void savePng(Image image, String pathToImage) throws Exception {
+    Jimi.putImage(image, pathToImage);
+  }
+
   public static void createPicture(String pathToImage, int index, int maxParts,
                                    String filename, boolean horizontal) {
     try {
       System.out.println("working with " + pathToImage);
-      decoder.setInputFilename(pathToImage);
-	    decoder.triggerAction();
-	    Image image = decoder.getResult();
-	    //	    encoder.setInputFilename(filename);
+      Image image = null;
+
+      if (pathToImage.toLowerCase().endsWith(".png")) {
+        PngImage png = new PngImage(new FileInputStream(pathToImage));
+        image = Toolkit.getDefaultToolkit().createImage(png);
+      } else if (pathToImage.toLowerCase().endsWith(".bmp")) {
+        decoder.setInputFilename(pathToImage);
+        decoder.triggerAction();
+        image = decoder.getResult();
+      } else {
+        throw new Error("do not know how to load " + pathToImage);
+      }
 
       // if only one image, dump it as it
 	    if (index == 0 && maxParts == 1) {
@@ -35,8 +54,6 @@ public class ImageUtils {
           image = grab(image, partWidth * index, 0,
                        partWidth, image.getHeight(bitmapCreator));
         }
-        //	    encoder.setInputImage(image);
-        //	    encoder.triggerAction();
         Jimi.putImage(image, filename);
       }
     } catch (Exception e) {
