@@ -60,7 +60,7 @@ import com.l2fprod.util.OS;
  * @author    $Author: l2fprod $
  * @author    Herve Lemaitre (setWindowImageRegion0)
  * @created   27 avril 2002
- * @version   $Revision: 1.2 $, $Date: 2003-12-06 21:45:10 $
+ * @version   $Revision: 1.3 $, $Date: 2004-07-18 19:12:51 $
  */
 public final class Win32NativeSkin extends NativeSkin {
   
@@ -203,7 +203,7 @@ public final class Win32NativeSkin extends NativeSkin {
       window.addNotify();
     }
 
-    if (OS.isOneDotFour()) {
+    if (OS.isOneDotFourOrMore()) {
       return getHWND0(window);
     } else {
       sun.awt.DrawingSurfaceInfo drawingSurfaceInfo;

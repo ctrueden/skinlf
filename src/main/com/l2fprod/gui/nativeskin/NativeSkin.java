@@ -84,7 +84,7 @@ public abstract class NativeSkin {
 
       if (OS.isWindows()) {
         impl = "com.l2fprod.gui.nativeskin.win32.Win32NativeSkin";
-        if (OS.isOneDotFour()) {
+        if (OS.isOneDotFourOrMore()) {
           library = "nativeskinwin32JAWT";
         } else {
           library = "nativeskinwin32";

@@ -50,7 +50,7 @@ package com.l2fprod.util;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.2 $, $Date: 2004-05-07 18:55:31 $
+ * @version   $Revision: 1.3 $, $Date: 2004-07-18 19:13:11 $
  */
 public final class OS {
 
@@ -213,6 +213,10 @@ public final class OS {
     return jdkVersion == JDK1_4;
   }
 
+  public static boolean isOneDotFourOrMore() {
+    return jdkVersion >= JDK1_4;
+  }
+  
   /**
    * Gets the OneDotThreeOrMore attribute of the OS class
    *

@@ -114,7 +114,7 @@ public class demo extends JApplet {
     d.createUI(args);
 
     // if we are running with JDK1.4 decorates the frames and dialogs
-    if (OS.isOneDotFour()) {
+    if (OS.isOneDotFourOrMore()) {
       java.lang.reflect.Method method =
         JFrame.class.getMethod(
           "setDefaultLookAndFeelDecorated",

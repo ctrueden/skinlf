@@ -60,7 +60,7 @@ import javax.swing.plaf.basic.BasicProgressBarUI;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.4 $, $Date: 2003-12-06 21:53:26 $
+ * @version   $Revision: 1.5 $, $Date: 2004-07-18 19:12:56 $
  */
 public final class SkinProgressBarUI extends BasicProgressBarUI {
 
@@ -82,7 +82,7 @@ public final class SkinProgressBarUI extends BasicProgressBarUI {
   	//if the progessBar is indererminate draw a window on the full 
   	//progressBar the size of the box to be shown.  That box is determine
   	//in the basicprogressbarui getBox() method
-    if (OS.isOneDotFour() && progressBar.isIndeterminate()) {
+    if (OS.isOneDotFourOrMore() && progressBar.isIndeterminate()) {
       skin.getProgress().
         paintIndeterminateProgress(g, progressBar, getBox(boxRect));
     } else {
