@@ -26,6 +26,10 @@ public abstract class ThemeConverter {
     skinDirectory = directory;
   }
 
+  protected File getSkinDirectory() {
+    return skinDirectory;
+  }
+
   public void setCurrentOutputDirectory(File directory) {
     currentOutputDir = directory;
   }
@@ -52,21 +56,6 @@ public abstract class ThemeConverter {
     setCurrentOutputDirectory(kdeFolder);
     processTemplate(getClass().getResourceAsStream("kde.template"),
                     new FileOutputStream(new File(kdeFolder, "kde.themerc")));
-
-    System.out.println("Writing skinlf-themepack.xml");
-    File skin = new File(skinDirectory, "skinlf-themepack.xml");
-    PrintWriter out = new PrintWriter(new FileWriter(skin));
-    out.println("<?xml version=\"1.0\"?>");
-    out.println("<skinlf-themepack require=\"1.2.4\">");
-    out.println("<property name=\"JDesktopPane.backgroundEnabled\" value=\"false\" />");
-    out.println("<property name=\"PopupMenu.animation\" value=\"false\" />");
-    out.println("<skin>");
-    out.println("<skin url=\"gtk/gtkrc\"></skin>");
-    out.println("<skin url=\"kde/kde.themerc\"></skin>");
-    out.println("</skin>");
-    out.println("</skinlf-themepack>");
-    out.flush();
-    out.close();
   }
 
   protected void processTemplate(InputStream template,
