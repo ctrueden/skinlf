@@ -147,7 +147,7 @@ public class SkinRootPaneUI extends BasicRootPaneUI {
 
 	private static java.awt.Window translateSource(MouseEvent ev) {
 		Object source = ev.getSource();
-		java.awt.Window w = null;
+		java.awt.Window w;
 
 		if (source.getClass() == SkinTitlePane.class) {
 			SkinTitlePane titleSource = (SkinTitlePane) source;
@@ -358,11 +358,6 @@ public class SkinRootPaneUI extends BasicRootPaneUI {
 
 
 				window.setBackground(null);
-				java.awt.Window target = title.getMainFrame();
-				//if (target instanceof JFrame) {
-				//	JFrame current = (JFrame) target;
-				//	current.setIconImage(null);
-				//}
 				title.setFrame(null);
 			}
 
@@ -622,7 +617,7 @@ public class SkinRootPaneUI extends BasicRootPaneUI {
 		/**
 		 * Returns the amount of space the layout would like to have.
 		 *
-		 * @param the Container for which this layout manager is being used
+		 * @param parent the Container for which this layout manager is being used
 		 * @return a Dimension object containing the layout's preferred size
 		 */
 		public Dimension preferredLayoutSize(Container parent) {
@@ -677,7 +672,7 @@ public class SkinRootPaneUI extends BasicRootPaneUI {
 		/**
 		 * Returns the minimum amount of space the layout needs.
 		 *
-		 * @param the Container for which this layout manager is being used
+		 * @param parent the Container for which this layout manager is being used
 		 * @return a Dimension object containing the layout's minimum size
 		 */
 		public Dimension minimumLayoutSize(Container parent) {
@@ -691,23 +686,24 @@ public class SkinRootPaneUI extends BasicRootPaneUI {
 			Insets i = parent.getInsets();
 			JRootPane root = (JRootPane) parent;
 
-      // It seems some content pane returns the preferred size as the
-      // minimum size. We will just ignore the content pane for now.
-      // if the following code is enabled, a JFrame/JDialog using look
-      // and feel decoration gets resized badly. The height changes
-      // even if only the width is being changed. However it does not
-      // happen with preferredLayoutSize()!?
-      /*
-			if (root.getContentPane() != null) {
-				cpd = root.getContentPane().getMinimumSize();
-			} else {
-				cpd = root.getSize();
-			}
-			if (cpd != null) {
-				cpWidth = cpd.width;
-				cpHeight = cpd.height;
-			}
-      */
+      // This code is enabled only if the parent is not a window with
+      // look and feel decorations. Otherwise the look and feel honors
+      // the minimum size and the window can not be resized to a small
+      // size in the case where a component in the component hierarchy
+      // returns a wrong/big minimum size. In such case, the minimum
+      // size will be the one of the title pane.
+      if (!(root.getParent() instanceof java.awt.Window &&
+            getWindowDecorationStyle(root) != JRootPane_NONE)) {
+        if (root.getContentPane() != null) {
+          cpd = root.getContentPane().getMinimumSize();
+        } else {
+          cpd = root.getSize();
+        }
+        if (cpd != null) {
+          cpWidth = cpd.width;
+          cpHeight = cpd.height;
+        }
+      }
 
 			if (root.getJMenuBar() != null) {
 				mbd = root.getJMenuBar().getMinimumSize();
@@ -742,7 +738,7 @@ public class SkinRootPaneUI extends BasicRootPaneUI {
 		/**
 		 * Returns the maximum amount of space the layout can use.
 		 *
-		 * @param the Container for which this layout manager is being used
+		 * @param target the Container for which this layout manager is being used
 		 * @return a Dimension object containing the layout's maximum size
 		 */
 		public Dimension maximumLayoutSize(Container target) {
@@ -805,7 +801,7 @@ public class SkinRootPaneUI extends BasicRootPaneUI {
 		 * Instructs the layout manager to perform the layout for the specified
 		 * container.
 		 *
-		 * @param the Container for which this layout manager is being used
+		 * @param parent the Container for which this layout manager is being used
 		 */
 		public void layoutContainer(Container parent) {
 			JRootPane root = (JRootPane) parent;
@@ -936,8 +932,6 @@ public class SkinRootPaneUI extends BasicRootPaneUI {
 		private int dragHeight;
 
 		public void mousePressed(MouseEvent ev) {
-			JRootPane rootPane = getRootPane();
-
 			if (getWindowDecorationStyle(root) == JRootPane_NONE) {
 				return;
 			}
@@ -980,7 +974,7 @@ public class SkinRootPaneUI extends BasicRootPaneUI {
 			//this was an else if before but the title panel would not
 			//cause a resize 
 			if (f != null
-				&& f.isResizable()
+          && f.isResizable() && !getFrameWindow().isShaded()
 				&& ((frameState & Frame_MAXIMIZED_BOTH) == 0)
 				|| (d != null && d.isResizable())) {
 				dragOffsetX = dragWindowOffset.x;
@@ -1033,7 +1027,7 @@ public class SkinRootPaneUI extends BasicRootPaneUI {
 
 			if (cursor != 0
 				&& ((f != null
-					&& (f.isResizable()
+             && (f.isResizable() && !getFrameWindow().isShaded()
 						&& (getExtendedState(f) & Frame_MAXIMIZED_BOTH) == 0))
 					|| (d != null && d.isResizable()))) {
 				w.setCursor(Cursor.getPredefinedCursor(cursor));
@@ -1134,19 +1128,20 @@ public class SkinRootPaneUI extends BasicRootPaneUI {
 						break;
 				}
 				if (!r.equals(startBounds)) {
-					w.setBounds(r);
-					// Defer repaint/validate on mouseReleased unless dynamic
-					// layout is active.
-					if (Boolean.TRUE.equals(AccessUtils.invoke(Toolkit.getDefaultToolkit(), "isDynamicLayoutActive", null, null))) {
-						w.validate();
-						getRootPane().repaint();
-
-					}
-					getFrameWindow().dispatchEvent(
-						new ComponentEvent(
-							getMainWindow(),
-							ComponentEvent.COMPONENT_RESIZED));
-				}
+          if (getFrameWindow().isResizable()) {
+            w.setBounds(r);
+            // Defer repaint/validate on mouseReleased unless dynamic
+            // layout is active.
+            if (Boolean.TRUE.equals(AccessUtils.invoke(Toolkit.getDefaultToolkit(), "isDynamicLayoutActive", null, null))) {
+              w.validate();
+              getRootPane().repaint();
+              
+            }
+            getFrameWindow().
+              dispatchEvent(new ComponentEvent(getMainWindow(),
+                                               ComponentEvent.COMPONENT_RESIZED));
+          }
+        }
 			}
 		}
 
@@ -1163,7 +1158,7 @@ public class SkinRootPaneUI extends BasicRootPaneUI {
 
 		public void mouseClicked(MouseEvent ev) {
 			java.awt.Window w = translateSource(ev);
-			Frame f = null;
+			Frame f;
 
 			if (w instanceof Frame) {
 				f = (Frame) w;
