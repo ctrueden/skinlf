@@ -13,7 +13,7 @@
 
   <!-- Project Identification -->
   <property name="project" value="skinlf"/>
-  <property name="version" value="1.2.7"/>
+  <property name="version" value="1.2.8"/>
   <property name="year"    value="2000-2003"/>
   <property name="project.fullname" value="Skin Look And Feel"/>
   <property name="project.nativeskin" value="nativeskin"/>
@@ -117,12 +117,91 @@
     <taskdef name="proguard"
              classname="proguard.ant.ProGuardTask"
              classpath="lib/proguard.jar"/>
+    <delete file="${build.dir}/${project}-obfuscated.jar"/>
     <proguard
               outjar="${build.dir}/${project}-obfuscated.jar"
-              obfuscate="yes">
+              obfuscate="yes"
+              usemixedclassnames="no"
+              overloadaggressively="yes"
+              printmapping="obfuscatemapping.txt"
+              printusage="obfuscateusage.txt">
       <libraryjar name="${java.home}/lib/rt.jar"/>
       <injar name="${build.dir}/${project}.jar"/>
-      <keep type="class" name="**"/>
+      <keep access="public" type="class" name="Skinit">
+        <method name="*"/>
+      </keep>
+      <keep access="public" type="class" name="com.l2fprod.gui.SkinApplet">
+        <method name="*"/>
+      </keep>      
+      <keep access="public" type="class" name="com.l2fprod.gui.SkinChooser">
+        <method name="*"/>
+      </keep>      
+      <keep access="public" type="class" name="com.l2fprod.gui.WindowSnapping">
+        <method name="*"/>
+      </keep>      
+      <keep access="public" type="class" name="com.l2fprod.gui.nativeskin.**">
+        <method name="*"/>
+      </keep>
+      <keep access="public" type="class" name="com.l2fprod.gui.plaf.skin.CompoundSkin">
+        <method name="*"/>
+      </keep>
+      <keep access="public" type="class" name="com.l2fprod.gui.plaf.skin.IncorrectVersionException">
+        <method name="*"/>
+      </keep>
+      <keep access="public" type="class" name="com.l2fprod.gui.plaf.skin.LinuxLookAndFeel">
+        <method name="*"/>
+      </keep>
+      <keep access="public" type="class" name="com.l2fprod.gui.plaf.skin.Skin">
+        <method name="*"/>
+      </keep>
+      <keep access="public" type="class" name="com.l2fprod.gui.plaf.skin.SkinButton">
+        <method name="*"/>
+      </keep>
+      <keep access="public" type="class" name="com.l2fprod.gui.plaf.skin.SkinFrame">
+        <method name="*"/>
+      </keep>
+      <keep access="public" type="class" name="com.l2fprod.gui.plaf.skin.Skinit">
+        <method name="*"/>
+      </keep>
+      <keep access="public" type="class" name="com.l2fprod.gui.plaf.skin.SkinLookAndFeel">
+        <method name="*"/>
+      </keep>
+      <keep access="public" type="class" name="com.l2fprod.gui.plaf.skin.SkinPersonality">
+        <method name="*"/>
+      </keep>
+      <keep access="public" type="class" name="com.l2fprod.gui.plaf.skin.SkinPreviewWindow">
+        <method name="*"/>
+      </keep>
+      <keep access="public" type="class" name="com.l2fprod.gui.plaf.skin.SkinProgress">
+        <method name="*"/>
+      </keep>
+      <keep access="public" type="class" name="com.l2fprod.gui.plaf.skin.SkinScrollbar">
+        <method name="*"/>
+      </keep>
+      <keep access="public" type="class" name="com.l2fprod.gui.plaf.skin.SkinSeparator">
+        <method name="*"/>
+      </keep>
+      <keep access="public" type="class" name="com.l2fprod.gui.plaf.skin.SkinSlider">
+        <method name="*"/>
+      </keep>
+      <keep access="public" type="class" name="com.l2fprod.gui.plaf.skin.SkinSplitPane">
+        <method name="*"/>
+      </keep>
+      <keep access="public" type="class" name="com.l2fprod.gui.plaf.skin.SkinTab">
+        <method name="*"/>
+      </keep>
+      <keep access="public" type="class" name="com.l2fprod.gui.plaf.skin.impl.*">
+        <method name="*"/>
+      </keep>
+      <keep access="public" type="class" name="com.l2fprod.gui.region.*">
+        <method name="*"/>
+      </keep>
+      <keep access="public" type="class" name="com.l2fprod.tools.**">
+        <method name="*"/>
+      </keep>
+      <keep type="class" name="com.l2fprod.util.**">
+        <method name="*"/>
+      </keep>
     </proguard>
   </target>
 
