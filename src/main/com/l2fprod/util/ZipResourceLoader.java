@@ -63,15 +63,21 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 /**
- * Description of the Class
+ * Loads files from a local or network zip archive.
  *
  * @author    fred
  * @created   27 avril 2002
  */
 public class ZipResourceLoader {
 
+  /**
+    * A cache of the files from the archive.
+    */
   Hashtable resources = new Hashtable();
 
+  /**
+    * An instance of an anonymous subclass of URLStreamHandler that can handle files in zip archives.
+    */
   URLStreamHandler handler =
     new URLStreamHandler() {
       protected URLConnection openConnection(URL u) {
@@ -85,8 +91,7 @@ public class ZipResourceLoader {
           String path = file.substring(0, index);
           setURL(u, u.getProtocol(), u.getHost(), u.getPort(),
               path + "/" + spec, u.getRef());
-        }
-        else {
+        } else {
           setURL(u, u.getProtocol(), u.getHost(), u.getPort(),
               spec, u.getRef());
         }
@@ -98,16 +103,19 @@ public class ZipResourceLoader {
     };
 
   /**
-   * Constructor for the ZipResourceLoader object
+   * Creates a ZipResourceLoader that loads data from an URL.
    *
-   * @param p_JarUrl       Description of Parameter
-   * @exception Exception  Description of Exception
+   * @param p_JarUrl       URL to load files from.
+   * @exception IOException  if there is an exception while loading the archive.
    */
-  public ZipResourceLoader(URL p_JarUrl) throws Exception {
+  public ZipResourceLoader(URL p_JarUrl) throws IOException {
     this(p_JarUrl.openStream());
   }
 
-  public ZipResourceLoader(InputStream p_JarStream) throws Exception {
+  /**
+    * Creates a ZipResourceLoader that loads data from an InputStream.
+    */
+  public ZipResourceLoader(InputStream p_JarStream) throws IOException {
     BufferedInputStream bis = new BufferedInputStream(p_JarStream);
     ZipInputStream input = new ZipInputStream(bis);
 
@@ -128,23 +136,23 @@ public class ZipResourceLoader {
   }
 
   /**
-   * Gets the ResourceAsStream attribute of the ZipResourceLoader object
+   * Opens an InputStream from a file contained in the archive.
    *
-   * @param name                       Description of Parameter
-   * @return                           The ResourceAsStream value
-   * @exception MalformedURLException  Description of Exception
-   * @exception IOException            Description of Exception
+   * @param name                       Name of the file to retrieve.
+   * @return                           An input stream from the file.
+   * @exception MalformedURLException  If the URL is malformed.
+   * @exception IOException            If an IO error is encountered.
    */
   public InputStream getResourceAsStream(String name) throws MalformedURLException, IOException {
-    return getResource(name).openStream();
+    return new ByteArrayInputStream(getURLContent(name));
   }
 
   /**
-   * Gets the Resource attribute of the ZipResourceLoader object
+   * Gets the URL of a file in the archive.
    *
-   * @param name                       Description of Parameter
-   * @return                           The Resource value
-   * @exception MalformedURLException  Description of Exception
+   * @param name                       Name of the file to retrieve.
+   * @return                           The URL of the file.
+   * @exception MalformedURLException  If the URL is malformed.
    */
   public URL getResource(final String name) throws MalformedURLException {
     if (resources.get(name) == null) {
@@ -154,36 +162,36 @@ public class ZipResourceLoader {
   }
 
   /**
-   * Gets the ZipResource attribute of the ZipResourceLoader object
+   * Gets a ZipResource representing the file.
    *
-   * @param name  Description of Parameter
-   * @return      The ZipResource value
+   * @param name  The name of the file to retrieve.
+   * @return      The ZipResource representing the file
    */
   public ZipResource getZipResource(String name) {
     return new ZipResource(name);
   }
 
   /**
-   * Gets the ZipResource attribute of the ZipResourceLoader object
+   * Gets a ZipResource representing the file.
    *
-   * @param name  Description of Parameter
-   * @return      The ZipResource value
+   * @param name  The URL of the resource to retrieve.
+   * @return      The ZipResource representing the file.
    */
   public ZipResource getZipResource(URL name) {
     return getZipResource(name.getFile());
   }
 
   /**
-   * Description of the Method
+   * Gets the files contained in this zip archive.
    *
-   * @return   Description of the Returned Value
+   * @return   An Enumeration of the files in this archive.
    */
   public Enumeration entries() {
     return resources.keys();
   }
 
   /**
-   * Description of the Method
+   * A debugging method.
    */
   public void dump() {
     for (Enumeration e = resources.keys(); e.hasMoreElements(); ) {
@@ -193,7 +201,7 @@ public class ZipResourceLoader {
   }
 
   /**
-   * Description of the Method
+   * Releases the resources claimed by this object.
    */
   public void release() {
     resources.clear();
@@ -201,10 +209,10 @@ public class ZipResourceLoader {
   }
 
   /**
-   * Gets the URLContent attribute of the ZipResourceLoader object
+   * Gets the raw data of this file as a byte array.
    *
-   * @param name  Description of Parameter
-   * @return      The URLContent value
+   * @param name  The entry to load.
+   * @return      The data contained in the entry.
    */
   private byte[] getURLContent(String name) {
     byte[] data = (byte[]) resources.get(name);
@@ -215,10 +223,10 @@ public class ZipResourceLoader {
   }
 
   /**
-   * The main program for the ZipResourceLoader class
+   * Diagnostic for the ZipResource class.
    *
    * @param args           The command line arguments
-   * @exception Exception  Description of Exception
+   * @exception Exception  If anything whatsoever goes wrong. :-)
    */
   public static void main(String[] args) throws Exception {
     ZipResourceLoader loader = new ZipResourceLoader(new File(args[0]).toURL());
@@ -233,7 +241,7 @@ public class ZipResourceLoader {
   }
 
   /**
-   * Description of the Class
+   * A class that represents a file contained in a zip archive.
    *
    * @author    fred
    * @created   27 avril 2002
@@ -242,28 +250,28 @@ public class ZipResourceLoader {
     String m_Name;
 
     /**
-     * Constructor for the ZipResource object
+     * Constructs a ZipResource object representing the file whose name is passed in.
      *
-     * @param p_Name  Description of Parameter
+     * @param p_Name  Name of the file.
      */
     public ZipResource(String p_Name) {
       m_Name = p_Name;
     }
 
     /**
-     * Gets the URL attribute of the ZipResource object
+     * Gets the URL of the file represented by this object.
      *
-     * @return                                    The URL value
-     * @exception java.net.MalformedURLException  Description of Exception
+     * @return                                    The URL.
+     * @exception java.net.MalformedURLException  If the URL if malformed.
      */
     public URL getURL() throws java.net.MalformedURLException {
       return new URL("http", null, -1, m_Name);
     }
 
     /**
-     * Gets the InputStream attribute of the ZipResource object
+     * Opens an input stream from the file represented by this object.
      *
-     * @return   The InputStream value
+     * @return   The InputStream.
      */
     public InputStream getInputStream() {
       ByteArrayInputStream input = new ByteArrayInputStream(ZipResourceLoader.this.getURLContent(m_Name));
@@ -271,9 +279,9 @@ public class ZipResourceLoader {
     }
 
     /**
-     * Gets the URLContent attribute of the ZipResource object
+     * Returns the raw data contained in the file represented by this object.
      *
-     * @return   The URLContent value
+     * @return   The data contained in the file.
      */
     public byte[] getURLContent() {
       return ZipResourceLoader.this.getURLContent(m_Name);
@@ -281,36 +289,36 @@ public class ZipResourceLoader {
   }
 
   /**
-   * Description of the Class
+   * An URLConnection that knows how to load files from a zip archive.
    *
    * @author    fred
    * @created   27 avril 2002
    */
   class ZipURLConnection extends URLConnection {
     /**
-     * Constructor for the ZipURLConnection object
+     * Constructs a ZipURLConnection from an URL.
      *
-     * @param p_Url  Description of Parameter
+     * @param p_Url  The URL connected to.
      */
     public ZipURLConnection(URL p_Url) {
       super(p_Url);
     }
 
     /**
-     * Gets the InputStream attribute of the ZipURLConnection object
+     * Opens an input stream from the URL host.
      *
-     * @return                 The InputStream value
-     * @exception IOException  Description of Exception
+     * @return                 The InputStream.
+     * @exception IOException  If there is an error reading from the host.
      */
-    public InputStream getInputStream() {
+    public InputStream getInputStream() throws IOException {
       ByteArrayInputStream input = new ByteArrayInputStream((byte[]) resources.get(getURL().getFile()));
       return input;
     }
 
     /**
-     * Description of the Method
+     * Opens a connection with the URL host.
      *
-     * @exception IOException  Description of Exception
+     * @exception IOException  If there is an exception while communicating the the URL host.
      */
     public void connect() throws IOException {
       if (resources == null || resources.get(getURL().getFile()) == null) {
@@ -318,5 +326,4 @@ public class ZipResourceLoader {
       }
     }
   }
-
 }
