@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article id="tutorial-clock">
+  <properties>
+    <title>A Clock using NativeSkin</title>
+  </properties>
+
+  <body>
+    <section>
+      <title>A Clock using NativeSkin</title>
+      <p>
+        Skin Look And Feel gives the developer access to native
+        functions such as irregular windows, transparency, always on
+        top feature.
+      </p>
+      <p>
+        The clock we are going to create will use all the features of
+        NativeSkin.
+      </p>
+      <p>
+        Having a rounded clock is one of the goal, here is the picture
+        we will use for the background of the clock:
+      </p>
+      <p align="CENTER">
+        <IMG SRC="http://www.l2fprod.com/software/skinlf/jnlp/clock.gif" WIDTH="120" HEIGHT="121"/>
+      </p>
+      <p>
+        The image is a transparent GIF. Setting the window shape to be
+        a circle is pretty easy using NativeSkin and
+        ImageRegion. First you need to load your image then to apply
+        the region to the window. Here is the relevant code from
+        Clock.java:
+      </p>
+      <pre CLASS="code">
+// create an ImageRegion from the background image
+// so we can use a rounded clock
+<B>ImageRegion region = new ImageRegion(back);</B>
+<B>NativeSkin.getInstance().setWindowRegion(window, region, true);</B>
+      </pre>
+      <p>
+        The clock will need to be always visible and on top of all
+        other windows:
+      </p>
+      <pre CLASS="code">
+// A clock should always be on top of other windows
+<B>NativeSkin.getInstance().setAlwaysOnTop(window, true);</B>
+      </pre>
+      <p>
+        Finally if the clock covers a large area you may want it to be
+        transparent so what is under the clock is still visible. The
+        transparency can be set from 0 to 255, where 0 means no
+        transparency (opaque) and 255 totally transparent. The
+        transparency is currently supported only on Windows 2000.
+      </p>
+      <pre CLASS="code">
+// but transparent so you can see through
+<B>NativeSkin.getInstance().setWindowTransparency(window, 127);</B>
+      </pre>
+      <p>
+        That's it for the NativeSkin part of the clock, the rest is
+        the clock design itself. We will not go deeper.
+      </p>
+      <p>
+        Get the <A
+        HREF="http://www.l2fprod.com/download/files/latestskinlf.php">latest</A>
+        SkinLF release, download <A HREF="Clock.java">Clock.java</A>
+        and <A HREF="http://www.l2fprod.com/software/skinlf/jnlp/clock.gif">clock.gif</A>, compile and
+        run using:
+      </p>
+      <pre CLASS="code">
+java -cp nativeskin.jar;. Clock clock.gif
+      </pre>
+      <p>
+        Here is the result of our clock running on top of Netbeans:
+      </p>
+      <p ALIGN="CENTER">
+        <IMG SRC="images/netbeansclock.gif" WIDTH="542" HEIGHT="285"/>
+      </p>
+      <p>
+        If you encounter problems with the transparency not being
+        applied (specially with JDK1.4), try to disable DirectDraw by
+        passing -Dsun.java2d.noddraw=true to the virtual machine:
+      </p>
+      <pre CLASS="code">
+java -Dsun.java2d.noddraw=true -cp nativeskin.jar;. Clock clock.gif
+      </pre>
+      <p>
+        <A HREF="http://www.l2fprod.com/software/skinlf/jnlp/clock.php">
+          <IMG SRC="http://www.l2fprod.com/images/V3/gobutton.gif" WIDTH="81" HEIGHT="79" ALIGN="RIGHT" BORDER="0"/>
+        </A>
+        You can view the <A HREF="http://www.l2fprod.com/software/skinlf/jnlp/clock.php">online demo
+        here</A> if your browser is JavaWebStart-enabled. The demo
+        will open a clock in the top left corner of your screen. You
+        can move the clock by clicking in it and moving your mouse. To
+        change the transparency, use the popup menu (right click on
+        the clock). To close the clock, use the Exit menu
+        item.
+      </p>
+    </section>
+  </body>
+</article>

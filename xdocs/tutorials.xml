@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document id="tutorials">
+  <properties>
+    <title>Tutorials</title>
+  </properties>
+
+  <body>
+    <section>
+      <title>Tutorials</title>
+      <p>
+        <ul>
+          <li>
+            <xref linkend="tutorial-applet" />
+          </li>
+          <li>
+            <xref linkend="tutorial-clock" />
+          </li>
+        </ul>
+      </p>
+    </section>
+  </body>
+</document>

@@ -1,0 +1,85 @@
+[General]
+name=Template
+author=UIS
+email=noone@isinnocent.com
+homepage=http://www.noone.com
+description=Template
+version=1.0
+
+[Panel]
+background=background.bmp
+
+[Colors]
+desktop=255 215 193
+
+background=244 244 240
+foreground=0 0 0
+
+activeBackground=233,233,233
+activeForeground=255,255,255
+
+inactiveBackground=247,247,239
+inactiveForeground=192,192,192
+
+activeBlend=53,99,144
+inactiveBlend=192,192,192
+
+selectBackground=197,222,247
+selectForeground=0 0 0
+
+contrast=7
+
+windowBackground=255 255 255
+windowForeground=0 0 0
+
+[Window Titlebar]
+CloseButton=file59.png
+CloseDownButton=file60.png
+CloseInactiveButton=file61.png
+
+MaximizeButton=file62.png
+MaximizeDownButton=file63.png
+MaximizeInactiveButton=file64.png
+
+MenuButton=menu.xpm
+
+MinimizeButton=file65.png
+MinimizeDownButton=file66.png
+MinimizeInactiveButton=file67.png
+
+StickyButton=sticky.xpm
+StickyDownButton=stickydown.xpm
+
+TitlebarPixmapActive=file68.png
+TitlebarPixmapActiveLeft=2
+TitlebarPixmapActiveRight=135
+TitlebarPixmapActiveTop=0
+TitlebarPixmapActiveBottom=0
+TitlebarPixmapInactive=file69.png
+
+PixmapUnderTitleText=yes
+TitleFrameShaded=no
+TitleAlignment=left
+
+[Window Border]
+shapePixmapTop=
+shapePixmapBottom=file70.png
+shapePixmapLeft=file71.png
+shapePixmapRight=file72.png
+shapePixmapTopLeft=
+shapePixmapTopRight=
+shapePixmapBottomLeft=
+shapePixmapBottomRight=
+
+[Window Button Layout]
+ButtonA=Off
+ButtonB=Off
+ButtonC=Off
+ButtonD=Close
+ButtonE=Maximize
+ButtonF=Iconify
+
+[Sounds]
+WindowShadeDown=RollUp.wav
+WindowShadeUp=RollUp.wav
+WindowClose=Close.wav

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article id="tutorial-applet">
+  <properties>
+    <title>Creating a simple "skinned" applet</title>
+  </properties>
+
+  <body>
+    <section>
+      <title>Creating a simple &quot;skinned&quot; applet</title>
+      <p>
+        Skin Look And Feel provides a simple way to skin your existing
+        applets. When you download Skin Look And Feel you are provided
+        with the look and feel part but also with utility classes to
+        help you in enabling skins in your applications.
+      </p>
+      <p>
+        <I>Skinit </I>has shipped with SkinLF since version 0.3 and
+        has enabled easy skinning of applications (see <A
+        HREF="http://www.netbeans.org/devhome/docs/howtos/skin.html">netbeans.org</A>
+        for a complete example of Skinit usage).
+      </p>
+      <p>
+        But <I>Skinit </I>is useless for applets.
+      </p>
+      <p>
+        Fortunately, SkinApplet is here. The goal of SkinApplet is to
+        offer a simple way to set the themepack of your applet using
+        the <I>themepack</I> applet tag. SkinApplet extends JApplet
+        and adds the required method to load a themepack.
+        </p>
+      <p>
+        Here is the most simple example applet using SkinApplet:
+      </p>
+      <PRE CLASS="code"><B>import com.l2fprod.gui.SkinApplet;</B>
+import java.awt.BorderLayout;
+import java.net.URL;
+import javax.swing.*;
+
+
+/**
+ * SimpleApplet.
+ * An applet showing how to set the Skin Look And Feel
+ * using a themepack provided as an applet parameter or
+ * using the themepack bundled in the applet jar file.
+ */
+<B>public class SimpleApplet extends SkinApplet {</B>
+
+  public SimpleApplet() {
+  }
+
+<B>  /**
+   * The init() method is called by the Applet container (appletviewer,java plugin,...).
+   * In this method, we will set up the look and feel and tries to load a theme pack
+   */
+  public void init() {</B>
+    try {
+      <B>initSkin(SkinApplet.THEMEPACK_TAG);</B>
+      createUI();       
+    } catch (Exception e) {
+      e.printStackTrace();
+    }    
+  }
+
+  public void createUI() {
+    getContentPane().setLayout(new BorderLayout(3, 3));
+    getContentPane().add("Center", new JButton("Congratulations !"));
+  }
+
+}
+</PRE>
+      <p>
+        Here is the SimpleApplet.html used to display the applet:
+      </p>
+      <pre CLASS="code">
+<span class="comment">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot;&gt;</span>
+<span class="variable-name">&lt;html&gt;</span>
+<span class="variable-name">&lt;head&gt;</span>
+<span class="type">&lt;title&gt;</span><span class="function-name">Simple Applet</span><span class="type">&lt;/title&gt;</span>
+<span class="variable-name">&lt;/head&gt;</span>
+<span class="variable-name">&lt;body&gt;</span>
+<span class="type">&lt;h1&gt;</span><span class="function-name">Simple Applet</span><span class="type">&lt;/h1&gt;</span>
+<B><span class="type">&lt;applet codebase=</span><span class="string">&quot;.&quot;</span><span class="type"> archive=</span><span class="string">&quot;skinlf.jar,simpleapplet.jar&quot;</span>
+<span class="type">code=</span><span class="string">&quot;SimpleApplet.class&quot;</span><span class="type"> width=</span><span class="string">&quot;200&quot;</span><span class="type"> height=</span><span class="string">&quot;30&quot;</span><span class="type">&gt;</span>
+      <span class="type">&lt;param name=</span><span class="string">&quot;themepack&quot;</span><span class="type"> value=</span><span class="string">&quot;themepack.zip&quot;</span><span class="type">&gt;</span>
+    <span class="type">&lt;/applet&gt;</span></B>
+  <span class="variable-name">&lt;/body&gt;</span>
+<span class="variable-name">&lt;/html&gt;</span></pre>
+      <p>
+        Test the <A
+        HREF="http://www.l2fprod.com/software/skinlf/jnlp/SimpleApplet.html">Simple
+        Applet</A>.
+      </p>
+      <p>
+        Skin Look And Feel requires the browser to support at least
+        JRE 1.2. The Java plugin is recommended to experience the
+        applet.
+      </p>
+    </section>
+  </body>
+</article>
