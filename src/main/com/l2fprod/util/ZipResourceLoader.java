@@ -104,7 +104,11 @@ public class ZipResourceLoader {
    * @exception Exception  Description of Exception
    */
   public ZipResourceLoader(URL p_JarUrl) throws Exception {
-    BufferedInputStream bis = new BufferedInputStream(p_JarUrl.openStream());
+    this(p_JarUrl.openStream());
+  }
+
+  public ZipResourceLoader(InputStream p_JarStream) throws Exception {
+    BufferedInputStream bis = new BufferedInputStream(p_JarStream);
     ZipInputStream input = new ZipInputStream(bis);
 
     ZipEntry entry = null;
