@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- JNLP File for Skin Look And Feel -->
+<jnlp
+	spec="1.0+"
+	codebase="@WEB@/software/skinlf/jnlp"
+	href="skinregion.php">
+	<information>
+		<title>Skin Region @VERSION@</title>
+		<vendor>L2FProd.com</vendor>
+		<homepage href="http://www.L2FProd.com"/>
+		<offline-allowed/>
+	</information>
+        <security> 
+		<all-permissions/> 
+	</security> 
+	<resources>
+		<jar href="nativeskin.jar"/>
+		<nativelib href="nativeskinlibs.jar"/>
+	</resources>
+	<component-desc/>
+</jnlp>

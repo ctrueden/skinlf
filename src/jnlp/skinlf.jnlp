@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- JNLP File for Skin Look And Feel -->
+<jnlp
+	spec="1.0+"
+	codebase="@WEB@/software/skinlf/jnlp"
+	href="skinlf.php">
+	<information>
+		<title>Skin Look And Feel @VERSION@</title>
+		<vendor>L2FProd.com</vendor>
+		<homepage href="http://www.L2FProd.com"/>
+		<offline-allowed/>
+	</information>
+	<resources>
+		<jar href="skinlf.jar"/>
+	</resources>
+	<component-desc/>
+</jnlp>

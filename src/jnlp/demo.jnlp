@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- JNLP File for Skin Look And Feel Demo -->
+<jnlp spec="1.0+" codebase="@WEB@/software/skinlf/jnlp" href="demo.php">
+	<information>
+		<title>SkinLF JavaWebStart Demo</title>
+		<vendor>L2FProd.com</vendor>
+		<homepage href="@WEB@"/>
+	    	<description>SkinLF JavaWebStart Demo</description>
+	    	<description kind="short">A SkinLF Demo Application</description>
+		<offline-allowed/>
+	</information>
+	<resources> 
+		<j2se version="1.2+"/> 
+		<jar href="examples.jar"/>
+		<extension name="Skin Look And Feel" href="skinlf.php"/>
+	</resources> 
+	<application-desc main-class="examples.demo">
+		<argument>@WEB@/software/skinlf/jnlp/themepack.zip</argument>
+		<argument>@WEB@/javootoo.com/plaf/skinlf/themepacks/cellshadedthemepack.zip</argument>
+		<argument>@WEB@/javootoo.com/plaf/skinlf/themepacks/bbjthemepack.zip</argument>
+		<argument>@WEB@/javootoo.com/plaf/skinlf/themepacks/xplunathemepack.zip</argument>
+		<argument>@WEB@/javootoo.com/plaf/skinlf/themepacks/aquathemepack.zip</argument>
+	</application-desc>
+</jnlp>

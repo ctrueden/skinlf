@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- JNLP File for Skin Region Demo -->
+<jnlp spec="1.0+" codebase="@WEB@/software/skinlf/jnlp" href="nativeskindemo.php">
+	<information>
+		<title>NativeSkin JavaWebStart Demo</title>
+		<vendor>L2FProd.com</vendor>
+		<homepage href="@WEB@"/>
+	    	<description>NativeSkin JavaWebStart Demo</description>
+	    	<description kind="short">A NativeSkin Demo Application</description>
+		<offline-allowed/>
+	</information>
+        <security> 
+		<all-permissions/> 
+	</security> 
+	<resources>
+		<j2se version="1.2+"/> 
+		<jar href="examples.jar"/>
+		<extension name="NativeSkin" href="nativeskin.php"/>
+	</resources> 
+	<application-desc main-class="examples.nativesplash"/>
+</jnlp>
