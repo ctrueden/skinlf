@@ -903,6 +903,12 @@ public final class SkinRootPaneUI extends BasicRootPaneUI {
      */
     private int dragHeight;
 
+    /**
+     * Sometimes mouse entered events generated twice, without proper mouse exit event. If we dont check for this
+     * possibility, this will cause strange mouse icons. For example the resize cursor appears in the whole window.    
+     */
+    private boolean mouseAlreadyEntered = false;
+
     public void mousePressed(MouseEvent ev) {
       if (getWindowDecorationStyle(root) == JRootPane_NONE) {
         return;
@@ -976,9 +982,9 @@ public final class SkinRootPaneUI extends BasicRootPaneUI {
         && getFrameWindow().isResizable()
         && !getFrameWindow().isShaded()
         && !getFrameWindow().isMaximum()) {
-        w.setCursor(Cursor.getPredefinedCursor(cursor));
+        	w.setCursor(Cursor.getPredefinedCursor(cursor));
       } else {
-        w.setCursor(lastCursor);
+        	w.setCursor(lastCursor);
       }
     }
 
@@ -1102,12 +1108,16 @@ public final class SkinRootPaneUI extends BasicRootPaneUI {
 
     public void mouseEntered(MouseEvent ev) {
       java.awt.Window w = translateSource(ev);
-      lastCursor = w.getCursor();
+      if (!mouseAlreadyEntered) {
+          lastCursor = w.getCursor();
+      }
+      mouseAlreadyEntered = true;
       mouseMoved(ev);
     }
 
     public void mouseExited(MouseEvent ev) {
       java.awt.Window w = translateSource(ev);
+      mouseAlreadyEntered = false;
       w.setCursor(lastCursor);
     }
 
