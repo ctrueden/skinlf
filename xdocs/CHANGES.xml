@@ -5,6 +5,10 @@
     <person name="Frederic Lavigne" email="fred@L2FProd.com" id="FL"/>
   </devs>
 
+  <release version="1.2.10" date="13 August 2004">
+    <action type="fix">Native Skin was broken with JDK 1.3.1</action>
+  </release>
+
   <release version="1.2.9" date="29 July 2004">
     <action type="fix">Potential for lockup when accessing skinlf due to synchronization issue</action>
     <action type="fix">When using window decoration, the window title bar was not painted differently for inactive windows. The window buttons (close, minimize, maximize) were not using the "disabled" icon of kde themes</action>
