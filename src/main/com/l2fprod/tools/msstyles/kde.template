@@ -70,10 +70,10 @@ shapePixmapTop=
 shapePixmapBottom=MS{Image://Group[@Name='General']/Class[@Name='Window']/Part[@Name='FrameBottom']#0,2|window_bottom.png}
 shapePixmapLeft=MS{Image://Group[@Name='General']/Class[@Name='Window']/Part[@Name='FrameLeft']#0,2|window_left.png}
 shapePixmapRight=MS{Image://Group[@Name='General']/Class[@Name='Window']/Part[@Name='FrameRight']#0,2|window_right.png}
-shapePixmapTopLeft=
-shapePixmapTopRight=
-shapePixmapBottomLeft=
-shapePixmapBottomRight=
+shapePixmapTopLeft=window_topleft.png
+shapePixmapTopRight=window_topright.png
+shapePixmapBottomLeft=window_bottomleft.png
+shapePixmapBottomRight=window_bottomright.png
 
 [Window Button Layout]
 ButtonA=Off
