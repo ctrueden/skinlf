@@ -63,7 +63,7 @@ import javax.swing.plaf.*;
  * @author    fred
  * @created   27 avril 2002
  */
-public class SkinTreeUI extends BasicTreeUI {
+public final class SkinTreeUI extends BasicTreeUI {
 
   /**
    * Description of the Field
@@ -116,7 +116,7 @@ public class SkinTreeUI extends BasicTreeUI {
    * @author    fred
    * @created   27 avril 2002
    */
-  public static class ExpandedIcon implements Icon, Serializable {
+  static class ExpandedIcon implements Icon, Serializable {
     /**
      * Gets the IconWidth attribute of the ExpandedIcon object
      *
@@ -175,7 +175,7 @@ public class SkinTreeUI extends BasicTreeUI {
    * @author    fred
    * @created   27 avril 2002
    */
-  public static class CollapsedIcon extends ExpandedIcon {
+  static class CollapsedIcon extends ExpandedIcon {
 
     /**
      * Description of the Method

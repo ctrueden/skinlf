@@ -60,9 +60,9 @@ import java.awt.event.*;
  *
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 20:04:39 $
+ * @version   $Revision: 1.2 $, $Date: 2003-10-24 18:34:25 $
  */
-public class SkinToolBarUI extends BasicToolBarUI {
+public final class SkinToolBarUI extends BasicToolBarUI {
 
   private Skin skin = SkinLookAndFeel.getSkin();
 

@@ -57,9 +57,9 @@ import javax.swing.plaf.basic.BasicToolTipUI;
 
 /**
  * @author    $Author: l2fprod $
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 20:04:39 $
+ * @version   $Revision: 1.2 $, $Date: 2003-10-24 18:34:25 $
  */
-public class SkinToolTipUI extends BasicToolTipUI {
+public final class SkinToolTipUI extends BasicToolTipUI {
 
   static SkinToolTipUI sharedInstance = new SkinToolTipUI();
 
