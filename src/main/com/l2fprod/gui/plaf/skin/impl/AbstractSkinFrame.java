@@ -55,7 +55,7 @@ import com.l2fprod.gui.plaf.skin.*;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 20:05:29 $
+ * @version   $Revision: 1.2 $, $Date: 2004-07-18 16:58:31 $
  */
 public class AbstractSkinFrame extends AbstractSkinComponent implements SkinFrame {
 
@@ -66,7 +66,7 @@ public class AbstractSkinFrame extends AbstractSkinComponent implements SkinFram
    * @return       The WindowButtons value
    */
   public SkinWindowButton[] getWindowButtons(int align) {
-    return null;
+    return new SkinWindowButton[0];
   }
 
   /**
