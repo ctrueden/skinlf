@@ -84,19 +84,10 @@ import com.l2fprod.gui.*;
  * <BR>
  *
  *
- * @author    $Author: l2fprod $
- * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 20:07:51 $
+ * @author    fred
  */
 public class KdeSkin extends AbstractSkin {
 
-  SkinPersonality personality;
-  SkinButton button;
-  SkinFrame frame;
-  SkinTab tab;
-  SkinProgress progress;
-  SkinScrollbar scrollbar;
-  SkinSlider slider;
   String[] colors;
 
   static Object[] swingToKde = {
