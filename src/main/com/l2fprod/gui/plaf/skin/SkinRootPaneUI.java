@@ -79,20 +79,7 @@ public final class SkinRootPaneUI extends BasicRootPaneUI {
 
   private Skin skin = SkinLookAndFeel.getSkin();
   private Window.FrameWindow title = null;
-  /**
-   * Keys to lookup borders in defaults table.
-   */
-  private static final String[] borderKeys =
-    new String[] {
-      null,
-      "RootPane.frameBorder",
-      "RootPane.plainDialogBorder",
-      "RootPane.informationDialogBorder",
-      "RootPane.errorDialogBorder",
-      "RootPane.colorChooserDialogBorder",
-      "RootPane.fileChooserDialogBorder",
-      "RootPane.questionDialogBorder",
-      "RootPane.warningDialogBorder" };
+
   /**
    * The amount of space (in pixels) that the cursor is changed on.
    */
@@ -107,10 +94,7 @@ public final class SkinRootPaneUI extends BasicRootPaneUI {
    * Window the <code>JRootPane</code> is in.
    */
   private java.awt.Window window;
-
-  /** Make sure the title pane is repainted when needed */
-  private WindowListener windowListener;
-  
+ 
   /**
    * <code>JComponent</code> providing window decorations. This will be null
    * if not providing window decorations.
@@ -207,7 +191,6 @@ public final class SkinRootPaneUI extends BasicRootPaneUI {
 
     layoutManager = null;
     mouseInputListener = null;
-    windowListener = null;
     root = null;
   }
 
@@ -254,13 +237,8 @@ public final class SkinRootPaneUI extends BasicRootPaneUI {
         mouseInputListener = createWindowMouseInputListener(root);
       }
 
-      if (windowListener == null) {
-        windowListener = createWindowListener();
-      }
-      
       window.addMouseListener(mouseInputListener);
       window.addMouseMotionListener(mouseInputListener);
-      window.addWindowListener(windowListener);
     }
   }
 
@@ -273,7 +251,6 @@ public final class SkinRootPaneUI extends BasicRootPaneUI {
 
       window.removeMouseListener(mouseInputListener);
       window.removeMouseMotionListener(mouseInputListener);
-      window.removeWindowListener(windowListener);
     }
   }
 
@@ -331,6 +308,8 @@ public final class SkinRootPaneUI extends BasicRootPaneUI {
       // the titlePane may not have been updated yet as it was created with a
       // empty FrameWindow so update its actions.
       titlePane.enableActions();
+      // callback to notify the titlePane the FrameWindow was set
+      titlePane.windowSet();
       
       String[] colors = skin.getColors();
       boolean cont = true;
@@ -435,23 +414,6 @@ public final class SkinRootPaneUI extends BasicRootPaneUI {
     return new MouseInputHandler();
   }
 
-  private WindowListener createWindowListener() {
-    return new WindowAdapter() {      
-      public void windowActivated(WindowEvent e) {
-        try {
-          title.setSelected(true);
-          titlePane.repaint();
-        } catch (PropertyVetoException ex) {}
-      }      
-      public void windowDeactivated(WindowEvent e) {
-        try {
-          title.setSelected(false);
-          titlePane.repaint();
-        } catch (PropertyVetoException ex) {}
-      }
-    };
-  }
-  
   /**
    * Returns a <code>LayoutManager</code> that will be set on the <code>JRootPane</code>.
    */
