@@ -72,38 +72,60 @@ import com.l2fprod.gui.SkinWindow;
  *
  * @author    fred
  */
-public class SkinTitlePane extends JComponent {
+public class SkinTitlePane extends BasicInternalFrameTitlePane {
 
-    protected JMenuBar menuBar;
-    protected JButton iconButton;
-    protected JButton maxButton;
-    protected JButton closeButton;
+  /**
+   * Description of the Field
+   */
+  //  protected JMenuBar menuBar;
 
-    protected JMenu windowMenu;
-  //    protected JInternalFrame frame;
-
-    protected Color selectedTitleColor;
-    protected Color selectedTextColor;
-    protected Color notSelectedTitleColor;
-    protected Color notSelectedTextColor;
-
-    protected Icon maxIcon;
-    protected Icon minIcon;
-    protected Icon iconIcon;
-    protected Icon closeIcon;
-
-    protected Action closeAction;
-    protected Action maximizeAction;
-    protected Action iconifyAction;
-    protected Action restoreAction;
-    protected Action moveAction;
-    protected Action sizeAction;
-
+  /**
+   * Description of the Field
+   */
+  //  protected JMenu windowMenu;
   /**
    * Description of the Field
    */
   protected Window frame;
 
+  /**
+   * Description of the Field
+   */
+  //  protected Color selectedTitleColor;
+  /**
+   * Description of the Field
+   */
+  //  protected Color selectedTextColor;
+  /**
+   * Description of the Field
+   */
+  //  protected Color notSelectedTitleColor;
+  /**
+   * Description of the Field
+   */
+  //  protected Color notSelectedTextColor;
+
+  /**
+   * Description of the Field
+   */
+  //  protected PropertyChangeListener propertyChangeListener;
+
+  /**
+   * Description of the Field
+   */
+  //  protected Action closeAction;
+  /**
+   * Description of the Field
+   */
+  //  protected Action maximizeAction;
+  /**
+   * Description of the Field
+   */
+  //  protected Action iconifyAction;
+  /**
+   * Description of the Field
+   */
+  //  protected Action restoreAction;
   /**
    * Description of the Field
    */
@@ -169,8 +191,6 @@ public class SkinTitlePane extends JComponent {
    */
   protected final static String SHADE_CMD = "Shade";
 
-  protected PropertyChangeListener propertyChangeListener;
-
   /**
    * Constructor for the SkinTitlePane object
    *
@@ -195,6 +215,7 @@ public class SkinTitlePane extends JComponent {
    * @param f  Description of Parameter
    */
   public SkinTitlePane(Window f) {
+    super(null);
     frame = f;
     install();
   }
@@ -232,7 +253,6 @@ public class SkinTitlePane extends JComponent {
    */
   public void addNotify() {
     super.addNotify();
-    installListeners();
     addSystemMenuItems(windowMenu);
     enableActions();
   }
@@ -246,8 +266,7 @@ public class SkinTitlePane extends JComponent {
       windowMenu.removeAll();
       systemMenuAdded = false;
     }
-    //    uninstallDefaults();
-    uninstallListeners();
+    uninstallDefaults();
   }
 
   /**
@@ -285,11 +304,8 @@ public class SkinTitlePane extends JComponent {
   /**
    * Description of the Method
    */
-  protected void install() {
-    selectedTitleColor = UIManager.getColor("InternalFrame.activeTitleBackground");
-    selectedTextColor = UIManager.getColor("InternalFrame.activeTitleForeground");
-    notSelectedTitleColor = UIManager.getColor("InternalFrame.inactiveTitleBackground");
-    notSelectedTextColor = UIManager.getColor("InternalFrame.inactiveTitleForeground");
+  protected void installTitlePane() {
+    installDefaults();
 
     createActions();
     enableActions();
@@ -299,9 +315,12 @@ public class SkinTitlePane extends JComponent {
     add(menuBar);
 
     setOpaque(true);
+  }
 
+  protected void install() {
     createButtons();
     enableActions();
+    installListeners();
   }
 
   /**
@@ -324,14 +343,29 @@ public class SkinTitlePane extends JComponent {
    * Description of the Method
    */
   protected void installListeners() {
-    if (propertyChangeListener != null) {
-      propertyChangeListener = createPropertyChangeListener();
-    }
+    propertyChangeListener = createPropertyChangeListener();
     frame.addPropertyChangeListener(propertyChangeListener);
   }
 
   protected void uninstallListeners() {
     frame.removePropertyChangeListener(propertyChangeListener);
+  }
+
+  /**
+   * Description of the Method
+   */
+  protected void installDefaults() {
+    selectedTitleColor = UIManager.getColor("InternalFrame.activeTitleBackground");
+    selectedTextColor = UIManager.getColor("InternalFrame.activeTitleForeground");
+    notSelectedTitleColor = UIManager.getColor("InternalFrame.inactiveTitleBackground");
+    notSelectedTextColor = UIManager.getColor("InternalFrame.inactiveTitleForeground");
+  }
+
+
+  /**
+   * Description of the Method
+   */
+  protected void uninstallDefaults() {
   }
 
   /**
@@ -435,7 +469,9 @@ public class SkinTitlePane extends JComponent {
   /**
    * Description of the Method
    */
-  public void showSystemMenu() {
+  protected void showSystemMenu() {
+    //      windowMenu.setPopupMenuVisible(true);
+    //      windowMenu.setVisible(true);
     windowMenu.doClick();
   }
 
