@@ -22,7 +22,7 @@ import javax.swing.plaf.UIResource;
  * To change the template for this generated type comment go to
  * Window>Preferences>Java>Code Generation>Code and Comments
  */
-public class FrameWindow implements com.l2fprod.gui.plaf.skin.Window{
+class FrameWindow implements com.l2fprod.gui.plaf.skin.Window{
 
 	private JFrame frame = null;
 	private JDialog dialog = null;
