@@ -52,7 +52,7 @@ package com.l2fprod.util;
  *
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 20:15:35 $
+ * @version   $Revision: 1.2 $, $Date: 2003-08-25 20:00:47 $
  */
 public class AccessUtils {
 
@@ -102,20 +102,22 @@ public class AccessUtils {
   }
 
   public static Object invoke(Object p_Object, String p_Method,
+                              Class[] p_ParameterClasses,
                               Object[] p_Parameters) {
     try {
-      return p_Object.getClass().getMethod(p_Method, new Class[0]).invoke(p_Object, p_Parameters);
+      return p_Object.getClass().getMethod(p_Method, p_ParameterClasses).invoke(p_Object, p_Parameters);
     } catch (Throwable throwable) {
+      throwable.printStackTrace();
       throw new Error(throwable.getMessage());
     }
   }
 
   public static int getAsInt(Object p_Object, String p_Method) {
-    return ((Integer)invoke(p_Object, p_Method, null)).intValue();
+    return ((Integer)invoke(p_Object, p_Method, null, null)).intValue();
   }
 
   public static void setAsInt(Object p_Object, String p_Method, int p_Int) {
-    invoke(p_Object, p_Method, new Object[]{new Integer(p_Int)});
+    invoke(p_Object, p_Method, new Class[]{int.class}, new Object[]{new Integer(p_Int)});
   }
 
 }
