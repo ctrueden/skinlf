@@ -6,8 +6,10 @@
 		<person name="Frederic Lavigne" email="fred@L2FProd.com" id="FL"/>
 	</devs>
 
-        <release version="1.2.5" date="Not scheduled yet">
+        <release version="1.2.4a" date="26 August 2003">
                 <action type="fix">Fix resizing issue with JDK1.4 window decoration</action>
+                <action type="fix">Fix window popup menu with JDK1.4 window decoration is used. Popup was going behind</action>
+                <action type="update">Updated the demo to allow File open dialogs to be visible in JavaWebStart</action>
         </release>
 
 	<release version="1.2.4" date="24 August 2003">
