@@ -68,6 +68,8 @@
     Utility targets to use the style converters
   -->
   <target name="convert.msstyles">
+    <fail unless="msstyle" message="Specify path to msstyle xml -Dmsstyle=pathtoxml"/>
+    <fail unless="skin"    message="Specify themepack folder -Dskin=pathtothemepackdir"/>
     <java classname="com.l2fprod.tools.msstyles.MsStylesToSkinLF"
           classpath="${classpath.asprop}:${java.src.dir}:${build.classes}"
           fork="yes">
