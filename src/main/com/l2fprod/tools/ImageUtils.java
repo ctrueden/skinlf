@@ -2,11 +2,11 @@ package com.l2fprod.tools;
 
 import java.awt.*;
 import java.awt.image.*;
+import java.io.File;
 import java.io.FileInputStream;
 
 import com.ibm.imageconversion.*;
 import com.sun.jimi.core.*;
-import com.sixlegs.image.png.PngImage;
 
 public class ImageUtils {
 
@@ -16,8 +16,7 @@ public class ImageUtils {
   static BMPEncoder encoder = new BMPEncoder();
 
   public static Image loadPng(String pathToImage) throws Exception {
-    PngImage png = new PngImage(new FileInputStream(pathToImage));
-    return Toolkit.getDefaultToolkit().createImage(png);
+    return Toolkit.getDefaultToolkit().createImage(new File(pathToImage).toURL());
   }
 
   public static void savePng(Image image, String pathToImage) throws Exception {
@@ -31,8 +30,7 @@ public class ImageUtils {
       Image image = null;
 
       if (pathToImage.toLowerCase().endsWith(".png")) {
-        PngImage png = new PngImage(new FileInputStream(pathToImage));
-        image = Toolkit.getDefaultToolkit().createImage(png);
+        image = loadPng(pathToImage);
       } else if (pathToImage.toLowerCase().endsWith(".bmp")) {
         decoder.setInputFilename(pathToImage);
         decoder.triggerAction();

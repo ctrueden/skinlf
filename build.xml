@@ -13,7 +13,7 @@
 
   <!-- Project Identification -->
   <property name="project" value="skinlf"/>
-  <property name="version" value="1.2.5"/>
+  <property name="version" value="1.2.6"/>
   <property name="year"    value="2000-2003"/>
   <property name="project.fullname" value="Skin Look And Feel"/>
   <property name="project.nativeskin" value="nativeskin"/>
@@ -21,7 +21,6 @@
   <property name="javadoc.packagenames" value="com.l2fprod.gui,com.l2fprod.gui.plaf.skin,com.l2fprod.gui.region,com.l2fprod.gui.nativeskin"/>
 
   <path id="classpath">
-    <pathelement location="lib/png.jar"/>
     <pathelement location="lib/imageconversion.jar"/>
     <pathelement location="lib/JimiProClasses.zip"/>
     <pathelement location="lib/xalan.jar"/>
@@ -96,7 +95,6 @@
   <!-- Dist targets -->
   <target name="jar" depends="compile.java">
     <jar destfile="${build.dir}/${project}.jar">
-      <zipfileset src="lib/png.jar"/>
       <fileset dir="${build.classes}" includes="*.class,com/**/*.class" excludes="**/region/**,**/nativeskin/**"/>
       <fileset dir="${java.src.dir}" includes="com/**/*.properties"/>
       <fileset dir="${java.src.dir}" includes="com/**/*.gif"/>

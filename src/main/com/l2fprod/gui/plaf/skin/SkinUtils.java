@@ -62,7 +62,7 @@ import com.l2fprod.util.OS;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.2 $, $Date: 2003-08-16 15:40:45 $
+ * @version   $Revision: 1.3 $, $Date: 2003-10-10 20:46:26 $
  */
 public class SkinUtils {
 
@@ -138,33 +138,20 @@ public class SkinUtils {
 	 */
 	public static Image loadImage(URL url) throws Exception {
 		Image img = null;
-    if (url.toString().toLowerCase().endsWith(".png") && !OS.isOneDotFour()) {
-      InputStream input = SkinLookAndFeel.getInputStream(url);
-      img = PngUtils.loadImage(input);
+    byte[] imageByte = SkinLookAndFeel.getURLContent(url);
+    img = Toolkit.getDefaultToolkit().
+      createImage(imageByte, 0, imageByte.length);
+
+    CustomImageObserver custom = new CustomImageObserver();
+    int width = img.getWidth(custom);
+    int height = img.getHeight(custom);
+    Object lock = custom.getLock();
+    
+    synchronized (lock) {
+      if (height < 1 && width < 1)
+        lock.wait();
     }
-    else {
-      byte[] imageByte = SkinLookAndFeel.getURLContent(url);
-			img = Toolkit.getDefaultToolkit().createImage(
-					imageByte,
-					0,
-					imageByte.length);
-			//end of jdk png support
 
-			CustomImageObserver custom = new CustomImageObserver();
-			int width = img.getWidth(custom);
-			int height = img.getHeight(custom);
-			Object lock = custom.getLock();
-
-			synchronized (lock) {
-				if (height < 1 && width < 1)
-					lock.wait();
-			}
-	  }
-
-		//} else {
-		//	byte[] data = SkinLookAndFeel.getURLContent(url);
-		//	img = Toolkit.getDefaultToolkit().createImage(data);
-		//}
 		return ImageUtils.transparent(img);
 	}
 
