@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article id="tutorial-themepack">
+  <properties>
+    <title>Understanding Theme Pack format</title>
+  </properties>
+
+  <body>
+    <section>
+      <title>Understanding Theme Pack format</title>
+      <p>
+        Skin Look And Feel allows developers to bundle a GTK and a KDE
+        theme into one single archive for easy delivery: a
+        <B>themepack</B>.
+      </p>
+      <p>
+        A themepack is a ZIP file with a specific format: it contains
+        the GTK theme, the KDE theme and a descriptor written in
+        XML. Several themepacks are available at <A
+        HREF="http://www.javootoo.com">www.javootoo.com</A> under the
+        SkinLF topic.
+      </p>
+      <section>
+        <title>Structure</title>
+        <p>
+          SkinLF ships with a default themepack named <I>themepack.zip
+          </I>located in the lib folder. If we unzip this themepack we
+          will get a folder hierarchy like:
+        </p>
+<PRE CLASS="code">                      /themepack
+                           /gtk
+                              gtkrc
+                              file01.png
+                              ...
+                           /icons
+                              Computer.gif
+                              ...
+                           /kde
+                              kde.themerc
+                              file01.png
+                              ...
+                           skinlf-themepack.xml</PRE>
+        <p>
+          Under the <B>gtk</B> folder you find the <B>gtkrc</B> file
+          and the images used by the GTK theme. The gtkrc file
+          describes the GTK theme and specifies which image to use for
+          each graphical widget. It also provides information about
+          colors. Under the <B>kde</B> folder you find the
+          <B>kde.themerc</B> and the images used by the KDE theme. The
+          kde.themerc describes the KDE theme and specifies which
+          image to use. It also provides information about
+          colors. Under the <B>icons </B>folder you find images used
+          by the look and feel. The images are the images used by the
+          FileChooser for folders and drives, the default icons for
+          JTree opened, closed and leaf nodes, the frame icon for
+          InternalFrames. Finally skinlf-themepack.xml is the
+          descriptor for the themepack, it puts together the gtk
+          theme, the kde theme and the icons. Let's have a closer look
+          to this file.
+        </p>
+      </section>
+      <section>
+        <title>skinlf-themepack.xml</title>
+        <p>
+          Here is the file that ships with themepack.zip:
+        </p>
+<PRE CLASS="code">
+&lt;?xml version="1.0"?&gt;
+&lt;<B>skinlf-themepack</B> require="1.1"&gt;
+	&lt;<B>property</B> name="<FONT COLOR="#0000CC">JDesktopPane.backgroundEnabled</FONT>" value="false" /&gt;
+	&lt;<B>property</B> name="PopupMenu.animation" value="true" /&gt;
+
+	&lt;<B>font</B> name="Global" value="Tahoma,0,11"/&gt;
+
+	&lt;<B>icon</B> name="Tree.openIcon" value="icons/TreeOpen.gif"/&gt;
+	&lt;<B>icon</B> name="Tree.closedIcon" value="icons/TreeClosed.gif"/&gt;
+	&lt;<B>icon</B> name="Tree.leafIcon" value="icons/Default.gif"/&gt;
+
+	&lt;<B>skin</B>>
+		&lt;<B>skin</B> url="gtk/gtkrc"&gt;&lt;/skin&gt;
+		&lt;<B>skin</B> url="kde/kde.themerc"&gt;&lt;/skin&gt;
+	&lt;/skin&gt;
+&lt;/skinlf-themepack&gt;</PRE>
+        <p>
+          and the  DTD that describes this xml along with comments:
+        </p>
+<pre class="code">
+&lt;!-- Skin Look And Feel Theme Pack DTD --&gt;
+
+&lt;!-- 
+     A themepack is made of properties, icons and skin
+--&gt;
+&lt;!ELEMENT skinlf-themepack (property*, icon*, skin)&gt;
+&lt;!ATTLIST skinlf-themepack
+	require CDATA #REQUIRED&gt;
+
+&lt;!-- 
+     Each property has a name, a value and an optional type.
+     The type must be a valid Java classname (fully qualified).
+     Supported types are:
+        boolean (it is the default if type is not specified)
+           The value must be true or false
+        int
+           The value must be parseable by Integer.parseInt
+        String
+           Any string
+        Color
+           The value must be parseable by Color.decode(string), for example #FF0FA3
+        Insets
+           The value must be {top,left,bottom,right} for example {5,10,5,10}
+        Dimension
+           The value must be {x,y} or x,y, for example {300,100}
+        EmptyBorder
+           If the type is EmptyBorder, the value defines the insets of the border
+           for example {5,10,5,10}
+        LineBorder
+           If the type is LineBorder, the additional properties rounded,
+           thickness and color may be filled. Rounded can be true or false,
+           thickness is an integer and color a Color like #FF0FA3.
+--&gt;
+&lt;!ELEMENT property&gt;
+&lt;!ATTLIST property
+	name CDATA #REQUIRED
+	value CDATA #REQUIRED
+        type CDATA #IMPLIED
+        rounded CDATA #IMPLIED
+        thickness CDATA #IMPLIED
+        color CDATA #IMPLIED&gt;
+
+&lt;!--
+     Ability to provide custom font for texts.
+        NAME is the name of the font that needs to be set.
+        For example: Button.font, TextArea.font, List.font, Table.font, ...
+        The special &quot;Global&quot; name will set all fonts to the same value.
+        VALUE is the font to use with the format: fontname,fonttype,fontsize.
+           Font name is a valid font name for the platform (for example Tahoma)
+           Font type is one of 0 (PLAIN), 1 (BOLD), 2 (ITALIC), 3 (BOLD + ITALIC)
+           Font size is an integer.
+        Example: &lt;font name=&quot;Global&quot; value=&quot;Tahoma,0,11&quot;/&gt;
+--&gt;
+&lt;!ELEMENT font&gt;
+&lt;!ATTLIST font
+        name CDATA #REQUIRED
+        value CDATA #REQUIRED&gt;
+
+&lt;!--
+     Ability to provide custom icons.
+        NAME is the name of the icon.
+        For example: Tree.openIcon, Tree.closedIcon, Tree.leafIcon, InternalFrame.icon,
+        OptionPane.errorIcon, OptionPane.informationIcon, OptionPane.warningIcon,
+        OptionPane.questionIcon
+        VALUE is the name of the file in the themepack. The value is relative to
+        the xml file.
+        Example: &lt;icon name=&quot;Tree.openIcon&quot; value=&quot;icons/TreeOpen.gif&quot;/&gt;
+--&gt;
+&lt;!ELEMENT icon&gt;
+&lt;!ATTLIST icon
+	name CDATA #REQUIRED
+	value CDATA #REQUIRED&gt;
+
+&lt;!--
+     This section defines the gtk and kde themes used.
+     A skin can contains other skins in such case a CompoundSkin is created
+     and allows several themes to provide different parts of the all skin.
+     Most of the time only one gtk and one kde themes will be provided.
+     Example:
+	&lt;skin&gt;
+		&lt;skin url=&quot;gtk/gtkrc&quot;&gt;&lt;/skin&gt;
+		&lt;skin url=&quot;kde/kde.themerc&quot;&gt;&lt;/skin&gt;
+	&lt;/skin&gt;
+--&gt;
+&lt;!ELEMENT skin (skin*)&gt;
+&lt;!ATTLIST skin
+	url CDATA #IMPLIED&gt;
+</pre>
+        <p>
+          As you can see in this DTD, the xml can contain statements
+          to tweak the themepack without putting your hands in the
+          GTK/KDE themes.
+        </p>
+      </section>
+      <section>
+        <title>Predefined Properties</title>
+        <p>
+          SkinLF supports some custom properties that can be defined
+          in the xml and will affect the look and feel at runtime:
+        </p>
+        <TABLE WIDTH="100%" BORDER="0">
+          <TR>
+            <TD WIDTH="27%" CLASS="code" VALIGN="MIDDLE" ALIGN="CENTER">JDesktopPane.backgroundEnabled</TD>
+            <TD WIDTH="73%">
+              <B>true</B> or <B>false</B>. If true, the background of
+              JDesktopPane will be painted with a background picture
+              if it is provided by the themepack. This can slow down
+              the performances that's why it can be enabled only on
+              demand. <B>Default is false.</B>
+            </TD>
+          </TR>
+          <TR>
+            <TD WIDTH="27%" CLASS="code" VALIGN="MIDDLE" ALIGN="CENTER">PopupMenu.animation</TD>
+            <TD WIDTH="73%">
+              true or false. If true, popup menu will be fade in when
+              appearing. <B>Default is false.</B>
+            </TD>
+          </TR>
+          <TR>
+            <TD WIDTH="27%" CLASS="code" VALIGN="MIDDLE" ALIGN="CENTER">ScrollBar.alternateLayout</TD>
+            <TD WIDTH="73%">
+              true or false. If true, the ScrollBar arrows will be
+              groupped together. <B>Default is false.</B>
+            </TD>
+          </TR>
+          <TR>
+            <TD WIDTH="27%" CLASS="code" VALIGN="MIDDLE" ALIGN="CENTER">JSplitPane.alternateUI</TD>
+            <TD WIDTH="73%">
+              true or false. If true, the SplitPane divider will be
+              painted using custom graphics. <B>Default is false</B>
+              (the SplitPane divider uses the BasicSplitPaneUI).
+            </TD>
+          </TR>
+          <TR>
+            <TD WIDTH="27%" CLASS="code" VALIGN="MIDDLE" ALIGN="CENTER">EnableBorders</TD>
+            <TD WIDTH="73%">
+              true or false. If true, SkinLF will use pixmaps in the
+              themepack to paint the border of text
+              components. <B>Default is false.</B>
+            </TD>
+          </TR>
+        </TABLE>
+        <section>
+          <title>Examples</title>
+          <p>
+            If you want to change the border of TextAreas to a black LineBorder you can add to skinlf-themepack.xml:
+          </p>
+          <PRE CLASS="code">&lt;property name=&quot;TextArea.border&quot;
+          type=&quot;LineBorder&quot;
+          thickness=&quot;1&quot;
+          color=&quot;#000000&quot;/&gt;</PRE>
+        </section>
+      </section>
+    </section>
+  </body>
+</article>
