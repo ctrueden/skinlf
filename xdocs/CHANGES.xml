@@ -1,403 +1,318 @@
 <?xml version="1.0"?>
 
 <changes title="History of Changes">
+  <devs>
+    <person name="Frederic Lavigne" email="fred@L2FProd.com" id="FL"/>
+  </devs>
 
-	<devs>
-		<person name="Frederic Lavigne" email="fred@L2FProd.com" id="FL"/>
-	</devs>
+  <release version="1.2.8" date="15 February 2004">
+    <action type="remove">Removed SkinWindow, JDK1.4 provides better 
+      alternative</action>
+    <action type="update">SkinLookAndFeel.getSkin() looks for the default 
+      themepack using "skinlf.themepack" property or ~/.skinlf/themepack.zip or 
+      ~/skinlf/themepack.zip or themepack.zip in the classpath.</action>
+    <action type="remove">Deprecated SkinLookAndFeel.enable()</action>
+    <action type="fix">JDialog was not resizable</action>
+    <action type="fix">JDialog window buttons were not correctly updated</action>
+    <action type="fix">JDialog window icon was not using its parent frame icon</action>
+    <action type="fix">JProgressBar has some painting glitches when current value was the minimum value</action>
+  </release>
 
-        <release version="1.2.8" date="">
-        		<action type="remove">Removed SkinWindow, JDK1.4 provides better alternative</action>
-				<action type="add">Linux support to SkinRegion</action>
-        </release>
+  <release version="1.2.7" date="23 November 2003">
+    <action type="add">Added support for indeterminate mode of progress bar in 
+      JDK1.4</action>
+    <action type="fix">Fixed loading of themepacks through HTTPS</action>
+  </release>
 
-        <release version="1.2.7" date="23 November 2003">
-                <action type="add">Added support for indeterminate mode of progress bar in JDK1.4</action>
-                <action type="fix">Fixed loading of themepacks through HTTPS</action>
-        </release>
-
-        <release version="1.2.6" date="16 November 2003">
-                <action type="add">Alluminium Alloy Toxic themepack</action>
-                <action type="fix">One more resizing issue with JDK1.4 was left in the code</action>
-                <action type="remove">Dropped JDK1.2 support, SkinLF 1.2.5 is the last version supporting JDK1.2</action>
-                <action type="fix">Fixed one memory leak when switching skins at runtime (was visible on the demo)</action>
-                <action type="fix">Shaded frame was resizable via the border corners</action>
-                <action type="fix">Decorated frame was not supporting the "shading" feature</action>
-                <action type="fix">With JDK1.4, the InternalFrame buttons were visible even if they are was disabled, a not closable frame had the close button for example</action>
-        </release>
-
-        <release version="1.2.5" date="4 October 2003">
-                <action type="fix">Fix resizing issue with JDK1.4 window decoration</action>
-                <action type="fix">Fix window popup menu with JDK1.4 window decoration is used. Popup was going behind</action>
-                <action type="update">Updated the demo to allow File open dialogs to be visible in JavaWebStart</action>
-        </release>
-
-	<release version="1.2.4" date="24 August 2003">
-                <action type="add">Cell shaded themepack</action>
-                <action type="add">Support for TextComponent, List and Table borders</action>
-                <action type="add">Added Accelerator in tooltip text</action>
-                <action type="fix" fixes-bug="600054">Painting in JOptionPane not proper</action>
-                <action type="fix" fixes-bug="599547">separator image very large in macostheme</action>
-                <action type="fix" fixes-bug="599365">Frame buttons focusable</action>
-                <action type="fix" fixes-bug="544782">Solved : JComboBox arrow problem</action>
-                <action type="fix" fixes-bug="577433">Editable JComboBox has wrong picture</action>
-                <action type="fix" fixes-bug="602515">JSlider causes NullPointerException</action>
-                <action type="add">Support for JDK1.4 Window Decoration (old SkinWindow)</action>
-        </release>
-
-	<release version="1.2.3" date="29 July 2002">
-		<action type="fix" fixes-bug="585981">NullPointerException after CTRL+SPACE</action>
-		<action type="fix" fixes-bug="575196">NativeSkin does not load for NT4.0</action>
-		<action type="fix" fixes-bug="567924">opaque JPanel</action>
-	</release>
-
-	<release version="1.2.2" date="12 June 2002">
-		<action type="fix" fixes-bug="557004">JLayeredPane opacity bug</action>
-		<action type="fix">Shading of InternalFrame in JDK1.4 was resizing the window to 0 pixel in height.</action>
-		<action type="fix" fixes-bug="560277">JTable serialization was failing due to GtkPersonality not being serializable. The header renderer is now in its own class, same for GtkListCellRenderer. DefaultButton images have been made transient too</action>
-		<action type="add">NativeSkin replaces SkinRegion, no only limited to irregular windows (library name changed too)</action>
-		<action type="add">Ability to set windows to be always on top (Win32)</action>
-		<action type="add">Transparency for windows (Win32)</action>
-	</release>
-
-	<release version="1.2.1" date="9 May 2002">
-		<action type="fix" fixes-bug="511901">Button rendering sometimes incoherent</action>
-		<action type="fix" fixes-bug="511415">A skinned JToggleButton problem...</action>
-		<action type="fix" fixes-bug="502869">JCheckBox and html</action>
-		<action type="fix" fixes-bug="480094">Buttons with focus don't look different</action>
-		<action type="fix" fixes-bug="541118">Different control for ToolBar/MenuBar</action>
-		<action type="fix" fixes-bug="545514">Problem with Jimi</action>
-		<action type="fix" fixes-bug="541112">Header Renderer</action>
-		<action type="fix" fixes-bug="541084">Scroll Bar handles missing.</action>
-		<action type="fix" fixes-bug="523899">JMenu Background problems</action>
-		<action type="fix">painting issues when jprogress bar was used as a renderer in table/list</action>
-		<action type="add">support for SplitPane divider</action>
-		<action type="update">applied JRefactory on all the code</action>
-                <action type="add">finally support for JSeparators is there</action>
-                <action type="add">enhanced themepack properties with integers, strings, borders</action>
-		<action type="update" fixes-bug="518030">SkinRegion now supports JRE1.4</action>
-	</release>
-
-	<release version="1.2" date="17 March 2002">
-		<action type="update">
-			themepacks are now loaded using a ZipResourceLoader. This will help developers load themepacks in applet or javawebstart applications
-		</action>
-		<action type="update">
-			removed dependency on Jimi package. Now only Gif, JPeg and Png are supported.
-		</action>
-		<action type="add">
-			alpha transparency for menus
-		</action>
-	</release>
-
-	<release version="1.2beta" date="15 November 2001">
-		<action type="fix">
-			fixed table header rendering in JDK1.3
-		</action>
-		<action type="update">
-			bottom tabs are calculated by flipping top tabs
-		</action>
-		<action type="fix" fixes-bug="463704">
-			improved fix for frame defaultCloseAction
-		</action>
-	</release>
-
-	<release version="1.2alpha" date="22 October 2001">
-          <action type="update">
-            major memory enhancements by using BufferedImage
-          </action>
-          <action type="fix">
-            fixed color handling for color definition like { 0.4, 0.5, 0.6 }
-          </action>
-	  <action type="fix">
-	    added space to left of jcombobox
-	  </action>
-	  <action type="fix">
-	    the fix for JTextComponent key bindings was not working properly due to a typo in a classname loaded by Class.forName: Class.forName("javax.swing.UIDefaults.LazyInputMap") should be written as Class.forName("javax.swing.UIDefaults$LazyInputMap").
-	  </action>
-	  <action type="fix" fixes-bug="426708">
-	    JMenu is now painted as a JMenuItem when selected
-	  </action>
-          <action type="fix" fixes-bug="463704">
-      DO_NOTHING_ON_CLOSE was not correctly handled due to a bug in JDK1.2. A workaround has been included for JDK1.2/JDK1.3 in skin/Window.java
-          </action>
-          <action type="fix" fixes-bug="470059">
-If an InternalFrame action is not enabled, it will not be visible in the title bar
-          </action>
-        </release>
-
-	<release version="1.1" date="14 August 2001">
-	  <action type="fix">
-	    better support for KDE frameborder, internal frame icons and button layout
-	  </action>
-		<action type="update">
-			in this release, there is no more support for JDK1.1
-		</action>
-		<action type="update">
-			gray filter applied to checkboxes and options if disable icons not provided
-		</action>
-		<action type="update">
-			ability to specify a font in a theme pack
-		</action>
-		<action type="fix">
-			clip was not set in ImageUtils.paintTile resulting in painting glitches
-			DefaultButton was aligning images with parent
-		</action>
-	</release>
-
-	<release version="1.0.1" date="19 June 2001">
-		<action type="fix">
-			re-enable painting of background. This shortcuts the setOpaque() method of a panel.  if a user want to paint the background of its panel (with a picture or a plain color) he can override the paintComponent method and do the painting in this method.
-		</action>
-	</release>
-
-	<release version="1.0" date="11 June 2001">
-		<action type="update">
-			version update, following the unreleased 0.3.2
-		</action>
-	</release>
-
-	<release version="0.3.2" date="9 June 2001">
-		<action type="fix">
-			ClassCastException in SkinInternalPaneUI (this solves problems with netbeans 3.2)
-		</action>
-
-		<action type="update">
-			Update to Nanoxml 1.6.7
-		</action>
-
-		<action type="fix" fixes-bug="415108">
-			System.getProperty() must not be used (except for non-secure properties) if we want SkinLF to work in applet
-		</action>
-	</release>
-
-	<release version="0.3.1" date="19 March 2001">
-		<action type="fix" fixes-bug="405017">
-			not editable is not handled by BasicLaF, SkinLF uses TextFieldUI from MetalLaF
-		</action>
-
-		<action type="update" context="code">
-			handled tab placement (TOP, LEFT, RIGHT, BOTTOM), the theme must provide at least the TOP select/unselected tab images
-		</action>
-		<action type="fix" fixes-bug="233407">
-			menu background was not correctly painted. Now all bitmaps use the gtk STRETCH = true or false if available with default to false
-		</action>
-		<action type="fix" fixes-bug="404971">
-			added getComboBoxInsets() in SkinPersonality, but aqua theme pack left border is 12, should be 4 or 5.
-		</action>
-
-		<action type="add" due-to="Nicholas Allen" due-to-email="nicholas.allen@ireland.sun.com">
-			the LinuxLookAndFeel loads the default gtk theme
-		</action>
-		<action type="fix" due-to="Ngoc Pham" due-to-email="ngoc_pham_us@yahoo.com" fixes-bug="133503">
-			Slider's track and thumb were off from each other
-		</action>
-		<action type="fix" fixes-bug="133409">
-			the button focus was not correctly painted. The "focus" section in gtkrc is now used if available
-		</action>
-		<action type="fix">
-			ImageUtils may lead to an infinite loop in some race conditions
-		</action>
-	</release>
-
-	<release version="0.3.1beta" date="9 February 2001">
-		<action type="update">
-			gtkparser: a class may have several styles (see scrollbars: scrollbar and arrows)
-			gtk: fix color handling
-		</action>
-		<action type="update">
-			added theme pack support in SkinChooser
-		</action>
-		<action type="fix" due-to="Christopher R. Staley" due-to-email="Chris.Staley@itpwebsolutions.com">
-			JPassword and JTextArea navigation failed if application look and feel was not initially set to SkinLF
-		</action>
-		<action type="fix">
-			remove WindowsLookAndFeel related icons in SkinLookAndFeel
-		</action>
-		<action dev="FL" type="fix" fixes-bug="125360">
-			added classes precaching in SkinLookAndFeel.
-		</action>
-		<action dev="FL" type="add">
-			new documentation (tutorials are included)
-		</action>
-		<action dev="FL" type="update" due-to="Herve Lemaitre"
-			due-to-email="buserror@club-internet.fr">
-			SkinRegion implementation for X11 including Solaris and Linux.
-			Region created from Image Transparency
-		</action>
-		<action dev="FL" type="fix">
-			fix border repaint bug in JInternalFrame (SwingSet runs better now)
-			prevent a shaded JInternalFrame from being resized
-		</action>
-	</release>
-
-	<release version="0.3.1alpha" date="1 December 2000">
-		<action dev="FL" type="add">
-			here it is: Irregular Windows for the Java Platform !
-		</action>
-	</release>
-
-	<release version="0.3" date="25 November 2000">
-		<action dev="FL" type="add">
-			introduced Skin Look And Feel Theme Packs
-			GTK and KDE in one zip file
-			customized icons for trees, filechoosers, internalframes, dialogs
-			default whistler theme bundled with SkinLF
-		</action>
-		<action dev="FL" type="add">
-			TabbedPane border
-		</action>
-		<action dev="FL" type="add">
-			added WindowSnapping (see examples/snap.java)
-		</action>
-		<action dev="FL" type="add">
-			easily skin any application with Skinit (see Tutorial 2 at www.L2FProd.com)
-		</action>
-		<action dev="FL" type="fix">
-			SkinButtonUI, setRolloverEnabled(true) was missing
-		</action>
-		<action dev="FL" type="add">
-			added SkinLookAndFeel.loadSkin(URL url)
-		</action>
-		<action dev="FL" type="add">
-			added preview to SkinChooser
-		</action>
-		<action dev="FL" type="update">
-			updated the scrollbar support (rollover on arrows and handle)
-		</action>
-		<action dev="FL" type="update">
-			reduced package size again
-		</action>
-		<action dev="FL" type="remove">
-			removed KDE sound support
-			=> see README.SOUND
-		</action>
-		<action dev="FL" type="add">
-			created a lightweight version with only GIF and JPG support (no Jimi)
-		</action>
-	</release>
-
-	<release version="0.2.3a" date="17 June 2000">
-		<action dev="FL" type="fix">
-			Fix bug in KdeSkin.setSoundEnabled
-		</action>
-	</release>
-
-	<release version="0.2.3" date="13 June 2000">
-		<action dev="FL" type="add">
-			Sound support preview (from KDE themes) for Window Events
-			=> see README.SOUND for more information
-		</action>
-		<action dev="FL" type="add">
-			SkinWindowEvent to handle shade/unshade, maximize/unmaximize on SkinWindow
-		</action>
-	</release>
-
-	<release version="0.2.3RC2" date="7 June 2000">
-		<action dev="FL" type="add">
-			JDK1.1 support (and about time too!)
-		</action>
-		<action dev="FL" type="add">
-			added ScrollBar.alternateLayout property to enable grouping of scrollbar buttons:
-			UIManager.put("ScrollBar.alternateLayout", Boolean.TRUE);
-			com.l2fprod.gui.plaf.xtra.XTraScrollBarUI can be used without SkinLF
-		</action>
-		<action dev="FL" type="update">
-			improved SkinWindow moving and resizing by using a ghostWindow
-		</action>
-		<action dev="FL" type="add">
-			added Shade/Unshade feature to SkinWindow/JInternalFrame
-		</action>
-		<action dev="FL" type="add">
-			reduced package size by removing Jimi encoders and using -O flag and some unused images in bundled themes
-		</action>
-		<action dev="FL" type="update">
-			better color handling from gtk and kde themes
-		</action>
-		<action dev="FL" type="add">
-			JSlider support (still buggy)
-		</action>
-		<action dev="FL" type="add">
-			created SkinChooser to easily add support for SkinLF in your app
-		</action>
-	</release>
-
-	<release version="0.2.3RC1" date="29 May 2000">
-		<action dev="FL" type="update">
-			changes in TableHeaderUI => custom column header renderers were overriden by SkinLF,
-			now SkinLF only installs its renderer in installUI
-		</action>
-		<action dev="FL" type="add">
-			added JDesktopPane.backgroundEnabled client property to JDesktopPane
-			to enable the desktop background (supported by KDE skins)
-		</action>
-		<action dev="FL" type="update">
-			improved SkinWindow (move and resize), SkinWindow is now usable
-		</action>
-		<action dev="FL" type="add">
-			added WindowList and WindowManager
-		</action>
-		<action dev="FL" type="update">
-			added examples (applets, skinwindow, demo)
-		</action>
-	</release>
-
-	<release version="0.2.2a" date="13 May 2000">
-		<action dev="FL" type="update">
-			JDK1.3 support
-		</action>
-	</release>
-
-	<release version="0.2.2" date="12 May 2000">
-		<action dev="FL" type="add">
-			allowed loading of Skins from java.net.URL instead of java.io.File
-			=> SkinLF can now be used in an applet
-		</action>
-		<action dev="FL" type="add">
-			begin merge with xWindow (com.l2fprod.gui.SkinWindow)
-		</action>
-		<action dev="FL" type="fix">
-			bug fixes
-		</action>
-		<action dev="FL" type="update">
-			moved gtk and kde packages to com.l2fprod.gui.plaf.skin.impl
-		</action>
-	</release>
-
-	<release version="0.2.1" date="9 April 2000">
-		<action dev="FL" type="add">
-			added missing tokens in GtkParser
-		</action>
-		<action dev="FL" type="fix">
-			fixed scrollbar preferred size
-		</action>
-		<action dev="FL" type="add">
-			added window border support to KDE theme
-		</action>
-		<action dev="FL" type="update">
-			improved color support
-		</action>
-		<action dev="FL" type="add">
-			added getDefaultSkinLocation() to GTK
-		</action>
-	</release>
-
-	<release version="0.2" date="19 March 2000">
-		<action dev="FL" type="add">
-			gtk and kde theme support is new
-		</action>
-		<action dev="FL" type="add">
-			new components added
-		</action>
-		<action dev="FL" type="remove">
-			removed uis (windowBlinds) skin support due to copyright statements
-		</action>
-	</release>
-
-	<release version="0.1" date="3 March 2000">
-		<action dev="FL" type="add">
-			everything is new !
-		</action>
-	</release>
-
+  <release version="1.2.6" date="16 November 2003">
+    <action type="add">Alluminium Alloy Toxic themepack</action>
+    <action type="fix">One more resizing issue with JDK1.4 was left in the 
+      code</action>
+    <action type="remove">Dropped JDK1.2 support, SkinLF 1.2.5 is the last 
+      version supporting JDK1.2</action>
+    <action type="fix">Fixed one memory leak when switching skins at runtime 
+      (was visible on the demo)</action>
+    <action type="fix">Shaded frame was resizable via the border 
+      corners</action>
+    <action type="fix">Decorated frame was not supporting the "shading" 
+      feature</action>
+    <action type="fix">With JDK1.4, the InternalFrame buttons were visible even 
+      if they are was disabled, a not closable frame had the close button for 
+      example</action>
+  </release>
+  <release version="1.2.5" date="4 October 2003">
+    <action type="fix">Fix resizing issue with JDK1.4 window decoration</action>
+    <action type="fix">Fix window popup menu with JDK1.4 window decoration is 
+      used. Popup was going behind</action>
+    <action type="update">Updated the demo to allow File open dialogs to be 
+      visible in JavaWebStart</action>
+  </release>
+  <release version="1.2.4" date="24 August 2003">
+    <action type="add">Cell shaded themepack</action>
+    <action type="add">Support for TextComponent, List and Table 
+      borders</action>
+    <action type="add">Added Accelerator in tooltip text</action>
+    <action type="fix" fixes-bug="600054">Painting in JOptionPane not 
+      proper</action>
+    <action type="fix" fixes-bug="599547">separator image very large in 
+      macostheme</action>
+    <action type="fix" fixes-bug="599365">Frame buttons focusable</action>
+    <action type="fix" fixes-bug="544782">Solved : JComboBox arrow 
+      problem</action>
+    <action type="fix" fixes-bug="577433">Editable JComboBox has wrong 
+      picture</action>
+    <action type="fix" fixes-bug="602515">JSlider causes 
+      NullPointerException</action>
+    <action type="add">Support for JDK1.4 Window Decoration (old 
+      SkinWindow)</action>
+  </release>
+  <release version="1.2.3" date="29 July 2002">
+    <action type="fix" fixes-bug="585981">NullPointerException after 
+      CTRL+SPACE</action>
+    <action type="fix" fixes-bug="575196">NativeSkin does not load for 
+      NT4.0</action>
+    <action type="fix" fixes-bug="567924">opaque JPanel</action>
+  </release>
+  <release version="1.2.2" date="12 June 2002">
+    <action type="fix" fixes-bug="557004">JLayeredPane opacity bug</action>
+    <action type="fix">Shading of InternalFrame in JDK1.4 was resizing the 
+      window to 0 pixel in height.</action>
+    <action type="fix" fixes-bug="560277">JTable serialization was failing due 
+      to GtkPersonality not being serializable. The header renderer is now in 
+      its own class, same for GtkListCellRenderer. DefaultButton images have 
+      been made transient too</action>
+    <action type="add">NativeSkin replaces SkinRegion, no only limited to 
+      irregular windows (library name changed too)</action>
+    <action type="add">Ability to set windows to be always on top 
+      (Win32)</action>
+    <action type="add">Transparency for windows (Win32)</action>
+  </release>
+  <release version="1.2.1" date="9 May 2002">
+    <action type="fix" fixes-bug="511901">Button rendering sometimes 
+      incoherent</action>
+    <action type="fix" fixes-bug="511415">A skinned JToggleButton 
+      problem...</action>
+    <action type="fix" fixes-bug="502869">JCheckBox and html</action>
+    <action type="fix" fixes-bug="480094">Buttons with focus don't look 
+      different</action>
+    <action type="fix" fixes-bug="541118">Different control for 
+      ToolBar/MenuBar</action>
+    <action type="fix" fixes-bug="545514">Problem with Jimi</action>
+    <action type="fix" fixes-bug="541112">Header Renderer</action>
+    <action type="fix" fixes-bug="541084">Scroll Bar handles missing.</action>
+    <action type="fix" fixes-bug="523899">JMenu Background problems</action>
+    <action type="fix">painting issues when jprogress bar was used as a 
+      renderer in table/list</action>
+    <action type="add">support for SplitPane divider</action>
+    <action type="update">applied JRefactory on all the code</action>
+    <action type="add">finally support for JSeparators is there</action>
+    <action type="add">enhanced themepack properties with integers, strings, 
+      borders</action>
+    <action type="update" fixes-bug="518030">SkinRegion now supports 
+      JRE1.4</action>
+  </release>
+  <release version="1.2" date="17 March 2002">
+    <action type="update"> themepacks are now loaded using a ZipResourceLoader. 
+      This will help developers load themepacks in applet or javawebstart 
+      applications </action>
+    <action type="update"> removed dependency on Jimi package. Now only Gif, 
+      JPeg and Png are supported. </action>
+    <action type="add"> alpha transparency for menus </action>
+  </release>
+  <release version="1.2beta" date="15 November 2001">
+    <action type="fix"> fixed table header rendering in JDK1.3 </action>
+    <action type="update"> bottom tabs are calculated by flipping top tabs 
+      </action>
+    <action type="fix" fixes-bug="463704"> improved fix for frame 
+      defaultCloseAction </action>
+  </release>
+  <release version="1.2alpha" date="22 October 2001">
+    <action type="update"> major memory enhancements by using BufferedImage 
+      </action>
+    <action type="fix"> fixed color handling for color definition like { 0.4, 
+      0.5, 0.6 } </action>
+    <action type="fix"> added space to left of jcombobox </action>
+    <action type="fix"> the fix for JTextComponent key bindings was not working 
+      properly due to a typo in a classname loaded by Class.forName: 
+      Class.forName("javax.swing.UIDefaults.LazyInputMap") should be written as 
+      Class.forName("javax.swing.UIDefaults$LazyInputMap"). </action>
+    <action type="fix" fixes-bug="426708"> JMenu is now painted as a JMenuItem 
+      when selected </action>
+    <action type="fix" fixes-bug="463704"> DO_NOTHING_ON_CLOSE was not 
+      correctly handled due to a bug in JDK1.2. A workaround has been included 
+      for JDK1.2/JDK1.3 in skin/Window.java </action>
+    <action type="fix" fixes-bug="470059"> If an InternalFrame action is not 
+      enabled, it will not be visible in the title bar </action>
+  </release>
+  <release version="1.1" date="14 August 2001">
+    <action type="fix"> better support for KDE frameborder, internal frame 
+      icons and button layout </action>
+    <action type="update"> in this release, there is no more support for JDK1.1 
+      </action>
+    <action type="update"> gray filter applied to checkboxes and options if 
+      disable icons not provided </action>
+    <action type="update"> ability to specify a font in a theme pack </action>
+    <action type="fix"> clip was not set in ImageUtils.paintTile resulting in 
+      painting glitches DefaultButton was aligning images with parent </action>
+  </release>
+  <release version="1.0.1" date="19 June 2001">
+    <action type="fix"> re-enable painting of background. This shortcuts the 
+      setOpaque() method of a panel. if a user want to paint the background of 
+      its panel (with a picture or a plain color) he can override the 
+      paintComponent method and do the painting in this method. </action>
+  </release>
+  <release version="1.0" date="11 June 2001">
+    <action type="update"> version update, following the unreleased 0.3.2 
+      </action>
+  </release>
+  <release version="0.3.2" date="9 June 2001">
+    <action type="fix"> ClassCastException in SkinInternalPaneUI (this solves 
+      problems with netbeans 3.2) </action>
+    <action type="update"> Update to Nanoxml 1.6.7 </action>
+    <action type="fix" fixes-bug="415108"> System.getProperty() must not be 
+      used (except for non-secure properties) if we want SkinLF to work in 
+      applet </action>
+  </release>
+  <release version="0.3.1" date="19 March 2001">
+    <action type="fix" fixes-bug="405017"> not editable is not handled by 
+      BasicLaF, SkinLF uses TextFieldUI from MetalLaF </action>
+    <action type="update" context="code"> handled tab placement (TOP, LEFT, 
+      RIGHT, BOTTOM), the theme must provide at least the TOP select/unselected 
+      tab images </action>
+    <action type="fix" fixes-bug="233407"> menu background was not correctly 
+      painted. Now all bitmaps use the gtk STRETCH = true or false if available 
+      with default to false </action>
+    <action type="fix" fixes-bug="404971"> added getComboBoxInsets() in 
+      SkinPersonality, but aqua theme pack left border is 12, should be 4 or 5. 
+      </action>
+    <action type="add" due-to="Nicholas Allen" 
+      due-to-email="nicholas.allen@ireland.sun.com"> the LinuxLookAndFeel loads 
+      the default gtk theme </action>
+    <action type="fix" due-to="Ngoc Pham" due-to-email="ngoc_pham_us@yahoo.com" 
+      fixes-bug="133503"> Slider's track and thumb were off from each other 
+      </action>
+    <action type="fix" fixes-bug="133409"> the button focus was not correctly 
+      painted. The "focus" section in gtkrc is now used if available </action>
+    <action type="fix"> ImageUtils may lead to an infinite loop in some race 
+      conditions </action>
+  </release>
+  <release version="0.3.1beta" date="9 February 2001">
+    <action type="update"> gtkparser: a class may have several styles (see 
+      scrollbars: scrollbar and arrows) gtk: fix color handling </action>
+    <action type="update"> added theme pack support in SkinChooser </action>
+    <action type="fix" due-to="Christopher R. Staley" 
+      due-to-email="Chris.Staley@itpwebsolutions.com"> JPassword and JTextArea 
+      navigation failed if application look and feel was not initially set to 
+      SkinLF </action>
+    <action type="fix"> remove WindowsLookAndFeel related icons in 
+      SkinLookAndFeel </action>
+    <action dev="FL" type="fix" fixes-bug="125360"> added classes precaching in 
+      SkinLookAndFeel. </action>
+    <action dev="FL" type="add"> new documentation (tutorials are included) 
+      </action>
+    <action dev="FL" type="update" due-to="Herve Lemaitre" 
+      due-to-email="buserror@club-internet.fr"> SkinRegion implementation for 
+      X11 including Solaris and Linux. Region created from Image Transparency 
+      </action>
+    <action dev="FL" type="fix"> fix border repaint bug in JInternalFrame 
+      (SwingSet runs better now) prevent a shaded JInternalFrame from being 
+      resized </action>
+  </release>
+  <release version="0.3.1alpha" date="1 December 2000">
+    <action dev="FL" type="add"> here it is: Irregular Windows for the Java 
+      Platform ! </action>
+  </release>
+  <release version="0.3" date="25 November 2000">
+    <action dev="FL" type="add"> introduced Skin Look And Feel Theme Packs GTK 
+      and KDE in one zip file customized icons for trees, filechoosers, 
+      internalframes, dialogs default whistler theme bundled with SkinLF 
+      </action>
+    <action dev="FL" type="add"> TabbedPane border </action>
+    <action dev="FL" type="add"> added WindowSnapping (see examples/snap.java) 
+      </action>
+    <action dev="FL" type="add"> easily skin any application with Skinit (see 
+      Tutorial 2 at www.L2FProd.com) </action>
+    <action dev="FL" type="fix"> SkinButtonUI, setRolloverEnabled(true) was 
+      missing </action>
+    <action dev="FL" type="add"> added SkinLookAndFeel.loadSkin(URL url) 
+      </action>
+    <action dev="FL" type="add"> added preview to SkinChooser </action>
+    <action dev="FL" type="update"> updated the scrollbar support (rollover on 
+      arrows and handle) </action>
+    <action dev="FL" type="update"> reduced package size again </action>
+    <action dev="FL" type="remove"> removed KDE sound support => see 
+      README.SOUND </action>
+    <action dev="FL" type="add"> created a lightweight version with only GIF 
+      and JPG support (no Jimi) </action>
+  </release>
+  <release version="0.2.3a" date="17 June 2000">
+    <action dev="FL" type="fix"> Fix bug in KdeSkin.setSoundEnabled </action>
+  </release>
+  <release version="0.2.3" date="13 June 2000">
+    <action dev="FL" type="add"> Sound support preview (from KDE themes) for 
+      Window Events => see README.SOUND for more information </action>
+    <action dev="FL" type="add"> SkinWindowEvent to handle shade/unshade, 
+      maximize/unmaximize on SkinWindow </action>
+  </release>
+  <release version="0.2.3RC2" date="7 June 2000">
+    <action dev="FL" type="add"> JDK1.1 support (and about time too!) </action>
+    <action dev="FL" type="add"> added ScrollBar.alternateLayout property to 
+      enable grouping of scrollbar buttons: 
+      UIManager.put("ScrollBar.alternateLayout", Boolean.TRUE); 
+      com.l2fprod.gui.plaf.xtra.XTraScrollBarUI can be used without SkinLF 
+      </action>
+    <action dev="FL" type="update"> improved SkinWindow moving and resizing by 
+      using a ghostWindow </action>
+    <action dev="FL" type="add"> added Shade/Unshade feature to 
+      SkinWindow/JInternalFrame </action>
+    <action dev="FL" type="add"> reduced package size by removing Jimi encoders 
+      and using -O flag and some unused images in bundled themes </action>
+    <action dev="FL" type="update"> better color handling from gtk and kde 
+      themes </action>
+    <action dev="FL" type="add"> JSlider support (still buggy) </action>
+    <action dev="FL" type="add"> created SkinChooser to easily add support for 
+      SkinLF in your app </action>
+  </release>
+  <release version="0.2.3RC1" date="29 May 2000">
+    <action dev="FL" type="update"> changes in TableHeaderUI => custom column 
+      header renderers were overriden by SkinLF, now SkinLF only installs its 
+      renderer in installUI </action>
+    <action dev="FL" type="add"> added JDesktopPane.backgroundEnabled client 
+      property to JDesktopPane to enable the desktop background (supported by 
+      KDE skins) </action>
+    <action dev="FL" type="update"> improved SkinWindow (move and resize), 
+      SkinWindow is now usable </action>
+    <action dev="FL" type="add"> added WindowList and WindowManager </action>
+    <action dev="FL" type="update"> added examples (applets, skinwindow, demo) 
+      </action>
+  </release>
+  <release version="0.2.2a" date="13 May 2000">
+    <action dev="FL" type="update"> JDK1.3 support </action>
+  </release>
+  <release version="0.2.2" date="12 May 2000">
+    <action dev="FL" type="add"> allowed loading of Skins from java.net.URL 
+      instead of java.io.File => SkinLF can now be used in an applet </action>
+    <action dev="FL" type="add"> begin merge with xWindow 
+      (com.l2fprod.gui.SkinWindow) </action>
+    <action dev="FL" type="fix"> bug fixes </action>
+    <action dev="FL" type="update"> moved gtk and kde packages to 
+      com.l2fprod.gui.plaf.skin.impl </action>
+  </release>
+  <release version="0.2.1" date="9 April 2000">
+    <action dev="FL" type="add"> added missing tokens in GtkParser </action>
+    <action dev="FL" type="fix"> fixed scrollbar preferred size </action>
+    <action dev="FL" type="add"> added window border support to KDE theme 
+      </action>
+    <action dev="FL" type="update"> improved color support </action>
+    <action dev="FL" type="add"> added getDefaultSkinLocation() to GTK </action>
+  </release>
+  <release version="0.2" date="19 March 2000">
+    <action dev="FL" type="add"> gtk and kde theme support is new </action>
+    <action dev="FL" type="add"> new components added </action>
+    <action dev="FL" type="remove"> removed uis (windowBlinds) skin support due 
+      to copyright statements </action>
+  </release>
+  <release version="0.1" date="3 March 2000">
+    <action dev="FL" type="add"> everything is new ! </action>
+  </release>
 </changes>
