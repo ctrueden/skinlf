@@ -55,9 +55,6 @@
             <li>
               Documentation of code examples
             </li>
-            <li>
-              Tutorial on "Skinit"
-            </li>
           </ul>
         </p>
       </section>
@@ -69,12 +66,6 @@
               border of internal frames: if pixmap bottom left/right
               and top left/right are null, left and right should be
               used to replace them
-            </li>
-            <li>
-              WIN32: when using a java.awt.Window, there is no taskbar
-              item associated, so the window is like a ghost and only
-              visible in our WindowList or with Alt+Tab (but with no
-              title)
             </li>
           </ul>
         </p>
