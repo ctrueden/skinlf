@@ -69,7 +69,7 @@ import com.l2fprod.contrib.freehep.PanelArtistUtilities;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 20:15:35 $
+ * @version   $Revision: 1.2 $, $Date: 2003-08-17 18:15:06 $
  */
 public class ImageUtils implements SwingConstants {
 
@@ -604,6 +604,18 @@ public class ImageUtils implements SwingConstants {
 
     AffineTransform transform =
         PanelArtistUtilities.getCCWRotateTransform(anImage.getWidth(producer), anImage.getHeight(producer));
+    AffineTransformOp operation =
+        new AffineTransformOp(transform, AffineTransformOp.TYPE_BILINEAR);
+    return transparent(operation.filter((BufferedImage) anImage, null));
+  }
+
+  public static Image rotateRight(Image anImage) {
+    if (anImage == null) {
+      return null;
+    }
+
+    AffineTransform transform =
+        PanelArtistUtilities.getCWRotateTransform(anImage.getWidth(producer), anImage.getHeight(producer));
     AffineTransformOp operation =
         new AffineTransformOp(transform, AffineTransformOp.TYPE_BILINEAR);
     return transparent(operation.filter((BufferedImage) anImage, null));
