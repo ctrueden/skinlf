@@ -136,7 +136,7 @@ public class demoWelcome extends JPanel {
       else {
         SkinLookAndFeel.setSkin(SkinLookAndFeel.loadThemePack(selectedItem));
       }
-      SkinLookAndFeel.enable();
+      UIManager.setLookAndFeel(new SkinLookAndFeel());
 
       Component c = SwingUtilities.getAncestorOfClass(java.awt.Window.class, this);
       if (c == null) {
