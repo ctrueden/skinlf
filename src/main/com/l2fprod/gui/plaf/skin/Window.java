@@ -66,7 +66,7 @@ import javax.swing.WindowConstants;
  * Created on 27/05/2000 by Frederic Lavigne, fred@L2FProd.com
  * 
  * @author $Author: l2fprod $ @created 27 avril 2002
- * @version $Revision: 1.5 $, $Date: 2004-05-22 15:06:16 $
+ * @version $Revision: 1.6 $, $Date: 2004-07-29 20:32:06 $
  */
 public interface Window {
 
@@ -503,7 +503,7 @@ public interface Window {
 
     private boolean shaded = false;
 
-    private boolean selected = false;
+    private boolean selected = true;
     
     /**
      * Constructor for the SkinWindowWindow object
