@@ -26,6 +26,7 @@
   <target name="init.properties">
     <tstamp>
       <format property="build.time" pattern="MM/dd/yyyy hh:mm aa" locale="en"/>
+      <format property="build.version" pattern="yyyyMMdd" locale="en"/>
     </tstamp>
     <filter token="VERSION" value="${version}"/>
     <filter token="PROJECT.FULLNAME" value="${project.fullname}"/>
@@ -106,7 +107,7 @@
           out="${build.dist.dir}/CHANGES"
           style="xdocs/xsl/text.xsl"/>
     <!-- zip file -->
-    <zip destfile="${project}-${version}.zip">
+    <zip destfile="${project}-${version}-${build.version}.zip">
       <zipfileset dir="${build.dist.dir}"
                   prefix="${project}-${version}" />
     </zip>
