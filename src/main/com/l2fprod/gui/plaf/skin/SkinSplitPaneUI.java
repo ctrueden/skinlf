@@ -62,10 +62,7 @@ public class SkinSplitPaneUI extends BasicSplitPaneUI {
   /**
    * Description of the Field
    */
-  protected Skin skin = SkinLookAndFeel.getSkin();
-
-  final static SkinSplitPaneUI splitpaneUI = new SkinSplitPaneUI();
-
+	private Skin skin = SkinLookAndFeel.getSkin();
 
   /**
    * Creates the default divider.
@@ -123,7 +120,6 @@ public class SkinSplitPaneUI extends BasicSplitPaneUI {
    * @return   Description of the Returned Value
    */
   public static ComponentUI createUI(JComponent x) {
-    splitpaneUI.skin = SkinLookAndFeel.getSkin();
     return new SkinSplitPaneUI();
   }
 
