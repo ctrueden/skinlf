@@ -18,6 +18,9 @@
           <li>
             <xref linkend="tutorial-themepack" />
           </li>
+          <li>
+            <xref linkend="tutorial-msstyle" />
+          </li>
         </ul>
       </p>
     </section>

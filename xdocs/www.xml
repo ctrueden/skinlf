@@ -7,6 +7,7 @@
   <!ENTITY tutorial-applet    SYSTEM "tutorial-applet.xml">
   <!ENTITY tutorial-clock     SYSTEM "tutorial-clock.xml">
   <!ENTITY tutorial-themepack SYSTEM "tutorial-themepack.xml">
+  <!ENTITY tutorial-msstyle   SYSTEM "tutorial-msstyle.xml">
 
   <!ENTITY converters SYSTEM "converters.xml">
   <!ENTITY todo       SYSTEM "TODO.xml">
@@ -24,6 +25,7 @@
   &tutorial-applet;
   &tutorial-clock;
   &tutorial-themepack;
+  &tutorial-msstyle;
 
   &converters;
   &todo;
