@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document id="converters">
+  <properties>
+    <title>Theme Converters</title>
+  </properties>
+
+  <body>
+    <section>
+      <title>Theme Converters</title>
+      <p>
+        Skin Look And Feel supports GTK and KDE skins. These theme
+        engines provide support for most of the components of Swing. 
+      </p>
+      <p>
+        Since the beginning, the choice was made to not create SkinLF
+        own skin format but to reuse existing. Adding support for new
+        theme engines is one of the goal of the next SkinLF
+        versions. Meanwhile, end-users want to get new themepacks to
+        include in their application and to be able to create such
+        themepacks easily. Here come converters. A converter will
+        <i>convert</i> a skin in a specific format in a theme pack
+        using GTK and KDE engines.
+      </p>
+      <section>
+        <title>Abstract Converter</title>
+        <p>
+        </p>
+      </section>
+      <section>
+        <title>MS Visual Style Converter</title>
+        <p>
+          Windows XP ships with the ability to theme the user
+          interface. It comes with the default Windows XP style aka
+          Luna. Themes in Windows XP are called Visual Styles. They
+          are binary files containing the images used to paint the
+          various components along with theme description files (in
+          xml).
+        </p>
+        <p>
+          There are tools to create such themes. One of the tool we
+          are going to use is StyleBuilder from <a
+          href="http://www.tgtsoft.com/">tgtsoft</a>. StyleBuilder
+          knows how to extract the images and resource files from the
+          Visual Styles.
+        </p>
+        <p>
+          The converter migrates StyleBuilder-extracted Microsoft
+          Visual Styles to SkinLF themepacks. The conversion is not
+          straightforward and requires some preparation but it kinds
+          of work.
+        </p>
+        <p>
+          First step is to find a Visual Style to convert. There are
+          multiple at <a
+          href="http://www.themexp.org">ThemeXP.org</a>. Then the
+          theme has to be extracted using StyleBuilder. Once
+          extracted, the converter can be invoked to create the
+          themepack.
+        </p>
+      </section>
+    </section>
+  </body>
+</document>

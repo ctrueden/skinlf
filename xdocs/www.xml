@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE DOCUMENT [
+  <!ENTITY index      SYSTEM "index.xml">
+  <!ENTITY converters SYSTEM "converters.xml">
+  <!ENTITY sitemap    SYSTEM "sitemap.xml">
+]>
+<www>
+  <properties>
+    <title>SkinLF :: developer zone</title>
+  </properties>
+
+  &index;
+  &converters;
+
+  &sitemap;
+</www>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document id="index">
+  <properties>
+    <title>Home</title>
+  </properties>
+
+  <body>
+    <section>
+      <title>Welcome to Skin Look And Feel developer zone</title>
+      <p>
+        Skin Look And Feel allows Java Developers to write skinnable
+        applications using the Swing toolkit.
+      </p>
+      <p>
+        Skin Look And Feel is able to read GTK (The Gimp ToolKit) and
+        KDE (The K Desktop Environment) Skins to enhance your
+        application GUI controls such as Buttons, Checks, Radios,
+        Scrollbars, Progress Bar, Lists, Tables, Internal Frames,
+        Colors, Background Textures, Regular Windows.
+      </p>
+      <p>
+        Skin Look And Feel (aka SkinLF) also includes SkinRegion to
+        create irregular windows.
+      </p>
+
+      <section>
+        <title>Keep informed</title>
+        <p>
+          These are the places where you can be kept up-to-date with
+          the latest development of the Skin Look And Feel along with
+          the upcoming projects:
+          <ul>
+            <li>
+              <a href="http://www.L2FProd.com/software/skinlf/">Skin
+              Look And Feel Official Web Site</a>
+            </li>
+            <li>
+              <a
+              href="https://skinlf.dev.java.net/servlets/ProjectIssues">Skin
+              Look And Feel Bug Database</a>
+            </li>
+            <li>
+              <a
+              href="https://skinlf.dev.java.net/servlets/SummarizeList?listName=dev">Developers
+              Mailing List</a>
+            </li>
+            <li>
+              <a
+              href="https://skinlf.dev.java.net/servlets/SummarizeList?listName=users">Users
+              Mailing List</a>
+            </li>
+            <li>
+              <a href="http://www.javootoo.com">Download Theme Packs</a>
+            </li>
+          </ul>
+        </p>
+      </section>
+    </section>
+  </body>
+</document>
