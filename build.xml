@@ -66,4 +66,48 @@
     </java>
   </target>
 
+  <!-- Dist targets -->
+  <target name="jar" depends="compile.java">
+    <jar destfile="${build.dir}/${project}.jar">
+      <zipfileset src="lib/png.jar"/>
+      <fileset dir="${build.classes}" includes="*.class,com/**/*.class" excludes="**/region/**,**/nativeskin/**"/>
+      <fileset dir="${java.src.dir}" includes="com/**/*.properties"/>
+      <fileset dir="${java.src.dir}" includes="com/**/*.gif"/>
+      <manifest>
+        <attribute name="Built-by" value="${user.name}"/>
+        <section name="com/l2fprod/gui/plaf/skin">
+          <attribute name="Specification-Title" value="${project.fullname}"/>
+          <attribute name="Specification-Version" value="${version}"/>
+          <attribute name="Specification-Vendor" value="L2FProd.com"/>
+          <attribute name="Implementation-Title" value="${project.fullname}"/>
+          <attribute name="Implementation-Version" value="${version}"/> 
+          <attribute name="Implementation-Vendor" value="L2FProd.com"/>
+        </section>
+      </manifest>
+    </jar>
+  </target>
+
+  <target name="dist.pre">
+    <!-- examples.jar -->
+    <jar destfile="${build.dist.lib}/examples.jar">
+      <fileset dir="${build.classes}" includes="examples/**.class"/>
+      <fileset dir="${java.src.dir}" includes="examples/**.properties,examples/**.gif,examples/**.jpg"/>
+    </jar>
+    <!-- batch files -->
+    <copy todir="${build.dist.bin}"
+	  flatten="yes"
+	  preservelastmodified="yes">
+      <fileset dir="src" includes="**/*.bat"/>
+    </copy>
+    <!-- default theme -->
+    <zip destfile="${build.dist.lib}/themepack.zip">
+      <zipfileset dir="src/themepacks/whistlerthemepack"/>
+    </zip>
+  </target>
+
+  <target name="themes">
+    <zip destfile="${build.www.themedir}/cellshadedthemepack.zip"
+	 basedir="src/themepacks/cellshadedthemepack"/>
+  </target>
+
 </project>

@@ -14,9 +14,11 @@
   <!-- Destination Directory for the build -->
   <property name="build.dir" value="build"/>
   <property name="build.classes" value="${build.dir}/classes"/>
+  <property name="build.src" value="${build.dir}/src"/>
   <property name="build.dist.dir" value="${project}-${version}"/>
-  <property name="build.dist.src" value="${build.dir}/src"/>
-  <property name="build.dist.lib" value="${build.dir}/lib"/>
+  <property name="build.dist.src" value="${build.dist.dir}/src"/>
+  <property name="build.dist.lib" value="${build.dist.dir}/lib"/>
+  <property name="build.dist.bin" value="${build.dist.dir}/bin"/>
   <property name="build.www.dir" value="${build.dir}/www"/>
 
 <!-- COMMON TARGETS -->
@@ -34,6 +36,9 @@
     <mkdir dir="${build.dir}"/>
     <mkdir dir="${build.classes}"/>
     <mkdir dir="${build.dist.dir}"/>
+    <mkdir dir="${build.dist.src}"/>
+    <mkdir dir="${build.dist.lib}"/>
+    <mkdir dir="${build.dist.bin}"/>
   </target>
 
   <target name="init" depends="init.properties,init.directories">
@@ -54,7 +59,12 @@
 <!-- Java Related Targets -->
 
   <target name="compile.java" depends="init">
-    <javac srcdir="${java.src.dir}"
+    <copy todir="${build.src}" filtering="yes">
+      <fileset dir="${java.src.dir}">
+        <include name="**/*.java"/>
+      </fileset>
+    </copy>
+    <javac srcdir="${build.src}"
            destdir="${build.classes}"
            classpathref="classpath"
            compiler="${javac.compiler}"
@@ -64,6 +74,42 @@
            optimize="${optimize}"
            target="1.1">
     </javac>
+  </target>
+
+<!-- Distribution Target -->
+
+  <target name="dist" depends="jar,dist.pre">
+    <!-- project.jar -->
+    <copy todir="${build.dist.lib}"
+          file="${build.dir}/${project}.jar"
+          preservelastmodified="yes"/>
+    <!-- source code -->
+    <copy todir="${build.dist.src}"
+          preservelastmodified="yes">
+      <fileset dir="${build.src}" includes="**/*.java"/>
+      <fileset dir="${java.src.dir}" includes="**/*.properties"/>
+    </copy>
+    <!-- regular files -->
+    <copy todir="${build.dist.dir}"
+          filtering="yes"
+          preservelastmodified="yes">
+      <fileset dir="${basedir}">
+        <include name="AUTHORS"/>
+        <include name="INSTALL"/>
+        <include name="README"/>
+        <include name="THANKS"/>
+        <include name="LICENSE"/>
+        <include name="LICENSE_*"/>
+      </fileset>
+    </copy>
+    <xslt in="xdocs/CHANGES.xml"
+          out="${build.dist.dir}/CHANGES"
+          style="xdocs/xsl/text.xsl"/>
+    <!-- zip file -->
+    <zip destfile="${project}-${version}.zip">
+      <zipfileset dir="${build.dist.dir}"
+                  prefix="${project}-${version}" />
+    </zip>
   </target>
 
 <!-- Source code formatting -->
@@ -84,6 +130,7 @@
     <copy todir="${build.www.dir}">
       <fileset dir="xdocs">
         <include name="images/**"/>
+        <include name="**.java"/>
       </fileset>
     </copy>
     <delete file="${build.www.dir}/empty.html"/>
