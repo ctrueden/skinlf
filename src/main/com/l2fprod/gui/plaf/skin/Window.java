@@ -65,8 +65,8 @@ import javax.swing.WindowConstants;
 /**
  * Created on 27/05/2000 by Frederic Lavigne, fred@L2FProd.com
  * 
- * @author $Author: l2fprod $ @created 27 avril 2002
- * @version $Revision: 1.7 $, $Date: 2004-11-11 17:00:38 $
+ * @author $Author: zombi $ @created 27 avril 2002
+ * @version $Revision: 1.8 $, $Date: 2005-02-08 23:40:23 $
  */
 public interface Window {
 
@@ -540,11 +540,9 @@ public interface Window {
     public void setSelected(boolean b) throws PropertyVetoException {
       if (b) {
         if (frame != null) {
-          frame.show();
-          frame.toFront();
+          frame.repaint();
         } else if (dialog != null) {
-          dialog.show();
-          dialog.toFront();
+          dialog.repaint();
         }
       }
       this.selected = b;
