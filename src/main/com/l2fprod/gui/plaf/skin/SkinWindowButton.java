@@ -54,16 +54,16 @@ import com.l2fprod.gui.SkinWindow;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 20:04:39 $
+ * @version   $Revision: 1.2 $, $Date: 2003-10-24 18:25:01 $
  */
 public class SkinWindowButton extends JButton {
 
-  int align, action;
-  int xcoord, ycoord;
+  private int align, action;
+  private int xcoord, ycoord;
 
-  Icon noFocusIcon, noFocusRolloverIcon;
+  private Icon noFocusIcon, noFocusRolloverIcon;
 
-  Window window;
+  private Window window;
 
   /**
    * Constructor for the SkinWindowButton object
