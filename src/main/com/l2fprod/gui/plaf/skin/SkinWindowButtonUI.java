@@ -56,31 +56,9 @@ import java.awt.*;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.3 $, $Date: 2003-12-06 21:54:35 $
+ * @version   $Revision: 1.4 $, $Date: 2004-07-18 16:55:27 $
  */
 public final class SkinWindowButtonUI extends BasicButtonUI {
-
-  /**
-   * Description of the Field
-   */
-  private int dashedRectGapX;
-  /**
-   * Description of the Field
-   */
-  private int dashedRectGapY;
-  /**
-   * Description of the Field
-   */
-  private int dashedRectGapWidth;
-  /**
-   * Description of the Field
-   */
-  private int dashedRectGapHeight;
-
-  /**
-   * Description of the Field
-   */
-  private Color focusColor;
 
   private final static SkinWindowButtonUI buttonUI = new SkinWindowButtonUI();
 
