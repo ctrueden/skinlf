@@ -81,7 +81,7 @@ import com.l2fprod.util.*;
  * L2FProd.com website</a> for the complete description of a theme pack.
  *
  * @author    $Author: l2fprod $
- * @version   $Revision: 1.6 $, $Date: 2003-10-10 20:49:05 $
+ * @version   $Revision: 1.7 $, $Date: 2003-11-16 17:31:26 $
  */
 public class SkinLookAndFeel extends BasicLookAndFeel {
 
@@ -100,8 +100,8 @@ public class SkinLookAndFeel extends BasicLookAndFeel {
     return "@VERSION@";
   }
 
-  final static String SKIN_KEY = new String("SkinLookAndFeel.Skin");
-  final static String SKIN_LOADER_KEY = new String("SkinLookAndFeel.SkinLoader");
+  private static Skin c_CurrentSkin;
+  private static ZipResourceLoader c_ResourceLoader;
 
   /**
    * Gets the Name attribute of the SkinLookAndFeel object
@@ -160,96 +160,81 @@ public class SkinLookAndFeel extends BasicLookAndFeel {
   protected void initClassDefaults(UIDefaults table) {
     super.initClassDefaults(table);
 
-    String skinPackageName = "com.l2fprod.gui.plaf.skin.";
     java.util.Vector list = new java.util.Vector();
 
     if (getSkin().getProgress() != null && getSkin().getProgress().status()) {
       list.addElement("ProgressBarUI");
-      list.addElement(skinPackageName + "SkinProgressBarUI");
+      list.addElement(SkinProgressBarUI.class.getName());
     }
 
     if (getSkin().getTab() != null && getSkin().getTab().status()) {
       list.addElement("TabbedPaneUI");
-      list.addElement(skinPackageName + "SkinTabbedPaneUI");
+      list.addElement(SkinTabbedPaneUI.class.getName());
     }
 
     if (getSkin().getFrame() != null && getSkin().getFrame().status()) {
       list.addElement("InternalFrameUI");
-      list.addElement(skinPackageName + "SkinInternalFrameUI");
+      list.addElement(SkinInternalFrameUI.class.getName());
       if (OS.isOneDotFour()) {
         // add support for decorated frames
         list.addElement("RootPaneUI");
-        list.addElement(skinPackageName + "SkinRootPaneUI");
+        list.addElement(SkinRootPaneUI.class.getName());
       }
       list.addElement("WindowButtonUI");
-      list.addElement(skinPackageName + "SkinWindowButtonUI");
+      list.addElement(SkinWindowButtonUI.class.getName());
     }
 
     if (getSkin().getSlider() != null && getSkin().getSlider().status()) {
       list.addElement("SliderUI");
-      list.addElement(skinPackageName + "SkinSliderUI");
+      list.addElement(SkinSliderUI.class.getName());
     }
 
     if (getSkin().getScrollbar() != null && getSkin().getScrollbar().status()) {
       list.addElement("ScrollBarUI");
-      list.addElement(skinPackageName + "SkinScrollBarUI");
+      list.addElement(SkinScrollBarUI.class.getName());
     }
 
     if (getSkin().getButton() != null && getSkin().getButton().status()) {
       list.addElement("ButtonUI");
-      list.addElement(skinPackageName + "SkinButtonUI");
+      list.addElement(SkinButtonUI.class.getName());
       list.addElement("ToggleButtonUI");
-      list.addElement(skinPackageName + "SkinToggleButtonUI");
+      list.addElement(SkinToggleButtonUI.class.getName());
     }
 
     if (getSkin().getSeparator() != null && getSkin().getSeparator().status()) {
       list.addElement("SeparatorUI");
-      list.addElement(skinPackageName + "SkinSeparatorUI");
+      list.addElement(SkinSeparatorUI.class.getName());
     }
 
     Object[] uiDefaults = {
-      "CheckBoxUI", skinPackageName + "SkinCheckBoxUI",
-      "ComboBoxUI", skinPackageName + "SkinComboBoxUI",
-      "CheckBoxMenuItemUI", skinPackageName + "SkinCheckBoxMenuItemUI",
-      "MenuItemUI", skinPackageName + "SkinMenuItemUI",
-      "MenuUI", skinPackageName + "SkinMenuUI",
-      "MenuBarUI", skinPackageName + "SkinMenuBarUI",
-      "ToolBarUI", skinPackageName + "SkinToolBarUI",
-      //	    "ListUI", skinPackageName + "SkinListUI",
-      "PopupMenuUI", skinPackageName + "SkinPopupMenuUI",
-      "RadioButtonUI", skinPackageName + "SkinRadioButtonUI",
-      "RadioButtonMenuItemUI", skinPackageName + "SkinRadioButtonMenuItemUI",
-      "PanelUI", skinPackageName + "SkinPanelUI",
-      "DesktopPaneUI", skinPackageName + "SkinDesktopPaneUI",
-      "DesktopIconUI", skinPackageName + "SkinDesktopIconUI",
-      "TableHeaderUI", skinPackageName + "SkinTableHeaderUI",
+      "CheckBoxUI", SkinCheckBoxUI.class.getName(),
+      "ComboBoxUI", SkinComboBoxUI.class.getName(),
+      "CheckBoxMenuItemUI", SkinCheckBoxMenuItemUI.class.getName(),
+      "MenuItemUI", SkinMenuItemUI.class.getName(),
+      "MenuUI", SkinMenuUI.class.getName(),
+      "MenuBarUI", SkinMenuBarUI.class.getName(),
+      "ToolBarUI", SkinToolBarUI.class.getName(),
+      //	    "ListUI", SkinListUI.class.getName(),
+      "PopupMenuUI", SkinPopupMenuUI.class.getName(),
+      "RadioButtonUI", SkinRadioButtonUI.class.getName(),
+      "RadioButtonMenuItemUI", SkinRadioButtonMenuItemUI.class.getName(),
+      "PanelUI", SkinPanelUI.class.getName(),
+      "DesktopPaneUI", SkinDesktopPaneUI.class.getName(),
+      "DesktopIconUI", SkinDesktopIconUI.class.getName(),
+      "TableHeaderUI", SkinTableHeaderUI.class.getName(),
       // there is no basic filechooser ui!
       // so we use the filechooser from metal :(
-      "FileChooserUI", skinPackageName + "SkinFileChooserUI",
+      "FileChooserUI", SkinFileChooserUI.class.getName(),
       "TextFieldUI", "javax.swing.plaf.metal.MetalTextFieldUI",
-      "SplitPaneUI",
-      (Boolean.TRUE.equals(UIManager.get("JSplitPane.alternateUI"))?
-      (skinPackageName + "SkinSplitPaneUI"):
-      "javax.swing.plaf.basic.BasicSplitPaneUI"),
-      "TreeUI", skinPackageName + "SkinTreeUI",
-      "OptionPaneUI", skinPackageName + "SkinOptionPaneUI",
+      "SplitPaneUI", (Boolean.TRUE.equals(UIManager.get("JSplitPane.alternateUI"))?
+                      (SkinSplitPaneUI.class.getName()):
+                      "javax.swing.plaf.basic.BasicSplitPaneUI"),
+      "TreeUI", SkinTreeUI.class.getName(),
+      "OptionPaneUI", SkinOptionPaneUI.class.getName(),
     };
     for (int i = 0; i < uiDefaults.length; i++) {
       list.addElement(uiDefaults[i]);
     }
-
-    String current;
-    for (int i = 0, c = list.size(); i < c; i++) {
-      try {
-        if ((current = (String) list.elementAt(i)).startsWith(skinPackageName)) {
-          Class.forName(current);
-          list.addElement(current);
-          list.addElement(Class.forName(current));
-        }
-      } catch (Throwable e) {
-      }
-    }
-    current = null;
 
     Object[] results = new Object[list.size()];
     list.copyInto(results);
@@ -546,7 +531,7 @@ public class SkinLookAndFeel extends BasicLookAndFeel {
    * @param skin  a skin
    */
   public static void setSkin(Skin skin) {
-    UIManager.put(SKIN_KEY, skin);
+    c_CurrentSkin = skin;
   }
 
   /**
@@ -561,7 +546,7 @@ public class SkinLookAndFeel extends BasicLookAndFeel {
    * @return   the current skin
    */
   public static Skin getSkin() {
-    Skin s = (Skin) UIManager.get(SKIN_KEY);
+    Skin s = c_CurrentSkin;
     if (s == null) {
       try {
         // first try to load the theme from the skinlf.themepack property
@@ -692,9 +677,9 @@ public class SkinLookAndFeel extends BasicLookAndFeel {
    */
   public static Skin loadThemePack(InputStream p_StreamToPack) throws Exception {
     ZipResourceLoader loader = new ZipResourceLoader(p_StreamToPack);
-    UIManager.put(SKIN_LOADER_KEY, loader);
+    c_ResourceLoader = loader;
     Skin skin = loadThemePackDefinition(new URL("http://dummyhostforziploader/skinlf-themepack.xml"));
-    UIManager.put(SKIN_LOADER_KEY, null);
+    c_ResourceLoader = null;
     return skin;
   }
 
@@ -848,9 +833,8 @@ public class SkinLookAndFeel extends BasicLookAndFeel {
    * @exception Exception  Description of Exception
    */
   static InputStream getInputStream(URL url) throws Exception {
-    ZipResourceLoader loader = (ZipResourceLoader) UIManager.get(SKIN_LOADER_KEY);
-    if (loader != null) {
-      return loader.getZipResource(url).getInputStream();
+    if (c_ResourceLoader != null) {
+      return c_ResourceLoader.getZipResource(url).getInputStream();
     }
     else {
       return url.openStream();
@@ -865,8 +849,7 @@ public class SkinLookAndFeel extends BasicLookAndFeel {
    * @exception Exception  Description of Exception
    */
   static byte[] getURLContent(URL url) throws Exception {
-    ZipResourceLoader loader = (ZipResourceLoader) UIManager.get(SKIN_LOADER_KEY);
-    if (loader == null) {
+    if (c_ResourceLoader == null) {
       BufferedInputStream input = new BufferedInputStream(url.openStream());
       ByteArrayOutputStream output = new ByteArrayOutputStream();
       int read;
@@ -876,7 +859,7 @@ public class SkinLookAndFeel extends BasicLookAndFeel {
       return output.toByteArray();
     }
     else {
-      return loader.getZipResource(url).getURLContent();
+      return c_ResourceLoader.getZipResource(url).getURLContent();
     }
   }
 
