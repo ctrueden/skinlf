@@ -81,7 +81,7 @@ import com.l2fprod.util.*;
  * L2FProd.com website</a> for the complete description of a theme pack.
  *
  * @author    $Author: l2fprod $
- * @version   $Revision: 1.4 $, $Date: 2003-08-24 16:47:33 $
+ * @version   $Revision: 1.5 $, $Date: 2003-09-07 18:06:11 $
  */
 public class SkinLookAndFeel extends BasicLookAndFeel {
 
@@ -667,8 +667,21 @@ public class SkinLookAndFeel extends BasicLookAndFeel {
    * @see                  com.l2fprod.util.ZipResourceLoader
    */
   public static Skin loadThemePack(URL url) throws Exception {
-    // create a ZipResourceLoader to read the themepack
-    ZipResourceLoader loader = new ZipResourceLoader(url);
+    return loadThemePack(url.openStream());
+  }
+
+  /**
+   * Load a Theme Pack from the given stream pointing to a themepack. <br>
+   * See <a href="http://www.L2FProd.com/">
+   * L2FProd.com website</a> for the complete description of a theme pack.
+   *
+   * @param url            the theme pack url
+   * @return               Description of the Returned Value
+   * @exception Exception  Description of Exception
+   * @see                  com.l2fprod.util.ZipResourceLoader
+   */
+  public static Skin loadThemePack(InputStream p_StreamToPack) throws Exception {
+    ZipResourceLoader loader = new ZipResourceLoader(p_StreamToPack);
     UIManager.put(SKIN_LOADER_KEY, loader);
     Skin skin = loadThemePackDefinition(new URL("http://dummyhostforziploader/skinlf-themepack.xml"));
     UIManager.put(SKIN_LOADER_KEY, null);
