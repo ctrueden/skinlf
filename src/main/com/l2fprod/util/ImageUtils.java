@@ -69,7 +69,7 @@ import com.l2fprod.contrib.freehep.PanelArtistUtilities;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.2 $, $Date: 2003-08-17 18:15:06 $
+ * @version   $Revision: 1.3 $, $Date: 2003-11-16 17:34:32 $
  */
 public class ImageUtils implements SwingConstants {
 
@@ -587,7 +587,7 @@ public class ImageUtils implements SwingConstants {
     AffineTransform transform =
         PanelArtistUtilities.getYFlipTransform(image.getHeight(producer));
     AffineTransformOp operation =
-        new AffineTransformOp(transform, AffineTransformOp.TYPE_BILINEAR);
+        new AffineTransformOp(transform, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
     return operation.filter((BufferedImage) image, null);
   }
 
@@ -605,7 +605,7 @@ public class ImageUtils implements SwingConstants {
     AffineTransform transform =
         PanelArtistUtilities.getCCWRotateTransform(anImage.getWidth(producer), anImage.getHeight(producer));
     AffineTransformOp operation =
-        new AffineTransformOp(transform, AffineTransformOp.TYPE_BILINEAR);
+        new AffineTransformOp(transform, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
     return transparent(operation.filter((BufferedImage) anImage, null));
   }
 
@@ -617,7 +617,7 @@ public class ImageUtils implements SwingConstants {
     AffineTransform transform =
         PanelArtistUtilities.getCWRotateTransform(anImage.getWidth(producer), anImage.getHeight(producer));
     AffineTransformOp operation =
-        new AffineTransformOp(transform, AffineTransformOp.TYPE_BILINEAR);
+        new AffineTransformOp(transform, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
     return transparent(operation.filter((BufferedImage) anImage, null));
   }
 
