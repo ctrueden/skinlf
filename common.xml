@@ -88,3 +88,17 @@
     </copy>
     <delete file="${build.www.dir}/empty.html"/>
   </target>
+
+  <target name="www.sync" depends="init">
+    <ftp server="${build.www.server}"
+	 userid="${build.www.userid}"
+	 password="${build.www.password}"
+	 remotedir="${build.www.remotedir}"
+	 action="put"
+	 verbose="yes"
+	 depends="yes">
+      <fileset dir="${build.www.dir}">
+        <include name="**/**"/>
+      </fileset>
+    </ftp>
+  </target>
