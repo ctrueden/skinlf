@@ -60,9 +60,9 @@ import com.l2fprod.gui.plaf.skin.impl.AbstractSkin;
  *
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 20:13:03 $
+ * @version   $Revision: 1.2 $, $Date: 2003-10-24 20:30:22 $
  */
-public class CompoundSkin extends AbstractSkin {
+public final class CompoundSkin extends AbstractSkin {
 
   private Skin skina, skinb;
 

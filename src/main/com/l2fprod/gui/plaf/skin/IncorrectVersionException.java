@@ -54,9 +54,9 @@ package com.l2fprod.gui.plaf.skin;
  *
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 20:09:07 $
+ * @version   $Revision: 1.2 $, $Date: 2003-10-24 20:29:55 $
  */
-public class IncorrectVersionException extends Exception {
+public final class IncorrectVersionException extends Exception {
 
   /**
    * Constructor for the IncorrectVersionException object
