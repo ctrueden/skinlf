@@ -81,7 +81,7 @@ import com.l2fprod.util.*;
  * L2FProd.com website</a> for the complete description of a theme pack.
  *
  * @author    $Author: l2fprod $
- * @version   $Revision: 1.3 $, $Date: 2003-08-19 12:46:45 $
+ * @version   $Revision: 1.4 $, $Date: 2003-08-24 16:47:33 $
  */
 public class SkinLookAndFeel extends BasicLookAndFeel {
 
@@ -720,15 +720,17 @@ public class SkinLookAndFeel extends BasicLookAndFeel {
         }
         else if ("Color".equalsIgnoreCase(type) || "java.awt.Color".equalsIgnoreCase(type)) {
           Color color = Color.decode(element.getProperty("VALUE"));
-          UIManager.put(element.getProperty("NAME"), color);
+          UIManager.put(element.getProperty("NAME"), new ColorUIResource(color));
         }
         else if ("Insets".equalsIgnoreCase(type) || "java.awt.Insets".equalsIgnoreCase(type)) {
           Insets insets = parseInsets(element.getProperty("VALUE"));
-          UIManager.put(element.getProperty("NAME"), insets);
+          UIManager.put(element.getProperty("NAME"),
+                        new InsetsUIResource(insets.top, insets.left,
+                                             insets.bottom, insets.right));
         }
         else if ("Dimension".equalsIgnoreCase(type) || "java.awt.Dimension".equalsIgnoreCase(type)) {
           Dimension dim = parseDimension(element.getProperty("VALUE"));
-          UIManager.put(element.getProperty("NAME"), dim);
+          UIManager.put(element.getProperty("NAME"), new DimensionUIResource(dim.width, dim.height));
         }
         else if ("LineBorder".equalsIgnoreCase(type) || "javax.swing.border.LineBorder".equalsIgnoreCase(type)) {
 
@@ -767,12 +769,12 @@ public class SkinLookAndFeel extends BasicLookAndFeel {
                                                                  padding,
                                                                  padding));
           }
-          UIManager.put(element.getProperty("NAME"), border);
+          UIManager.put(element.getProperty("NAME"), new BorderUIResource(border));
         }
         else if ("EmptyBorder".equalsIgnoreCase(type) || "javax.swing.border.EmptyBorder".equalsIgnoreCase(type)) {
           Insets insets = parseInsets(element.getProperty("VALUE"));
           Border border = new javax.swing.border.EmptyBorder(insets);
-          UIManager.put(element.getProperty("NAME"), border);
+          UIManager.put(element.getProperty("NAME"), new BorderUIResource(border));
         }
       }
       else if ("font".equalsIgnoreCase(tagName)) {
