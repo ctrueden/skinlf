@@ -64,7 +64,7 @@ import com.l2fprod.gui.plaf.skin.impl.*;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.3 $, $Date: 2003-08-25 19:15:21 $
+ * @version   $Revision: 1.4 $, $Date: 2003-10-04 17:24:52 $
  */
 class KdeFrame extends AbstractSkinFrame {
 
@@ -73,6 +73,7 @@ class KdeFrame extends AbstractSkinFrame {
   java.util.Vector buttonList;
   int textShiftLeft = SkinTitlePane.ICON_OFFSET, textShiftRight = 0;
   int textAlignment = LEFT;
+  boolean textAbsolutePosition = false;
 
   boolean pixmapUnderTitle = false;
   boolean titleFrameShaded = false;
@@ -159,6 +160,7 @@ class KdeFrame extends AbstractSkinFrame {
       }
     }
     buttonList = new java.util.Vector();
+    textAbsolutePosition = "yes".equals(ini.getKeyValue("Window Titlebar", "TitleAbsolutePosition"));
 
     String letters = "ABCDEF";
     if (ini.getSection("Window Button Layout") == null) {
@@ -300,7 +302,11 @@ class KdeFrame extends AbstractSkinFrame {
           x = textShiftLeft;
           break;
         case MIDDLE:
-          x = (((JComponent) c).getWidth() - textShiftLeft - textShiftRight) / 2 + textShiftLeft - width / 2;
+          if (textAbsolutePosition) {
+            x = (((JComponent)c).getWidth() - width) / 2;
+          } else {
+            x = (((JComponent) c).getWidth() - textShiftLeft - textShiftRight) / 2 + textShiftLeft - width / 2;
+          }
           break;
         case RIGHT:
           x = ((JComponent) c).getWidth() - width - textShiftRight;
