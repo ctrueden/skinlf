@@ -333,7 +333,9 @@ public class SkinTitlePane extends BasicInternalFrameTitlePane {
     mi.setMnemonic('n');
     mi = systemMenu.add(maximizeAction);
     mi.setMnemonic('x');
-    systemMenu.add(shadeAction);
+    if (!UIManager.getBoolean("TitlePane.disableShade")) {
+      systemMenu.add(shadeAction);
+    }
     systemMenu.add(new JSeparator());
     mi = systemMenu.add(closeAction);
     mi.setMnemonic('C');
