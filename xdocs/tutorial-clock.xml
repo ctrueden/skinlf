@@ -84,10 +84,10 @@ java -cp nativeskin.jar;. Clock clock.gif
 java -Dsun.java2d.noddraw=true -cp nativeskin.jar;. Clock clock.gif
       </pre>
       <p>
-        <A HREF="http://www.l2fprod.com/software/skinlf/jnlp/clock.php">
+        <A HREF="http://www.l2fprod.com/software/skinlf/jnlp/clock.jnlp">
           <IMG SRC="http://www.l2fprod.com/images/V3/gobutton.gif" WIDTH="81" HEIGHT="79" ALIGN="RIGHT" BORDER="0"/>
         </A>
-        You can view the <A HREF="http://www.l2fprod.com/software/skinlf/jnlp/clock.php">online demo
+        You can view the <A HREF="http://www.l2fprod.com/software/skinlf/jnlp/clock.jnlp">online demo
         here</A> if your browser is JavaWebStart-enabled. The demo
         will open a clock in the top left corner of your screen. You
         can move the clock by clicking in it and moving your mouse. To
