@@ -6,6 +6,11 @@
 		<person name="Frederic Lavigne" email="fred@L2FProd.com" id="FL"/>
 	</devs>
 
+        <release version="1.2.8" date="">
+        		<action type="remove">Removed SkinWindow, JDK1.4 provides better alternative</action>
+				<action type="add">Linux support to SkinRegion</action>
+        </release>
+
         <release version="1.2.7" date="23 November 2003">
                 <action type="add">Added support for indeterminate mode of progress bar in JDK1.4</action>
                 <action type="fix">Fixed loading of themepacks through HTTPS</action>
