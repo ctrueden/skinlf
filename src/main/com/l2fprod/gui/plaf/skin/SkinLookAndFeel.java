@@ -82,7 +82,7 @@ import javax.swing.text.JTextComponent;
  * website</a> for the complete description of a theme pack.
  * 
  * @author $Author: l2fprod $
- * @version $Revision: 1.11 $, $Date: 2004-05-07 19:00:03 $
+ * @version $Revision: 1.12 $, $Date: 2004-07-18 19:15:45 $
  */
 public class SkinLookAndFeel extends BasicLookAndFeel {
 
@@ -186,7 +186,7 @@ public class SkinLookAndFeel extends BasicLookAndFeel {
     if (getSkin().getFrame() != null && getSkin().getFrame().status()) {
       list.addElement("InternalFrameUI");
       list.addElement(SkinInternalFrameUI.class.getName());
-      if (OS.isOneDotFour()) {
+      if (OS.isOneDotFourOrMore()) {
         // add support for decorated frames
         list.addElement("RootPaneUI");
         list.addElement(SkinRootPaneUI.class.getName());
@@ -252,7 +252,7 @@ public class SkinLookAndFeel extends BasicLookAndFeel {
         SkinTableHeaderUI.class.getName(),
       // there is no basic filechooser ui!
       // so we use the filechooser from metal :(
-      "FileChooserUI",
+        "FileChooserUI",
         SkinFileChooserUI.class.getName(),
         "TextFieldUI",
         "javax.swing.plaf.metal.MetalTextFieldUI",
