@@ -25,7 +25,8 @@
               Compile and test skinregionlinux.so
             </li>
             <li>
-              Support new skin format like MSVisualStyles
+              Support new skin format like MSVisualStyles, ICEwm
+              (www.icewm.org)
             </li>
           </ul>
         </p>
