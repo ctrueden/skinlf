@@ -10,6 +10,9 @@
       <p>
         <ul>
           <li>
+            <xref linkend="tutorial-firstaid" />
+          </li>
+          <li>
             <xref linkend="tutorial-applet" />
           </li>
           <li>

@@ -4,6 +4,7 @@
   <!ENTITY contribute SYSTEM "contribute.xml">
 
   <!ENTITY tutorials          SYSTEM "tutorials.xml">
+  <!ENTITY tutorial-firstaid  SYSTEM "tutorial-firstaid.xml">
   <!ENTITY tutorial-applet    SYSTEM "tutorial-applet.xml">
   <!ENTITY tutorial-clock     SYSTEM "tutorial-clock.xml">
   <!ENTITY tutorial-themepack SYSTEM "tutorial-themepack.xml">
@@ -22,6 +23,7 @@
   &contribute;
 
   &tutorials;
+  &tutorial-firstaid;
   &tutorial-applet;
   &tutorial-clock;
   &tutorial-themepack;
