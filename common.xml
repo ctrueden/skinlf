@@ -30,6 +30,7 @@
     </tstamp>
     <filter token="VERSION" value="${version}"/>
     <filter token="PROJECT.FULLNAME" value="${project.fullname}"/>
+    <filter token="DATE" value="${build.time}"/>
     <filter token="YEAR" value="${year}"/>
   </target>
 
@@ -78,7 +79,7 @@
            includeJavaRuntime="false"
            debug="${debug}"
            optimize="${optimize}"
-           target="1.1">
+           target="1.3" source="1.3">
     </javac>
   </target>
 
@@ -167,3 +168,4 @@
       </fileset>
     </ftp>
   </target>
+  
