@@ -83,23 +83,33 @@ public class MsStylesToSkinLF extends ThemeConverter {
 
   protected String handleImage(String path,
                                int index, int count,
-                               boolean vertical,
                                String outputname) throws Exception {
     Element element = locateElement(path);
     if (element == null) {
       throw new Exception("Node " + path + " not found");
     }
 
+    // how are the chunk organized? vertical or horizontal
+    boolean vertical = true;
+
     String imageFile = null;
     if ("Property".equalsIgnoreCase(element.getTagName())) {
       imageFile = element.getAttribute("Value");
     } else if ("Part".equalsIgnoreCase(element.getTagName()) ||
                "Class".equalsIgnoreCase(element.getTagName())) {
-      imageFile = getPropertyValue(element, "ImageFile");
+
       // may happen if image is available is several DPI
-      if (null == imageFile) {
-         imageFile = getPropertyValue(element, "ImageFile1");
+      imageFile = getPropertyValue(element, "ImageFile1");
+      if (imageFile == null) {
+        imageFile = getPropertyValue(element, "ImageFile");
       }
+
+      String layout = getPropertyValue(element, "ImageLayout");
+      if (layout == null) {
+        layout = getPropertyValue(element, "Imagelayout");
+      }
+      
+      vertical = "vertical".equalsIgnoreCase(layout);
     }
 
     if (imageFile == null || "".equals(imageFile)) {
@@ -108,6 +118,11 @@ public class MsStylesToSkinLF extends ThemeConverter {
 
     //    System.out.println("element name = " + element.getTagName());
     //    System.out.println("imageFile = " + imageFile);
+    File file = new File(getMsStyleDirectory(), imageFile);
+    // if the .BMP is not found, try the .png
+    if (file.exists() == false && imageFile.toLowerCase().endsWith(".bmp")) {
+      imageFile = imageFile.substring(0, imageFile.length() - 4) + ".png";
+    }
 
     ImageUtils.createPicture(getMsStyleDirectory() + File.separator + imageFile,
                              index, count,

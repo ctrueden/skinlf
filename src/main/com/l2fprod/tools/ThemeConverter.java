@@ -115,11 +115,9 @@ public abstract class ThemeConverter {
       int count = token.hasMoreTokens()?Integer.parseInt(token.nextToken()):-1;
       // filenametocreate
       String output = token.hasMoreTokens()?token.nextToken():null;
-      // how are the chunks organized
-      boolean vertical = token.hasMoreTokens()?"true".equals(token.nextToken()):true;
 
       // we have all parameters
-      return handleImage(path, index, count, vertical, output);
+      return handleImage(path, index, count, output);
     } else if (tag.startsWith("Property:")) {
       StringTokenizer token = new StringTokenizer(tag, ":");
       // skip prop
@@ -135,7 +133,6 @@ public abstract class ThemeConverter {
 
   protected abstract String handleImage(String path,
                                         int index, int count,
-                                        boolean vertical,
                                         String outputname) throws Exception;
 
   protected abstract String handleProperty(String path) throws Exception;
