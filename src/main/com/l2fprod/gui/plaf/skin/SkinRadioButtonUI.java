@@ -65,14 +65,6 @@ public class SkinRadioButtonUI extends BasicRadioButtonUI {
   /**
    * Description of the Field
    */
-  protected int dashedRectGapX;
-  /**
-   * Description of the Field
-   */
-  protected int dashedRectGapY;
-  /**
-   * Description of the Field
-   */
   protected int dashedRectGapWidth;
   /**
    * Description of the Field

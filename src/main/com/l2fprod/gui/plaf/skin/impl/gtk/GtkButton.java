@@ -60,7 +60,7 @@ import com.l2fprod.gui.plaf.skin.impl.gtk.parser.*;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 20:05:46 $
+ * @version   $Revision: 1.2 $, $Date: 2003-11-16 16:52:44 $
  */
 class GtkButton extends AbstractSkinButton implements SkinButton {
 
@@ -120,18 +120,6 @@ class GtkButton extends AbstractSkinButton implements SkinButton {
     toggleRollover = GtkUtils.newButton(parser, "GtkToggleButton",
         new String[]{"function", "state"},
         new String[]{"BOX", "PRELIGHT"});
-
-    // the radio button
-    //	GtkStyle radioStyle = parser.getClass("GtkRadioButton").getStyle();
-
-    GtkStyle defaultStyle = parser.getStyle("check");
-    if (defaultStyle == null) {
-      // try the checkradiobutton style
-      defaultStyle = parser.getStyle("checkradiobutton");
-      if (defaultStyle == null) {
-        defaultStyle = parser.getStyle("default");
-      }
-    }
 
     checkIN = GtkUtils.newButton(parser, "GtkCheckButton",
         new String[]{"function", "shadow"},

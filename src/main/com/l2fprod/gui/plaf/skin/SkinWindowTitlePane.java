@@ -489,10 +489,6 @@ class SkinWindowTitlePane extends SkinTitlePane {
       int newH;
       int deltaX;
       int deltaY;
-      Dimension min;
-      Dimension max;
-      p = SwingUtilities.convertPoint((Component) e.getSource(),
-          e.getX(), e.getY(), null);
 
       deltaX = e.getX() - startX;
       deltaY = e.getY() - startY;
@@ -516,13 +512,8 @@ class SkinWindowTitlePane extends SkinTitlePane {
         return;
       }
 
-      min = m_Window.getContainer().getMinimumSize();
-      max = m_Window.getContainer().getMaximumSize();
-
       newX = p.x;
       newY = p.y;
-      newW = m_Window.getContainer().getSize().width;
-      newH = m_Window.getContainer().getSize().height;
 
       switch (resizeDir) {
         case RESIZE_NONE:
