@@ -82,7 +82,7 @@ import javax.swing.text.JTextComponent;
  * website</a> for the complete description of a theme pack.
  * 
  * @author $Author: l2fprod $
- * @version $Revision: 1.10 $, $Date: 2004-02-14 11:01:49 $
+ * @version $Revision: 1.11 $, $Date: 2004-05-07 19:00:03 $
  */
 public class SkinLookAndFeel extends BasicLookAndFeel {
 
@@ -264,6 +264,8 @@ public class SkinLookAndFeel extends BasicLookAndFeel {
         SkinTreeUI.class.getName(),
         "OptionPaneUI",
         SkinOptionPaneUI.class.getName(),
+        "ToolTipUI",
+        SkinToolTipUI.class.getName(),
         };
     for (int i = 0; i < uiDefaults.length; i++) {
       list.addElement(uiDefaults[i]);
