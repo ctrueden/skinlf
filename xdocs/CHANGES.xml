@@ -6,7 +6,7 @@
 		<person name="Frederic Lavigne" email="fred@L2FProd.com" id="FL"/>
 	</devs>
 
-        <release version="1.2.6" date="">
+        <release version="1.2.6" date="16 November 2003">
                 <action type="add">Alluminium Alloy Toxic themepack</action>
                 <action type="fix">One more resizing issue with JDK1.4 was left in the code</action>
                 <action type="remove">Dropped JDK1.2 support, SkinLF 1.2.5 is the last version supporting JDK1.2</action>
