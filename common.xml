@@ -40,6 +40,13 @@
     <delete dir="${build.dist.dir}"/>
   </target>
 
+  <target name="fixcrlf">
+    <fixcrlf srcdir="${basedir}" eol="cr">
+      <include name="AUTHORS,LICENSE*,README,THANKS" />
+      <include name="**/*.java" />
+    </fixcrlf>
+  </target>
+
 <!-- Java Related Targets -->
 
   <target name="compile.java" depends="init">
@@ -53,4 +60,9 @@
            optimize="${optimize}"
            target="1.1">
     </javac>
+  </target>
+
+<!-- Source code formatting -->
+
+  <target name="jalopy" depends="init">
   </target>
