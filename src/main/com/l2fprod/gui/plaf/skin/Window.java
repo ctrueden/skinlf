@@ -6,33 +6,37 @@
  * Copyright (c) @YEAR@ L2FProd.com. All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met: 1.
- * Redistributions of source code must retain the above copyright notice, this
- * list of conditions and the following disclaimer. 2. Redistributions in
- * binary form must reproduce the above copyright notice, this list of
- * conditions and the following disclaimer in the documentation and/or other
- * materials provided with the distribution. 3. The end-user documentation
- * included with the redistribution, if any, must include the following
- * acknowlegement: "This product includes software developed by L2FProd.com
- * (http://www.L2FProd.com/)." Alternately, this acknowlegement may appear in
- * the software itself, if and wherever such third-party acknowlegements
- * normally appear. 4. The names "@PROJECT.FULLNAME@", "SkinLF" and
- * "L2FProd.com" must not be used to endorse or promote products derived from
- * this software without prior written permission. For written permission,
- * please contact info@L2FProd.com. 5. Products derived from this software may
- * not be called "SkinLF" nor may "SkinLF" appear in their names without prior
- * written permission of L2FProd.com.
+ * modification, are permitted provided that the following conditions
+ * are met: 1. Redistributions of source code must retain the above
+ * copyright notice, this list of conditions and the following
+ * disclaimer. 2. Redistributions in binary form must reproduce the
+ * above copyright notice, this list of conditions and the following
+ * disclaimer in the documentation and/or other materials provided
+ * with the distribution. 3. The end-user documentation included with
+ * the redistribution, if any, must include the following
+ * acknowlegement: "This product includes software developed by
+ * L2FProd.com (http://www.L2FProd.com/)." Alternately, this
+ * acknowlegement may appear in the software itself, if and wherever
+ * such third-party acknowlegements normally appear. 4. The names
+ * "@PROJECT.FULLNAME@", "SkinLF" and "L2FProd.com" must not be used
+ * to endorse or promote products derived from this software without
+ * prior written permission. For written permission, please contact
+ * info@L2FProd.com. 5. Products derived from this software may not be
+ * called "SkinLF" nor may "SkinLF" appear in their names without
+ * prior written permission of L2FProd.com.
  * 
- * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED WARRANTIES,
- * INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
- * FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL
- * L2FPROD.COM OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
- * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
- * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA,
- * OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
- * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL L2FPROD.COM OR ITS CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT
+ * OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+ * BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+ * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE
+ * USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
+ * DAMAGE.
  * ====================================================================
  */
 package com.l2fprod.gui.plaf.skin;
@@ -62,7 +66,7 @@ import javax.swing.WindowConstants;
  * Created on 27/05/2000 by Frederic Lavigne, fred@L2FProd.com
  * 
  * @author $Author: l2fprod $ @created 27 avril 2002
- * @version $Revision: 1.4 $, $Date: 2004-05-07 18:58:22 $
+ * @version $Revision: 1.5 $, $Date: 2004-05-22 15:06:16 $
  */
 public interface Window {
 
@@ -81,20 +85,20 @@ public interface Window {
   Container getContainer();
 
   /**
-   * Adds a feature to the PropertyChangeListener attribute of the Window
-   * object
+   * Adds a feature to the PropertyChangeListener attribute of the
+   * Window object
    * 
-   * @param listener The feature to be added to the PropertyChangeListener
-   *          attribute
+   * @param listener The feature to be added to the
+   *        PropertyChangeListener attribute
    */
   void addPropertyChangeListener(PropertyChangeListener listener);
 
   /**
-   * Remove a feature to the PropertyChangeListener attribute of the Window
-   * object
+   * Remove a feature to the PropertyChangeListener attribute of the
+   * Window object
    * 
-   * @param listener The feature to be remove from the PropertyChangeListener
-   *          attribute
+   * @param listener The feature to be remove from the
+   *        PropertyChangeListener attribute
    */
   void removePropertyChangeListener(PropertyChangeListener listener);
 
@@ -220,7 +224,9 @@ public interface Window {
    * @author fred @created 27 avril 2002
    */
   public static class InternalFrameWindow implements Window {
+
     JInternalFrame frame;
+
     boolean shaded = false;
 
     /**
@@ -268,25 +274,19 @@ public interface Window {
      * @param b The new Shaded value
      */
     public void setShaded(boolean b) {
-      if (b == shaded) {
-        return;
-      }
+      if (b == shaded) { return; }
 
       if (b == true) {
         Rectangle bounds = frame.getBounds();
-        Rectangle p =
-          new Rectangle(bounds.x, bounds.y, bounds.width, bounds.height);
+        Rectangle p = new Rectangle(bounds.x, bounds.y, bounds.width,
+            bounds.height);
         frame.putClientProperty(SHADE_BOUNDS_PROPERTY, p);
         frame.setBounds(p.x, p.y, p.width, frame.getMinimumSize().height - 2);
       } else {
         Point location = frame.getLocation();
         Rectangle p = (Rectangle)frame.getClientProperty(SHADE_BOUNDS_PROPERTY);
-        frame.getDesktopPane().getDesktopManager().setBoundsForFrame(
-          frame,
-          location.x,
-          location.y,
-          p.width,
-          p.height);
+        frame.getDesktopPane().getDesktopManager().setBoundsForFrame(frame,
+            location.x, location.y, p.width, p.height);
         frame.putClientProperty(SHADE_BOUNDS_PROPERTY, null);
       }
       shaded = b;
@@ -301,10 +301,8 @@ public interface Window {
     public void setClosed(boolean b) throws PropertyVetoException {
       if (OS.isOneDotThreeOrMore()) {
         try {
-          Class
-            .forName("javax.swing.JInternalFrame")
-            .getMethod("doDefaultCloseAction", new Class[0])
-            .invoke(frame, null);
+          Class.forName("javax.swing.JInternalFrame").getMethod(
+              "doDefaultCloseAction", new Class[0]).invoke(frame, null);
         } catch (Exception e) {
           e.printStackTrace();
         }
@@ -363,7 +361,8 @@ public interface Window {
     }
 
     /**
-     * Gets the Maximizable attribute of the InternalFrameWindow object
+     * Gets the Maximizable attribute of the InternalFrameWindow
+     * object
      * 
      * @return The Maximizable value
      */
@@ -372,7 +371,8 @@ public interface Window {
     }
 
     /**
-     * Gets the Iconifiable attribute of the InternalFrameWindow object
+     * Gets the Iconifiable attribute of the InternalFrameWindow
+     * object
      * 
      * @return The Iconifiable value
      */
@@ -420,8 +420,8 @@ public interface Window {
      * Adds a feature to the PropertyChangeListener attribute of the
      * InternalFrameWindow object
      * 
-     * @param listener The feature to be added to the PropertyChangeListener
-     *          attribute
+     * @param listener The feature to be added to the
+     *        PropertyChangeListener attribute
      */
     public void addPropertyChangeListener(PropertyChangeListener listener) {
       frame.addPropertyChangeListener(listener);
@@ -431,8 +431,8 @@ public interface Window {
      * Adds a feature to the PropertyChangeListener attribute of the
      * InternalFrameWindow object
      * 
-     * @param listener The feature to be added to the PropertyChangeListener
-     *          attribute
+     * @param listener The feature to be added to the
+     *        PropertyChangeListener attribute
      */
     public void removePropertyChangeListener(PropertyChangeListener listener) {
       frame.removePropertyChangeListener(listener);
@@ -456,35 +456,32 @@ public interface Window {
       int defaultCloseOperation = frame.getDefaultCloseOperation();
       frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
       switch (defaultCloseOperation) {
-        case WindowConstants.HIDE_ON_CLOSE :
-          try {
-            frame.setClosed(true);
-            frame.setVisible(false);
-            if (frame.isSelected()) {
-              frame.setSelected(false);
-            }
-          } catch (PropertyVetoException pve) {
+      case WindowConstants.HIDE_ON_CLOSE:
+        try {
+          frame.setClosed(true);
+          frame.setVisible(false);
+          if (frame.isSelected()) {
+            frame.setSelected(false);
           }
-          break;
-        case WindowConstants.DISPOSE_ON_CLOSE :
-          try {
-            frame.setClosed(true);
-            frame.dispose();
-            // only executes if close wasn't vetoed.
-          } catch (PropertyVetoException pve) {
-          }
-          break;
-        case 3 :
-          // EXIT_ON_CLOSE:
-          System.exit(0);
-          break;
-        case WindowConstants.DO_NOTHING_ON_CLOSE :
-          try {
-            frame.setClosed(true);
-          } catch (PropertyVetoException pve) {
-          }
-        default :
-          break;
+        } catch (PropertyVetoException pve) {}
+        break;
+      case WindowConstants.DISPOSE_ON_CLOSE:
+        try {
+          frame.setClosed(true);
+          frame.dispose();
+          // only executes if close wasn't vetoed.
+        } catch (PropertyVetoException pve) {}
+        break;
+      case 3:
+        // EXIT_ON_CLOSE:
+        System.exit(0);
+        break;
+      case WindowConstants.DO_NOTHING_ON_CLOSE:
+        try {
+          frame.setClosed(true);
+        } catch (PropertyVetoException pve) {}
+      default:
+        break;
       }
       frame.setDefaultCloseOperation(defaultCloseOperation);
     }
@@ -497,11 +494,17 @@ public interface Window {
   static class FrameWindow implements Window {
 
     private JFrame frame = null;
+
     private JDialog dialog = null;
+
     private Rectangle restoreBounds = null;
+
     private Rectangle oldBounds = null;
+
     private boolean shaded = false;
 
+    private boolean selected = false;
+    
     /**
      * Constructor for the SkinWindowWindow object
      * 
@@ -531,21 +534,23 @@ public interface Window {
      * @exception PropertyVetoException Description of Exception
      */
     public void setSelected(boolean b) throws PropertyVetoException {
-      if (frame != null) {
-        frame.show();
-        frame.toFront();
-      } else if (dialog != null) {
-        dialog.show();
-        dialog.toFront();
+      if (b) {
+        if (frame != null) {
+          frame.show();
+          frame.toFront();
+        } else if (dialog != null) {
+          dialog.show();
+          dialog.toFront();
+        }
       }
+      this.selected = b;
     }
 
     public java.awt.Window getMainFrame() {
       java.awt.Window toreturn = null;
       if (frame != null)
         toreturn = frame;
-      else if (dialog != null)
-        toreturn = dialog;
+      else if (dialog != null) toreturn = dialog;
       return toreturn;
     }
 
@@ -572,17 +577,15 @@ public interface Window {
      */
     public void setMaximum(boolean b) throws PropertyVetoException {
       if (frame != null) {
-        if (SkinRootPaneUI.getExtendedState(frame)
-          != SkinRootPaneUI.Frame_MAXIMIZED_BOTH) {
+        if (SkinRootPaneUI.getExtendedState(frame) != SkinRootPaneUI.Frame_MAXIMIZED_BOTH) {
           restoreBounds = frame.getBounds();
-          SkinRootPaneUI.setExtendedState(
-            frame,
-            SkinRootPaneUI.Frame_MAXIMIZED_BOTH);
+          SkinRootPaneUI.setExtendedState(frame,
+              SkinRootPaneUI.Frame_MAXIMIZED_BOTH);
         } else if (restoreBounds != null) {
           frame.setBounds(restoreBounds);
         }
-        dispatchEvent(
-          new ComponentEvent(frame, ComponentEvent.COMPONENT_RESIZED));
+        dispatchEvent(new ComponentEvent(frame,
+            ComponentEvent.COMPONENT_RESIZED));
       } else if (dialog != null) {
         // not available for JDialog
       }
@@ -594,29 +597,21 @@ public interface Window {
      * @param b The new Shaded value
      */
     public void setShaded(boolean b) {
-      java.awt.Window window =
-        (frame == null) ? (java.awt.Window)dialog : (java.awt.Window)frame;
+      java.awt.Window window = (frame == null)?(java.awt.Window)dialog
+          :(java.awt.Window)frame;
 
-      if (window == null || b == shaded) {
-        return;
-      }
+      if (window == null || b == shaded) { return; }
 
       if (b == true) {
         Rectangle bounds = window.getBounds();
-        oldBounds =
-          new Rectangle(bounds.x, bounds.y, bounds.width, bounds.height);
-        window.setBounds(
-          oldBounds.x,
-          oldBounds.y,
-          oldBounds.width,
-          window.getMinimumSize().height - 2);
+        oldBounds = new Rectangle(bounds.x, bounds.y, bounds.width,
+            bounds.height);
+        window.setBounds(oldBounds.x, oldBounds.y, oldBounds.width, window
+            .getMinimumSize().height - 2);
       } else {
         Point location = window.getLocation();
-        window.setBounds(
-          location.x,
-          location.y,
-          oldBounds.width,
-          oldBounds.height);
+        window.setBounds(location.x, location.y, oldBounds.width,
+            oldBounds.height);
         oldBounds = null;
       }
       shaded = b;
@@ -632,8 +627,8 @@ public interface Window {
       if (frame != null)
         frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
       else if (dialog != null)
-        dialog.dispatchEvent(
-          new WindowEvent(dialog, WindowEvent.WINDOW_CLOSING));
+          dialog.dispatchEvent(new WindowEvent(dialog,
+              WindowEvent.WINDOW_CLOSING));
     }
 
     /**
@@ -644,8 +639,7 @@ public interface Window {
     public Container getContainer() {
       if (frame != null)
         return frame.getContentPane();
-      else if (dialog != null)
-        return dialog.getContentPane();
+      else if (dialog != null) return dialog.getContentPane();
       return null;
     }
 
@@ -655,12 +649,14 @@ public interface Window {
      * @return The Selected value
      */
     public boolean isSelected() {
+      return selected;
+      /** With JDK1.4 use:
       boolean toreturn = true;
       if (frame != null)
-        toreturn = frame.isShowing();
-      else if (dialog != null)
-        toreturn = dialog.isShowing();
+        toreturn = frame.isActive();
+      else if (dialog != null) toreturn = dialog.isActive();
       return toreturn;
+      **/
     }
 
     /**
@@ -670,8 +666,7 @@ public interface Window {
      */
     public boolean isIcon() {
       boolean toreturn = false;
-      if (frame != null)
-        toreturn = frame.getState() == Frame.ICONIFIED;
+      if (frame != null) toreturn = frame.getState() == Frame.ICONIFIED;
       return toreturn;
     }
 
@@ -683,9 +678,7 @@ public interface Window {
     public boolean isMaximum() {
       boolean toreturn = false;
       if (frame != null)
-        toreturn =
-          SkinRootPaneUI.getExtendedState(frame)
-            == SkinRootPaneUI.Frame_MAXIMIZED_BOTH;
+          toreturn = SkinRootPaneUI.getExtendedState(frame) == SkinRootPaneUI.Frame_MAXIMIZED_BOTH;
       return toreturn;
     }
 
@@ -696,8 +689,7 @@ public interface Window {
      */
     public boolean isMaximizable() {
       boolean toreturn = false;
-      if (frame != null)
-        toreturn = frame.isResizable() && !isShaded();
+      if (frame != null) toreturn = frame.isResizable() && !isShaded();
       return toreturn;
     }
 
@@ -717,8 +709,7 @@ public interface Window {
      */
     public boolean isIconifiable() {
       boolean toreturn = false;
-      if (frame != null)
-        toreturn = frame.isResizable();
+      if (frame != null) toreturn = frame.isResizable();
       return toreturn;
     }
 
@@ -740,9 +731,7 @@ public interface Window {
       boolean toreturn = false;
       if (frame != null) {
         toreturn = frame.isResizable();
-      } else if (dialog != null) {
-        return dialog.isResizable() && !isShaded();
-      }
+      } else if (dialog != null) { return dialog.isResizable() && !isShaded(); }
       return toreturn;
     }
 
@@ -755,8 +744,7 @@ public interface Window {
       String title = "";
       if (frame != null)
         title = frame.getTitle();
-      else if (dialog != null)
-        title = dialog.getTitle();
+      else if (dialog != null) title = dialog.getTitle();
       return title;
     }
 
@@ -774,8 +762,8 @@ public interface Window {
         frameImage = frame.getIconImage();
       } else if (dialog != null) {
         // JDialog takes it from the parent frame
-        Frame parent =
-          (Frame)SwingUtilities.getAncestorOfClass(Frame.class, dialog);
+        Frame parent = (Frame)SwingUtilities.getAncestorOfClass(Frame.class,
+            dialog);
         if (parent != null) {
           frameImage = parent.getIconImage();
         }
@@ -792,28 +780,26 @@ public interface Window {
      * Adds a feature to the PropertyChangeListener attribute of the
      * SkinWindowWindow object
      * 
-     * @param listener The feature to be added to the PropertyChangeListener
-     *          attribute
+     * @param listener The feature to be added to the
+     *        PropertyChangeListener attribute
      */
     public void addPropertyChangeListener(PropertyChangeListener listener) {
       if (frame != null)
         frame.addPropertyChangeListener(listener);
-      else if (dialog != null)
-        dialog.addPropertyChangeListener(listener);
+      else if (dialog != null) dialog.addPropertyChangeListener(listener);
     }
 
     /**
-     * Removes a feature to the PropertyChangeListener attribute of the
-     * SkinWindowWindow object
+     * Removes a feature to the PropertyChangeListener attribute of
+     * the SkinWindowWindow object
      * 
-     * @param listener The feature to be added to the PropertyChangeListener
-     *          attribute
+     * @param listener The feature to be added to the
+     *        PropertyChangeListener attribute
      */
     public void removePropertyChangeListener(PropertyChangeListener listener) {
       if (frame != null)
         frame.removePropertyChangeListener(listener);
-      else if (dialog != null)
-        dialog.removePropertyChangeListener(listener);
+      else if (dialog != null) dialog.removePropertyChangeListener(listener);
     }
 
     /**

@@ -10,8 +10,12 @@ import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeEvent;
+import java.beans.PropertyVetoException;
 
 import javax.swing.Icon;
 import javax.swing.JComponent;
@@ -103,6 +107,9 @@ public final class SkinRootPaneUI extends BasicRootPaneUI {
    */
   private java.awt.Window window;
 
+  /** Make sure the title pane is repainted when needed */
+  private WindowListener windowListener;
+  
   /**
    * <code>JComponent</code> providing window decorations. This will be null
    * if not providing window decorations.
@@ -199,6 +206,7 @@ public final class SkinRootPaneUI extends BasicRootPaneUI {
 
     layoutManager = null;
     mouseInputListener = null;
+    windowListener = null;
     root = null;
   }
 
@@ -245,8 +253,13 @@ public final class SkinRootPaneUI extends BasicRootPaneUI {
         mouseInputListener = createWindowMouseInputListener(root);
       }
 
+      if (windowListener == null) {
+        windowListener = createWindowListener();
+      }
+      
       window.addMouseListener(mouseInputListener);
       window.addMouseMotionListener(mouseInputListener);
+      window.addWindowListener(windowListener);
     }
   }
 
@@ -259,6 +272,7 @@ public final class SkinRootPaneUI extends BasicRootPaneUI {
 
       window.removeMouseListener(mouseInputListener);
       window.removeMouseMotionListener(mouseInputListener);
+      window.removeWindowListener(windowListener);
     }
   }
 
@@ -420,6 +434,23 @@ public final class SkinRootPaneUI extends BasicRootPaneUI {
     return new MouseInputHandler();
   }
 
+  private WindowListener createWindowListener() {
+    return new WindowAdapter() {      
+      public void windowActivated(WindowEvent e) {
+        try {
+          title.setSelected(true);
+          titlePane.repaint();
+        } catch (PropertyVetoException ex) {}
+      }      
+      public void windowDeactivated(WindowEvent e) {
+        try {
+          title.setSelected(false);
+          titlePane.repaint();
+        } catch (PropertyVetoException ex) {}
+      }
+    };
+  }
+  
   /**
    * Returns a <code>LayoutManager</code> that will be set on the <code>JRootPane</code>.
    */
