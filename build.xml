@@ -13,8 +13,8 @@
 
   <!-- Project Identification -->
   <property name="project" value="skinlf"/>
-  <property name="version" value="1.2.10"/>
-  <property name="year"    value="2000-2004"/>
+  <property name="version" value="1.2.11"/>
+  <property name="year"    value="2000-2005"/>
   <property name="project.fullname" value="Skin Look And Feel"/>
   <property name="project.nativeskin" value="nativeskin"/>
 
