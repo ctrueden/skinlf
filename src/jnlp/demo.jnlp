@@ -16,6 +16,7 @@
 	</resources> 
 	<application-desc main-class="examples.demo">
 		<argument>@WEB@/software/skinlf/jnlp/themepack.zip</argument>
+		<argument>@WEB@/javootoo.com/plaf/skinlf/themepacks/toxicthemepack.zip</argument>
 		<argument>@WEB@/javootoo.com/plaf/skinlf/themepacks/cellshadedthemepack.zip</argument>
 		<argument>@WEB@/javootoo.com/plaf/skinlf/themepacks/bbjthemepack.zip</argument>
 		<argument>@WEB@/javootoo.com/plaf/skinlf/themepacks/xplunathemepack.zip</argument>
