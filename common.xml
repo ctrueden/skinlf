@@ -68,7 +68,6 @@
     <copy todir="${build.src}" filtering="yes">
       <fileset dir="${java.src.dir}">
         <include name="**/*.java"/>
-        <exclude name="sun/**"/>
       </fileset>
     </copy>
     <javac srcdir="${build.src}"
