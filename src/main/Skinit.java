@@ -51,17 +51,16 @@
  * start any application with SkinLF. Skinit will prevent the
  * application to set its own Look And Feel. Once Skin Look And Feel
  * is set, it can't be removed. <br>
- *
- * @author    $Author: l2fprod $
- * @version   $Revision: 1.2 $, $Date: 2003-08-20 09:35:36 $
+ * 
+ * @author fred
  */
 public class Skinit extends com.l2fprod.gui.plaf.skin.Skinit {
 
   /**
    * The main program for the Skinit class
-   *
-   * @param args           The command line arguments
-   * @exception Exception  Description of Exception
+   * 
+   * @param args The command line arguments
+   * @throws Exception Description of Exception
    */
   public static void main(String[] args) throws Exception {
     com.l2fprod.gui.plaf.skin.Skinit.main(args);
