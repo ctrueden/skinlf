@@ -11,6 +11,8 @@
                 <action type="remove">Dropped JDK1.2 support, SkinLF 1.2.5 is the last version supporting JDK1.2</action>
                 <action type="fix">Fixed one memory leak when switching skins at runtime (was visible on the demo)</action>
                 <action type="fix">Shaded frame was resizable via the border corners</action>
+                <action type="fix">Decorated frame was not supporting the "shading" feature</action>
+                <action type="fix">With JDK1.4, the InternalFrame buttons were visible even if they are was disabled, a not closable frame had the close button for example</action>
         </release>
 
         <release version="1.2.5" date="4 October 2003">
