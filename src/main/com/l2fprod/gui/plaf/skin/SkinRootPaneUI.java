@@ -27,6 +27,7 @@ import javax.swing.LookAndFeel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.event.MouseInputListener;
+import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicRootPaneUI;
 
@@ -338,7 +339,7 @@ public final class SkinRootPaneUI extends BasicRootPaneUI {
         if (string.equalsIgnoreCase("desktop")) {
           cont = false;
           try {
-            Color background = Color.decode(colors[i + 1]);
+            Color background = new ColorUIResource(Color.decode(colors[i + 1]));
             window.setBackground(background);
           } catch (NumberFormatException e) {
           }
