@@ -3,6 +3,7 @@ package com.l2fprod.tools.msstyles;
 import com.l2fprod.tools.ThemeConverter;
 import com.l2fprod.tools.ImageUtils;
 
+import java.awt.Image;
 import java.io.File;
 import java.io.FileInputStream;
 import javax.xml.parsers.DocumentBuilder;
@@ -42,7 +43,14 @@ public class MsStylesToSkinLF extends ThemeConverter {
       factory.newDocumentBuilder();
     msstyle = builder.parse(new FileInputStream(file));
   }
-  
+
+  public void process() throws Exception {
+    super.process();
+
+    System.out.println("Fixing Window borders");
+    postProcessWindowDecorations();
+  }
+
   /**
    * Locate the element. if xpath is absolute, update the lastElement
    * property else find a node relative to lastElement but do not
@@ -110,6 +118,11 @@ public class MsStylesToSkinLF extends ThemeConverter {
       }
       
       vertical = "vertical".equalsIgnoreCase(layout);
+
+      String countProperty = getPropertyValue(element, "ImageCount");
+      if (countProperty != null) {
+        count = Integer.parseInt(countProperty);
+      }
     }
 
     if (imageFile == null || "".equals(imageFile)) {
@@ -131,7 +144,54 @@ public class MsStylesToSkinLF extends ThemeConverter {
                              
     return outputname;
   }
-  
+
+  private void postProcessWindowDecorations() throws Exception {
+    // get the top selected and move the left and right top corners as
+    // single images, then remove the borders from the selected and
+    // unselected.
+    Image top = ImageUtils.loadPng(new File(getSkinDirectory(), "kde/titlebar_selected.png").getAbsolutePath());
+    Image topUnselected = ImageUtils.loadPng(new File(getSkinDirectory(), "kde/titlebar_unselected.png").getAbsolutePath());
+
+    Image left = ImageUtils.loadPng(new File(getSkinDirectory(), "kde/window_left.png").getAbsolutePath());
+    Image right = ImageUtils.loadPng(new File(getSkinDirectory(), "kde/window_right.png").getAbsolutePath());
+
+    Image topleft = ImageUtils.grab(top, 0, 0, left.getWidth(null), top.getHeight(null));
+    ImageUtils.savePng(topleft, new File(getSkinDirectory(), "kde/window_topleft.png").getAbsolutePath());
+    
+    Image topright = ImageUtils.grab(top, top.getWidth(null) - right.getWidth(null), 0,
+                                     right.getWidth(null), top.getHeight(null));
+    ImageUtils.savePng(topright, new File(getSkinDirectory(), "kde/window_topright.png").getAbsolutePath());
+
+    // rewrite the top selected
+    top = ImageUtils.grab(top, left.getWidth(null), 0,
+                          top.getWidth(null) - left.getWidth(null) - right.getWidth(null),
+                          top.getHeight(null));
+    ImageUtils.savePng(top, new File(getSkinDirectory(), "kde/titlebar_selected.png").getAbsolutePath());
+
+    // and unselected
+    topUnselected = ImageUtils.grab(topUnselected, left.getWidth(null), 0,
+                                    top.getWidth(null) - left.getWidth(null) - right.getWidth(null),
+                                    top.getHeight(null));
+    ImageUtils.savePng(topUnselected, new File(getSkinDirectory(), "kde/titlebar_unselected.png").getAbsolutePath());
+
+    // same process with the bottom image
+    Image bottom = ImageUtils.loadPng(new File(getSkinDirectory(), "kde/window_bottom.png").getAbsolutePath());
+
+    Image bottomLeft = ImageUtils.grab(bottom, 0, 0, left.getWidth(null), bottom.getHeight(null));
+    ImageUtils.savePng(bottomLeft, new File(getSkinDirectory(), "kde/window_bottomleft.png").getAbsolutePath());
+
+    Image bottomRight = ImageUtils.grab(bottom, bottom.getWidth(null) - right.getWidth(null),
+                                        0, right.getWidth(null), bottom.getHeight(null));
+    ImageUtils.savePng(bottomRight, new File(getSkinDirectory(), "kde/window_bottomright.png").getAbsolutePath());
+
+    // rewrite the bottom
+    // rewrite the top selected
+    bottom = ImageUtils.grab(bottom, left.getWidth(null), 0,
+                             bottom.getWidth(null) - left.getWidth(null) - right.getWidth(null),
+                             bottom.getHeight(null));
+    ImageUtils.savePng(bottom, new File(getSkinDirectory(), "kde/window_bottom.png").getAbsolutePath());
+  }
+
   protected String paramString() {
     return super.paramString() +
       ",msstyleDirectory=" + msstyleDirectory +
