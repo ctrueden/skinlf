@@ -13,10 +13,6 @@
 
   <xsl:template match="www">
     <xsl:for-each select="document">
-      <xsl:message>
-        <xsl:value-of select="$output.dir"/>
-        <xsl:value-of select="@id"/>
-      </xsl:message>
       <redirect:write file="{$output.dir}/{@id}.html">
         <xsl:call-template name="document.html" />
       </redirect:write>
@@ -109,6 +105,11 @@
 :: <xsl:for-each select="//document">
       <a class="banner" href="{@id}.html">
         <xsl:value-of select="properties/title"/>
+      </a> ::
+    </xsl:for-each>
+    <xsl:for-each select="/www/links/a">
+      <a class="banner" href="{@href}">
+        <xsl:value-of select="."/>
       </a> ::
     </xsl:for-each>
   </xsl:template>

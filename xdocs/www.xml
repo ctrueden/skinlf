@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE DOCUMENT [
+<!DOCTYPE www [
   <!ENTITY index      SYSTEM "index.xml">
   <!ENTITY converters SYSTEM "converters.xml">
+  <!ENTITY todo       SYSTEM "TODO.xml">
   <!ENTITY sitemap    SYSTEM "sitemap.xml">
 ]>
 <www>
@@ -11,6 +12,15 @@
 
   &index;
   &converters;
+  &todo;
 
   &sitemap;
+
+  <!--
+    External links to add to the Link bar
+    -->
+  <links>
+    <a href="http://www.L2FProd.com">L2FProd.com</a>
+  </links>
+
 </www>

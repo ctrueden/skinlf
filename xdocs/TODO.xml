@@ -1,37 +1,63 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
+<document id="todo">
+  <properties>
+    <title>Roadmap</title>
+  </properties>
 
-<todo title="Things to do">
-  
-  <devs>
-    <person name="Frederic Lavigne" email="fred@L2FProd.com" id="FL"/>
-  </devs>
-  
-  <actions priority="low">
-    <action context="code">
-      support for background color on widgets (need testing)
-    </action>
-    <action context="code">
-      kdeframeborder: if pixmap bottom left/right and top left/right are null, left and right should be used to replace them
-    </action>
-    <action context="code">
-      add double arrow to scrollbar (for page up down)
-      => how to create the double arrow (what graphic to use ?)
-    </action>
-    <action context="code">
-      WIN32: when using a java.awt.Window, there is no taskbar item associated, so the window is like a ghost and only visible in our WindowList or with Alt+Tab (but with no title)
-    </action>
-  </actions>
-  
-  <actions priority="high">
-    <action context="web">
-      add a tutorial/making-off with javawebstart demo
-    </action>
-    <action context="code">
-      compile and test skinregionlinux.so
-    </action>
-    <action context="code">
-      support new skin format like MSVisualStyles
-    </action>
-  </actions>
-
-</todo>
+  <body>
+    <section>
+      <title>Things to do</title>
+      <p>
+        What's next with SkinLF? What is planned and when?
+      </p>
+      <section>
+        <title>Features</title>
+        <p>
+          <ul>
+            <li>
+              Support for background color on widgets (need testing)
+            </li>
+            <li>
+              add double arrow to scrollbar (for page up down) => how
+              to create the double arrow (what graphic to use ?)
+            </li>
+            <li>
+              Compile and test skinregionlinux.so
+            </li>
+            <li>
+              Support new skin format like MSVisualStyles
+            </li>
+          </ul>
+        </p>
+      </section>
+      <section>
+        <title>Documentation</title>
+        <p>
+          <ul>
+            <li>
+              Add a tutorial/making-off with javawebstart demo
+            </li>
+          </ul>
+        </p>
+      </section>
+      <section>
+        <title>Bugs to fix</title>
+        <p>
+          <ul>
+            <li>
+              border of internal frames: if pixmap bottom left/right
+              and top left/right are null, left and right should be
+              used to replace them
+            </li>
+            <li>
+              WIN32: when using a java.awt.Window, there is no taskbar
+              item associated, so the window is like a ghost and only
+              visible in our WindowList or with Alt+Tab (but with no
+              title)
+            </li>
+          </ul>
+        </p>
+      </section>
+    </section>
+  </body>
+</document>
