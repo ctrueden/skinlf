@@ -61,7 +61,7 @@ import com.l2fprod.util.ImageUtils;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.3 $, $Date: 2003-12-06 21:48:36 $
+ * @version   $Revision: 1.4 $, $Date: 2004-02-14 11:16:23 $
  */
 final class GtkPersonality extends AbstractSkinPersonality {
 
@@ -83,8 +83,6 @@ final class GtkPersonality extends AbstractSkinPersonality {
   DefaultButton disabledComboBox;
 
   DefaultButton focus;
-
-  TableCellRenderer tableHeaderRenderer;
 
   java.awt.Insets comboBoxInsets = new java.awt.Insets(1, 4, 1, 4);
 
@@ -220,15 +218,12 @@ final class GtkPersonality extends AbstractSkinPersonality {
    * @return   The TableHeaderRenderer value
    */
   public TableCellRenderer getTableHeaderRenderer() {
-    if (tableHeaderRenderer == null) {
-      if (itemSelected != null && itemUnselected != null) {
-        tableHeaderRenderer = new GtkTableHeaderRenderer(itemSelected, itemUnselected);
-      }
-      else {
-        tableHeaderRenderer = new DefaultTableCellRenderer();
-      }
+    if (itemSelected != null && itemUnselected != null) {
+      return new GtkTableHeaderRenderer(itemSelected, itemUnselected);
     }
-    return tableHeaderRenderer;
+    else {
+      return new DefaultTableCellRenderer();
+    }
   }
 
   /**
