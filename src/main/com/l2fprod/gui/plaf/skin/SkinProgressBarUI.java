@@ -58,11 +58,17 @@ import java.awt.*;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.2 $, $Date: 2003-11-23 14:47:45 $
+ * @version   $Revision: 1.3 $, $Date: 2003-11-23 16:12:29 $
  */
 public class SkinProgressBarUI extends BasicProgressBarUI {
 
   private Skin skin = SkinLookAndFeel.getSkin();
+
+  /**                                                             
+   * Used to hold the location and size of the bouncing box (returned
+   * by getBox) to be painted.  
+   */                                                             
+  private Rectangle boxRect;
 
   /**
    * Description of the Method
@@ -76,7 +82,7 @@ public class SkinProgressBarUI extends BasicProgressBarUI {
   	//in the basicprogressbarui getBox() method
     if (OS.isOneDotFour() && progressBar.isIndeterminate()) {
       skin.getProgress().
-        paintIndeterminateProgress(g, progressBar, getBox(new Rectangle()));
+        paintIndeterminateProgress(g, progressBar, getBox(boxRect));
     } else {
 	    skin.getProgress().paintProgress(g, progressBar);
     }
@@ -111,6 +117,28 @@ public class SkinProgressBarUI extends BasicProgressBarUI {
     progressBar.setOpaque(true);
     progressBar.setBorderPainted(false);
     progressBar.setMinimumSize(skin.getProgress().getMinimumSize(progressBar));
+  }
+
+  public void installUI(JComponent c) {
+    super.installUI(c);
+    if (OS.isOneDotFour()) {
+      //JDK 1.4 has a bug where all the support for indeterminate is
+      //not recreated when a look and feel is changed at runtime thus
+      //resulting in nullpointerexception in updateSize():
+      //java.lang.NullPointerException
+      //  at javax.swing.plaf.basic.BasicProgressBarUI.updateSizes(BasicProgressBarUI.java:433)
+      //  at javax.swing.plaf.basic.BasicProgressBarUI.getBox(BasicProgressBarUI.java:375)
+      //  at com.l2fprod.gui.plaf.skin.SkinProgressBarUI.paint(SkinProgressBarUI.java:84)
+      //
+      //plus it does not re-enable the animation when the lnf has
+      //changed. The following code fixes this.
+      //
+      //logged as http://developer.java.sun.com/developer/bugParade/bugs/4862295.html 
+      if (progressBar.isIndeterminate()) {
+        progressBar.setIndeterminate(false);
+        progressBar.setIndeterminate(true);
+      }
+    }
   }
 
   /**
