@@ -49,12 +49,9 @@ package com.l2fprod.gui.plaf.skin;
 
 import com.l2fprod.util.ImageUtils;
 
-import java.awt.Component;
-import java.awt.Container;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Insets;
-import java.awt.Point;
 import java.awt.Toolkit;
 import java.io.File;
 import java.net.URL;
@@ -68,7 +65,7 @@ import javax.swing.plaf.FontUIResource;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.4 $, $Date: 2003-12-06 21:53:26 $
+ * @version   $Revision: 1.5 $, $Date: 2003-12-27 21:03:46 $
  */
 public final class SkinUtils {
 
@@ -181,40 +178,6 @@ public final class SkinUtils {
 			path = path + "/";
 		}
 		return new URL("file", "", path);
-	}
-
-	/**
-	 * Description of the Method
-	 *
-	 * @param container  Description of Parameter
-	 * @param x          Description of Parameter
-	 * @param y          Description of Parameter
-	 * @return           Description of the Returned Value
-	 */
-	public static Component findComponentAt(
-		Container container,
-		int x,
-		int y) {
-		if (!container.contains(x, y)) {
-			return null;
-		}
-		int ncomponents = container.getComponentCount();
-		Component component[] = container.getComponents();
-		for (int i = 0; i < ncomponents; i++) {
-			Component comp = component[i];
-			if (comp != null) {
-				Point p = comp.getLocation();
-				if (comp instanceof Container) {
-					comp = findComponentAt((Container) comp, x - p.x, y - p.y);
-				} else {
-					comp = comp.locate(x - p.x, y - p.y);
-				}
-				if (comp != null && comp.isVisible()) {
-					return comp;
-				}
-			}
-		}
-		return container;
 	}
 
 	// color is R,G,B
