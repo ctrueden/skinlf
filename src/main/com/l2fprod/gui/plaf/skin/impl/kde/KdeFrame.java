@@ -64,7 +64,7 @@ import com.l2fprod.gui.plaf.skin.impl.*;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 20:07:51 $
+ * @version   $Revision: 1.2 $, $Date: 2003-08-16 15:39:43 $
  */
 class KdeFrame extends AbstractSkinFrame {
 
@@ -99,28 +99,48 @@ class KdeFrame extends AbstractSkinFrame {
     String path = ini.getKeyValue("Window Titlebar", "TitlebarPixmapActive");
     if (path != null) {
       Image image = SkinUtils.loadImage(new URL(skinURL, path));
+      Insets border;
+      if (ini.getKeyValue("Window Titlebar", "TitlebarPixmapActiveBorder") != null) {
+        border = SkinUtils.stringToInsets(ini.getKeyValue("Window Titlebar", "TitlebarPixmapActiveBorder"));
+      } else {
+        border =
+          new Insets(ini.getKeyIntValue("Window Titlebar", "TitlebarPixmapActiveTop"),
+                     ini.getKeyIntValue("Window Titlebar", "TitlebarPixmapActiveLeft"),
+                     ini.getKeyIntValue("Window Titlebar", "TitlebarPixmapActiveBottom"),
+                     ini.getKeyIntValue("Window Titlebar", "TitlebarPixmapActiveRight"));
+      }
       topSelected =
-          new DefaultButton(image,
-          image.getWidth(null),
-          image.getHeight(null),
-          ini.getKeyIntValue("Window Titlebar", "TitlebarPixmapActiveTop"),
-          ini.getKeyIntValue("Window Titlebar", "TitlebarPixmapActiveRight"),
-          ini.getKeyIntValue("Window Titlebar", "TitlebarPixmapActiveBottom"),
-          ini.getKeyIntValue("Window Titlebar", "TitlebarPixmapActiveLeft"));
+        new DefaultButton(image,
+                          image.getWidth(null),
+                          image.getHeight(null),
+                          border.top,
+                          border.right,
+                          border.bottom,
+                          border.left);
       topHeight = topSelected.getHeight();
     }
 
     path = ini.getKeyValue("Window Titlebar", "TitlebarPixmapInactive");
     if (path != null) {
       Image image = SkinUtils.loadImage(new URL(skinURL, path));
+      Insets border;
+      if (ini.getKeyValue("Window Titlebar", "TitlebarPixmapActiveBorder") != null) {
+        border = SkinUtils.stringToInsets(ini.getKeyValue("Window Titlebar", "TitlebarPixmapActiveBorder"));
+      } else {
+        border =
+          new Insets(ini.getKeyIntValue("Window Titlebar", "TitlebarPixmapActiveTop"),
+                     ini.getKeyIntValue("Window Titlebar", "TitlebarPixmapActiveLeft"),
+                     ini.getKeyIntValue("Window Titlebar", "TitlebarPixmapActiveBottom"),
+                     ini.getKeyIntValue("Window Titlebar", "TitlebarPixmapActiveRight"));
+      }
       topUnselected =
           new DefaultButton(image,
           image.getWidth(null),
           image.getHeight(null),
-          ini.getKeyIntValue("Window Titlebar", "TitlebarPixmapActiveTop"),
-          ini.getKeyIntValue("Window Titlebar", "TitlebarPixmapActiveRight"),
-          ini.getKeyIntValue("Window Titlebar", "TitlebarPixmapActiveBottom"),
-          ini.getKeyIntValue("Window Titlebar", "TitlebarPixmapActiveLeft"));
+                            border.top,
+                            border.right,
+                            border.bottom,
+                            border.left);
       //	    topUnselected = SkinUtils.loadImage(new URL(skinURL, path));
       topHeight = Math.max(topHeight, topUnselected.getHeight());
     }
@@ -317,7 +337,7 @@ class KdeFrame extends AbstractSkinFrame {
    * @created   27 avril 2002
    */
   class FrameButton {
-    ImageIcon icon, downIcon, inactiveIcon;
+    ImageIcon icon, rolloverIcon, downIcon, inactiveIcon;
     int align;
     int action = SkinTitlePane.NO_ACTION;
 
@@ -347,6 +367,10 @@ class KdeFrame extends AbstractSkinFrame {
       path = ini.getKeyValue("Window Titlebar", command + "InactiveButton");
       if (path != null) {
         inactiveIcon = new ImageIcon(SkinUtils.loadImage(new URL(skinURL, path)));
+      }
+      path = ini.getKeyValue("Window Titlebar", command + "RolloverButton");
+      if (path != null) {
+        rolloverIcon = new ImageIcon(SkinUtils.loadImage(new URL(skinURL, path)));
       }
 
       if ("Maximize".equalsIgnoreCase(command)) {
@@ -390,7 +414,7 @@ class KdeFrame extends AbstractSkinFrame {
         button.setNoFocusIcon(inactiveIcon);
         button.setNoFocusRolloverIcon(inactiveIcon);
         button.setIcon(icon);
-        button.setRolloverIcon(icon);
+        button.setRolloverIcon(rolloverIcon!=null?rolloverIcon:icon);
         button.setPressedIcon(downIcon);
       }
       return button;
