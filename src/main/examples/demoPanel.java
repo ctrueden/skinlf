@@ -65,7 +65,7 @@ import javax.swing.table.*;
  *
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.7 $, $Date: 2003-12-06 21:52:06 $
+ * @version   $Revision: 1.8 $, $Date: 2004-02-14 11:21:22 $
  */
 public class demoPanel extends JPanel {
 
@@ -177,7 +177,7 @@ public class demoPanel extends JPanel {
     common.add(select);
 
     check = new JCheckBox("<html>Check box<br>with<br>multiple lines", false);
-    check.setBackground(Color.green);
+    check.setBackground(Color.red);
     common.add(check);
 
     select = new JRadioButton("Select", false);
@@ -293,7 +293,7 @@ public class demoPanel extends JPanel {
     menu.add(
       new AbstractAction("About " + SkinLookAndFeel.version()) {
         public void actionPerformed(ActionEvent event) {
-          JOptionPane.showMessageDialog(null,
+          JOptionPane.showMessageDialog(demoPanel.this,
               "SkinLookAndFeel " + SkinLookAndFeel.version() + "\n" +
               "(c) @YEAR@ L2FProd.com");
         }
