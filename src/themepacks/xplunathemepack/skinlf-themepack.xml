@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<skinlf-themepack require="1.2.4">
+
+        <property name="EnableBorders" value="true" />
+	<property name="JDesktopPane.backgroundEnabled" value="false"/>
+	<property name="JSplitPane.alternateUI" value="true" />
+	<property name="PopupMenu.animation" value="false"/>
+	<property name="ScrollBar.alternateLayout" value="true"/>
+
+	<icon name="InternalFrame.icon" value="icons/Window.gif"/>
+
+	<icon name="Tree.openIcon" value="icons/TreeOpen.gif"/>
+	<icon name="Tree.closedIcon" value="icons/TreeClosed.gif"/>
+	<icon name="Tree.leafIcon" value="icons/Default.gif"/>
+  
+	<icon name="OptionPane.errorIcon" value="icons/Error.gif"/>
+	<icon name="OptionPane.informationIcon" value="icons/Inform.gif"/>
+	<icon name="OptionPane.warningIcon" value="icons/Warn.gif"/>
+	<icon name="OptionPane.questionIcon" value="icons/Question.gif"/>
+
+	<font name="Global" value="SansSerif,0,11"/>
+
+	<skin>
+		<skin url="gtk/gtkrc"></skin>
+		<skin url="kde/kde.themerc"></skin>
+	</skin>
+</skinlf-themepack>
