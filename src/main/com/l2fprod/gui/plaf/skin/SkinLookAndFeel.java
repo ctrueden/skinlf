@@ -81,7 +81,7 @@ import com.l2fprod.util.*;
  * L2FProd.com website</a> for the complete description of a theme pack.
  *
  * @author    $Author: l2fprod $
- * @version   $Revision: 1.2 $, $Date: 2003-08-17 20:48:03 $
+ * @version   $Revision: 1.3 $, $Date: 2003-08-19 12:46:45 $
  */
 public class SkinLookAndFeel extends BasicLookAndFeel {
 
@@ -221,7 +221,8 @@ public class SkinLookAndFeel extends BasicLookAndFeel {
       (Boolean.TRUE.equals(UIManager.get("JSplitPane.alternateUI"))?
       (skinPackageName + "SkinSplitPaneUI"):
       "javax.swing.plaf.basic.BasicSplitPaneUI"),
-      "TreeUI", skinPackageName + "SkinTreeUI"
+      "TreeUI", skinPackageName + "SkinTreeUI",
+      "OptionPaneUI", skinPackageName + "SkinOptionPaneUI",
     };
     for (int i = 0; i < uiDefaults.length; i++) {
       list.addElement(uiDefaults[i]);
