@@ -33,6 +33,26 @@
 
   &build-COMMON;
 
+  <!-- get some of the dependant jars from maven repository -->
+  <target name="init.jars">
+    <get src="http://www.ibiblio.org/maven/javacc/jars/JavaCC.zip"
+	 dest="lib/JavaCC.zip"
+	 verbose="true"
+	 usetimestamp="true"/>
+    <get src="http://www.ibiblio.org/maven/xalan/jars/xalan-2.5.1.jar"
+         dest="lib/xalan.jar"
+	 verbose="true"
+	 usetimestamp="true"/>
+    <get src="http://www.ibiblio.org/maven/xerces/jars/xercesImpl-2.4.0.jar"
+	 dest="lib/xercesImpl.jar"
+	 verbose="true"
+	 usetimestamp="true"/>
+    <get src="http://www.ibiblio.org/maven/xml-apis/jars/xml-apis-2.0.2.jar"
+	 dest="lib/xml-apis.jar"
+	 verbose="true"
+	 usetimestamp="true"/>
+  </target>
+
   <target name="compile.javacc" depends="init">
     <javacc target="src/main/com/l2fprod/gui/plaf/skin/impl/gtk/parser/GtkParser.jj"
             outputdirectory="src/main/com/l2fprod/gui/plaf/skin/impl/gtk/parser"
