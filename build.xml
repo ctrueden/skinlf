@@ -108,6 +108,12 @@
   <target name="themes">
     <zip destfile="${build.www.themedir}/cellshadedthemepack.zip"
 	 basedir="src/themepacks/cellshadedthemepack"/>
+    <zip destfile="${build.www.themedir}/whistlerthemepack.zip"
+	 basedir="src/themepacks/whistlerthemepack"/>
+    <zip destfile="${build.www.themedir}/xplunathemepack.zip"
+	 basedir="src/themepacks/xplunathemepack"/>
+    <zip destfile="${build.www.themedir}/aquathemepack.zip"
+	 basedir="src/themepacks/aquathemepack"/>
   </target>
 
 </project>
