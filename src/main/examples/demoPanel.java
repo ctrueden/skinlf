@@ -72,7 +72,7 @@ import javax.swing.table.TableColumn;
  *
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.9 $, $Date: 2004-07-18 16:54:13 $
+ * @version   $Revision: 1.10 $, $Date: 2004-07-29 21:38:51 $
  */
 public class demoPanel extends JPanel {
 
@@ -302,8 +302,9 @@ public class demoPanel extends JPanel {
       new AbstractAction("About " + SkinLookAndFeel.version()) {
         public void actionPerformed(ActionEvent event) {
           JOptionPane.showMessageDialog(demoPanel.this,
-              "SkinLookAndFeel " + SkinLookAndFeel.version() + "\n" +
-              "(c) @YEAR@ L2FProd.com");
+              "SkinLookAndFeel "
+            	+ SkinLookAndFeel.version() + " build " + SkinLookAndFeel.date()
+            	+ "\n" + "(c) @YEAR@ L2FProd.com");
         }
       });
     menubar.add(menu);

@@ -82,7 +82,7 @@ import javax.swing.text.JTextComponent;
  * website</a> for the complete description of a theme pack.
  * 
  * @author $Author: l2fprod $
- * @version $Revision: 1.12 $, $Date: 2004-07-18 19:15:45 $
+ * @version $Revision: 1.13 $, $Date: 2004-07-29 21:38:38 $
  */
 public class SkinLookAndFeel extends BasicLookAndFeel {
 
@@ -102,6 +102,10 @@ public class SkinLookAndFeel extends BasicLookAndFeel {
     return "@VERSION@";
   }
 
+  public static String date() {
+    return "@DATE@";
+  }
+  
   private static Skin c_CurrentSkin;
   private static ZipResourceLoader c_ResourceLoader;
 
