@@ -103,8 +103,6 @@ public class demoWelcome extends JPanel {
     area.setEditable(false);
     area.setOpaque(false);
     area.setText("Welcome to Skin Look And Feel " + SkinLookAndFeel.VERSION + "\n" +
-        "This version has been tested with JRE 1.2 and 1.3. " +
-        "The next version will be available shortly with JRE 1.4 support.\n\n" +
         "Use the combobox above to test the various themepacks available.\n");
     area.setBackground(getBackground());
     p.add(area);
