@@ -113,12 +113,7 @@ public class demo extends JApplet {
 
     demo d = new demo();
     d.createUI(args);
-
-    JFrame f = new JFrame("Skin Look And Feel " + SkinLookAndFeel.VERSION);
-
-    f.getContentPane().setLayout(new BorderLayout());
-    f.getContentPane().add("Center", d);
-    
+   
     // if we are running with JDK1.4 decorates the frames and dialogs
     if (OS.isOneDotFour()) {
       java.lang.reflect.Method method = JFrame.class.
@@ -131,6 +126,11 @@ public class demo extends JApplet {
                   new Class[]{boolean.class});
       method.invoke(null, new Object[]{Boolean.TRUE});
     }
+
+    JFrame f = new JFrame("Skin Look And Feel " + SkinLookAndFeel.VERSION);
+
+    f.getContentPane().setLayout(new BorderLayout());
+    f.getContentPane().add("Center", d);
 
     f.pack();
 
