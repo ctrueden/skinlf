@@ -52,6 +52,7 @@ import java.awt.image.PixelGrabber;
 
 import com.l2fprod.gui.nativeskin.*;
 import com.l2fprod.gui.region.*;
+import com.l2fprod.util.AccessUtils;
 import com.l2fprod.util.OS;
 
 /**
@@ -60,7 +61,7 @@ import com.l2fprod.util.OS;
  * @author    $Author: l2fprod $
  * @author    Herve Lemaitre (setWindowImageRegion0)
  * @created   27 avril 2002
- * @version   $Revision: 1.3 $, $Date: 2004-07-18 19:12:51 $
+ * @version   $Revision: 1.4 $, $Date: 2004-08-10 18:38:13 $
  */
 public final class Win32NativeSkin extends NativeSkin {
   
@@ -206,23 +207,40 @@ public final class Win32NativeSkin extends NativeSkin {
     if (OS.isOneDotFourOrMore()) {
       return getHWND0(window);
     } else {
-      sun.awt.DrawingSurfaceInfo drawingSurfaceInfo;
-      sun.awt.Win32DrawingSurface win32DrawingSurface;
+      try {
+      Object drawingSurfaceInfo;
       int hwnd = 0;
             
       // Get the drawing surface
+      // drawingSurfaceInfo =
+      //   ((sun.awt.DrawingSurface) (window.getPeer())).getDrawingSurfaceInfo();
       drawingSurfaceInfo =
-        ((sun.awt.DrawingSurface) (window.getPeer())).getDrawingSurfaceInfo();
-      
+        Class.forName("sun.awt.DrawingSurface").
+        getMethod("getDrawingSurfaceInfo", null).
+        invoke(window.getPeer(), null);
+
       if (null != drawingSurfaceInfo) {
-        drawingSurfaceInfo.lock();
+        // drawingSurfaceInfo.lock();
+        AccessUtils.invoke(drawingSurfaceInfo, "lock", null, null);
+
         // Get the Win32 specific information
-        win32DrawingSurface =
-          (sun.awt.Win32DrawingSurface) drawingSurfaceInfo.getSurface();
-        hwnd = win32DrawingSurface.getHWnd();
-        drawingSurfaceInfo.unlock();
+        // win32DrawingSurface =
+        //   (sun.awt.Win32DrawingSurface) drawingSurfaceInfo.getSurface();
+        Object win32DrawingSurface =
+          AccessUtils.invoke(drawingSurfaceInfo, "getSurface", null, null);
+
+        // hwnd = win32DrawingSurface.getHWnd();
+        hwnd = AccessUtils.getAsInt(win32DrawingSurface, "getHWnd");
+
+        // drawingSurfaceInfo.unlock();
+        AccessUtils.invoke(drawingSurfaceInfo, "unlock", null, null);
       }
       return hwnd;
+        
+      } catch (Throwable throwable) {
+        throwable.printStackTrace();
+        throw new Error(throwable);
+      }
     }
   }
 
