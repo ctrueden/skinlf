@@ -47,22 +47,17 @@
  */
 package com.l2fprod.gui.plaf.skin;
 
-import javax.swing.Icon;
 import javax.swing.JButton;
 
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.3 $, $Date: 2003-12-06 21:53:26 $
+ * @version   $Revision: 1.4 $, $Date: 2004-07-18 19:20:16 $
  */
 public final class SkinWindowButton extends JButton {
 
   private int align, action;
   private int xcoord, ycoord;
-
-  private Icon noFocusIcon, noFocusRolloverIcon;
-
-  private Window window;
 
   /**
    * Constructor for the SkinWindowButton object
@@ -99,33 +94,6 @@ public final class SkinWindowButton extends JButton {
   }
 
 	public void requestFocus() {};
-
-  /**
-   * Sets the Window attribute of the SkinWindowButton object
-   *
-   * @param window  The new Window value
-   */
-  public void setWindow(Window window) {
-    this.window = window;
-  }
-
-  /**
-   * Sets the NoFocusIcon attribute of the SkinWindowButton object
-   *
-   * @param icon  The new NoFocusIcon value
-   */
-  public void setNoFocusIcon(Icon icon) {
-    noFocusIcon = icon;
-  }
-
-  /**
-   * Sets the NoFocusRolloverIcon attribute of the SkinWindowButton object
-   *
-   * @param icon  The new NoFocusRolloverIcon value
-   */
-  public void setNoFocusRolloverIcon(Icon icon) {
-    noFocusRolloverIcon = icon;
-  }
 
   /**
    * Gets the UIClassID attribute of the SkinWindowButton object
@@ -170,48 +138,6 @@ public final class SkinWindowButton extends JButton {
    */
   public int getWindowAction() {
     return action;
-  }
-
-  /**
-   * Gets the Icon attribute of the SkinWindowButton object
-   *
-   * @return   The Icon value
-   */
-  public Icon getIcon() {
-    if (isSelected()) {
-      return super.getIcon();
-    }
-    else {
-      return noFocusIcon;
-    }
-  }
-
-  /**
-   * Gets the RolloverIcon attribute of the SkinWindowButton object
-   *
-   * @return   The RolloverIcon value
-   */
-  public Icon getRolloverIcon() {
-    if (isSelected()) {
-      return super.getRolloverIcon();
-    }
-    else {
-      return noFocusRolloverIcon;
-    }
-  }
-
-  /**
-   * Gets the Selected attribute of the SkinWindowButton object
-   *
-   * @return   The Selected value
-   */
-  public boolean isSelected() {
-    if (window != null) {
-      return window.isSelected();
-    }
-    else {
-      return true;
-    }
   }
 
 }

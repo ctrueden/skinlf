@@ -57,6 +57,9 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyVetoException;
@@ -87,15 +90,17 @@ public class SkinTitlePane extends BasicInternalFrameTitlePane {
    */
   protected Window m_Window;
 
+  private SkinWindowButton[] m_WindowButtons;
+  
   /**
    * Description of the Field
    */
   private Action shadeAction;
 
-  private boolean systemMenuAdded = false;
-
   private Skin skin;
 
+  private WindowListener m_WindowListener;
+  
   public final static int ICON_OFFSET = 16;
 
   /**
@@ -149,7 +154,7 @@ public class SkinTitlePane extends BasicInternalFrameTitlePane {
     // in JDK1.4 Sun changed the way listener is added remove before
     // it was in add/remove notify now add is made in installDefaults
     // and remove by BasicInternalFrameUI
-    if (OS.isOneDotFour()) {
+    if (OS.isOneDotFourOrMore()) {
       installListeners();
     }
   }
@@ -253,17 +258,64 @@ public class SkinTitlePane extends BasicInternalFrameTitlePane {
    * Overriden to register on the window
    */
   protected void installListeners() {
+    // the window container may be null when the titlePane is used by
+    // a JFrame/JDialog
+    if (m_Window == null || m_Window.getContainer() == null) {
+      return;
+    }
+
     if (propertyChangeListener == null) {
       propertyChangeListener = createPropertyChangeListener();
     }
     m_Window.addPropertyChangeListener(propertyChangeListener);
+
+    if (m_Window instanceof Window.FrameWindow) {
+      if (m_WindowListener == null) {
+        m_WindowListener = createWindowListener();
+      }
+      ((Window.FrameWindow)m_Window).getMainFrame().addWindowListener(
+        m_WindowListener);
+    }
   }
 
+  /**
+   * called by the SkinRootPaneUI when the window container has been
+   * set
+   */
+  void windowSet() {
+    installListeners();
+  }
+  
+  /**
+   * Tracks window activation events to update the buttons and the
+   * titlebar
+   */
+  private WindowListener createWindowListener() {
+    return new WindowAdapter() {      
+      public void windowActivated(WindowEvent e) {
+        try {
+          m_Window.setSelected(true);
+          updateButtons();
+        } catch (PropertyVetoException ex) {}
+      }      
+      public void windowDeactivated(WindowEvent e) {
+        try {
+          m_Window.setSelected(false);
+          updateButtons();
+        } catch (PropertyVetoException ex) {}
+      }
+    };
+  }
+  
   /**
    * Overriden to unregister on the window
    */
   protected void uninstallListeners() {
     m_Window.removePropertyChangeListener(propertyChangeListener);
+    if (m_Window instanceof Window.FrameWindow && m_WindowListener != null) {
+      ((Window.FrameWindow)m_Window).getMainFrame().removeWindowListener(
+        m_WindowListener);
+    }
   }
 
   /**
@@ -280,30 +332,42 @@ public class SkinTitlePane extends BasicInternalFrameTitlePane {
    * Description of the Method
    */
   protected void createButtons() {
-    SkinWindowButton[] buttons =
+    SkinWindowButton[] buttonsLeft =
         skin.getFrame().getWindowButtons(ALIGN_TOP_LEFT);
-    if (buttons != null) {
-      for (int i = 0, c = buttons.length; i < c; i++) {
-        addButton(buttons[i]);
+    if (buttonsLeft != null) {
+      for (int i = 0, c = buttonsLeft.length; i < c; i++) {
+        addButton(buttonsLeft[i]);
       }
     }
 
-    buttons =
+    SkinWindowButton[] buttonsRight =
         skin.getFrame().getWindowButtons(ALIGN_TOP_RIGHT);
-    if (buttons != null) {
-      for (int i = 0, c = buttons.length; i < c; i++) {
-        addButton(buttons[i]);
+    if (buttonsRight != null) {
+      for (int i = 0, c = buttonsRight.length; i < c; i++) {
+        addButton(buttonsRight[i]);
       }
     }
+    
+    m_WindowButtons = new SkinWindowButton[buttonsLeft.length
+      + buttonsRight.length];
+    System.arraycopy(buttonsLeft, 0, m_WindowButtons, 0, buttonsLeft.length);
+    System.arraycopy(buttonsRight, 0, m_WindowButtons, buttonsLeft.length,
+      buttonsRight.length);
   }
 
+  private void updateButtons() {
+    for (int i = 0; i < m_WindowButtons.length; i++) {
+      m_WindowButtons[i].setSelected(m_Window.isSelected());
+    }
+    repaint();    
+  }
+  
   /**
    * Adds a feature to the Button attribute of the SkinTitlePane object
    *
    * @param button  The feature to be added to the Button attribute
    */
   protected void addButton(SkinWindowButton button) {
-    button.setWindow(m_Window);
     switch (button.getWindowAction()) {
       case CLOSE_ACTION:
         button.addActionListener(closeAction);
@@ -333,7 +397,7 @@ public class SkinTitlePane extends BasicInternalFrameTitlePane {
     mi.setMnemonic('n');
     mi = systemMenu.add(maximizeAction);
     mi.setMnemonic('x');
-    if (!UIManager.getBoolean("TitlePane.disableShade")) {
+    if (!Boolean.TRUE.equals(UIManager.get("TitlePane.disableShade"))) {
       systemMenu.add(shadeAction);
     }
     systemMenu.add(new JSeparator());
@@ -421,12 +485,13 @@ public class SkinTitlePane extends BasicInternalFrameTitlePane {
       String prop = evt.getPropertyName();
 
       if (JInternalFrame.IS_SELECTED_PROPERTY.equals(prop)) {
+        updateButtons();
         repaint();
         return;
       }
 
 	    enableActions();
-            
+      
       revalidate();
       repaint();
     }
@@ -496,6 +561,7 @@ public class SkinTitlePane extends BasicInternalFrameTitlePane {
        */
           ; i < nmembers; i++) {
         SkinWindowButton m = (SkinWindowButton) c.getComponent(i);
+        m.setSelected(m_Window.isSelected());
         m.setVisible(m.isEnabled());
         if (m.isEnabled()) {
           if (m.getAlign() == ALIGN_TOP_LEFT) {

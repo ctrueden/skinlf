@@ -72,7 +72,7 @@ import javax.swing.plaf.BorderUIResource;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.5 $, $Date: 2003-12-06 21:50:31 $
+ * @version   $Revision: 1.6 $, $Date: 2004-07-18 19:20:21 $
  */
 final class KdeFrame extends AbstractSkinFrame {
 
@@ -187,14 +187,14 @@ final class KdeFrame extends AbstractSkinFrame {
         FrameButton fb = new FrameButton(ini, skinURL, button);
         fb.setAlign((i < c / 2) ? SkinTitlePane.ALIGN_TOP_LEFT :
             SkinTitlePane.ALIGN_TOP_RIGHT);
-        if (fb.icon != null) {
+        if (fb.selectedIcon != null) {
           if (i < c / 2) {
-            textShiftLeft += fb.icon.getIconWidth();
+            textShiftLeft += fb.selectedIcon.getIconWidth();
           }
           else {
-            textShiftRight += fb.icon.getIconWidth();
+            textShiftRight += fb.selectedIcon.getIconWidth();
           }
-          topHeight = Math.max(topHeight, fb.icon.getIconHeight());
+          topHeight = Math.max(topHeight, fb.selectedIcon.getIconHeight());
         }
         buttonList.addElement(fb);
       }
@@ -350,8 +350,8 @@ final class KdeFrame extends AbstractSkinFrame {
    * @author    fred
    * @created   27 avril 2002
    */
-  class FrameButton {
-    ImageIcon icon, rolloverIcon, downIcon, inactiveIcon;
+  private class FrameButton {
+    private ImageIcon selectedIcon, rolloverIcon, downIcon, unselectedIcon;
     int align;
     int action = SkinTitlePane.NO_ACTION;
 
@@ -370,9 +370,9 @@ final class KdeFrame extends AbstractSkinFrame {
 
       String path = ini.getKeyValue("Window Titlebar", command + "Button");
       if (path != null) {
-        icon = new ImageIcon(SkinUtils.loadImage(new URL(skinURL, path)));
-        inactiveIcon = icon;
-        downIcon = icon;
+        selectedIcon = new ImageIcon(SkinUtils.loadImage(new URL(skinURL, path)));
+        unselectedIcon = selectedIcon;
+        downIcon = selectedIcon;
       }
       path = ini.getKeyValue("Window Titlebar", command + "DownButton");
       if (path != null) {
@@ -380,7 +380,7 @@ final class KdeFrame extends AbstractSkinFrame {
       }
       path = ini.getKeyValue("Window Titlebar", command + "InactiveButton");
       if (path != null) {
-        inactiveIcon = new ImageIcon(SkinUtils.loadImage(new URL(skinURL, path)));
+        unselectedIcon = new ImageIcon(SkinUtils.loadImage(new URL(skinURL, path)));
       }
       path = ini.getKeyValue("Window Titlebar", command + "RolloverButton");
       if (path != null) {
@@ -422,14 +422,14 @@ final class KdeFrame extends AbstractSkinFrame {
      * @return   Description of the Returned Value
      */
     public SkinWindowButton createButton() {
-      SkinWindowButton button = new SkinWindowButton(-1, (topHeight - icon.getIconHeight()) / 2, align, action);
-      if (icon != null) {
-        button.setSize(icon.getIconWidth(), icon.getIconHeight());
-        button.setNoFocusIcon(inactiveIcon);
-        button.setNoFocusRolloverIcon(inactiveIcon);
-        button.setIcon(icon);
-        button.setRolloverIcon(rolloverIcon!=null?rolloverIcon:icon);
+      SkinWindowButton button = new SkinWindowButton(-1, (topHeight - selectedIcon.getIconHeight()) / 2, align, action);
+      if (selectedIcon != null) {
+        button.setSize(selectedIcon.getIconWidth(), selectedIcon.getIconHeight());
+        button.setIcon(unselectedIcon);
+        button.setRolloverIcon(rolloverIcon!=null?rolloverIcon:selectedIcon);
+        button.setRolloverSelectedIcon(rolloverIcon!=null?rolloverIcon:selectedIcon);
         button.setPressedIcon(downIcon);
+        button.setSelectedIcon(selectedIcon);
       }
       return button;
     }

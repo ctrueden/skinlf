@@ -7,7 +7,7 @@
 
   <release version="1.2.9" date="">
     <action type="fix">Potential for lockup when accessing skinlf due to synchronization issue</action>
-    <action type="fix">When using window decoration, the window title bar was not painted differently for inactive windows</action>
+    <action type="fix">When using window decoration, the window title bar was not painted differently for inactive windows. The window buttons (close, minimize, maximize) were not using the "disabled" icon of kde themes</action>
     <action type="fix">in the demo, a call to System.getProperties().put was leading to a SecurityException</action>
     <action type="update">If a color was set as the background of a component, it will be used to paint the component. Meaning you can finally change the background of buttons</action>
     <action type="add">New property to disable the "Shade" action menu. Use UIManager.put("TitlePane.disableShade", Boolean.TRUE) before applying SkinLF to remove the menu item</action>
