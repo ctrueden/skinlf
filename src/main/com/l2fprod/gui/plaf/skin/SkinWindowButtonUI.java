@@ -61,31 +61,31 @@ import java.awt.event.MouseAdapter;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 20:04:39 $
+ * @version   $Revision: 1.2 $, $Date: 2003-10-24 18:42:19 $
  */
 public class SkinWindowButtonUI extends BasicButtonUI {
 
   /**
    * Description of the Field
    */
-  protected int dashedRectGapX;
+  private int dashedRectGapX;
   /**
    * Description of the Field
    */
-  protected int dashedRectGapY;
+  private int dashedRectGapY;
   /**
    * Description of the Field
    */
-  protected int dashedRectGapWidth;
+  private int dashedRectGapWidth;
   /**
    * Description of the Field
    */
-  protected int dashedRectGapHeight;
+  private int dashedRectGapHeight;
 
   /**
    * Description of the Field
    */
-  protected Color focusColor;
+  private Color focusColor;
 
   private final static SkinWindowButtonUI buttonUI = new SkinWindowButtonUI();
 
