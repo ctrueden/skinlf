@@ -34,11 +34,6 @@
               vertically on one side of a jInternalFrame? why not,
               either on a theme basis or a jinternalframe basis.
             </li>
-            <li>
-              ease auto-discovery of the default themepack.zip skin,
-              looking in classpath, in ~/.skinlf, ~/skinlf, in
-              ./skinlf, in System property and document it.
-            </li>
           </ul>
         </p>
       </section>
