@@ -72,7 +72,7 @@ import com.l2fprod.util.*;
  *
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.3 $, $Date: 2003-08-25 20:04:26 $
+ * @version   $Revision: 1.4 $, $Date: 2003-10-04 17:59:39 $
  */
 public class demoPanel extends JPanel {
 
@@ -104,6 +104,7 @@ public class demoPanel extends JPanel {
               getMethod("openFileDialog", new Class[]{String.class, String[].class}).
               invoke(fileOpenService, new Object[]{null, null});
           } catch (Exception e) {
+            System.err.println("Error trying JavaWebStart, will default to JFileChooser:" + e.getMessage());
             new JFileChooser().showDialog(demoPanel.this, "Ok");
           }
         }
