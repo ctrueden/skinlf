@@ -64,7 +64,7 @@ import com.l2fprod.gui.plaf.skin.impl.*;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.2 $, $Date: 2003-08-16 15:39:43 $
+ * @version   $Revision: 1.3 $, $Date: 2003-08-25 19:15:21 $
  */
 class KdeFrame extends AbstractSkinFrame {
 
@@ -208,7 +208,7 @@ class KdeFrame extends AbstractSkinFrame {
    * @return   The TopPreferredSize value
    */
   public Dimension getTopPreferredSize() {
-    return new Dimension(50, topHeight);
+    return new Dimension(textShiftLeft + textShiftRight + 50, topHeight);
   }
 
   /**
