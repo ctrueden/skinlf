@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE www [
   <!ENTITY index      SYSTEM "index.xml">
+  <!ENTITY contribute SYSTEM "contribute.xml">
+
+  <!ENTITY tutorials        SYSTEM "tutorials.xml">
+  <!ENTITY tutorial-applet  SYSTEM "tutorial-applet.xml">
+  <!ENTITY tutorial-clock   SYSTEM "tutorial-clock.xml">
+
   <!ENTITY converters SYSTEM "converters.xml">
   <!ENTITY todo       SYSTEM "TODO.xml">
   <!ENTITY sitemap    SYSTEM "sitemap.xml">
@@ -11,6 +17,12 @@
   </properties>
 
   &index;
+  &contribute;
+
+  &tutorials;
+  &tutorial-applet;
+  &tutorial-clock;
+
   &converters;
   &todo;
 
