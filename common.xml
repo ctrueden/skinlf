@@ -135,7 +135,7 @@
       </fileset>
     </copy>
     <mkdir dir="${build.www.dir}/javadoc"/>
-    <javadoc sourcepath="${build.src}"
+    <javadoc sourcepath="${java.src.dir}"
              classpath="${classpath}"
              destdir="${build.www.dir}/javadoc"
              packagenames="${javadoc.packagenames}"
