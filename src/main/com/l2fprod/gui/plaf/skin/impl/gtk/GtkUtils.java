@@ -61,7 +61,7 @@ import com.l2fprod.gui.plaf.skin.*;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 20:05:45 $
+ * @version   $Revision: 1.2 $, $Date: 2003-08-17 18:06:22 $
  */
 class GtkUtils {
 
@@ -80,7 +80,7 @@ class GtkUtils {
    * @return               Description of the Returned Value
    * @exception Exception  Description of Exception
    */
-  public static DefaultButton newButton(GtkParser parser,
+  public static GtkDefaultButton newButton(GtkParser parser,
       String style, String[] keys, String[] values) throws Exception {
     return newButton(parser, style, keys, values, false, false, true);
   }
@@ -96,13 +96,13 @@ class GtkUtils {
    * @return               Description of the Returned Value
    * @exception Exception  Description of Exception
    */
-  public static DefaultButton newButton(GtkParser parser,
+  public static GtkDefaultButton newButton(GtkParser parser,
       String style, String[] keys, String[] values,
       boolean useOverlay) throws Exception {
     return newButton(parser, style, keys, values, useOverlay, false, true);
   }
 
-  public static DefaultButton newButton(GtkParser parser,
+  public static GtkDefaultButton newButton(GtkParser parser,
       String style, String[] keys, String[] values,
       boolean useOverlay, boolean exactMatch) throws Exception {
     return newButton(parser, style, keys, values,
@@ -121,7 +121,7 @@ class GtkUtils {
    * @return               Description of the Returned Value
    * @exception Exception  Description of Exception
    */
-  public static DefaultButton newButton(GtkParser parser,
+  public static GtkDefaultButton newButton(GtkParser parser,
       String style, String[] keys, String[] values,
       boolean useOverlay, boolean exactMatch, boolean useDefault) throws Exception {
     if (DEBUG) {
@@ -132,7 +132,7 @@ class GtkUtils {
     }
 
     try {
-      DefaultButton button = null;
+      GtkDefaultButton button = null;
       // parser.getClass(style).getStyles
       GtkStyle[] styles;
       if (parser.getClass(style) == null) {
@@ -184,12 +184,13 @@ class GtkUtils {
               bitmap = image.getImage(parser.getDirectory(), "overlay_file");
             }
 
-            button = new DefaultButton(bitmap,
-                bitmap.getWidth(ImageUtils.producer),
-                bitmap.getHeight(ImageUtils.producer),
-                border.top, border.right, border.bottom, border.left);
+            button = new GtkDefaultButton(bitmap,
+                                          bitmap.getWidth(ImageUtils.producer),
+                                          bitmap.getHeight(ImageUtils.producer),
+                                          border.top, border.right, border.bottom, border.left);
             button.setCenterFill("TRUE".equals(image.getProperty(useOverlay ? "overlay_stretch" : "stretch")) ?
-                ImageUtils.PAINT_STRETCH : ImageUtils.PAINT_TILE);
+                                 ImageUtils.PAINT_STRETCH : ImageUtils.PAINT_TILE);
+            button.parserItem = image;
             break;
           }
         }
