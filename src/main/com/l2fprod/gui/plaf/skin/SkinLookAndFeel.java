@@ -81,7 +81,7 @@ import com.l2fprod.util.*;
  * L2FProd.com website</a> for the complete description of a theme pack.
  *
  * @author    $Author: l2fprod $
- * @version   $Revision: 1.7 $, $Date: 2003-11-16 17:31:26 $
+ * @version   $Revision: 1.8 $, $Date: 2003-11-23 14:49:57 $
  */
 public class SkinLookAndFeel extends BasicLookAndFeel {
 
@@ -641,9 +641,10 @@ public class SkinLookAndFeel extends BasicLookAndFeel {
    */
   public static Skin loadThemePack(String filename) throws Exception {
     if (filename.startsWith("http://") ||
-      filename.startsWith("ftp://") ||
-      filename.startsWith("file:/") ||
-      filename.startsWith("jar:/")) {
+        filename.startsWith("https://") ||
+        filename.startsWith("ftp://") ||
+        filename.startsWith("file:/") ||
+        filename.startsWith("jar:/")) {
       return loadThemePack(new URL(filename));
     }
     else {
