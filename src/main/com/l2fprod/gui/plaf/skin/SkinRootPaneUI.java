@@ -10,12 +10,8 @@ import java.awt.*;
 import java.awt.event.ComponentEvent;
 import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeEvent;
-import java.beans.PropertyVetoException;
 
 import javax.swing.Icon;
 import javax.swing.JComponent;
@@ -819,7 +815,6 @@ public final class SkinRootPaneUI extends BasicRootPaneUI {
         nextY += mbd.height;
       }
       if (root.getContentPane() != null) {
-        Dimension cpd = root.getContentPane().getPreferredSize();
         root.getContentPane().setBounds(0, nextY, w, h < nextY ? 0 : h - nextY);
       }
     }
