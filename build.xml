@@ -98,6 +98,7 @@
     <jar destfile="${build.dir}/${project}.jar">
       <fileset dir="${build.classes}" includes="*.class,com/**/*.class" excludes="**/region/**,**/nativeskin/**"/>
       <fileset dir="${java.src.dir}" includes="com/**/*.properties"/>
+      <fileset dir="${java.src.dir}" includes="com/**/*.template"/>
       <fileset dir="${java.src.dir}" includes="com/**/*.gif"/>
       <manifest>
         <attribute name="Built-by" value="${user.name}"/>
