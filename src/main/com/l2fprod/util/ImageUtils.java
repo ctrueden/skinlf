@@ -47,22 +47,35 @@
  */
 package com.l2fprod.util;
 
-import java.awt.*;
+import com.l2fprod.contrib.freehep.PanelArtistUtilities;
+
 import java.awt.Color;
-import java.awt.geom.*;
-import java.awt.image.*;
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.Shape;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBuffer;
+import java.awt.image.FilteredImageSource;
+import java.awt.image.MemoryImageSource;
+import java.awt.image.PixelGrabber;
+import java.awt.image.RGBImageFilter;
+import java.awt.image.WritableRaster;
 
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
-
-import com.l2fprod.contrib.freehep.PanelArtistUtilities;
+import javax.swing.plaf.ColorUIResource;
 
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.4 $, $Date: 2003-11-23 14:48:04 $
+ * @version   $Revision: 1.5 $, $Date: 2004-07-18 11:20:16 $
  */
 public final class ImageUtils implements SwingConstants {
 
@@ -366,11 +379,15 @@ public final class ImageUtils implements SwingConstants {
 			return;
 		}
 
-		//     Color color = c.getBackground();
-		//     if (color != null && !(color instanceof ColorUIResource)) {
-		//       ColorFillFilter filter = new ColorFillFilter(color);
-		//       image = producer.createImage(new FilteredImageSource(image.getSource(), filter));
-		//     }
+		Color color = c.getBackground();
+		if (color != null && !(color instanceof ColorUIResource)) {
+      ColorFillFilter filter = new ColorFillFilter(color);
+      BufferedImage buffered = toBufferedImage(image);
+      BufferedImage filtered = new BufferedImage(buffered.getWidth(),
+          buffered.getHeight(), BufferedImage.TYPE_INT_ARGB);
+      filter.filter(buffered, filtered);
+      image = filtered;
+		}
 
 		switch (paintType) {
 			case PAINT_NORMAL :
@@ -581,6 +598,10 @@ public final class ImageUtils implements SwingConstants {
 			return null;
 		}
 
+    if (image instanceof BufferedImage) {
+      return (BufferedImage)image;
+    }
+    
 		// This code ensures that all the pixels in
 		// the image are loaded.
 		image = new ImageIcon(image).getImage();
