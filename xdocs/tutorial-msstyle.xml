@@ -68,17 +68,20 @@
       <section>
         <title>Step 3 - Converting to themepack</title>
         <p>
-          The converters are not yet bundled with the distribution of
-          SkinLF but are available when doing a checkout of the code
-          from the CVS repository (See <a
-          href="http://skinlf.dev.java.net">skinlf @
-          dev.java.net</a>).
+          The converters are bundled in the skinlf.jar. Most uptodate
+          version is available when doing a checkout of the code from
+          the CVS repository (See <a
+          href="http://skinlf.dev.java.net">skinlf.dev.java.net</a>).
         </p>
         <p>
           To convert the visual style to a themepack, open a terminal
           from the "bin" folder of the SkinLF distribution and run:
           <pre class="code">
-            msstyle.bat &lt;path-to-the-visualstyle.xml&gt; &lt;path-to-the-themepack-folder-to-create&gt;
+            java -cp skinlf.jar
+            com.l2fprod.tools.msstyles.MsStylesToSkinLF
+            &lt;path-to-the-visualstyle-folder&gt;
+            &lt;path-to-the-visualstyle.xml&gt;
+            &lt;path-to-the-themepack-folder-to-create&gt;
           </pre>
           In the target folder, it will generate the directory
           structure of a themepack including skinlf-themepack.xml,
@@ -112,6 +115,24 @@
             <li>Font size is set to default</li>
           </ul>
         </p>
+        <section>
+          <title>Combobox looks bad</title>
+          <p>
+            TODO
+          </p>
+        </section>
+        <section>
+          <title>Menu border is the default border</title>
+          <p>
+            TODO
+          </p>
+        </section>
+        <section>
+          <title>Internal frame border is incorrect</title>
+          <p>
+            TODO
+          </p>
+        </section>
       </section>
       <section>
         <title>Step 5 - Ready for prime time</title>
