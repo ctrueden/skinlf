@@ -29,6 +29,9 @@
     <action context="code">
       compile and test skinregionlinux.so
     </action>
+    <action context="code">
+      support new skin format like MSVisualStyles
+    </action>
   </actions>
 
 </todo>
