@@ -59,7 +59,7 @@ import com.l2fprod.gui.plaf.skin.impl.gtk.parser.*;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 20:05:45 $
+ * @version   $Revision: 1.2 $, $Date: 2003-08-17 18:06:07 $
  */
 class GtkTab extends AbstractSkinTab implements SkinTab {
 
@@ -84,51 +84,14 @@ class GtkTab extends AbstractSkinTab implements SkinTab {
         new String[]{"function", "state", "gap_side"},
         new String[]{"EXTENSION", null, "BOTTOM"});
 
-    unselected_bottom = GtkUtils.newButton(parser, "GtkNotebook",
-        new String[]{"function", "state", "gap_side"},
-        new String[]{"EXTENSION", "ACTIVE", "TOP"}, false, true);
-    selected_bottom = GtkUtils.newButton(parser, "GtkNotebook",
-        new String[]{"function", "state", "gap_side"},
-        new String[]{"EXTENSION", null, "TOP"});
+    unselected_bottom = unselected_top.getTopToBottom();
+    selected_bottom = selected_top.getTopToBottom();
 
-    if (unselected_top == null && unselected_bottom != null) {
-      unselected_top = unselected_bottom.getTopToBottom();
-    }
-    if (selected_top == null && selected_bottom != null) {
-      selected_top = selected_bottom.getTopToBottom();
-    }
-    if (unselected_bottom == null && unselected_top != null) {
-      unselected_bottom = unselected_top.getTopToBottom();
-    }
-    if (selected_bottom == null && selected_top != null) {
-      selected_bottom = selected_top.getTopToBottom();
-    }
+    unselected_left = unselected_top.rotateCounterClockWise();
+    selected_left = selected_top.rotateCounterClockWise();
     
-    unselected_left = GtkUtils.newButton(parser, "GtkNotebook",
-        new String[]{"function", "state", "gap_side"},
-        new String[]{"EXTENSION", "ACTIVE", "LEFT"}, false, true);
-    if (unselected_left == null) {
-      unselected_left = unselected_top;
-    }
-    selected_left = GtkUtils.newButton(parser, "GtkNotebook",
-        new String[]{"function", "state", "gap_side"},
-        new String[]{"EXTENSION", null, "LEFT"});
-    if (selected_left == null) {
-      selected_left = selected_top;
-    }
-
-    unselected_right = GtkUtils.newButton(parser, "GtkNotebook",
-        new String[]{"function", "state", "gap_side"},
-        new String[]{"EXTENSION", "ACTIVE", "RIGHT"}, false, true);
-    if (unselected_right == null) {
-      unselected_right = unselected_top;
-    }
-    selected_right = GtkUtils.newButton(parser, "GtkNotebook",
-        new String[]{"function", "state", "gap_side"},
-        new String[]{"EXTENSION", null, "RIGHT"});
-    if (selected_right == null) {
-      selected_right = selected_top;
-    }
+    unselected_right = unselected_top.rotateClockWise();
+    selected_right = selected_top.rotateClockWise();
 
     border = GtkUtils.newButton(parser, "GtkNotebook",
         new String[]{"function", "gap_side"},
