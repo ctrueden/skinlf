@@ -91,9 +91,18 @@ public class GtkParser {
 	// need testing...
     }
 
-    public URL getDirectory() {
+  public URL getDirectory() {
 		return directory;
 	}	
+
+  /**
+   * Sets the Directory attribute of the GtkParser object
+   *
+   * @param dir  The new Directory value
+   */
+  public void setDirectory(URL dir) {
+    directory = dir;
+  }
 
 	public Hashtable getStyles() {
 		return styleTable;
@@ -219,6 +228,7 @@ TOKEN: {
 	<OTHER_TOKEN: "module_path" | "include" | "pixmap_path">
 	| <WIDGET_CLASS: "widget_class">
 	| <WIDGET: "widget">
+  | < PROPERTY_KEY: ( (["a"-"z"])+ )>
 }
 
 void buildStructure(): {
@@ -334,6 +344,8 @@ void imageDefinition(GtkEngine engine): {
 			{ image.setProperty(property.image, value.image); }
 		| (property=<ARROW_DIRECTION> <ASSIGN> value=<DIRECTION>)
 			{ image.setProperty(property.image, value.image); }
+    | (property=<PROPERTY_KEY> <ASSIGN>)
+			{ image.setProperty(property.image, readString()); }
 		)+
 	<RBRACK>
 	{ engine.addImage(image); }
