@@ -112,6 +112,19 @@
     </jar>
   </target>
 
+  <target name="obfuscate" depends="jar">
+    <taskdef name="proguard"
+             classname="proguard.ant.ProGuardTask"
+             classpath="lib/proguard.jar"/>
+    <proguard
+              outjar="${build.dir}/${project}-obfuscated.jar"
+              obfuscate="yes">
+      <libraryjar name="${java.home}/lib/rt.jar"/>
+      <injar name="${build.dir}/${project}.jar"/>
+      <keep type="class" name="**"/>
+    </proguard>
+  </target>
+
   <target name="dist.pre">
     <!-- examples.jar -->
     <jar destfile="${build.dist.lib}/examples.jar">
@@ -180,6 +193,8 @@
 	 basedir="src/themepacks/whistlerthemepack"/>
     <zip destfile="${build.www.themedir}/xplunathemepack.zip"
 	 basedir="src/themepacks/xplunathemepack"/>
+    <zip destfile="${build.www.themedir}/toxicthemepack.zip"
+	 basedir="src/themepacks/toxicthemepack"/>
 
     <!-- png for these themepacks are not in cvs -->
     <zip destfile="${build.www.themedir}/aquathemepack.zip"
