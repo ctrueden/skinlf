@@ -5,6 +5,12 @@
     <person name="Frederic Lavigne" email="fred@L2FProd.com" id="FL"/>
   </devs>
 
+  <release version="1.2.9" date="">
+    <action type="fix">Potential for lockup when accessing skinlf due to synchronization issue</action>
+    <action type="fix">When using window decoration, the window title bar was not painted differently for inactive windows</action>
+    <action type="fix">in the demo, a call to System.getProperties().put was leading to a SecurityException</action>
+  </release>
+
   <release version="1.2.8" date="15 February 2004">
     <action type="remove">Removed SkinWindow, JDK1.4 provides better 
       alternative</action>
