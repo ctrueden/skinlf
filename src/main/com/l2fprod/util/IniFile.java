@@ -54,7 +54,7 @@ import java.net.URL;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 20:15:35 $
+ * @version   $Revision: 1.2 $, $Date: 2003-08-16 15:33:02 $
  */
 public class IniFile {
 
@@ -212,6 +212,27 @@ public class IniFile {
       results[i][1] = (String) g.nextElement();
     }
     return results;
+  }
+
+  public String getSectionWhere(String[][] query) {
+    String result = null;
+    
+    for (Enumeration e = getSections().keys(); e.hasMoreElements(); ) {
+	    String current = (String)e.nextElement();
+	    boolean match = true;
+	    for (int i = 0, c = query.length; i < c; i++) {
+        if (getKeyValue(current, query[i][0]) == null ||
+            getKeyValue(current, query[i][0]).equals(query[i][1]) == false) {
+          match = false;
+          break;
+        }
+	    }
+	    if (match) {
+        result = current;
+        break;
+	    }
+    }
+    return result;
   }
 
   /**
