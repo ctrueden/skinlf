@@ -5,7 +5,7 @@
     <person name="Frederic Lavigne" email="fred@L2FProd.com" id="FL"/>
   </devs>
 
-  <release version="1.2.9" date="">
+  <release version="1.2.9" date="29 July 2004">
     <action type="fix">Potential for lockup when accessing skinlf due to synchronization issue</action>
     <action type="fix">When using window decoration, the window title bar was not painted differently for inactive windows. The window buttons (close, minimize, maximize) were not using the "disabled" icon of kde themes</action>
     <action type="fix">in the demo, a call to System.getProperties().put was leading to a SecurityException</action>
