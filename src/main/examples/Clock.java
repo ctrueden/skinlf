@@ -29,11 +29,9 @@
  */
 package examples;
 
-import java.io.*;
 import java.util.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.applet.*;
 import java.text.*;
 import java.net.*;
 
@@ -147,7 +145,7 @@ public class Clock extends Component implements Runnable {
     Thread me = Thread.currentThread();
     while (timer == me) {
       try {
-        Thread.currentThread().sleep(500);
+        Thread.sleep(500);
       } catch (InterruptedException e) {
       }
       repaint();

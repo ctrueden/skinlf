@@ -60,9 +60,9 @@ import com.l2fprod.util.OS;
  * @author    $Author: l2fprod $
  * @author    Herve Lemaitre (setWindowImageRegion0)
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 20:21:09 $
+ * @version   $Revision: 1.2 $, $Date: 2003-12-06 21:45:10 $
  */
-public class Win32NativeSkin extends NativeSkin {
+public final class Win32NativeSkin extends NativeSkin {
   
   public void setWindowTransparency(Window window, int transparency) {
     setWindowTransparency0(getHWND(window), transparency);

@@ -47,26 +47,34 @@
  */
 package com.l2fprod.gui.plaf.skin.impl.kde;
 
+import com.l2fprod.gui.plaf.skin.DefaultButton;
+import com.l2fprod.gui.plaf.skin.SkinTitlePane;
+import com.l2fprod.gui.plaf.skin.SkinUtils;
+import com.l2fprod.gui.plaf.skin.SkinWindowButton;
+import com.l2fprod.gui.plaf.skin.impl.AbstractSkinFrame;
+import com.l2fprod.util.IniFile;
+
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Insets;
 import java.net.URL;
-import java.awt.*;
+
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
-import javax.swing.JInternalFrame;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.plaf.BorderUIResource;
 
-import com.l2fprod.util.IniFile;
-import com.l2fprod.util.ImageUtils;
-import com.l2fprod.gui.plaf.skin.*;
-import com.l2fprod.gui.plaf.skin.impl.*;
-
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.4 $, $Date: 2003-10-04 17:24:52 $
+ * @version   $Revision: 1.5 $, $Date: 2003-12-06 21:50:31 $
  */
-class KdeFrame extends AbstractSkinFrame {
+final class KdeFrame extends AbstractSkinFrame {
 
   DefaultButton topSelected, topUnselected;
   int topHeight = 17;

@@ -47,23 +47,13 @@
  */
 package com.l2fprod.gui.plaf.skin.impl.kde;
 
-import java.awt.Toolkit;
-import java.awt.AWTEvent;
-import java.awt.event.*;
-import java.applet.AudioClip;
-import java.applet.Applet;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.net.URL;
-import javax.swing.JWindow;
 
 import com.l2fprod.util.IniFile;
-import com.l2fprod.util.LazyTable;
-import com.l2fprod.gui.event.SkinWindowEvent;
 import com.l2fprod.gui.plaf.skin.*;
 import com.l2fprod.gui.plaf.skin.impl.AbstractSkin;
-import com.l2fprod.gui.*;
 
 /**
  * KDE (The K Desktop Environment) Skin Support. <BR>
@@ -86,11 +76,11 @@ import com.l2fprod.gui.*;
  *
  * @author    fred
  */
-public class KdeSkin extends AbstractSkin {
+public final class KdeSkin extends AbstractSkin {
 
-  String[] colors;
+  private String[] colors;
 
-  static Object[] swingToKde = {
+  private final static Object[] swingToKde = {
       "desktop", new String[]{"desktop", "background"},
       "activeCaption", new String[]{"activeBackground", "background"},
       "activeCaptionText", new String[]{"activeForeground", "foreground"},
@@ -174,75 +164,12 @@ public class KdeSkin extends AbstractSkin {
   }
 
   /**
-   * Gets the Personality attribute of the KdeSkin object
-   *
-   * @return   The Personality value
-   */
-  public SkinPersonality getPersonality() {
-    return personality;
-  }
-
-  /**
-   * Gets the Button attribute of the KdeSkin object
-   *
-   * @return   The Button value
-   */
-  public SkinButton getButton() {
-    return button;
-  }
-
-  /**
-   * Gets the Frame attribute of the KdeSkin object
-   *
-   * @return   The Frame value
-   */
-  public SkinFrame getFrame() {
-    return frame;
-  }
-
-  /**
-   * Gets the Tab attribute of the KdeSkin object
-   *
-   * @return   The Tab value
-   */
-  public SkinTab getTab() {
-    return tab;
-  }
-
-  /**
-   * Gets the Progress attribute of the KdeSkin object
-   *
-   * @return   The Progress value
-   */
-  public SkinProgress getProgress() {
-    return progress;
-  }
-
-  /**
    * Gets the Colors attribute of the KdeSkin object
    *
    * @return   The Colors value
    */
   public String[] getColors() {
     return colors;
-  }
-
-  /**
-   * Gets the Scrollbar attribute of the KdeSkin object
-   *
-   * @return   The Scrollbar value
-   */
-  public SkinScrollbar getScrollbar() {
-    return scrollbar;
-  }
-
-  /**
-   * Gets the Slider attribute of the KdeSkin object
-   *
-   * @return   The Slider value
-   */
-  public SkinSlider getSlider() {
-    return slider;
   }
 
 }

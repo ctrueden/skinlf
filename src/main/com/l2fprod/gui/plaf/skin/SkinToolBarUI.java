@@ -47,20 +47,18 @@
  */
 package com.l2fprod.gui.plaf.skin;
 
-import java.awt.*;
-import javax.swing.*;
-import javax.swing.border.*;
-import javax.swing.plaf.*;
-import javax.swing.plaf.basic.*;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Graphics;
+
+import javax.swing.JComponent;
+import javax.swing.plaf.ComponentUI;
+import javax.swing.plaf.basic.BasicToolBarUI;
 
 /**
  * Created on 03/02/2001 by Frederic Lavigne, fred@L2FProd.com
  *
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.2 $, $Date: 2003-10-24 18:34:25 $
+ * @version   $Revision: 1.3 $, $Date: 2003-12-06 21:47:37 $
  */
 public final class SkinToolBarUI extends BasicToolBarUI {
 

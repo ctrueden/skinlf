@@ -3,7 +3,6 @@ package com.l2fprod.tools;
 import java.awt.*;
 import java.awt.image.*;
 import java.io.File;
-import java.io.FileInputStream;
 
 import com.ibm.imageconversion.*;
 import com.sun.jimi.core.*;

@@ -48,8 +48,6 @@
 package com.l2fprod.gui.plaf.skin;
 
 import java.awt.*;
-import java.awt.event.*;
-import java.io.*;
 import javax.swing.plaf.*;
 import javax.swing.*;
 
@@ -58,9 +56,9 @@ import javax.swing.*;
  *
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 19:47:23 $
+ * @version   $Revision: 1.2 $, $Date: 2003-12-06 21:46:29 $
  */
-public class SkinCheckBoxIcon implements Icon, java.io.Serializable, UIResource {
+final class SkinCheckBoxIcon implements Icon, java.io.Serializable, UIResource {
 
   /**
    * Gets the IconHeight attribute of the SkinCheckBoxIcon object

@@ -58,7 +58,7 @@ import javax.swing.*;
  * @author    fred
  * @created   27 avril 2002
  */
-public class SkinTabbedPaneUI extends BasicTabbedPaneUI {
+public final class SkinTabbedPaneUI extends BasicTabbedPaneUI {
 
   private Skin skin = SkinLookAndFeel.getSkin();
 

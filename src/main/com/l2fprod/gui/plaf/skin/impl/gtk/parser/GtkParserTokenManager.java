@@ -47,13 +47,6 @@
  * ====================================================================
  */
 package com.l2fprod.gui.plaf.skin.impl.gtk.parser;
-import java.io.File;
-import java.io.FileInputStream;
-import java.net.URL;
-import java.util.Hashtable;
-import java.util.Enumeration;
-import com.l2fprod.gui.plaf.skin.impl.gtk.*;
-import com.l2fprod.gui.plaf.skin.*;
 
 public class GtkParserTokenManager implements GtkParserConstants
 {

@@ -50,7 +50,6 @@ package com.l2fprod.gui.region;
 import java.awt.Window;
 import java.awt.Image;
 
-import com.l2fprod.util.OS;
 import com.l2fprod.gui.nativeskin.NativeSkin;
 
 /**
@@ -58,9 +57,9 @@ import com.l2fprod.gui.nativeskin.NativeSkin;
  *
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 20:21:21 $
+ * @version   $Revision: 1.2 $, $Date: 2003-12-06 21:51:20 $
  */
-public class RegionBuilder implements com.l2fprod.gui.nativeskin.NativeConstants {
+public final class RegionBuilder implements com.l2fprod.gui.nativeskin.NativeConstants {
 
   static RegionBuilder theInstance = new RegionBuilder();
 

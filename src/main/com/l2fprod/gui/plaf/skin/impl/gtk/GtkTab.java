@@ -47,21 +47,21 @@
  */
 package com.l2fprod.gui.plaf.skin.impl.gtk;
 
-import java.awt.Image;
+import com.l2fprod.gui.plaf.skin.DefaultButton;
+import com.l2fprod.gui.plaf.skin.SkinTab;
+import com.l2fprod.gui.plaf.skin.impl.AbstractSkinTab;
+import com.l2fprod.gui.plaf.skin.impl.gtk.parser.GtkParser;
+import com.l2fprod.util.ImageUtils;
+
 import javax.swing.JComponent;
 import javax.swing.SwingConstants;
-
-import com.l2fprod.util.ImageUtils;
-import com.l2fprod.gui.plaf.skin.*;
-import com.l2fprod.gui.plaf.skin.impl.*;
-import com.l2fprod.gui.plaf.skin.impl.gtk.parser.*;
 
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.3 $, $Date: 2003-08-19 12:48:56 $
+ * @version   $Revision: 1.4 $, $Date: 2003-12-06 21:50:13 $
  */
-class GtkTab extends AbstractSkinTab implements SkinTab {
+final class GtkTab extends AbstractSkinTab implements SkinTab {
 
   DefaultButton selected_top, unselected_top;
   DefaultButton selected_bottom, unselected_bottom;

@@ -4,21 +4,40 @@
 
 package com.l2fprod.gui.plaf.skin;
 
-import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.awt.image.ColorModel;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import javax.swing.*;
-import javax.swing.border.*;
-import javax.swing.event.*;
-import javax.swing.plaf.*;
-import javax.swing.plaf.basic.*;
-import java.awt.*;
-import java.io.*;
-import java.awt.Point;
-
 import com.l2fprod.util.AccessUtils;
+
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Cursor;
+import java.awt.Dialog;
+import java.awt.Dimension;
+import java.awt.Frame;
+import java.awt.Graphics;
+import java.awt.Insets;
+import java.awt.LayoutManager;
+import java.awt.LayoutManager2;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Toolkit;
+import java.awt.event.ComponentEvent;
+import java.awt.event.InputEvent;
+import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.beans.PropertyChangeEvent;
+
+import javax.swing.Icon;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JLayeredPane;
+import javax.swing.JMenu;
+import javax.swing.JRootPane;
+import javax.swing.LookAndFeel;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.event.MouseInputListener;
+import javax.swing.plaf.ComponentUI;
+import javax.swing.plaf.basic.BasicRootPaneUI;
 
 /**
  * 
@@ -48,7 +67,7 @@ import com.l2fprod.util.AccessUtils;
  * @author Terry Kellerman
  * @since 1.4
  */
-public class SkinRootPaneUI extends BasicRootPaneUI {
+public final class SkinRootPaneUI extends BasicRootPaneUI {
 
   // TO MAKE THE CODE COMPILE WITH JDK < 1.4
   public final static int Frame_MAXIMIZED_BOTH =
@@ -70,7 +89,7 @@ public class SkinRootPaneUI extends BasicRootPaneUI {
   }
 
 	private Skin skin = SkinLookAndFeel.getSkin();
-	private FrameWindow title = null;
+	private Window.FrameWindow title = null;
 	/**
 	 * Keys to lookup borders in defaults table.
 	 */
@@ -151,7 +170,7 @@ public class SkinRootPaneUI extends BasicRootPaneUI {
 
 		if (source.getClass() == SkinTitlePane.class) {
 			SkinTitlePane titleSource = (SkinTitlePane) source;
-			FrameWindow win = (FrameWindow) titleSource.getWindow();
+			Window.FrameWindow win = (Window.FrameWindow) titleSource.getWindow();
 			w = win.getMainFrame();
 		} else
 			w = (java.awt.Window) ev.getSource();
@@ -399,7 +418,7 @@ public class SkinRootPaneUI extends BasicRootPaneUI {
 	 * style.
 	 */
 	private JComponent createTitlePane(JRootPane root) {
-		JComponent titlePane = new SkinTitlePane(title = new FrameWindow()) {
+		JComponent titlePane = new SkinTitlePane(title = new Window.FrameWindow()) {
         // overriden to set the popup to not be lightweight. it
         // resulted in the popupmenu being hidden, not correctly
         // z-ordered. Using a JWindow does the trick
@@ -463,7 +482,7 @@ public class SkinRootPaneUI extends BasicRootPaneUI {
 		return titlePane;
 	}
 
-	private FrameWindow getFrameWindow() {
+	private Window.FrameWindow getFrameWindow() {
 		return title;
 	}
 	private java.awt.Window getMainWindow() {

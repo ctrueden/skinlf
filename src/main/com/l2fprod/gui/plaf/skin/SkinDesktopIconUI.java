@@ -47,16 +47,18 @@
  */
 package com.l2fprod.gui.plaf.skin;
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-import javax.swing.event.*;
-import javax.swing.border.*;
-import javax.swing.plaf.*;
-import javax.swing.plaf.basic.*;
-import java.beans.*;
-import java.util.EventListener;
-import java.io.Serializable;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
+import javax.swing.Icon;
+import javax.swing.JComponent;
+import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
+import javax.swing.event.MouseInputListener;
+import javax.swing.plaf.ComponentUI;
+import javax.swing.plaf.basic.BasicDesktopIconUI;
 
 /**
  * Description of the Class
@@ -64,7 +66,7 @@ import java.io.Serializable;
  * @author    fred
  * @created   27 avril 2002
  */
-public class SkinDesktopIconUI extends BasicDesktopIconUI {
+public final class SkinDesktopIconUI extends BasicDesktopIconUI {
   /**
    * Description of the Field
    */

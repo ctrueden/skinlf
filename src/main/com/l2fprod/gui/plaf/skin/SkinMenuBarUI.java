@@ -47,13 +47,11 @@
  */
 package com.l2fprod.gui.plaf.skin;
 
-import java.awt.*;
-import javax.swing.*;
-import javax.swing.border.*;
-import javax.swing.plaf.*;
-import javax.swing.plaf.basic.*;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Graphics;
+
+import javax.swing.JComponent;
+import javax.swing.plaf.ComponentUI;
+import javax.swing.plaf.basic.BasicMenuBarUI;
 
 /**
  * Description of the Class
@@ -61,7 +59,7 @@ import java.awt.event.*;
  * @author    fred
  * @created   27 avril 2002
  */
-public class SkinMenuBarUI extends BasicMenuBarUI {
+public final class SkinMenuBarUI extends BasicMenuBarUI {
 
   private Skin skin = SkinLookAndFeel.getSkin();
 

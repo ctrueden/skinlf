@@ -47,14 +47,9 @@
  */
 package com.l2fprod.gui.plaf.skin.impl.gtk;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.*;
 import javax.swing.border.*;
-import javax.swing.plaf.UIResource;
-import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.BorderUIResource;
 import javax.swing.table.*;
 
@@ -66,9 +61,9 @@ import com.l2fprod.util.ImageUtils;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.2 $, $Date: 2003-08-19 12:48:56 $
+ * @version   $Revision: 1.3 $, $Date: 2003-12-06 21:48:36 $
  */
-class GtkPersonality extends AbstractSkinPersonality {
+final class GtkPersonality extends AbstractSkinPersonality {
 
   Image background;
   int backgroundPaintMode;

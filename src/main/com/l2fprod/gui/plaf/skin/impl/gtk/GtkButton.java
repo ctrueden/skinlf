@@ -48,7 +48,6 @@
 package com.l2fprod.gui.plaf.skin.impl.gtk;
 
 import java.awt.Dimension;
-import java.awt.Image;
 import java.awt.Graphics;
 import javax.swing.*;
 
@@ -60,9 +59,9 @@ import com.l2fprod.gui.plaf.skin.impl.gtk.parser.*;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.2 $, $Date: 2003-11-16 16:52:44 $
+ * @version   $Revision: 1.3 $, $Date: 2003-12-06 21:48:36 $
  */
-class GtkButton extends AbstractSkinButton implements SkinButton {
+final class GtkButton extends AbstractSkinButton implements SkinButton {
 
   DefaultButton checkIN, checkOUT;
   DefaultButton optionIN, optionOUT;

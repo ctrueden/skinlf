@@ -55,9 +55,9 @@ import java.awt.*;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 20:04:39 $
+ * @version   $Revision: 1.2 $, $Date: 2003-12-06 21:47:23 $
  */
-public class SkinSliderUI extends BasicSliderUI {
+public final class SkinSliderUI extends BasicSliderUI {
 
   private Skin skin = SkinLookAndFeel.getSkin();
 

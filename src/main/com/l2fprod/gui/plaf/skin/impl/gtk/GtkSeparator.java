@@ -57,9 +57,9 @@ import com.l2fprod.gui.plaf.skin.impl.gtk.parser.GtkParser;
  *
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 20:05:45 $
+ * @version   $Revision: 1.2 $, $Date: 2003-12-06 21:50:13 $
  */
-class GtkSeparator extends AbstractSkinSeparator {
+final class GtkSeparator extends AbstractSkinSeparator {
 
   DefaultButton hline;
   DefaultButton vline;

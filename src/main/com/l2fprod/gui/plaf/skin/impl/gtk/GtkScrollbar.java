@@ -47,25 +47,26 @@
  */
 package com.l2fprod.gui.plaf.skin.impl.gtk;
 
-import java.awt.Rectangle;
-import java.awt.Image;
+import com.l2fprod.gui.plaf.skin.DefaultButton;
+import com.l2fprod.gui.plaf.skin.SkinScrollbar;
+import com.l2fprod.gui.plaf.skin.impl.AbstractSkinScrollbar;
+import com.l2fprod.gui.plaf.skin.impl.gtk.parser.GtkParser;
+import com.l2fprod.util.ImageUtils;
+
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Rectangle;
+
+import javax.swing.JComponent;
 import javax.swing.JScrollBar;
 import javax.swing.SwingConstants;
-import javax.swing.JComponent;
-
-import com.l2fprod.util.ImageUtils;
-import com.l2fprod.gui.plaf.skin.*;
-import com.l2fprod.gui.plaf.skin.impl.*;
-import com.l2fprod.gui.plaf.skin.impl.gtk.parser.*;
 
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.2 $, $Date: 2003-08-19 12:48:56 $
+ * @version   $Revision: 1.3 $, $Date: 2003-12-06 21:48:36 $
  */
-class GtkScrollbar extends AbstractSkinScrollbar implements SkinScrollbar, SwingConstants {
+final class GtkScrollbar extends AbstractSkinScrollbar implements SkinScrollbar, SwingConstants {
 
   DefaultButton h_track, v_track;
   DefaultButton h_thumb, v_thumb;

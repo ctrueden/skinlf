@@ -47,16 +47,13 @@
  */
 package com.l2fprod.gui.region;
 
-import java.awt.*;
-import sun.awt.*;
-
 /**
  * SkinRegion. <br>
  * Created on 29/11/2000 by Frederic Lavigne, fred@L2FProd.com
  *
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 20:21:21 $
+ * @version   $Revision: 1.2 $, $Date: 2003-12-06 21:51:20 $
  */
 public class Region {
 

@@ -50,7 +50,6 @@ package examples;
 import com.l2fprod.gui.SkinApplet;
 
 import java.awt.BorderLayout;
-import java.net.URL;
 import javax.swing.*;
 
 /**

@@ -48,8 +48,6 @@
 package com.l2fprod.gui.nativeskin.x11;
 
 import java.awt.*;
-import java.awt.image.PixelGrabber;
-import sun.awt.*;
 
 import com.l2fprod.gui.region.*;
 import com.l2fprod.gui.nativeskin.NativeSkin;
@@ -60,9 +58,9 @@ import com.l2fprod.gui.nativeskin.NativeSkin;
  *
  * @author    Herve Lemaitre
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $
+ * @version   $Revision: 1.2 $
  */
-public class X11NativeSkin extends NativeSkin {
+public final class X11NativeSkin extends NativeSkin {
 
   /**
    * Sets the WindowRegion attribute of the X11NativeSkin object

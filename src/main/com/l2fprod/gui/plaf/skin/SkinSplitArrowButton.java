@@ -49,12 +49,12 @@ package com.l2fprod.gui.plaf.skin;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Rectangle;
-import java.awt.Color;
 import java.awt.Insets;
-import javax.swing.border.Border;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.border.Border;
 
 /**
  * Description of the Class
@@ -62,7 +62,7 @@ import javax.swing.*;
  * @author    fred
  * @created   27 avril 2002
  */
-public class SkinSplitArrowButton extends JButton implements SwingConstants {
+public final class SkinSplitArrowButton extends JButton implements SwingConstants {
 
   /**
    * Description of the Field

@@ -47,14 +47,40 @@
  */
 package com.l2fprod.gui.plaf.skin;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.image.*;
-import javax.swing.*;
-import com.l2fprod.gui.*;
-import com.l2fprod.gui.plaf.skin.impl.gtk.*;
-import com.l2fprod.gui.plaf.skin.impl.kde.*;
 import com.l2fprod.util.WindowUtils;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+import javax.swing.BoundedRangeModel;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
+import javax.swing.DefaultBoundedRangeModel;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JComboBox;
+import javax.swing.JDesktopPane;
+import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
+import javax.swing.JList;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JSlider;
+import javax.swing.JTabbedPane;
+import javax.swing.JTable;
+import javax.swing.JToggleButton;
+import javax.swing.JTree;
+import javax.swing.UIManager;
 
 /**
  * SkinPreview Window. <br>
@@ -62,9 +88,9 @@ import com.l2fprod.util.WindowUtils;
  *
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 19:47:23 $
+ * @version   $Revision: 1.2 $, $Date: 2003-12-06 21:53:26 $
  */
-public class SkinPreviewWindow extends SkinWindow {
+public class SkinPreviewWindow extends JFrame {
 
   /**
    * Constructor for the SkinPreviewWindow object
@@ -103,25 +129,6 @@ public class SkinPreviewWindow extends SkinWindow {
           SkinPreviewWindow.this.dispose();
         }
       });
-  }
-
-  /**
-   * Description of the Method
-   *
-   * @return   Description of the Returned Value
-   */
-  protected JComponent createNorthPanel() {
-    try {
-      Class acClass = javax.swing.JComponent.class;
-      UIManager.put("ClassLoader", SkinWindowButtonUI.class.getClassLoader());
-      UIManager.put("WindowButtonUI",
-          "com.l2fprod.gui.plaf.skin.SkinWindowButtonUI");
-      UIManager.put(SkinWindowButtonUI.class,
-          SkinWindowButtonUI.class.getMethod("createUI", new Class[]{acClass}));
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    return new SkinWindowTitlePane(this);
   }
 
   /**

@@ -66,7 +66,7 @@ import com.l2fprod.gui.plaf.skin.CompoundSkin;
  * Feel. Once Skin Look And Feel is set, it can't be removed. <br>
  *
  * @author    $Author: l2fprod $
- * @version   $Revision: 1.1 $, $Date: 2003-08-20 09:32:35 $
+ * @version   $Revision: 1.2 $, $Date: 2003-12-06 21:54:35 $
  */
 public class Skinit {
 
@@ -153,7 +153,7 @@ public class Skinit {
     } else if (metaltheme != null) {
       MetalTheme theme = (MetalTheme)Class.forName(metaltheme).newInstance();
       MetalLookAndFeel metal = new MetalLookAndFeel();
-      metal.setCurrentTheme(theme);
+      MetalLookAndFeel.setCurrentTheme(theme);
       UIManager.setLookAndFeel(metal);
     } else {
       Skin skin = null;

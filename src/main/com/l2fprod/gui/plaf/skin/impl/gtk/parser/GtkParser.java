@@ -162,9 +162,8 @@ public class GtkParser implements GtkParserConstants {
                         Object key = e.nextElement();
                         GtkClass clas = (GtkClass)getClasses().get(key);
                         for (int i = 0, c = clas.styles.size(); i < c; i++)
-                                clas.styles.setElementAt(
-                                        (GtkStyle)getStyles().get(clas.styles.elementAt(i)),
-                                        i);
+                                clas.styles.set(i,
+                                        (GtkStyle)getStyles().get(clas.styles.get(i)));
                 }
   }
 

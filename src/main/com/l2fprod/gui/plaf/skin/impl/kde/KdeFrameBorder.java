@@ -47,26 +47,20 @@
  */
 package com.l2fprod.gui.plaf.skin.impl.kde;
 
-import javax.swing.border.*;
-import java.net.URL;
-import java.awt.*;
-import javax.swing.ImageIcon;
-import javax.swing.JComponent;
-import javax.swing.JInternalFrame;
-
+import com.l2fprod.gui.plaf.skin.DefaultButton;
+import com.l2fprod.gui.plaf.skin.SkinUtils;
 import com.l2fprod.util.IniFile;
-import com.l2fprod.util.ImageUtils;
-import com.l2fprod.gui.plaf.skin.*;
-import com.l2fprod.gui.plaf.skin.impl.*;
+
+import java.net.URL;
 
 /**
  * Created on 08/04/2000 by Frederic Lavigne, fred@L2FProd.com
  *
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 20:07:51 $
+ * @version   $Revision: 1.2 $, $Date: 2003-12-06 21:50:31 $
  */
-class KdeFrameBorder extends DefaultButton {
+final class KdeFrameBorder extends DefaultButton {
 
   /**
    * Constructor for the KdeFrameBorder object

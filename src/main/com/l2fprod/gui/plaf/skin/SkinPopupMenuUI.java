@@ -47,14 +47,20 @@
  */
 package com.l2fprod.gui.plaf.skin;
 
-import java.awt.*;
-import javax.swing.*;
-import javax.swing.event.*;
-import javax.swing.border.*;
-import javax.swing.plaf.*;
-import javax.swing.plaf.basic.*;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.AlphaComposite;
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+
+import javax.swing.JComponent;
+import javax.swing.JPopupMenu;
+import javax.swing.UIManager;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
+import javax.swing.plaf.ComponentUI;
+import javax.swing.plaf.basic.BasicPopupMenuUI;
 
 /**
  * Description of the Class
@@ -62,7 +68,7 @@ import java.awt.event.*;
  * @author    fred
  * @created   27 avril 2002
  */
-public class SkinPopupMenuUI extends BasicPopupMenuUI {
+public final class SkinPopupMenuUI extends BasicPopupMenuUI {
 
   PopupMenuListener m_PopupListener;
   AncestorListener m_AncestorListener;

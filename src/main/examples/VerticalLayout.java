@@ -49,10 +49,6 @@ package examples;
 
 import java.awt.*;
 import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.event.*;
-import java.awt.image.*;
 
 /**
  * Description of the Class

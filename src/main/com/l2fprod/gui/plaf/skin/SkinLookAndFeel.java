@@ -47,32 +47,44 @@
 */
 package com.l2fprod.gui.plaf.skin;
 
-import java.awt.*;
+import com.l2fprod.contrib.nanoxml.XMLElement;
+import com.l2fprod.gui.plaf.skin.impl.gtk.GtkSkin;
+import com.l2fprod.gui.plaf.skin.impl.kde.KdeSkin;
+import com.l2fprod.util.OS;
+import com.l2fprod.util.StringUtils;
+import com.l2fprod.util.ZipResourceLoader;
+
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.SystemColor;
-import java.awt.event.InputEvent;
+import java.awt.Insets;
 import java.awt.event.KeyEvent;
 import java.io.BufferedInputStream;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.InputStream;
-import java.io.Serializable;
 import java.net.URL;
-import java.util.*;
-import javax.swing.*;
-import javax.swing.border.*;
-import javax.swing.plaf.*;
-import javax.swing.plaf.basic.*;
-import javax.swing.plaf.metal.MetalLookAndFeel;
+import java.util.Arrays;
+import java.util.Enumeration;
+import java.util.ResourceBundle;
+
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.UIDefaults;
+import javax.swing.UIManager;
+import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
+import javax.swing.plaf.BorderUIResource;
+import javax.swing.plaf.ColorUIResource;
+import javax.swing.plaf.DimensionUIResource;
+import javax.swing.plaf.FontUIResource;
+import javax.swing.plaf.IconUIResource;
+import javax.swing.plaf.InsetsUIResource;
+import javax.swing.plaf.basic.BasicLookAndFeel;
 import javax.swing.text.DefaultEditorKit;
 import javax.swing.text.JTextComponent;
-
-import com.l2fprod.contrib.nanoxml.*;
-import com.l2fprod.gui.plaf.skin.impl.gtk.GtkSkin;
-import com.l2fprod.gui.plaf.skin.impl.kde.KdeSkin;
-import com.l2fprod.util.*;
 
 /**
  * Skin Look And Feel Main Class. <br>
@@ -81,7 +93,7 @@ import com.l2fprod.util.*;
  * L2FProd.com website</a> for the complete description of a theme pack.
  *
  * @author    $Author: l2fprod $
- * @version   $Revision: 1.8 $, $Date: 2003-11-23 14:49:57 $
+ * @version   $Revision: 1.9 $, $Date: 2003-12-06 21:55:22 $
  */
 public class SkinLookAndFeel extends BasicLookAndFeel {
 

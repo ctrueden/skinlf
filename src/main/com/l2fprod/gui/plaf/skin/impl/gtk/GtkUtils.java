@@ -47,23 +47,17 @@
  */
 package com.l2fprod.gui.plaf.skin.impl.gtk;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.net.URL;
-import java.awt.Component;
-import java.awt.Image;
-import java.awt.image.MemoryImageSource;
-
+import com.l2fprod.gui.plaf.skin.impl.gtk.parser.GtkParser;
 import com.l2fprod.util.ImageUtils;
-import com.l2fprod.gui.plaf.skin.impl.gtk.parser.*;
-import com.l2fprod.gui.plaf.skin.*;
+
+import java.awt.Image;
 
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.3 $, $Date: 2003-08-19 12:48:56 $
+ * @version   $Revision: 1.4 $, $Date: 2003-12-06 21:50:13 $
  */
-class GtkUtils {
+final class GtkUtils {
 
   /**
    * Description of the Field

@@ -56,9 +56,9 @@ import com.l2fprod.util.ImageUtils;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 20:05:46 $
+ * @version   $Revision: 1.2 $, $Date: 2003-12-06 21:54:43 $
  */
-class ArrowButton {
+final class ArrowButton {
 
   DefaultButton normal, focus, pressed;
 

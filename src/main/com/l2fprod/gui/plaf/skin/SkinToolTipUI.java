@@ -47,17 +47,25 @@
  */
 package com.l2fprod.gui.plaf.skin;
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-import javax.swing.BorderFactory;
-import javax.swing.border.Border;
-import javax.swing.plaf.*;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Toolkit;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+
+import javax.swing.JComponent;
+import javax.swing.JMenuItem;
+import javax.swing.JToolTip;
+import javax.swing.KeyStroke;
+import javax.swing.UIManager;
+import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicToolTipUI;
 
 /**
  * @author    $Author: l2fprod $
- * @version   $Revision: 1.2 $, $Date: 2003-10-24 18:34:25 $
+ * @version   $Revision: 1.3 $, $Date: 2003-12-06 21:47:37 $
  */
 public final class SkinToolTipUI extends BasicToolTipUI {
 

@@ -52,10 +52,6 @@ import java.awt.Graphics;
 
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JList;
-import javax.swing.JTable;
-import javax.swing.plaf.UIResource;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.JTableHeader;
 
 import com.l2fprod.gui.plaf.skin.DefaultButton;
 

@@ -47,28 +47,32 @@
  */
 package com.l2fprod.gui.plaf.skin;
 
+import com.l2fprod.util.OS;
+
 import java.awt.AWTEvent;
-import java.awt.Insets;
 import java.awt.Container;
+import java.awt.Frame;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.event.ComponentEvent;
+import java.awt.event.WindowEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyVetoException;
+
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.WindowConstants;
-import javax.swing.JComponent;
-import javax.swing.SwingUtilities;
-import com.l2fprod.gui.SkinWindow;
-import com.l2fprod.gui.DefaultWindowManager;
-import com.l2fprod.util.OS;
 
 /**
  * Created on 27/05/2000 by Frederic Lavigne, fred@L2FProd.com
  *
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 20:09:07 $
+ * @version   $Revision: 1.2 $, $Date: 2003-12-06 21:54:35 $
  */
 public interface Window {
 
@@ -77,6 +81,8 @@ public interface Window {
    */
   public final static String IS_SHADED_PROPERTY = "shaded";
 
+  public final static String SHADE_BOUNDS_PROPERTY = "windowshadeBounds";
+  
   /**
    * Gets the Container attribute of the Window object
    *
@@ -278,16 +284,16 @@ public interface Window {
       if (b == true) {
         Rectangle bounds = frame.getBounds();
         Rectangle p = new Rectangle(bounds.x, bounds.y, bounds.width, bounds.height);
-        frame.putClientProperty(DefaultWindowManager.SHADE_BOUNDS_PROPERTY, p);
+        frame.putClientProperty(SHADE_BOUNDS_PROPERTY, p);
         frame.setBounds(p.x, p.y, p.width,
             frame.getMinimumSize().height - 2);
       }
       else {
         Point location = frame.getLocation();
-        Rectangle p = (Rectangle) frame.getClientProperty(DefaultWindowManager.SHADE_BOUNDS_PROPERTY);
+        Rectangle p = (Rectangle)frame.getClientProperty(SHADE_BOUNDS_PROPERTY);
         frame.getDesktopPane().getDesktopManager().setBoundsForFrame(frame, location.x, location.y,
             p.width, p.height);
-        frame.putClientProperty(DefaultWindowManager.SHADE_BOUNDS_PROPERTY, null);
+        frame.putClientProperty(SHADE_BOUNDS_PROPERTY, null);
       }
       shaded = b;
     }
@@ -488,22 +494,33 @@ public interface Window {
     }
   }
 
-  /**
-   * Description of the Class
-   *
-   * @author    fred
-   * @created   27 avril 2002
-   */
-  public static class SkinWindowWindow implements Window {
-    SkinWindow frame;
+  static class FrameWindow implements Window {
+
+    private JFrame frame = null;
+    private JDialog dialog = null;
+    private Rectangle restoreBounds = null;
+    private Rectangle oldBounds = null;
+    private boolean shaded = false;
 
     /**
      * Constructor for the SkinWindowWindow object
      *
      * @param frame  Description of Parameter
      */
-    public SkinWindowWindow(SkinWindow frame) {
-      this.frame = frame;
+    public FrameWindow()  {
+      frame = null;
+    }
+    
+    public void setFrame(java.awt.Window argWin)  {
+      if (argWin instanceof JDialog)  {
+        dialog = (JDialog)argWin;
+      }	else if (argWin instanceof JFrame)  {
+        frame = (JFrame)argWin;
+      } else {
+        frame = null;
+      }
+      oldBounds = null;
+      shaded = false;
     }
 
     /**
@@ -513,7 +530,22 @@ public interface Window {
      * @exception PropertyVetoException  Description of Exception
      */
     public void setSelected(boolean b) throws PropertyVetoException {
-      frame.setSelected(b);
+      if (frame != null)  {
+        frame.show();
+        frame.toFront();
+      } else if (dialog != null)  {
+        frame.show();
+        frame.toFront();
+      }
+    }
+    
+    public java.awt.Window getMainFrame()  {
+      java.awt.Window toreturn =  null;
+      if (frame != null)
+        toreturn = frame;
+      else if (dialog != null)
+        toreturn = dialog;
+      return toreturn;
     }
 
     /**
@@ -523,7 +555,10 @@ public interface Window {
      * @exception PropertyVetoException  Description of Exception
      */
     public void setIcon(boolean b) throws PropertyVetoException {
-      frame.setIcon(b);
+      if (frame != null)  {
+        frame.setState(Frame.ICONIFIED);
+        //frame.show();
+      }
     }
 
     /**
@@ -533,7 +568,16 @@ public interface Window {
      * @exception PropertyVetoException  Description of Exception
      */
     public void setMaximum(boolean b) throws PropertyVetoException {
-      frame.setMaximum(b);
+      if (frame != null)  {
+        if (SkinRootPaneUI.getExtendedState(frame) != SkinRootPaneUI.Frame_MAXIMIZED_BOTH)  {
+          restoreBounds = frame.getBounds();
+          SkinRootPaneUI.setExtendedState(frame, SkinRootPaneUI.Frame_MAXIMIZED_BOTH);
+        }	else if (restoreBounds != null) {
+          frame.setBounds(restoreBounds);
+        }
+        frame.show();
+        dispatchEvent(new ComponentEvent(frame, ComponentEvent.COMPONENT_RESIZED));
+      }
     }
 
     /**
@@ -542,7 +586,22 @@ public interface Window {
      * @param b  The new Shaded value
      */
     public void setShaded(boolean b) {
-      frame.setShaded(b);
+      if (frame == null || b == shaded) {
+        return;
+      }
+      
+      if (b == true) {
+        Rectangle bounds = frame.getBounds();
+        oldBounds = new Rectangle(bounds.x, bounds.y, bounds.width, bounds.height);
+        frame.setBounds(oldBounds.x, oldBounds.y, oldBounds.width,
+            frame.getMinimumSize().height - 2);
+      } else {
+        Point location = frame.getLocation();
+        frame.setBounds(location.x, location.y,
+            oldBounds.width, oldBounds.height);
+        oldBounds = null;
+      }
+      shaded = b;
     }
 
     /**
@@ -552,108 +611,152 @@ public interface Window {
      * @exception PropertyVetoException  Description of Exception
      */
     public void setClosed(boolean b) throws PropertyVetoException {
-      frame.setClosed(b);
+      if (frame != null)
+        frame.dispatchEvent(new WindowEvent(frame,WindowEvent.WINDOW_CLOSING));
+      else if (dialog != null)
+        dialog.dispatchEvent(new WindowEvent(dialog,WindowEvent.WINDOW_CLOSING));
     }
-
+    
     /**
      * Gets the Container attribute of the SkinWindowWindow object
      *
      * @return   The Container value
      */
     public Container getContainer() {
-      return frame;
+      if (frame != null)
+        return frame.getContentPane();
+      else if (dialog != null)
+        return dialog.getContentPane();
+      return null;
     }
-
+    
     /**
      * Gets the Selected attribute of the SkinWindowWindow object
      *
      * @return   The Selected value
      */
     public boolean isSelected() {
-      return frame.isSelected();
+      boolean toreturn = true;
+      if (frame != null)
+        toreturn = frame.isShowing();
+      else if (dialog != null)
+        toreturn = dialog.isShowing();
+      return toreturn;
     }
-
+    
     /**
      * Gets the Icon attribute of the SkinWindowWindow object
      *
      * @return   The Icon value
      */
     public boolean isIcon() {
-      return frame.isIcon();
+      boolean toreturn = false;
+      if (frame != null)
+        toreturn = frame.getState() == Frame.ICONIFIED;
+      return toreturn;
     }
-
+    
     /**
      * Gets the Maximum attribute of the SkinWindowWindow object
      *
      * @return   The Maximum value
      */
     public boolean isMaximum() {
-      return frame.isMaximum();
+      boolean toreturn = false;
+      if (frame != null)
+        toreturn = SkinRootPaneUI.getExtendedState(frame) == SkinRootPaneUI.Frame_MAXIMIZED_BOTH;
+      return toreturn;
     }
-
+    
     /**
      * Gets the Maximizable attribute of the SkinWindowWindow object
      *
      * @return   The Maximizable value
      */
     public boolean isMaximizable() {
-      return frame.isMaximizable();
+      boolean toreturn = false;
+      if (frame != null)
+        toreturn = frame.isResizable() && !isShaded();
+      return toreturn;
     }
-
+    
     /**
      * Gets the Shaded attribute of the SkinWindowWindow object
      *
      * @return   The Shaded value
      */
     public boolean isShaded() {
-      return frame.isShaded();
+      return shaded;
     }
-
+    
     /**
      * Gets the Iconifiable attribute of the SkinWindowWindow object
      *
      * @return   The Iconifiable value
      */
     public boolean isIconifiable() {
-      return frame.isIconifiable();
+      boolean toreturn = true;
+      if (dialog != null)
+        toreturn = false;
+      else if (frame != null)
+        toreturn = frame.isResizable();
+      return toreturn;
     }
-
+    
     /**
      * Gets the Closable attribute of the SkinWindowWindow object
      *
      * @return   The Closable value
      */
     public boolean isClosable() {
-      return frame.isClosable();
+      return true;
     }
-
+    
     /**
      * Gets the Resizable attribute of the SkinWindowWindow object
      *
      * @return   The Resizable value
      */
     public boolean isResizable() {
-      return isShaded() == false && frame.isResizable();
+      boolean toreturn = false;
+      if (frame != null)
+        toreturn = frame.isResizable();
+      return toreturn;
     }
-
+    
     /**
      * Gets the Title attribute of the SkinWindowWindow object
      *
      * @return   The Title value
      */
     public String getTitle() {
-      return frame.getTitle();
+      String title = "";
+      if (frame != null)
+        title = frame.getTitle();
+      else if (dialog != null)
+        title = dialog.getTitle();
+      return title;
     }
-
+    
     /**
      * Gets the FrameIcon attribute of the SkinWindowWindow object
      *
      * @return   The FrameIcon value
      */
     public Icon getFrameIcon() {
-      return frame.getFrameIcon();
+      Icon toreturn = null;
+      
+      if (frame != null)  {
+        Image frameImage = frame.getIconImage();
+        if (frameImage != null)
+          toreturn = new ImageIcon(frame.getIconImage());
+      }
+      
+      //cannot set the JDialog corner it already takes it from
+      //the parent frame
+      return toreturn;
     }
-
+    
     /**
      * Adds a feature to the PropertyChangeListener attribute of the
      * SkinWindowWindow object
@@ -662,9 +765,12 @@ public interface Window {
      *      attribute
      */
     public void addPropertyChangeListener(PropertyChangeListener listener) {
-      frame.addPropertyChangeListener(listener);
+      if (frame != null)
+        frame.addPropertyChangeListener(listener);
+      else if (dialog != null)
+        dialog.addPropertyChangeListener(listener);
     }
-
+    
     /**
      * Removes a feature to the PropertyChangeListener attribute of the
      * SkinWindowWindow object
@@ -673,17 +779,21 @@ public interface Window {
      *      attribute
      */
     public void removePropertyChangeListener(PropertyChangeListener listener) {
-      frame.removePropertyChangeListener(listener);
+      if (frame != null)
+        frame.removePropertyChangeListener(listener);
+      else if (dialog != null)
+        dialog.removePropertyChangeListener(listener);
     }
-
+    
     /**
      * Description of the Method
      *
      * @param event  Description of Parameter
      */
     public void dispatchEvent(AWTEvent event) {
-      frame.dispatchEvent(event);
+      if (frame != null)
+        frame.dispatchEvent(event);
     }
   }
-
+  
 }

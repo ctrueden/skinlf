@@ -47,24 +47,30 @@
  */
 package com.l2fprod.gui.plaf.skin;
 
-import java.awt.*;
-import java.awt.image.*;
-import java.io.*;
+import com.l2fprod.util.ImageUtils;
+
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Font;
+import java.awt.Image;
+import java.awt.Insets;
+import java.awt.Point;
+import java.awt.Toolkit;
+import java.io.File;
 import java.net.URL;
 import java.util.Enumeration;
 import java.util.StringTokenizer;
-import javax.swing.*;
-import javax.swing.plaf.*;
-import com.l2fprod.util.ImageUtils;
-import com.l2fprod.util.AccessUtils;
-import com.l2fprod.util.OS;
+
+import javax.swing.UIDefaults;
+import javax.swing.UIManager;
+import javax.swing.plaf.FontUIResource;
 
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.3 $, $Date: 2003-10-10 20:46:26 $
+ * @version   $Revision: 1.4 $, $Date: 2003-12-06 21:53:26 $
  */
-public class SkinUtils {
+public final class SkinUtils {
 
 	/**
 	 * Description of the Field

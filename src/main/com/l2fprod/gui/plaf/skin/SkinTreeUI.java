@@ -47,15 +47,15 @@
  */
 package com.l2fprod.gui.plaf.skin;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
+import java.io.Serializable;
 
-import java.io.*;
-import java.util.*;
-
-import javax.swing.plaf.basic.*;
-import javax.swing.*;
-import javax.swing.plaf.*;
+import javax.swing.Icon;
+import javax.swing.JComponent;
+import javax.swing.plaf.ComponentUI;
+import javax.swing.plaf.basic.BasicTreeUI;
 
 /**
  * A placeholder for default Tree icons.

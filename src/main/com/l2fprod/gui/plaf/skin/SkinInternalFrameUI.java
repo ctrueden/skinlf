@@ -47,22 +47,24 @@
  */
 package com.l2fprod.gui.plaf.skin;
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-import javax.swing.event.*;
-import javax.swing.border.*;
-import javax.swing.plaf.*;
-import javax.swing.plaf.basic.*;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Insets;
+import java.awt.LayoutManager;
+import java.awt.event.MouseEvent;
+
+import javax.swing.JComponent;
+import javax.swing.JInternalFrame;
+import javax.swing.event.MouseInputAdapter;
+import javax.swing.plaf.ComponentUI;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.2 $, $Date: 2003-10-24 20:28:19 $
+ * @version   $Revision: 1.3 $, $Date: 2003-12-06 21:46:29 $
  */
-public class SkinInternalFrameUI extends BasicInternalFrameUI {
+public final class SkinInternalFrameUI extends BasicInternalFrameUI {
 
   private Skin skin = SkinLookAndFeel.getSkin();
 

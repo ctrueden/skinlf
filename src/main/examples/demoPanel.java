@@ -47,32 +47,25 @@
  */
 package examples;
 
+import com.l2fprod.gui.plaf.skin.*;
+import com.l2fprod.util.*;
+
 import java.awt.*;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.event.*;
-import java.awt.image.*;
 import java.beans.*;
-import java.net.URL;
-import java.util.Arrays;
 import java.util.Enumeration;
 import javax.swing.*;
 import javax.swing.border.*;
-import javax.swing.event.*;
 import javax.swing.table.*;
-import javax.swing.text.*;
-
-import com.l2fprod.gui.*;
-import com.l2fprod.gui.plaf.skin.*;
-import com.l2fprod.util.*;
 
 /**
  * Simple Test Panel for a Look And Feel
  *
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.6 $, $Date: 2003-11-23 14:48:11 $
+ * @version   $Revision: 1.7 $, $Date: 2003-12-06 21:52:06 $
  */
 public class demoPanel extends JPanel {
 

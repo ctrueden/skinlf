@@ -49,10 +49,7 @@ package com.l2fprod.gui.plaf.skin.impl.gtk;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileReader;
-import java.io.InputStream;
-import java.util.Vector;
 import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.plaf.*;
@@ -83,9 +80,9 @@ import com.l2fprod.gui.plaf.skin.impl.gtk.parser.*;
  *
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 20:05:45 $
+ * @version   $Revision: 1.2 $, $Date: 2003-12-06 21:50:13 $
  */
-public class GtkSkin extends AbstractSkin {
+public final class GtkSkin extends AbstractSkin {
 
   String[] colors;
 

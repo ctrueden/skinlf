@@ -47,11 +47,19 @@
  */
 package com.l2fprod.gui.plaf.skin;
 
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Insets;
+import java.awt.LayoutManager;
+import java.awt.Rectangle;
+
+import javax.swing.JButton;
+import javax.swing.JSplitPane;
 import javax.swing.plaf.basic.BasicSplitPaneDivider;
 import javax.swing.plaf.basic.BasicSplitPaneUI;
-import javax.swing.plaf.*;
-import javax.swing.*;
-import java.awt.*;
 
 /**
  * Description of the Class
@@ -59,7 +67,7 @@ import java.awt.*;
  * @author    fred
  * @created   27 avril 2002
  */
-public class SkinSplitPaneDivider extends BasicSplitPaneDivider implements javax.swing.SwingConstants {
+public final class SkinSplitPaneDivider extends BasicSplitPaneDivider implements javax.swing.SwingConstants {
 
   /**
    * Description of the Field

@@ -50,8 +50,6 @@ package examples;
 import java.awt.*;
 import javax.swing.*;
 
-import com.l2fprod.gui.region.*;
-
 /**
  * Skin Region Demo.
  */

@@ -47,18 +47,18 @@
  */
 package com.l2fprod.gui.plaf.skin.impl.gtk;
 
+import com.l2fprod.gui.plaf.skin.SkinUtils;
+
 import java.awt.Image;
 import java.net.URL;
-
-import javax.swing.tree.TreeNode;
 import java.util.Enumeration;
 
-import com.l2fprod.gui.plaf.skin.SkinUtils;
+import javax.swing.tree.TreeNode;
 
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 20:05:45 $
+ * @version   $Revision: 1.2 $, $Date: 2003-12-06 21:48:36 $
  */
 public class GtkImage extends GtkProps implements TreeNode {
 

@@ -47,15 +47,16 @@
  */
 package com.l2fprod.gui.plaf.skin.impl.gtk;
 
-import com.l2fprod.gui.plaf.skin.DefaultButton;
 import com.l2fprod.gui.icon.ArrowIcon;
+import com.l2fprod.gui.plaf.skin.DefaultButton;
 
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Image;
+
 import javax.swing.SwingConstants;
 
-class GtkDefaultButton extends DefaultButton {
+final class GtkDefaultButton extends DefaultButton {
 
   /** mainly used by optionmenu */
   boolean hasArrow = true;

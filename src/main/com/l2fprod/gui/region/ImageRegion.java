@@ -54,9 +54,9 @@ import java.awt.Image;
  *
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 20:21:21 $
+ * @version   $Revision: 1.2 $, $Date: 2003-12-06 21:51:20 $
  */
-public class ImageRegion extends Region {
+public final class ImageRegion extends Region {
 
   Image img;
   int width;

@@ -47,10 +47,6 @@
  */
 package com.l2fprod.gui.plaf.skin.impl.gtk;
 
-import java.awt.Graphics;
-import java.awt.Rectangle;
-
-import javax.swing.JProgressBar;
 import javax.swing.SwingConstants;
 import com.l2fprod.gui.plaf.skin.impl.*;
 import com.l2fprod.gui.plaf.skin.impl.gtk.parser.*;
@@ -58,7 +54,7 @@ import com.l2fprod.gui.plaf.skin.impl.gtk.parser.*;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.3 $, $Date: 2003-11-23 14:47:57 $
+ * @version   $Revision: 1.4 $, $Date: 2003-12-06 21:48:36 $
  */
 final class GtkProgress extends AbstractSkinProgress implements SwingConstants {
 

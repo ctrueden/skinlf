@@ -47,11 +47,10 @@
  */
 package com.l2fprod.gui.plaf.skin;
 
-import javax.swing.plaf.basic.*;
-import javax.swing.*;
-import javax.swing.plaf.*;
-
-import java.awt.*;
+import javax.swing.AbstractButton;
+import javax.swing.JComponent;
+import javax.swing.UIManager;
+import javax.swing.plaf.ComponentUI;
 
 /**
  * Description of the Class
@@ -59,7 +58,7 @@ import java.awt.*;
  * @author    fred
  * @created   27 avril 2002
  */
-public class SkinCheckBoxUI extends SkinRadioButtonUI {
+public final class SkinCheckBoxUI extends SkinRadioButtonUI {
 
   private boolean defaults_initialized = false;
 

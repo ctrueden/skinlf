@@ -47,26 +47,24 @@
  */
 package com.l2fprod.gui.plaf.skin.impl.kde;
 
-import java.awt.Image;
-import java.awt.Graphics;
-import java.awt.Component;
+import com.l2fprod.gui.plaf.skin.SkinUtils;
+import com.l2fprod.gui.plaf.skin.impl.AbstractSkinPersonality;
+import com.l2fprod.util.ImageUtils;
+import com.l2fprod.util.IniFile;
 
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.net.URL;
-import java.io.FileInputStream;
-import java.io.InputStream;
 
 import javax.swing.JComponent;
-
-import com.l2fprod.util.*;
-import com.l2fprod.gui.plaf.skin.*;
-import com.l2fprod.gui.plaf.skin.impl.*;
 
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 20:07:51 $
+ * @version   $Revision: 1.2 $, $Date: 2003-12-06 21:50:31 $
  */
-class KdePersonality extends AbstractSkinPersonality {
+final class KdePersonality extends AbstractSkinPersonality {
 
   Image wallpaper;
   int wallpaperPaintMode;

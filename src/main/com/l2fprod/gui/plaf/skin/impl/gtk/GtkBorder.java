@@ -50,9 +50,9 @@ package com.l2fprod.gui.plaf.skin.impl.gtk;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 20:05:46 $
+ * @version   $Revision: 1.2 $, $Date: 2003-12-06 21:48:36 $
  */
-public class GtkBorder {
+public final class GtkBorder {
 
   /**
    * Description of the Field

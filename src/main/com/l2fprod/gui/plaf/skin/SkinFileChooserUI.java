@@ -47,27 +47,19 @@
  */
 package com.l2fprod.gui.plaf.skin;
 
-import javax.swing.*;
-import javax.swing.filechooser.*;
-import javax.swing.event.*;
-import javax.swing.plaf.*;
-import javax.swing.plaf.basic.*;
-import javax.swing.plaf.metal.*;
-import java.awt.*;
-import java.awt.event.*;
-import java.beans.*;
-import java.io.File;
-import java.io.IOException;
-import java.util.*;
+import javax.swing.JComponent;
+import javax.swing.JFileChooser;
+import javax.swing.plaf.ComponentUI;
+import javax.swing.plaf.metal.MetalFileChooserUI;
 
 /**
  * Created on 05/04/2000 by Frederic Lavigne, fred@L2FProd.com
  *
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 19:47:23 $
+ * @version   $Revision: 1.2 $, $Date: 2003-12-06 21:46:29 $
  */
-public class SkinFileChooserUI extends MetalFileChooserUI {
+public final class SkinFileChooserUI extends MetalFileChooserUI {
 
   /**
    * Constructor for the SkinFileChooserUI object

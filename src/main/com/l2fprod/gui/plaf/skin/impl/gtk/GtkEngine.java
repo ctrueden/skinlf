@@ -50,9 +50,9 @@ package com.l2fprod.gui.plaf.skin.impl.gtk;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.2 $, $Date: 2003-08-19 12:48:56 $
+ * @version   $Revision: 1.3 $, $Date: 2003-12-06 21:48:36 $
  */
-public class GtkEngine {
+public final class GtkEngine {
 
   /**
    * Description of the Field

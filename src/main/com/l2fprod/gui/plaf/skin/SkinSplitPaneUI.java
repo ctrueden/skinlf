@@ -47,17 +47,17 @@
  */
 package com.l2fprod.gui.plaf.skin;
 
-import javax.swing.plaf.basic.*;
-import javax.swing.plaf.*;
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JComponent;
+import javax.swing.plaf.ComponentUI;
+import javax.swing.plaf.basic.BasicSplitPaneDivider;
+import javax.swing.plaf.basic.BasicSplitPaneUI;
 
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
  * @version
  */
-public class SkinSplitPaneUI extends BasicSplitPaneUI {
+public final class SkinSplitPaneUI extends BasicSplitPaneUI {
 
   /**
    * Creates the default divider.

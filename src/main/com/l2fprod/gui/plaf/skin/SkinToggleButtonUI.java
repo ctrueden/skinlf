@@ -48,12 +48,9 @@
 package com.l2fprod.gui.plaf.skin;
 
 import java.awt.*;
-import java.awt.event.*;
 
 import javax.swing.*;
-import javax.swing.border.*;
 import javax.swing.plaf.*;
-import javax.swing.plaf.basic.*;
 import javax.swing.text.View;
 
 /**
@@ -62,7 +59,7 @@ import javax.swing.text.View;
  * @author    fred
  * @created   27 avril 2002
  */
-public class SkinToggleButtonUI extends SkinButtonUI {
+public final class SkinToggleButtonUI extends SkinButtonUI {
 
   // ********************************
   //          Paint Methods

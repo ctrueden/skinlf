@@ -47,9 +47,6 @@
  */
 package com.l2fprod.gui.nativeskin.win32;
 
-import java.awt.*;
-import sun.awt.*;
-
 import com.l2fprod.gui.region.Region;
 
 /**
@@ -57,9 +54,9 @@ import com.l2fprod.gui.region.Region;
  *
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 20:21:09 $
+ * @version   $Revision: 1.2 $, $Date: 2003-12-06 21:45:10 $
  */
-class Win32Region extends Region {
+final class Win32Region extends Region {
 
   long nativeHandle;
 

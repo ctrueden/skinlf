@@ -15,7 +15,7 @@ import java.awt.image.ImageObserver;
  * To change the template for this generated type comment go to
  * Window>Preferences>Java>Code Generation>Code and Comments
  */
-class CustomImageObserver implements ImageObserver {
+final class CustomImageObserver implements ImageObserver {
 
 	/* (non-Javadoc)
 	 * @see java.awt.image.ImageObserver#imageUpdate(java.awt.Image, int, int, int, int, int)

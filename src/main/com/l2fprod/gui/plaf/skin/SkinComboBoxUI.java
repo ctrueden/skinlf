@@ -58,9 +58,9 @@ import com.l2fprod.gui.icon.ArrowIcon;
 
 /**
  * @author    $Author: l2fprod $
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 19:47:23 $
+ * @version   $Revision: 1.2 $, $Date: 2003-12-06 21:46:29 $
  */
-public class SkinComboBoxUI extends BasicComboBoxUI {
+public final class SkinComboBoxUI extends BasicComboBoxUI {
 
   private Skin skin = SkinLookAndFeel.getSkin();
 

@@ -47,23 +47,23 @@
  */
 package com.l2fprod.gui.plaf.skin;
 
-import javax.swing.plaf.basic.*;
-import javax.swing.border.*;
-import javax.swing.plaf.*;
-import javax.swing.*;
-import javax.swing.text.View;
-
-import java.awt.*;
-import java.awt.event.MouseListener;
+import java.awt.Point;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseAdapter;
+
+import javax.swing.JComponent;
+import javax.swing.JMenuItem;
+import javax.swing.MenuElement;
+import javax.swing.MenuSelectionManager;
+import javax.swing.UIManager;
+import javax.swing.plaf.ComponentUI;
+import javax.swing.plaf.UIResource;
 
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 19:47:23 $
+ * @version   $Revision: 1.2 $, $Date: 2003-12-06 21:47:23 $
  */
-public class SkinRadioButtonMenuItemUI extends SkinMenuItemUI {
+public final class SkinRadioButtonMenuItemUI extends SkinMenuItemUI {
 
   /**
    * Description of the Method

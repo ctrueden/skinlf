@@ -48,20 +48,15 @@
 package com.l2fprod.gui.plaf.skin;
 
 import javax.swing.plaf.basic.*;
-import javax.swing.border.*;
 import javax.swing.plaf.*;
 import javax.swing.*;
-import javax.swing.text.View;
 
 import java.awt.*;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseAdapter;
 
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 19:47:23 $
+ * @version   $Revision: 1.2 $, $Date: 2003-12-06 21:46:58 $
  */
 public class SkinMenuItemUI extends BasicMenuItemUI {
 

@@ -47,8 +47,6 @@
  */
 package com.l2fprod.gui.plaf.skin.impl.gtk;
 
-import java.awt.Rectangle;
-import java.awt.Image;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Insets;
@@ -56,7 +54,6 @@ import javax.swing.JSplitPane;
 import javax.swing.SwingConstants;
 import javax.swing.JComponent;
 
-import com.l2fprod.util.ImageUtils;
 import com.l2fprod.gui.plaf.skin.*;
 import com.l2fprod.gui.plaf.skin.impl.*;
 import com.l2fprod.gui.plaf.skin.impl.gtk.parser.*;
@@ -64,9 +61,9 @@ import com.l2fprod.gui.plaf.skin.impl.gtk.parser.*;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 20:05:45 $
+ * @version   $Revision: 1.2 $, $Date: 2003-12-06 21:50:13 $
  */
-class GtkSplitPane extends AbstractSkinSplitPane implements SkinSplitPane, SwingConstants {
+final class GtkSplitPane extends AbstractSkinSplitPane implements SkinSplitPane, SwingConstants {
 
   DefaultButton h_gutter, v_gutter;
   DefaultButton h_thumb, v_thumb;

@@ -47,18 +47,21 @@
  */
 package com.l2fprod.gui.plaf.skin;
 
-import java.awt.*;
-import javax.swing.*;
-import javax.swing.plaf.*;
-import javax.swing.plaf.basic.*;
-import java.awt.*;
+import java.awt.Graphics;
+
+import javax.swing.JComponent;
+import javax.swing.JRootPane;
+import javax.swing.RootPaneContainer;
+import javax.swing.plaf.ColorUIResource;
+import javax.swing.plaf.ComponentUI;
+import javax.swing.plaf.basic.BasicOptionPaneUI;
 
 /**
  * Description of the Class
  *
  * @author    fred
  */
-public class SkinOptionPaneUI extends BasicOptionPaneUI {
+public final class SkinOptionPaneUI extends BasicOptionPaneUI {
 
   private Skin skin = SkinLookAndFeel.getSkin();
 

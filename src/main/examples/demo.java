@@ -47,16 +47,22 @@
  */
 package examples;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.image.*;
+import com.l2fprod.gui.plaf.skin.Skin;
+import com.l2fprod.gui.plaf.skin.SkinLookAndFeel;
+import com.l2fprod.util.OS;
+import com.l2fprod.util.WindowUtils;
+
+import java.awt.BorderLayout;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
-import java.net.URL;
-import javax.swing.*;
-import javax.swing.plaf.metal.*;
-import com.l2fprod.gui.*;
-import com.l2fprod.gui.plaf.skin.*;
-import com.l2fprod.util.*;
+
+import javax.swing.JApplet;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.UIManager;
+import javax.swing.plaf.metal.MetalLookAndFeel;
+import javax.swing.plaf.metal.MetalTheme;
 
 /**
  * Skin Look And Feel Demo.<BR>
@@ -93,7 +99,7 @@ public class demo extends JApplet {
     if (args.length > 0) {
       String themepack = args[0];
       if (themepack.endsWith(".xml")) {
-        SkinLookAndFeel.setSkin(SkinLookAndFeel.loadThemePackDefinition(SkinUtils.toURL(new File(args[0]))));
+        SkinLookAndFeel.setSkin(SkinLookAndFeel.loadThemePackDefinition(new File(args[0]).toURL()));
         SkinLookAndFeel.enable();
       } else if (themepack.startsWith("class:")) {
         String classname = themepack.substring("class:".length());
@@ -103,7 +109,7 @@ public class demo extends JApplet {
         String classname = themepack.substring("theme:".length());
         MetalTheme theme = (MetalTheme)Class.forName(classname).newInstance();
         MetalLookAndFeel metal = new MetalLookAndFeel();
-        metal.setCurrentTheme(theme);
+        MetalLookAndFeel.setCurrentTheme(theme);
         UIManager.setLookAndFeel(metal);
       } else {
         SkinLookAndFeel.setSkin(SkinLookAndFeel.loadThemePack(args[0]));

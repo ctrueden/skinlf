@@ -47,25 +47,25 @@
  */
 package com.l2fprod.gui.plaf.skin.impl.gtk;
 
-import java.awt.Rectangle;
-import java.awt.Image;
+import com.l2fprod.gui.plaf.skin.DefaultButton;
+import com.l2fprod.gui.plaf.skin.SkinSlider;
+import com.l2fprod.gui.plaf.skin.impl.AbstractSkinSlider;
+import com.l2fprod.gui.plaf.skin.impl.gtk.parser.GtkParser;
+
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Rectangle;
+
 import javax.swing.JComponent;
 import javax.swing.JSlider;
 import javax.swing.SwingConstants;
 
-import com.l2fprod.util.ImageUtils;
-import com.l2fprod.gui.plaf.skin.*;
-import com.l2fprod.gui.plaf.skin.impl.*;
-import com.l2fprod.gui.plaf.skin.impl.gtk.parser.*;
-
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 20:05:45 $
+ * @version   $Revision: 1.2 $, $Date: 2003-12-06 21:50:13 $
  */
-class GtkSlider extends AbstractSkinSlider implements SkinSlider, SwingConstants {
+final class GtkSlider extends AbstractSkinSlider implements SkinSlider, SwingConstants {
 
   DefaultButton h_track, v_track;
   DefaultButton h_thumb, v_thumb;

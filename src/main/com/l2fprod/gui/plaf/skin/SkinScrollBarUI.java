@@ -47,20 +47,23 @@
  */
 package com.l2fprod.gui.plaf.skin;
 
-import javax.swing.plaf.basic.*;
-import javax.swing.plaf.*;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-
 import com.l2fprod.gui.plaf.xtra.XTraScrollBarUI;
+
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Rectangle;
+
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JScrollBar;
+import javax.swing.plaf.ComponentUI;
 
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 19:47:23 $
+ * @version   $Revision: 1.2 $, $Date: 2003-12-06 21:53:26 $
  */
-public class SkinScrollBarUI extends XTraScrollBarUI {
+public final class SkinScrollBarUI extends XTraScrollBarUI {
 
   private Skin skin = SkinLookAndFeel.getSkin();
 

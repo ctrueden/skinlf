@@ -56,7 +56,6 @@ import java.io.StringWriter;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Properties;
-import java.util.StringTokenizer;
 import java.util.Vector;
 
 /**
@@ -77,8 +76,8 @@ import java.util.Vector;
  * and <CODE>nanoxml-sax.jar</CODE> in your classpath and setting the property
  * <CODE>org.xml.sax.parser</CODE> to <CODE>nanoxml.sax.SAXParser</CODE> <P>
  *
- * $Revision: 1.1 $<BR>
- * $Date: 2003-08-01 20:11:46 $<P>
+ * $Revision: 1.2 $<BR>
+ * $Date: 2003-12-06 21:46:16 $<P>
  *
  *
  *

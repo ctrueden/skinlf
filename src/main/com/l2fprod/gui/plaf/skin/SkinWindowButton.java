@@ -47,16 +47,15 @@
  */
 package com.l2fprod.gui.plaf.skin;
 
-import javax.swing.*;
-
-import com.l2fprod.gui.SkinWindow;
+import javax.swing.Icon;
+import javax.swing.JButton;
 
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.2 $, $Date: 2003-10-24 18:25:01 $
+ * @version   $Revision: 1.3 $, $Date: 2003-12-06 21:53:26 $
  */
-public class SkinWindowButton extends JButton {
+public final class SkinWindowButton extends JButton {
 
   private int align, action;
   private int xcoord, ycoord;

@@ -56,9 +56,9 @@ import com.l2fprod.gui.plaf.skin.impl.gtk.parser.*;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 20:05:45 $
+ * @version   $Revision: 1.2 $, $Date: 2003-12-06 21:50:13 $
  */
-public class GtkStyle extends GtkProps implements MutableTreeNode {
+public final class GtkStyle extends GtkProps implements MutableTreeNode {
 
   /**
    * Description of the Field

@@ -47,21 +47,20 @@
  */
 package com.l2fprod.gui.plaf.skin;
 
-import javax.swing.table.*;
-import javax.swing.*;
-import javax.swing.event.*;
 import java.util.Enumeration;
-import java.awt.event.*;
-import java.awt.*;
-import javax.swing.plaf.*;
-import javax.swing.plaf.basic.*;
+
+import javax.swing.JComponent;
+import javax.swing.plaf.ComponentUI;
+import javax.swing.plaf.basic.BasicTableHeaderUI;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
 
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 20:04:39 $
+ * @version   $Revision: 1.2 $, $Date: 2003-12-06 21:47:37 $
  */
-public class SkinTableHeaderUI extends BasicTableHeaderUI {
+public final class SkinTableHeaderUI extends BasicTableHeaderUI {
 
   TableCellRenderer renderer;
   Skin skin = SkinLookAndFeel.getSkin();

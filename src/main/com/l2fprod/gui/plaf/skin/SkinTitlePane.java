@@ -47,7 +47,8 @@
  */
 package com.l2fprod.gui.plaf.skin;
 
-import java.awt.Color;
+import com.l2fprod.util.OS;
+
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -55,18 +56,24 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.LayoutManager;
-import java.awt.Toolkit;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyVetoException;
 
-import javax.swing.*;
-import javax.swing.event.InternalFrameEvent;
+import javax.swing.AbstractAction;
+import javax.swing.AbstractButton;
+import javax.swing.Action;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JInternalFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JSeparator;
+import javax.swing.UIManager;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
-
-import com.l2fprod.gui.SkinWindow;
-import com.l2fprod.util.OS;
 
 /**
  * Description of the Class
@@ -120,15 +127,6 @@ public class SkinTitlePane extends BasicInternalFrameTitlePane {
    * Description of the Field
    */
   public final static int NO_ACTION = -1;
-
-  /**
-   * Constructor for the SkinTitlePane object
-   *
-   * @param f  Description of Parameter
-   */
-  public SkinTitlePane(SkinWindow f) {
-    this(new Window.SkinWindowWindow(f));
-  }
 
   /**
    * Constructor for the SkinTitlePane object

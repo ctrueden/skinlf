@@ -49,7 +49,6 @@ package com.l2fprod.gui;
 
 import java.awt.Window;
 import java.awt.Rectangle;
-import java.awt.event.WindowListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.ComponentEvent;
@@ -63,7 +62,7 @@ import javax.swing.SwingConstants;
  *
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 20:33:31 $
+ * @version   $Revision: 1.2 $, $Date: 2003-12-06 21:45:05 $
  */
 public class WindowSnapping {
 

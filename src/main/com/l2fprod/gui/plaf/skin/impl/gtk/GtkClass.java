@@ -47,30 +47,24 @@
  */
 package com.l2fprod.gui.plaf.skin.impl.gtk;
 
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 20:05:46 $
+ * @version   $Revision: 1.2 $, $Date: 2003-12-06 21:48:36 $
  */
-public class GtkClass {
+public final class GtkClass {
 
-  /**
-   * Description of the Field
-   */
   public String name;
-
-  /**
-   * Description of the Field
-   */
-  public Vector styles;
+  public List styles;
 
   /**
    * Constructor for the GtkClass object
    */
   public GtkClass() {
-    styles = new Vector();
+    styles = new ArrayList();
   }
 
   /**
@@ -88,7 +82,7 @@ public class GtkClass {
    * @return   The Style value
    */
   public GtkStyle getStyle() {
-    return (GtkStyle) styles.elementAt(0);
+    return (GtkStyle) styles.get(0);
   }
 
   /**
@@ -97,9 +91,7 @@ public class GtkClass {
    * @return   The Styles value
    */
   public GtkStyle[] getStyles() {
-    GtkStyle[] arrayStyles = new GtkStyle[styles.size()];
-    styles.copyInto(arrayStyles);
-    return arrayStyles;
+    return (GtkStyle[])styles.toArray(new GtkStyle[styles.size()]);
   }
 
   /**
@@ -109,7 +101,7 @@ public class GtkClass {
    */
   public void addStyleName(String stylename) {
     if (styles.contains(stylename) == false) {
-      styles.addElement(stylename);
+      styles.add(stylename);
     }
   }
 

@@ -48,22 +48,17 @@
 package com.l2fprod.gui.plaf.skin;
 
 import javax.swing.plaf.basic.*;
-import javax.swing.border.*;
 import javax.swing.plaf.*;
 import javax.swing.*;
-import javax.swing.text.View;
 
 import java.awt.*;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseAdapter;
 
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.2 $, $Date: 2003-10-24 18:42:19 $
+ * @version   $Revision: 1.3 $, $Date: 2003-12-06 21:54:35 $
  */
-public class SkinWindowButtonUI extends BasicButtonUI {
+public final class SkinWindowButtonUI extends BasicButtonUI {
 
   /**
    * Description of the Field
@@ -125,7 +120,7 @@ public class SkinWindowButtonUI extends BasicButtonUI {
    * @return   Description of the Returned Value
    */
   protected BasicButtonListener createButtonListener(AbstractButton b) {
-    return new SkinButtonListener(b);
+    return new BasicButtonListener(b);
   }
 
   // ********************************

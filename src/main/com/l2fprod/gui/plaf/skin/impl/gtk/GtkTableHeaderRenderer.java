@@ -47,15 +47,14 @@
  */
 package com.l2fprod.gui.plaf.skin.impl.gtk;
 
+import com.l2fprod.gui.plaf.skin.DefaultButton;
+
 import java.awt.Component;
 import java.awt.Graphics;
 
 import javax.swing.JTable;
-import javax.swing.plaf.UIResource;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
-
-import com.l2fprod.gui.plaf.skin.DefaultButton;
 
 /**
  * Description of the Class
@@ -63,23 +62,26 @@ import com.l2fprod.gui.plaf.skin.DefaultButton;
  * @author    fred
  * @created   27 avril 2002
  */
-public class GtkTableHeaderRenderer extends DefaultTableCellRenderer
+public class GtkTableHeaderRenderer
+  extends DefaultTableCellRenderer
   implements javax.swing.plaf.UIResource {
 
   boolean isSelected;
   boolean hasFocus;
-  
+
   transient DefaultButton itemSelected, itemUnselected;
 
   /**
    * Constructor for the GtkTableHeaderRenderer object
    */
-  public GtkTableHeaderRenderer(DefaultButton itemSelected, DefaultButton itemUnselected) {
+  public GtkTableHeaderRenderer(
+    DefaultButton itemSelected,
+    DefaultButton itemUnselected) {
     setOpaque(false);
     this.itemSelected = itemSelected;
     this.itemUnselected = itemUnselected;
   }
-  
+
   /**
    * Gets the TableCellRendererComponent attribute of the
    * GtkTableHeaderRenderer object
@@ -92,10 +94,13 @@ public class GtkTableHeaderRenderer extends DefaultTableCellRenderer
    * @param column      Description of Parameter
    * @return            The TableCellRendererComponent value
    */
-  public Component getTableCellRendererComponent(JTable table, Object value,
-                                                 boolean isSelected,
-                                                 boolean hasFocus,
-                                                 int row, int column) {
+  public Component getTableCellRendererComponent(
+    JTable table,
+    Object value,
+    boolean isSelected,
+    boolean hasFocus,
+    int row,
+    int column) {
     if (table != null) {
       JTableHeader header = table.getTableHeader();
       if (header != null) {
@@ -104,13 +109,13 @@ public class GtkTableHeaderRenderer extends DefaultTableCellRenderer
         setFont(header.getFont());
       }
     }
-    
+
     this.isSelected = isSelected;
     this.hasFocus = hasFocus;
     setText((value == null) ? "" : value.toString());
     return this;
   }
-  
+
   /**
    * Description of the Method
    *
@@ -119,9 +124,8 @@ public class GtkTableHeaderRenderer extends DefaultTableCellRenderer
   protected void paintComponent(Graphics g) {
     if (isSelected || hasFocus) {
       itemSelected.paint(g, this);
-    }
-    else {
-        itemUnselected.paint(g, this);
+    } else {
+      itemUnselected.paint(g, this);
     }
     super.paintComponent(g);
   }

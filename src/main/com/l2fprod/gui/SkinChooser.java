@@ -48,6 +48,7 @@
 package com.l2fprod.gui;
 
 import java.awt.*;
+import java.awt.Window;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
@@ -64,7 +65,7 @@ import com.l2fprod.gui.plaf.skin.*;
  *
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 20:29:54 $
+ * @version   $Revision: 1.2 $, $Date: 2003-12-06 21:46:21 $
  */
 public class SkinChooser extends JPanel {
 
@@ -271,7 +272,7 @@ public class SkinChooser extends JPanel {
       SkinLookAndFeel.setSkin(skin);
       UIManager.setLookAndFeel("com.l2fprod.gui.plaf.skin.SkinLookAndFeel");
 
-      SkinWindow window = new SkinPreviewWindow();
+      Window window = new SkinPreviewWindow();
       window.setVisible(true);
 
     } catch (Exception e) {

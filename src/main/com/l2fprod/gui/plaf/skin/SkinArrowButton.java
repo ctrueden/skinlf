@@ -49,9 +49,10 @@ package com.l2fprod.gui.plaf.skin;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Color;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 
 /**
  * Description of the Class

@@ -47,20 +47,22 @@
  */
 package com.l2fprod.gui.plaf.skin;
 
-import com.l2fprod.util.AccessUtils;
 import com.l2fprod.util.OS;
 
-import javax.swing.plaf.basic.*;
-import javax.swing.plaf.*;
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Graphics;
+import java.awt.Insets;
+import java.awt.Rectangle;
+
+import javax.swing.JComponent;
+import javax.swing.plaf.ComponentUI;
+import javax.swing.plaf.basic.BasicProgressBarUI;
 
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.3 $, $Date: 2003-11-23 16:12:29 $
+ * @version   $Revision: 1.4 $, $Date: 2003-12-06 21:53:26 $
  */
-public class SkinProgressBarUI extends BasicProgressBarUI {
+public final class SkinProgressBarUI extends BasicProgressBarUI {
 
   private Skin skin = SkinLookAndFeel.getSkin();
 
