@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<article id="tutorial-firstaid">
+  <properties>
+    <title>First Time Skin Look And Feel</title>
+  </properties>
+
+  <body>
+    <section>
+      <title>First Time Skin Look And Feel</title>
+      <p>
+        There are two different ways to use Skin Look And Feel: the
+        classic LookAndFeel way and the Skinit way. In both cases, you
+        need to know which skins or themepacks you are going to
+        use. Let say we are going to use the default themepack which
+        comes with SkinLF, it is named "themepack.zip" and is located
+        in the "lib" directory of the SkinLF distribution.
+      </p>
+
+      <section>
+        <title>Classic LookAndFeel way</title>
+        <p>
+          Enabling SkinLF in your application is more or less like
+          enabling other look and feels, it is just telling SkinLF
+          which themepacks to use and calling
+          <i>UIManager.setLookAndFeel</i>.
+        </p>
+        <p>
+          Here is an example from the demo class:
+<pre class="code">
+        // first tell SkinLF which theme to use
+        <a href="javadoc/com/l2fprod/gui/plaf/skin/Skin.html">Skin</a> theSkinToUse = <a href="javadoc/com/l2fprod/gui/plaf/skin/SkinLookAndFeel.html#loadThemePack(java.lang.String)">SkinLookAndFeel.loadThemePack("themepack.zip")</a>;
+        <a href="javadoc/com/l2fprod/gui/plaf/skin/SkinLookAndFeel.html#setSkin(com.l2fprod.gui.plaf.skin.Skin)">SkinLookAndFeel.setSkin(theSkinToUse)</a>;
+
+        // finally set the Skin Look And Feel
+        UIManager.setLookAndFeel(new <a href="javadoc/com/l2fprod/gui/plaf/skin/SkinLookAndFeel.html">SkinLookAndFeel()</a>);
+</pre>
+        </p>
+      </section>
+
+      <section>
+        <title>Skinit</title>
+        <p>
+          Skinit is a small java class which ships with Skin Look And
+          Feel and provides a non intrusive solution to skin any
+          applications. You only need to know how to start from the
+          command line the application you want to skin.
+        </p>
+        <p>
+          Suppose you start your application with:
+<pre class="code">
+java -cp myapp.jar com.mypackage.MyApp arg1 arg2
+</pre>
+          then with SkinLF, it will look like:
+<pre class="code">
+java -cp skinlf.jar;myapp.jar Skinit -pack themepack.zip com.mypackage.MyApp arg1 arg2
+</pre>
+          That's it. Your application will start skinned with the
+          themepack. This is the fastest way to get your app skinned.
+        </p>
+        <p>
+          Folks at netbeans have skinned their IDE too using this
+          technique: <a
+          href="http://www.netbeans.org/kb/articles/skin-current.html">HOWTO
+          : Skin NetBeans 3.5!</a>
+        </p>
+      </section>
+
+    </section>
+  </body>
+
+</article>
