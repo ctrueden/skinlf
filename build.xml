@@ -1,0 +1,29 @@
+<!DOCTYPE DOCUMENT [
+  <!ENTITY build-COMMON SYSTEM "common.xml">
+]>
+
+<!--
+  Skin Look And Feel Build
+-->
+<project name="skinlf" default="compile.java" basedir=".">
+
+  <!-- Allow user to override settings -->
+  <property file="${user.home}/ant.properties" />
+
+  <!-- Project Identification -->
+  <property name="project" value="skinlf"/>
+  <property name="version" value="1.2.4"/>
+  <property name="year"    value="2003"/>
+  <property name="project.fullname" value="Skin Look And Feel"/>
+  <property name="project.nativeskin" value="nativeskin"/>
+
+  <path id="classpath">
+    <pathelement location="lib/png.jar"/>
+  </path>
+
+  &build-COMMON;
+
+  <target name="compile" depends="init">
+  </target>
+
+</project>

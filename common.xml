@@ -1,0 +1,56 @@
+<!--
+  Common Target which could be reused by other projects later.
+-->
+
+<!-- COMMON PROPERTIES -->
+
+  <property name="debug" value="true"/>
+  <property name="optimize" value="false"/>
+
+  <!-- Java Related -->
+  <property name="java.src.dir" value="src/main"/>
+  <property name="javac.compiler" value="modern"/>
+
+  <!-- Destination Directory for the build -->
+  <property name="build.dir" value="build"/>
+  <property name="build.classes" value="${build.dir}/classes"/>
+  <property name="build.dist.dir" value="${project}-${version}"/>
+  <property name="build.dist.src" value="${build.dir}/src"/>
+  <property name="build.dist.lib" value="${build.dir}/lib"/>
+
+<!-- COMMON TARGETS -->
+
+  <target name="init.properties">
+    <filter token="VERSION" value="${version}"/>
+    <filter token="PROJECT.FULLNAME" value="${project.fullname}"/>
+    <filter token="YEAR" value="${year}"/>
+  </target>
+
+  <target name="init.directories">
+    <mkdir dir="${build.dir}"/>
+    <mkdir dir="${build.classes}"/>
+    <mkdir dir="${build.dist.dir}"/>
+  </target>
+
+  <target name="init" depends="init.properties,init.directories">
+  </target>
+
+  <target name="clean">
+    <delete dir="${build.dir}"/>
+    <delete dir="${build.dist.dir}"/>
+  </target>
+
+<!-- Java Related Targets -->
+
+  <target name="compile.java" depends="init">
+    <javac srcdir="${java.src.dir}"
+           destdir="${build.classes}"
+           classpathref="classpath"
+           compiler="${javac.compiler}"
+           includeAntRuntime="false"
+           includeJavaRuntime="false"
+           debug="${debug}"
+           optimize="${optimize}"
+           target="1.1">
+    </javac>
+  </target>
