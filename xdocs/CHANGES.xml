@@ -7,6 +7,7 @@
 	</devs>
 
         <release version="1.2.6" date="">
+                <action type="add">Alluminium Alloy Toxic themepack</action>
                 <action type="fix">One more resizing issue with JDK1.4 was left in the code</action>
                 <action type="remove">Dropped JDK1.2 support, SkinLF 1.2.5 is the last version supporting JDK1.2</action>
                 <action type="fix">Fixed one memory leak when switching skins at runtime (was visible on the demo)</action>
