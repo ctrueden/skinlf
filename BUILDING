@@ -1,0 +1,9 @@
+1. Ant is required
+To compile SkinLF you need ant 1.5.4.
+
+2. Third party JARS
+Before compiling SkinLF you need to get some jars, to do so use "ant
+ init.jars". It will retrieve some jar files from a maven repository.
+
+3. Ready
+Do "ant" to compile SkinLF source code.
