@@ -9,6 +9,8 @@
         <release version="1.2.6" date="">
                 <action type="fix">One more resizing issue with JDK1.4 was left in the code</action>
                 <action type="remove">Dropped JDK1.2 support, SkinLF 1.2.5 is the last version supporting JDK1.2</action>
+                <action type="fix">Fixed one memory leak when switching skins at runtime (was visible on the demo)</action>
+                <action type="fix">Shaded frame was resizable via the border corners</action>
         </release>
 
         <release version="1.2.5" date="4 October 2003">
