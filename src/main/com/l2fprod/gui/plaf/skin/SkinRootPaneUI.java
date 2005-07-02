@@ -910,7 +910,7 @@ public final class SkinRootPaneUI extends BasicRootPaneUI {
     private boolean mouseAlreadyEntered = false;
 
     public void mousePressed(MouseEvent ev) {
-      if (getWindowDecorationStyle(root) == JRootPane_NONE) {
+      if (root==null || getWindowDecorationStyle(root) == JRootPane_NONE) {
         return;
       }
       Point dragWindowOffset = ev.getPoint();
@@ -967,7 +967,7 @@ public final class SkinRootPaneUI extends BasicRootPaneUI {
     public void mouseMoved(MouseEvent ev) {
       JRootPane root = getRootPane();
 
-      if (getWindowDecorationStyle(root) == JRootPane_NONE) {
+      if (root!=null && getWindowDecorationStyle(root) == JRootPane_NONE) {
         return;
       }
 
