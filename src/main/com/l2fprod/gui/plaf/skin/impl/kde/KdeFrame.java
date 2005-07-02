@@ -70,9 +70,9 @@ import javax.swing.border.Border;
 import javax.swing.plaf.BorderUIResource;
 
 /**
- * @author    $Author: l2fprod $
+ * @author    $Author: zombi $
  * @created   27 avril 2002
- * @version   $Revision: 1.7 $, $Date: 2004-07-29 21:37:08 $
+ * @version   $Revision: 1.8 $, $Date: 2005-07-02 21:47:30 $
  */
 final class KdeFrame extends AbstractSkinFrame {
 
@@ -170,7 +170,7 @@ final class KdeFrame extends AbstractSkinFrame {
     buttonList = new java.util.Vector();
     textAbsolutePosition = "yes".equals(ini.getKeyValue("Window Titlebar", "TitleAbsolutePosition"));
 
-    String letters = "ABCDEF";
+    final String letters = "ABCDEF";
     if (ini.getSection("Window Button Layout") == null) {
       ini.addSection("Window Button Layout");
       ini.setKeyValue("Window Button Layout", "ButtonA", "Off");
@@ -185,13 +185,21 @@ final class KdeFrame extends AbstractSkinFrame {
       String button = ini.getKeyValue("Window Button Layout", "Button" + letters.charAt(i));
       if ((button != null) && ("Off".equalsIgnoreCase(button) == false)) {
         FrameButton fb = new FrameButton(ini, skinURL, button);
-        fb.setAlign((i < c / 2) ? SkinTitlePane.ALIGN_TOP_LEFT :
-            SkinTitlePane.ALIGN_TOP_RIGHT);
+        
+        int align = ini.getKeyIntValue("Window Button Layout", "Button"+letters.charAt(i)+"Align",-1);
+        
+        if (align==-1) {
+            align = (i < c / 2) ? SkinTitlePane.ALIGN_TOP_LEFT :
+                SkinTitlePane.ALIGN_TOP_RIGHT;
+        } 
+        fb.setAlign(align);
+        fb.setEnabled(ini.getKeyBooleanValue("Window Button Layout", "Button"+letters.charAt(i)+"Enabled",true));
+        fb.setTooltip(ini.getKeyValue("Window Button Layout", "Button"+letters.charAt(i)+"Tooltip"));
+        
         if (fb.selectedIcon != null) {
-          if (i < c / 2) {
+          if (align== SkinTitlePane.ALIGN_TOP_LEFT) {
             textShiftLeft += fb.selectedIcon.getIconWidth();
-          }
-          else {
+          } else {
             textShiftRight += fb.selectedIcon.getIconWidth();
           }
           topHeight = Math.max(topHeight, fb.selectedIcon.getIconHeight());
@@ -351,9 +359,13 @@ final class KdeFrame extends AbstractSkinFrame {
    * @created   27 avril 2002
    */
   private class FrameButton {
-    private ImageIcon selectedIcon, rolloverIcon, downIcon, unselectedIcon;
+    ImageIcon selectedIcon;
+    private ImageIcon rolloverIcon, downIcon, unselectedIcon;
     int align;
     int action = SkinTitlePane.NO_ACTION;
+    boolean enabled = true;
+    String command;
+    String tooltip;
 
     /**
      * Constructor for the FrameButton object
@@ -397,6 +409,15 @@ final class KdeFrame extends AbstractSkinFrame {
       else if ("Close".equalsIgnoreCase(command)) {
         action = SkinTitlePane.CLOSE_ACTION;
       }
+      this.command = command;
+    }
+
+    public void setEnabled(boolean b) {
+        this.enabled = b;
+    }
+    
+    public void setTooltip(String tooltip) {
+        this.tooltip = tooltip;
     }
 
     /**
@@ -433,6 +454,10 @@ final class KdeFrame extends AbstractSkinFrame {
         button.setSelectedIcon(selectedIcon);
         button.setDisabledIcon(unselectedIcon);
         button.setDisabledSelectedIcon(unselectedIcon);
+        button.setActionCommand(command);
+        button.setEnabled(enabled);
+        if (tooltip!=null)
+            button.setToolTipText(tooltip);
       }
       return button;
     }

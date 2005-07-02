@@ -52,9 +52,9 @@ import java.util.*;
 import java.net.URL;
 
 /**
- * @author    $Author: l2fprod $
+ * @author    $Author: zombi $
  * @created   27 avril 2002
- * @version   $Revision: 1.3 $, $Date: 2004-07-29 19:11:04 $
+ * @version   $Revision: 1.4 $, $Date: 2005-07-02 21:47:29 $
  */
 public class IniFile {
 
@@ -192,6 +192,25 @@ public class IniFile {
         return 0;
       }
     }
+  }
+
+  /**
+   * return true if the value of the key is yes/true, false if no/false, defaultValue in all other cases.
+   * @param section
+   * @param key
+   * @param defaultValue
+   * @return
+   */
+  public boolean getKeyBooleanValue(String section, String key, boolean defaultValue) {
+      String value = getKeyValue(section, key.toLowerCase());
+      if (value == null) {
+        return defaultValue;
+      }
+      if ("yes".equalsIgnoreCase(value) || "true".equalsIgnoreCase(value))
+          return true;
+      if ("no".equalsIgnoreCase(value) || "false".equalsIgnoreCase(value))
+          return false;
+      return defaultValue;
   }
 
   /**

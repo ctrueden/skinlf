@@ -47,14 +47,24 @@
  */
 package com.l2fprod.util;
 
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.Window;
-import java.awt.Dimension;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLayeredPane;
+import javax.swing.JRootPane;
+
+import com.l2fprod.gui.plaf.skin.SkinTitlePane;
+import com.l2fprod.gui.plaf.skin.SkinWindowButton;
 
 /**
- * @author    $Author: l2fprod $
+ * @author    $Author: zombi $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-13 20:49:31 $
+ * @version   $Revision: 1.2 $, $Date: 2005-07-02 21:47:29 $
  */
 public class WindowUtils {
 
@@ -80,6 +90,35 @@ public class WindowUtils {
   public static void sizeTo(Window w, double x, double y) {
     Dimension size = Toolkit.getDefaultToolkit().getScreenSize();
     w.setSize((int) (size.width * x), (int) (size.height * y));
+  }
+
+  public static JButton getWindowButton(JFrame window, String name) {
+      return getWindowButton(window.getRootPane(), name);
+  }
+
+  public static JButton getWindowButton(JDialog window, String name) {
+      return getWindowButton(window.getRootPane(), name);
+  }
+
+  public static JButton getWindowButton(JRootPane rootPane, String name) {
+      JLayeredPane jlp = rootPane.getLayeredPane();
+      for (int i=0;i<jlp.getComponentCount();i++) {
+          Component comp = jlp.getComponent(i);
+          if (comp instanceof SkinTitlePane) {
+              SkinTitlePane  stp = (SkinTitlePane) comp;
+              for (int j=0;j<stp.getComponentCount();j++) {
+                  Component comp2 = stp.getComponent(j);
+                  if (comp2 instanceof SkinWindowButton) {
+                      SkinWindowButton swb = (SkinWindowButton) comp2;
+                      if (name.equals(swb.getActionCommand()))
+                          return swb;
+                  }
+              }
+              
+          }
+      }
+      return null;
+      
   }
 
 }

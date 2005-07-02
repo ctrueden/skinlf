@@ -561,8 +561,11 @@ public class SkinTitlePane extends BasicInternalFrameTitlePane {
           ; i < nmembers; i++) {
         SkinWindowButton m = (SkinWindowButton) c.getComponent(i);
         m.setSelected(m_Window.isSelected());
-        m.setVisible(m.isEnabled());
-        if (m.isEnabled()) {
+        // only adjust the system buttons.
+        boolean userDefinedAction =(m.getWindowAction()==SkinTitlePane.NO_ACTION); 
+        if (!userDefinedAction)
+            m.setVisible(m.isEnabled());
+        if (m.isEnabled() || userDefinedAction) {
           if (m.getAlign() == ALIGN_TOP_LEFT) {
             if (m.getXCoord() == -1) {
               m.setLocation(atlX, Math.max(m.getYCoord(), 1));
