@@ -106,11 +106,6 @@ public final class SkinOptionPaneUI extends BasicOptionPaneUI {
     }
   }
 
-  /**
-   * Description of the Method
-   *
-   * @param p  Description of Parameter
-   */
   protected void installDefaults() {
     super.installDefaults();
     skin.getPersonality().installSkin(optionPane);
