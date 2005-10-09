@@ -65,7 +65,7 @@ import javax.swing.plaf.basic.BasicToolTipUI;
 
 /**
  * @author    $Author: l2fprod $
- * @version   $Revision: 1.3 $, $Date: 2003-12-06 21:47:37 $
+ * @version   $Revision: 1.4 $, $Date: 2005-10-09 13:30:55 $
  */
 public final class SkinToolTipUI extends BasicToolTipUI {
 
@@ -106,9 +106,11 @@ public final class SkinToolTipUI extends BasicToolTipUI {
     if (! (keyText.equals(""))) {  // only draw control key if there is one
 	    g.setFont(smallFont);
 	    g.setColor( c.getForeground() );
-	    g.drawString(keyText, 
-                   metrics.stringWidth(tipText) + padSpaceBetweenStrings, 
-                   2 + metrics.getAscent());
+
+	    // from http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4449310
+        metrics = c.getFontMetrics(smallFont);
+	    g.drawString(keyText, c.getWidth() - 2 - metrics.stringWidth(keyText),
+	      c.getHeight() - 2 - metrics.getDescent());
     }
   }
 

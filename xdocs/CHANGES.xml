@@ -5,7 +5,13 @@
     <person name="Frederic Lavigne" email="fred@L2FProd.com" id="FL"/>
   </devs>
 
+  <release version="1.2.12" date="9 October 2005">
+    <action type="fix">Fixed an issue with the list renderer used by a ComboBox, background and foreground were not used, renderer was not replaced when switching skins or lookandfeels</action>
+  </release>
+
   <release version="1.2.11" date="20 February 2005">
+    <action type="update">Caching of the JFrame iconImage when frame is decorated</action>
+    <action type="fix">Added extra border to ToolTips using HTML</action>
     <action type="fix">With two overlapping window it is possible to use 100%CPU, and effectively kill the application</action>
   </release>
 

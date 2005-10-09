@@ -46,7 +46,7 @@ import com.l2fprod.gui.plaf.skin.*;
 
 /**
  * @author $Author: l2fprod $ @created 27 avril 2002
- * @version $Revision: 1.3 $, $Date: 2004-02-14 11:13:38 $
+ * @version $Revision: 1.4 $, $Date: 2005-10-09 13:36:38 $
  */
 public abstract class AbstractSkinProgress
   extends AbstractSkinComponent
@@ -149,7 +149,7 @@ public abstract class AbstractSkinProgress
         height =
           (int) ((double)progress.getValue()
             * progress.getHeight()
-            / (double)progress.getMaximum());
+            / progress.getMaximum());
         y = progress.getHeight() - height;
         width = progress.getWidth();
         progressBarVertical.paint(g, x, y, width, height, progress);
@@ -158,7 +158,7 @@ public abstract class AbstractSkinProgress
         width =
           (int) ((double)progress.getValue()
             * progress.getWidth()
-            / (double)progress.getMaximum());
+            / progress.getMaximum());
         height = progress.getHeight();
         progressBarHorizontal.paint(g, x, y, width, height, progress);
       }

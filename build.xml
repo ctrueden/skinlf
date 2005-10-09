@@ -1,5 +1,6 @@
 <!DOCTYPE project [
   <!ENTITY build-COMMON SYSTEM "common.xml">
+  <!ENTITY build-COMMONDEVJAVANET SYSTEM "common-devjavanet.xml">
 ]>
 
 <!--
@@ -13,7 +14,7 @@
 
   <!-- Project Identification -->
   <property name="project" value="skinlf"/>
-  <property name="version" value="1.2.11"/>
+  <property name="version" value="1.2.12"/>
   <property name="year"    value="2000-2005"/>
   <property name="project.fullname" value="Skin Look And Feel"/>
   <property name="project.nativeskin" value="nativeskin"/>
@@ -26,12 +27,12 @@
     <pathelement location="lib/xalan.jar"/>
     <pathelement location="lib/xercesImpl.jar"/>
     <pathelement location="lib/xml-apis.jar"/>
-    <pathelement location="lib/sunawt.jar"/>
   </path>
 
   <property name="classpath.asprop" refid="classpath"/>
 
   &build-COMMON;
+  &build-COMMONDEVJAVANET;
 
   <!-- get some of the dependant jars from maven repository -->
   <target name="init.jars">
@@ -223,7 +224,7 @@
     <!-- nativeskin.jar -->
     <jar jarfile="${build.dist.lib}/nativeskin.jar">
       <fileset dir="${build.classes}"
-               includes="com/l2fprod/gui/region/**,com/l2fprod/gui/nativeskin/**,com/l2fprod/util/OS**"
+               includes="com/l2fprod/gui/region/**,com/l2fprod/gui/nativeskin/**,com/l2fprod/util/OS**,,com/l2fprod/util/Access**"
                excludes="**/*.html"/>
     </jar>
     <!-- batch files -->

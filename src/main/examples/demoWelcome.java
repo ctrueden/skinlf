@@ -87,7 +87,8 @@ public class demoWelcome extends JPanel {
 
     JPanel toolbar = new JPanel(new FlowLayout());
     JButton hello = new JButton("Hello");
-    hello.setToolTipText("Hello ! Bonjour ! Ciao !");
+    hello.setToolTipText("<html><b>Hello!</b><br><i>Bonjour !</i><br><u>Ciao !</u>");
+    hello.setMnemonic('i');
     toolbar.add(hello);
     toolbar.add(new JSeparator(JSeparator.VERTICAL));
     toolbar.add(new JButton("World!"));

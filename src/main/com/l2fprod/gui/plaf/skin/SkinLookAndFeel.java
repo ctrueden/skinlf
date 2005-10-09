@@ -66,6 +66,8 @@ import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.plaf.BorderUIResource;
 import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.DimensionUIResource;
@@ -82,7 +84,7 @@ import javax.swing.text.JTextComponent;
  * website</a> for the complete description of a theme pack.
  * 
  * @author $Author: l2fprod $
- * @version $Revision: 1.14 $, $Date: 2004-08-13 19:26:21 $
+ * @version $Revision: 1.15 $, $Date: 2005-10-09 13:35:56 $
  */
 public class SkinLookAndFeel extends BasicLookAndFeel {
 
@@ -368,6 +370,9 @@ public class SkinLookAndFeel extends BasicLookAndFeel {
         table.get("controlHighlight"),
         "InternalFrame.resizeIconShadow",
         table.get("controlShadow"),
+        "ToolTip.border",
+        new BorderUIResource(new CompoundBorder(new LineBorder(Color.black),
+        new EmptyBorder(0, 2, 0, 2))),
         };
     table.putDefaults(defaults);
 
@@ -943,14 +948,12 @@ public class SkinLookAndFeel extends BasicLookAndFeel {
    * <a href="http://www.L2FProd.com/">L2FProd.com website</a> for the
    * complete description of a theme pack.
    * 
-   * @param url the theme pack url
-   * @return Description of the Returned Value
-   * @exception Exception Description of Exception
+   * @param streamToPack stream to the themepack
    * @see com.l2fprod.util.ZipResourceLoader
    */
-  public static Skin loadThemePack(InputStream p_StreamToPack)
+  public static Skin loadThemePack(InputStream streamToPack)
     throws Exception {
-    ZipResourceLoader loader = new ZipResourceLoader(p_StreamToPack);
+    ZipResourceLoader loader = new ZipResourceLoader(streamToPack);
     c_ResourceLoader = loader;
     Skin skin =
       loadThemePackDefinition(
@@ -982,9 +985,9 @@ public class SkinLookAndFeel extends BasicLookAndFeel {
     UIManager.put("ScrollBar.alternateLayout", Boolean.FALSE);
     UIManager.put("JSplitPane.alternateUI", Boolean.FALSE);
 
-    Enumeration enum = element.enumerateChildren();
-    while (enum.hasMoreElements()) {
-      element = (XMLElement)enum.nextElement();
+    Enumeration enumeration = element.enumerateChildren();
+    while (enumeration.hasMoreElements()) {
+      element = (XMLElement)enumeration.nextElement();
       String tagName = element.getTagName().toLowerCase();
       if ("skin".equals(tagName)) {
         skin = buildSkin(url, element);
@@ -1123,7 +1126,7 @@ public class SkinLookAndFeel extends BasicLookAndFeel {
    * Description of the Method
    * 
    * @param required Description of Parameter
-   * @exception Exception Description of Exception
+   * @exception IncorrectVersionException
    */
   public static void checkRequiredVersion(String required) throws IncorrectVersionException {
     if ((required == null) || ("".equals(required))) {

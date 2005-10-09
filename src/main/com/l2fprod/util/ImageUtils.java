@@ -75,7 +75,7 @@ import javax.swing.plaf.ColorUIResource;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.6 $, $Date: 2004-07-29 19:10:28 $
+ * @version   $Revision: 1.7 $, $Date: 2005-10-09 13:27:31 $
  */
 public final class ImageUtils implements SwingConstants {
 
@@ -614,20 +614,20 @@ public final class ImageUtils implements SwingConstants {
 	}
 
 	/**
-	 * Description of the Method
-	 *
-	 * @param anImage  Description of Parameter
-	 * @return         Description of the Returned Value
-	 */
-	public static Image rotateLeft(Image anImage) {
-		if (anImage == null) {
-			return null;
-		}
-
-		AffineTransform transform = PanelArtistUtilities.getCCWRotateTransform(anImage.getWidth(producer), anImage.getHeight(producer));
-		AffineTransformOp operation = new AffineTransformOp(transform, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
-		return transparent(operation.filter((BufferedImage)anImage, null));
-	}
+   * Description of the Method
+   *
+   * @param anImage  Description of Parameter
+   * @return         Description of the Returned Value
+   */
+  public static Image rotateLeft(Image anImage) {
+  	if (anImage == null) {
+  		return null;
+  	}
+  
+  	AffineTransform transform = PanelArtistUtilities.getCCWRotateTransform(anImage.getWidth(producer), anImage.getHeight(producer));
+  	AffineTransformOp operation = new AffineTransformOp(transform, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
+  	return transparent(operation.filter((BufferedImage)anImage, null));
+  }
 
 	public static Image rotateRight(Image anImage) {
 		if (anImage == null) {

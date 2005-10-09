@@ -293,9 +293,6 @@ public final class SkinRootPaneUI extends BasicRootPaneUI {
     }
   }
 
-  /**
-   * @param window
-   */
   private void adjustIconAndBackground() {
     if (window != null) {
 
@@ -423,9 +420,6 @@ public final class SkinRootPaneUI extends BasicRootPaneUI {
    * look and feel are controlled by the plaf. The plaf creates and sets this
    * value; the default is null, implying a native operating system window
    * title pane.
-   * 
-   * @param content the <code>JComponent</code> to use for the window title
-   *          pane.
    */
   private void setTitlePane(JRootPane root, JComponent titlePane) {
     JLayeredPane layeredPane = root.getLayeredPane();

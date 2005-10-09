@@ -72,7 +72,7 @@ import javax.swing.table.TableColumn;
  *
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.10 $, $Date: 2004-07-29 21:38:51 $
+ * @version   $Revision: 1.11 $, $Date: 2005-10-09 13:28:15 $
  */
 public class demoPanel extends JPanel {
 
@@ -154,6 +154,7 @@ public class demoPanel extends JPanel {
     button.setBackground(Color.green);
 
     button = new JButton("Pressed");
+    button.setForeground(Color.red);
     model =
       new DefaultButtonModel() {
         public boolean isPressed() {
@@ -549,7 +550,7 @@ public class demoPanel extends JPanel {
 
           public Object getValueAt(int row, int column) {
             if (column == 1) {
-              return new Integer((int)(((double)100 * row) / (double)getRowCount()));
+              return new Integer((int)(((double)100 * row) / getRowCount()));
             } else {
               return new Integer(row * column);
             }
@@ -674,7 +675,7 @@ public class demoPanel extends JPanel {
       
       ListModel model = new AbstractListModel() {
           public Object getElementAt(int index) {
-            return new Integer((int)(((double)100 * index) / (double)getSize()));
+            return new Integer((int)(((double)100 * index) / getSize()));
           }
           public int getSize() {
             return 10;

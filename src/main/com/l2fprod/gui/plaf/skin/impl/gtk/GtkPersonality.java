@@ -61,7 +61,7 @@ import com.l2fprod.util.ImageUtils;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.4 $, $Date: 2004-02-14 11:16:23 $
+ * @version   $Revision: 1.5 $, $Date: 2005-10-09 13:38:50 $
  */
 final class GtkPersonality extends AbstractSkinPersonality {
 
@@ -222,7 +222,7 @@ final class GtkPersonality extends AbstractSkinPersonality {
       return new GtkTableHeaderRenderer(itemSelected, itemUnselected);
     }
     else {
-      return new DefaultTableCellRenderer();
+      return new DefaultTableCellRenderer.UIResource();
     }
   }
 
@@ -394,7 +394,7 @@ final class GtkPersonality extends AbstractSkinPersonality {
       return new GtkListCellRenderer(itemSelected, itemUnselected);
     }
     else {
-      return new DefaultListCellRenderer();
+      return new DefaultListCellRenderer.UIResource();
     }
   }
 

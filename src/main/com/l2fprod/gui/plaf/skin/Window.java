@@ -65,8 +65,8 @@ import javax.swing.WindowConstants;
 /**
  * Created on 27/05/2000 by Frederic Lavigne, fred@L2FProd.com
  * 
- * @author $Author: zombi $ @created 27 avril 2002
- * @version $Revision: 1.9 $, $Date: 2005-03-16 01:49:33 $
+ * @author $Author: l2fprod $ @created 27 avril 2002
+ * @version $Revision: 1.10 $, $Date: 2005-10-09 13:27:02 $
  */
 public interface Window {
 
@@ -511,8 +511,6 @@ public interface Window {
     
     /**
      * Constructor for the SkinWindowWindow object
-     * 
-     * @param frame Description of Parameter
      */
     public FrameWindow() {
       frame = null;

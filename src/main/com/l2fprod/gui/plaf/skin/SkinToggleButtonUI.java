@@ -123,8 +123,8 @@ public final class SkinToggleButtonUI extends SkinButtonUI {
         v.paint(g, textRect);
       }
       else {
-        paintText((Graphics)g, (JComponent)b,
-                  (Rectangle)textRect,
+        paintText(g, (JComponent)b,
+                  textRect,
                   text);
       }
     }
