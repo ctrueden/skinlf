@@ -50,6 +50,7 @@ package com.l2fprod.gui.plaf.skin;
 import java.awt.Component;
 import javax.swing.JList;
 import javax.swing.Icon;
+import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.*;
 
 /**
@@ -57,9 +58,9 @@ import javax.swing.plaf.basic.*;
  *
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 19:47:23 $
+ * @version   $Revision: 1.2 $, $Date: 2005-10-09 13:15:15 $
  */
-public class SkinComboBoxRenderer extends BasicComboBoxRenderer {
+public class SkinComboBoxRenderer extends BasicComboBoxRenderer implements UIResource {
 
   /**
    * Constructor for the SkinComboBoxRenderer object
@@ -113,6 +114,7 @@ public class SkinComboBoxRenderer extends BasicComboBoxRenderer {
     else {
       setText((value == null) ? "" : value.toString());
     }
+    
     return this;
   }
 

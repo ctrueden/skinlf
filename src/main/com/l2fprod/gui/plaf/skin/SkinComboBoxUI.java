@@ -49,16 +49,20 @@ package com.l2fprod.gui.plaf.skin;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 import javax.swing.*;
 import javax.swing.plaf.*;
 import javax.swing.plaf.basic.*;
+import javax.swing.plaf.metal.MetalComboBoxButton;
+import javax.swing.plaf.metal.MetalComboBoxUI.MetalPropertyChangeListener;
 
 import com.l2fprod.gui.icon.ArrowIcon;
 
 /**
  * @author    $Author: l2fprod $
- * @version   $Revision: 1.2 $, $Date: 2003-12-06 21:46:29 $
+ * @version   $Revision: 1.3 $, $Date: 2005-10-09 13:15:00 $
  */
 public final class SkinComboBoxUI extends BasicComboBoxUI {
 
@@ -390,10 +394,42 @@ public final class SkinComboBoxUI extends BasicComboBoxUI {
     return new SkinComboBoxUI();
   }
 
+  public PropertyChangeListener createPropertyChangeListener() {
+    return new SkinPropertyChangeListener();
+  }
+
+  /**
+   * This inner class is marked &quot;public&quot; due to a compiler bug. This
+   * class should be treated as a &quot;protected&quot; inner class. Instantiate
+   * it only within subclasses of <FooUI>.
+   */
+  public class SkinPropertyChangeListener extends
+    BasicComboBoxUI.PropertyChangeHandler {
+    public void propertyChange(PropertyChangeEvent e) {
+      super.propertyChange(e);
+      String propertyName = e.getPropertyName();
+
+      if (propertyName.equals("editable")) {
+        MetalComboBoxButton button = (MetalComboBoxButton)arrowButton;
+        button.setIconOnly(comboBox.isEditable());
+        comboBox.repaint();
+      } else if (propertyName.equals("background")) {
+        Color color = (Color)e.getNewValue();
+        arrowButton.setBackground(color);
+        listBox.setBackground(color);
+
+      } else if (propertyName.equals("foreground")) {
+        Color color = (Color)e.getNewValue();
+        arrowButton.setForeground(color);
+        listBox.setForeground(color);
+      }
+    }
+  }
+
   /**
    * Description of the Class
-   *
-   * @author    fred
+   * 
+   * @author fred
    */
   public class SkinComboBoxLayoutManager implements LayoutManager {
     /**
