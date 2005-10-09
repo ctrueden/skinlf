@@ -72,7 +72,7 @@ public class PanelArtistUtilities {
    * @return        The YFlipTransform value
    */
   public static AffineTransform getYFlipTransform(int height) {
-    return new AffineTransform(1., 0., 0., -1., 0., (double) height);
+    return new AffineTransform(1., 0., 0., -1., 0., height);
   }
 
   /**
@@ -94,7 +94,7 @@ public class PanelArtistUtilities {
         ((double) width) / height,
         0.,
         0.,
-        (double) height);
+        height);
   }
 
   /**
