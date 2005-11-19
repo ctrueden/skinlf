@@ -52,9 +52,9 @@ import java.util.*;
 import java.net.URL;
 
 /**
- * @author    $Author: zombi $
+ * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.4 $, $Date: 2005-07-02 21:47:29 $
+ * @version   $Revision: 1.5 $, $Date: 2005-11-19 09:26:22 $
  */
 public class IniFile {
 
@@ -93,7 +93,6 @@ public class IniFile {
    * Constructor for the IniFile object
    *
    * @param input            Description of Parameter
-   * @exception IOException  Description of Exception
    */
   public IniFile(InputStream input) {
     this();
@@ -199,7 +198,6 @@ public class IniFile {
    * @param section
    * @param key
    * @param defaultValue
-   * @return
    */
   public boolean getKeyBooleanValue(String section, String key, boolean defaultValue) {
       String value = getKeyValue(section, key.toLowerCase());

@@ -140,10 +140,8 @@ public class ZipResourceLoader {
    *
    * @param name                       Name of the file to retrieve.
    * @return                           An input stream from the file.
-   * @exception MalformedURLException  If the URL is malformed.
-   * @exception IOException            If an IO error is encountered.
    */
-  public InputStream getResourceAsStream(String name) throws MalformedURLException, IOException {
+  public InputStream getResourceAsStream(String name) {
     return new ByteArrayInputStream(getURLContent(name));
   }
 
@@ -308,9 +306,8 @@ public class ZipResourceLoader {
      * Opens an input stream from the URL host.
      *
      * @return                 The InputStream.
-     * @exception IOException  If there is an error reading from the host.
      */
-    public InputStream getInputStream() throws IOException {
+    public InputStream getInputStream() {
       ByteArrayInputStream input = new ByteArrayInputStream((byte[]) resources.get(getURL().getFile()));
       return input;
     }

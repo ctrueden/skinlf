@@ -66,7 +66,7 @@ import javax.swing.WindowConstants;
  * Created on 27/05/2000 by Frederic Lavigne, fred@L2FProd.com
  * 
  * @author $Author: l2fprod $ @created 27 avril 2002
- * @version $Revision: 1.10 $, $Date: 2005-10-09 13:27:02 $
+ * @version $Revision: 1.11 $, $Date: 2005-11-19 09:25:28 $
  */
 public interface Window {
 
@@ -497,8 +497,6 @@ public interface Window {
 
     private JDialog dialog = null;
 
-    private Rectangle restoreBounds = null;
-
     private Rectangle oldBounds = null;
 
     private boolean shaded = false;
@@ -533,9 +531,8 @@ public interface Window {
      * Sets the Selected attribute of the SkinWindowWindow object
      * 
      * @param b The new Selected value
-     * @exception PropertyVetoException Description of Exception
      */
-    public void setSelected(boolean b) throws PropertyVetoException {
+    public void setSelected(boolean b) {
       if (b) {
         if (frame != null) {
           frame.repaint();
@@ -558,9 +555,8 @@ public interface Window {
      * Sets the Icon attribute of the SkinWindowWindow object
      * 
      * @param b The new Icon value
-     * @exception PropertyVetoException Description of Exception
      */
-    public void setIcon(boolean b) throws PropertyVetoException {
+    public void setIcon(boolean b) {
       if (frame != null) {
         frame.setState(Frame.ICONIFIED);
         //frame.show();
@@ -573,12 +569,10 @@ public interface Window {
      * Sets the Maximum attribute of the SkinWindowWindow object
      * 
      * @param b The new Maximum value
-     * @exception PropertyVetoException Description of Exception
      */
-    public void setMaximum(boolean b) throws PropertyVetoException {
+    public void setMaximum(boolean b) {
       if (frame != null) {
         if (b && SkinRootPaneUI.getExtendedState(frame) != SkinRootPaneUI.Frame_MAXIMIZED_BOTH) {
-          restoreBounds = frame.getBounds();
           SkinRootPaneUI.setExtendedState(frame,
               SkinRootPaneUI.Frame_MAXIMIZED_BOTH);
         } else if (!b) {
@@ -622,9 +616,8 @@ public interface Window {
      * Sets the Closed attribute of the SkinWindowWindow object
      * 
      * @param b The new Closed value
-     * @exception PropertyVetoException Description of Exception
      */
-    public void setClosed(boolean b) throws PropertyVetoException {
+    public void setClosed(boolean b) {
       if (frame != null)
         frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
       else if (dialog != null)
