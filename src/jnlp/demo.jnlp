@@ -10,12 +10,34 @@
 		<offline-allowed/>
 	</information>
 	<resources> 
-		<j2se version="1.2+"/> 
+		<j2se version="1.4+"/> 
 		<jar href="examples.jar"/>
 		<extension name="Skin Look And Feel" href="skinlf.jnlp"/>
 	</resources> 
 	<application-desc main-class="examples.demo">
 		<argument>@WEB@/software/skinlf/jnlp/themepack.zip</argument>
+		<argument>@WEB@/javootoo.com/plaf/skinlf/t-packs/themepacks/amarachthemepack.zip</argument>
+		<argument>@WEB@/javootoo.com/plaf/skinlf/t-packs/themepacks/architectBluethemepack.zip</argument>
+		<argument>@WEB@/javootoo.com/plaf/skinlf/t-packs/themepacks/architectOlivethemepack.zip</argument>
+		<argument>@WEB@/javootoo.com/plaf/skinlf/t-packs/themepacks/b0sumiErgothempack.zip</argument>
+		<argument>@WEB@/javootoo.com/plaf/skinlf/t-packs/themepacks/b0sumithemepack.zip</argument>
+		<argument>@WEB@/javootoo.com/plaf/skinlf/t-packs/themepacks/BeOSthemepack.zip</argument>
+		<argument>@WEB@/javootoo.com/plaf/skinlf/t-packs/themepacks/blueMetalthemepack.zip</argument>
+		<argument>@WEB@/javootoo.com/plaf/skinlf/t-packs/themepacks/blueTurquesathemepack.zip</argument>
+		<argument>@WEB@/javootoo.com/plaf/skinlf/t-packs/themepacks/chaNinja-Bluethemepack.zip</argument>
+		<argument>@WEB@/javootoo.com/plaf/skinlf/t-packs/themepacks/coronaHthemepack.zip</argument>
+		<argument>@WEB@/javootoo.com/plaf/skinlf/t-packs/themepacks/cougarthemepack.zip</argument>
+		<argument>@WEB@/javootoo.com/plaf/skinlf/t-packs/themepacks/crystal2themepack.zip</argument>
+		<argument>@WEB@/javootoo.com/plaf/skinlf/t-packs/themepacks/gfxOasisthemepack.zip</argument>
+		<argument>@WEB@/javootoo.com/plaf/skinlf/t-packs/themepacks/gorillathemepack.zip</argument>
+		<argument>@WEB@/javootoo.com/plaf/skinlf/t-packs/themepacks/hmmXPBluethemepack.zip</argument>
+		<argument>@WEB@/javootoo.com/plaf/skinlf/t-packs/themepacks/hmmXPMonoBluethemepack.zip</argument>
+		<argument>@WEB@/javootoo.com/plaf/skinlf/t-packs/themepacks/iBarthemepack.zip</argument>
+		<argument>@WEB@/javootoo.com/plaf/skinlf/t-packs/themepacks/midnightthemepack.zip</argument>
+		<argument>@WEB@/javootoo.com/plaf/skinlf/t-packs/themepacks/midnightthemepack.zip</argument>
+		<argument>@WEB@/javootoo.com/plaf/skinlf/t-packs/themepacks/roueBluethemepack.zip</argument>
+		<argument>@WEB@/javootoo.com/plaf/skinlf/t-packs/themepacks/roueBrownthemepack.zip</argument>
+		<argument>@WEB@/javootoo.com/plaf/skinlf/t-packs/themepacks/roueGreenthemepack.zip</argument>
 		<argument>@WEB@/javootoo.com/plaf/skinlf/themepacks/beigeazulthemepack.zip</argument>
 		<argument>@WEB@/javootoo.com/plaf/skinlf/themepacks/toxicthemepack.zip</argument>
 		<argument>@WEB@/javootoo.com/plaf/skinlf/themepacks/cellshadedthemepack.zip</argument>
