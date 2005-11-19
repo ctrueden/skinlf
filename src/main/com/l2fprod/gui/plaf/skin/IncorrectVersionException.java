@@ -54,7 +54,7 @@ package com.l2fprod.gui.plaf.skin;
  *
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.3 $, $Date: 2004-08-13 19:26:21 $
+ * @version   $Revision: 1.4 $, $Date: 2005-11-19 09:25:05 $
  */
 public final class IncorrectVersionException extends Exception {
 
@@ -80,6 +80,10 @@ public final class IncorrectVersionException extends Exception {
    */
   public static void checkRequiredVersion(String current, String required)
     throws IncorrectVersionException {
+    if ("@VERSION@".equals(current)) {
+      return;
+    }
+    
     java.util.StringTokenizer currentToken =
       new java.util.StringTokenizer(current, ".");
     java.util.StringTokenizer requiredToken =
