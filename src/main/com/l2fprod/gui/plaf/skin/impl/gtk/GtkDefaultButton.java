@@ -67,6 +67,12 @@ final class GtkDefaultButton extends DefaultButton {
           topHeight, rightWidth, bottomHeight, leftWidth, false);
   }
 
+  public GtkDefaultButton(Image bitmap, Image gap, Image gap_start, Image gap_end, int imageWidth, int imageHeight,
+          			      int topHeight, int rightWidth, int bottomHeight, int leftWidth) {
+    super(bitmap, gap, gap_start, gap_end, imageWidth, imageHeight,
+          topHeight, rightWidth, bottomHeight, leftWidth);
+  }  
+  
   public GtkDefaultButton(Image top, Image bottom, Image left, Image right,
                           Image topLeft, Image topRight, Image bottomLeft, Image bottomRight) {
     super(top, bottom, left, right,

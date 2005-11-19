@@ -64,7 +64,7 @@ import javax.swing.SwingConstants;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.3 $, $Date: 2003-12-06 21:48:36 $
+ * @version   $Revision: 1.4 $, $Date: 2005-11-19 09:20:02 $
  */
 final class GtkScrollbar extends AbstractSkinScrollbar implements SkinScrollbar, SwingConstants {
 
@@ -86,18 +86,18 @@ final class GtkScrollbar extends AbstractSkinScrollbar implements SkinScrollbar,
   public GtkScrollbar(GtkParser parser) throws Exception {
     h_thumb = GtkUtils.newButton(parser, "GtkScrollbar",
         new String[]{"function", "detail", "orientation", "state"},
-        new String[]{"BOX", "slider", "HORIZONTAL", "NORMAL"}, false, true, true);
+        new String[]{"BOX", "slider", "HORIZONTAL", "NORMAL"}, false, true, true, false);
     v_thumb = GtkUtils.newButton(parser, "GtkScrollbar",
         new String[]{"function", "detail", "orientation"},
-        new String[]{"BOX", "slider", "VERTICAL"}, false, true, true);
+        new String[]{"BOX", "slider", "VERTICAL"}, false, true, true, false);
 
     h_track = GtkUtils.newButton(parser, "GtkScrollbar",
         new String[]{"function", "detail", "orientation"},
-        new String[]{"BOX", "trough", "HORIZONTAL"}, false, true, true);
+        new String[]{"BOX", "trough", "HORIZONTAL"}, false, true, true, false);
 
     v_track = GtkUtils.newButton(parser, "GtkScrollbar",
         new String[]{"function", "detail", "orientation"},
-        new String[]{"BOX", "trough", "VERTICAL"}, false, true, true);
+        new String[]{"BOX", "trough", "VERTICAL"}, false, true, true, false);
 
     h_handle = GtkUtils.newButton(parser, "default",
         new String[]{"function", "orientation"},
@@ -130,8 +130,8 @@ final class GtkScrollbar extends AbstractSkinScrollbar implements SkinScrollbar,
    */
   public Dimension getPreferredSize(JScrollBar scrollbar) {
     return (scrollbar.getOrientation() == JScrollBar.VERTICAL)
-        ? new Dimension(Math.max(10, Math.min(up.getWidth(), v_thumb.getWidth())), 48)
-        : new Dimension(48, Math.max(10, Math.min(left.getHeight(), h_thumb.getHeight())));
+        ? new Dimension(Math.max(10, Math.max(up.getWidth(), v_thumb.getWidth())), 48)
+        : new Dimension(48, Math.max(10, Math.max(left.getHeight(), h_thumb.getHeight())));
   }
 
   /**

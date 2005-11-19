@@ -59,7 +59,7 @@ import javax.swing.SwingConstants;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.4 $, $Date: 2003-12-06 21:50:13 $
+ * @version   $Revision: 1.5 $, $Date: 2005-11-19 09:18:06 $
  */
 final class GtkTab extends AbstractSkinTab implements SkinTab {
 
@@ -79,31 +79,31 @@ final class GtkTab extends AbstractSkinTab implements SkinTab {
   public GtkTab(GtkParser parser) throws Exception {
     unselected_top = GtkUtils.newButton(parser, "GtkNotebook",
         new String[]{"function", "state", "gap_side"},
-        new String[]{"EXTENSION", "ACTIVE", "BOTTOM"}, false, false, false);
+        new String[]{"EXTENSION", "ACTIVE", "BOTTOM"}, false, false, false, false);
     selected_top = GtkUtils.newButton(parser, "GtkNotebook",
         new String[]{"function", "state", "gap_side"},
-        new String[]{"EXTENSION", null, "BOTTOM"}, false, true, true);
+        new String[]{"EXTENSION", null, "BOTTOM"}, false, true, true, false);
 
     unselected_bottom = GtkUtils.newButton(parser, "GtkNotebook",
         new String[]{"function", "state", "gap_side"},
-        new String[]{"EXTENSION", "ACTIVE", "TOP"}, false, true, false);
+        new String[]{"EXTENSION", "ACTIVE", "TOP"}, false, true, false, false);
     selected_bottom = GtkUtils.newButton(parser, "GtkNotebook",
         new String[]{"function", "state", "gap_side"},
-        new String[]{"EXTENSION", null, "TOP"}, false, true, false);
+        new String[]{"EXTENSION", null, "TOP"}, false, true, false, false);
 
     unselected_left = GtkUtils.newButton(parser, "GtkNotebook",
         new String[]{"function", "state", "gap_side"},
-        new String[]{"EXTENSION", "ACTIVE", "LEFT"}, false, true, false);
+        new String[]{"EXTENSION", "ACTIVE", "LEFT"}, false, true, false, false);
     selected_left = GtkUtils.newButton(parser, "GtkNotebook",
         new String[]{"function", "state", "gap_side"},
-        new String[]{"EXTENSION", null, "LEFT"}, false, true, false);
+        new String[]{"EXTENSION", null, "LEFT"}, false, true, false, false);
 
     unselected_right = GtkUtils.newButton(parser, "GtkNotebook",
         new String[]{"function", "state", "gap_side"},
-        new String[]{"EXTENSION", "ACTIVE", "RIGHT"}, false, true, false);
+        new String[]{"EXTENSION", "ACTIVE", "RIGHT"}, false, true, false, false);
     selected_right = GtkUtils.newButton(parser, "GtkNotebook",
         new String[]{"function", "state", "gap_side"},
-        new String[]{"EXTENSION", null, "RIGHT"}, false, true, false);
+        new String[]{"EXTENSION", null, "RIGHT"}, false, true, false, false);
 
     if (unselected_bottom == null) {
       unselected_bottom = unselected_top.getTopToBottom();
@@ -131,7 +131,7 @@ final class GtkTab extends AbstractSkinTab implements SkinTab {
 
     border = GtkUtils.newButton(parser, "GtkNotebook",
         new String[]{"function", "gap_side"},
-        new String[]{"BOX_GAP", "TOP"});
+        new String[]{"BOX_GAP", "TOP"}, false, true, false, true);
     if (border != null) {
       border.center = null;
     }
@@ -169,7 +169,12 @@ final class GtkTab extends AbstractSkinTab implements SkinTab {
    * @return              Description of the Returned Value
    */
   public boolean paintTab(java.awt.Graphics g, int tabPlacement, boolean isSelected, int x, int y, int w, int h) {
-    if (isSelected) {
+      
+      if (isSelected) {
+
+      //HACK: set the height smaller, so that the tab is placed exactly on the content border
+      h -= 2;
+
       switch (tabPlacement) {
         case SwingConstants.TOP:
           selected_top.paint(g, x, y, w, h, ImageUtils.producer);
@@ -188,6 +193,10 @@ final class GtkTab extends AbstractSkinTab implements SkinTab {
       }
     }
     else {
+        
+      // HACK: set the width greater, so that the unselected tabs are placed exactly side by side
+      w += 1;
+      
       switch (tabPlacement) {
         case SwingConstants.TOP:
           unselected_top.paint(g, x, y, w, h, ImageUtils.producer);
@@ -230,5 +239,14 @@ final class GtkTab extends AbstractSkinTab implements SkinTab {
       return false;
     }
   }
-
+  
+  public boolean paintGap(java.awt.Graphics g, int tabPlacement, int selectedIndex, int x, int y, int w, int h) {
+    if (border != null) {
+      border.paintGap(g, x, y, w, ImageUtils.producer);
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
 }

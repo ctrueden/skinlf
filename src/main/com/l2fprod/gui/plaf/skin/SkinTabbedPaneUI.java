@@ -48,6 +48,7 @@
 package com.l2fprod.gui.plaf.skin;
 
 import java.awt.*;
+
 import javax.swing.plaf.basic.*;
 import javax.swing.plaf.*;
 import javax.swing.*;
@@ -113,12 +114,18 @@ public final class SkinTabbedPaneUI extends BasicTabbedPaneUI {
       default:
         y += calculateTabAreaHeight(tabPlacement, runCount, maxTabHeight);
         h -= (y - insets.top);
+
     }
     if (skin.getTab().paintContent(g, tabPlacement, selectedIndex, x, y, w, h) == false) {
       paintContentBorderTopEdge(g, tabPlacement, selectedIndex, x, y, w, h);
       paintContentBorderLeftEdge(g, tabPlacement, selectedIndex, x, y, w, h);
       paintContentBorderBottomEdge(g, tabPlacement, selectedIndex, x, y, w, h);
       paintContentBorderRightEdge(g, tabPlacement, selectedIndex, x, y, w, h);
+    }
+    else
+    {
+      Rectangle rect = getTabBounds(selectedIndex, calcRect);
+      skin.getTab().paintGap(g, tabPlacement, selectedIndex, rect.x, y, rect.width, h);
     }
   }
 
@@ -139,7 +146,7 @@ public final class SkinTabbedPaneUI extends BasicTabbedPaneUI {
       int x, int y, int w, int h,
       boolean isSelected) {
   }
-
+  
   /**
    * Description of the Method
    *
@@ -149,6 +156,5 @@ public final class SkinTabbedPaneUI extends BasicTabbedPaneUI {
   public static ComponentUI createUI(JComponent c) {
     return new SkinTabbedPaneUI();
   }
-
 }
 

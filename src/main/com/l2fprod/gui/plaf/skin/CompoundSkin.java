@@ -60,7 +60,7 @@ import com.l2fprod.gui.plaf.skin.impl.AbstractSkin;
  *
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.3 $, $Date: 2003-11-23 14:47:45 $
+ * @version   $Revision: 1.4 $, $Date: 2005-11-19 09:16:31 $
  */
 public final class CompoundSkin extends AbstractSkin {
 
@@ -1220,6 +1220,17 @@ public final class CompoundSkin extends AbstractSkin {
       }
       return result;
     }
+
+    public boolean paintGap(java.awt.Graphics g, int tabPlacement, int selectedIndex, int x, int y, int w, int h) {
+      boolean result = false;
+      if (skina.getTab() != null) {
+        result = skina.getTab().paintGap(g, tabPlacement, selectedIndex, x, y, w, h);
+      }
+      if (!result && (skinb.getTab() != null)) {
+        result = skinb.getTab().paintGap(g, tabPlacement, selectedIndex, x, y, w, h);
+      }
+      return result;
+    }  
   }
 
 }

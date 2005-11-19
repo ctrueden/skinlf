@@ -59,7 +59,7 @@ import com.l2fprod.util.ImageUtils;
  *
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.3 $, $Date: 2003-11-23 14:47:45 $
+ * @version   $Revision: 1.4 $, $Date: 2005-11-19 09:16:31 $
  */
 public class DefaultButton implements Icon, Border, UIResource, java.io.Serializable {
 	/**
@@ -111,6 +111,7 @@ public class DefaultButton implements Icon, Border, UIResource, java.io.Serializ
 	 * Description of the Field
 	 */
 	public transient Image top, right, bottom, left, center;
+	public transient Image gap, gap_start, gap_end;
 
 	protected int topHeight, bottomHeight, leftWidth, rightWidth;
 	protected int imageWidth, imageHeight;
@@ -146,6 +147,15 @@ public class DefaultButton implements Icon, Border, UIResource, java.io.Serializ
 		this(bitmap, imageWidth, imageHeight, topHeight, rightWidth, bottomHeight, leftWidth, false);
 	}
 
+	public DefaultButton(Image bitmap, Image gap, Image gap_start, Image gap_end, int imageWidth, int imageHeight, 
+	        int topHeight, int rightWidth, int bottomHeight, int leftWidth) {
+	    this(bitmap, imageWidth, imageHeight, topHeight, rightWidth, bottomHeight, leftWidth, false);
+
+	    this.gap = gap;
+	    this.gap_start = gap_start;
+	    this.gap_end = gap_end;
+	}
+	
 	/**
 	 * Constructor for the DefaultButton object
 	 *
@@ -554,7 +564,21 @@ public class DefaultButton implements Icon, Border, UIResource, java.io.Serializ
 		}
 	}
 
-
+	public void paintGap(Graphics g, int x, int y, int width, Component b) {
+	    //TODO: gap_border gap_start_border gap_end_border
+	    if(gap != null) {      
+	       ImageUtils.paint(b, g, gap, x, y, width, 1);
+	        
+	       if(gap_start != null) {
+	          ImageUtils.paint(b, g, gap_start, x, y, 1, 1); 
+		   }
+		        
+	       if(gap_end != null) {
+		      ImageUtils.paint(b, g, gap_end, x + width - 1, y, 1, 1); 
+		   }
+		}
+	}
+	
 	public void paintWindow(Graphics g, int width, int height, int windowX, int windowY, int windowWidth, int windowHeight, Component b) {
 
 		ImageUtils.paintWindow(b, g, center, leftWidth, topHeight, width - leftWidth - rightWidth, height - topHeight - bottomHeight ,windowX, windowY, windowWidth, windowHeight,false,center_fill);

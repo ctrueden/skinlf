@@ -61,7 +61,7 @@ import com.l2fprod.util.ImageUtils;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.5 $, $Date: 2005-10-09 13:38:50 $
+ * @version   $Revision: 1.6 $, $Date: 2005-11-19 09:21:24 $
  */
 final class GtkPersonality extends AbstractSkinPersonality {
 
@@ -132,14 +132,14 @@ final class GtkPersonality extends AbstractSkinPersonality {
      */
     toolBarBorder = GtkUtils.newButton(parser, "GtkToolbar",
         new String[]{"function"},
-        new String[]{"BOX"}, false, true, false);
+        new String[]{"BOX"}, false, true, false, false);
     if (toolBarBorder != null) {
       toolBarBorder = new BorderUIResource(toolBarBorder);
     }
     
     menuBarBorder = GtkUtils.newButton(parser, "GtkMenuBar",
         new String[]{"function"},
-        new String[]{"BOX"}, false, true, false);
+        new String[]{"BOX"}, false, true, false, false);
     if (menuBarBorder != null) {
       menuBarBorder = new BorderUIResource(menuBarBorder);
     }
@@ -158,22 +158,22 @@ final class GtkPersonality extends AbstractSkinPersonality {
 
     comboBox = GtkUtils.newButton(parser, "GtkOptionMenu",
         new String[]{"function", "state"},
-        new String[]{"BOX", null}, false, true, false);
+        new String[]{"BOX", null}, false, true, false, false);
     if (comboBox == null) {
       comboBox = GtkUtils.newButton(parser, "GtkOptionMenu",
           new String[]{"function"},
-          new String[]{"TAB"}, false, true, true);
+          new String[]{"TAB"}, false, true, true, false);
     }
 
     rolloverComboBox =
       GtkUtils.newButton(parser, "GtkOptionMenu",
                          new String[]{"function", "state"},
-                         new String[]{"BOX", "PRELIGHT"}, false, true, false);
+                         new String[]{"BOX", "PRELIGHT"}, false, true, false, false);
 
     disabledComboBox =
       GtkUtils.newButton(parser, "GtkOptionMenu",
                          new String[]{"function", "state"},
-                         new String[]{"BOX", "INSENSITIVE"}, false, true, false);
+                         new String[]{"BOX", "INSENSITIVE"}, false, true, false, false);
 
     focus = GtkUtils.newButton(parser, "default",
         new String[]{"function"},

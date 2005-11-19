@@ -55,7 +55,7 @@ import com.l2fprod.gui.plaf.skin.*;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.1 $, $Date: 2003-08-01 20:05:29 $
+ * @version   $Revision: 1.2 $, $Date: 2005-11-19 09:17:57 $
  */
 public class AbstractSkinTab extends AbstractSkinComponent implements SkinTab {
 
@@ -111,4 +111,7 @@ public class AbstractSkinTab extends AbstractSkinComponent implements SkinTab {
     return false;
   }
 
+  public boolean paintGap(Graphics g, int tabPlacement, int selectedIndex, int x, int y, int w, int h) {
+    return false;
+  }  
 }
