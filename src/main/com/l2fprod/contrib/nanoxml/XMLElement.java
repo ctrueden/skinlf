@@ -76,8 +76,8 @@ import java.util.Vector;
  * and <CODE>nanoxml-sax.jar</CODE> in your classpath and setting the property
  * <CODE>org.xml.sax.parser</CODE> to <CODE>nanoxml.sax.SAXParser</CODE> <P>
  *
- * $Revision: 1.2 $<BR>
- * $Date: 2003-12-06 21:46:16 $<P>
+ * $Revision: 1.3 $<BR>
+ * $Date: 2005-11-19 09:15:30 $<P>
  *
  *
  *
@@ -85,7 +85,7 @@ import java.util.Vector;
  *      HREF="mailto:Marc.DeScheemaecker@advalvas.be" >
  *      Marc.DeScheemaecker@advalvas.be</A> &gt;
  * @created   27 avril 2002
- * @see       nanoxml.XMLParseException
+ * @see       com.l2fprod.contrib.nanoxml.XMLParseException
  * @version   1.6
  */
 public class XMLElement
@@ -162,9 +162,9 @@ public class XMLElement
    * </DL>
    *
    *
-   * @see   nanoxml.XMLElement#XMLElement(java.util.Properties)
-   * @see   nanoxml.XMLElement#XMLElement(boolean)
-   * @see   nanoxml.XMLElement#XMLElement(java.util.Properties,boolean)
+   * @see   com.l2fprod.contrib.nanoxml.XMLElement#XMLElement(java.util.Properties)
+   * @see   com.l2fprod.contrib.nanoxml.XMLElement#XMLElement(boolean)
+   * @see   com.l2fprod.contrib.nanoxml.XMLElement#XMLElement(java.util.Properties,boolean)
    */
   public XMLElement() {
     this(new Properties(), false, true, true);
@@ -186,9 +186,9 @@ public class XMLElement
    *
    *
    * @param conversionTable  Description of Parameter
-   * @see                    nanoxml.XMLElement#XMLElement()
-   * @see                    nanoxml.XMLElement#XMLElement(boolean)
-   * @see                    nanoxml.XMLElement#XMLElement(java.util.Properties,boolean)
+   * @see                    com.l2fprod.contrib.nanoxml.XMLElement#XMLElement()
+   * @see                    com.l2fprod.contrib.nanoxml.XMLElement#XMLElement(boolean)
+   * @see                    com.l2fprod.contrib.nanoxml.XMLElement#XMLElement(java.util.Properties,boolean)
    */
   public XMLElement(Properties conversionTable) {
     this(conversionTable, false, true, true);
@@ -209,9 +209,9 @@ public class XMLElement
    *
    *
    * @param skipLeadingWhitespace  Description of Parameter
-   * @see                          nanoxml.XMLElement#XMLElement()
-   * @see                          nanoxml.XMLElement#XMLElement(java.util.Properties)
-   * @see                          nanoxml.XMLElement#XMLElement(java.util.Properties,boolean)
+   * @see                          com.l2fprod.contrib.nanoxml.XMLElement#XMLElement()
+   * @see                          com.l2fprod.contrib.nanoxml.XMLElement#XMLElement(java.util.Properties)
+   * @see                          com.l2fprod.contrib.nanoxml.XMLElement#XMLElement(java.util.Properties,boolean)
    */
   public XMLElement(boolean skipLeadingWhitespace) {
     this(new Properties(), skipLeadingWhitespace, true, true);
@@ -234,9 +234,9 @@ public class XMLElement
    *
    * @param conversionTable        Description of Parameter
    * @param skipLeadingWhitespace  Description of Parameter
-   * @see                          nanoxml.XMLElement#XMLElement()
-   * @see                          nanoxml.XMLElement#XMLElement(boolean)
-   * @see                          nanoxml.XMLElement#XMLElement(java.util.Properties)
+   * @see                          com.l2fprod.contrib.nanoxml.XMLElement#XMLElement()
+   * @see                          com.l2fprod.contrib.nanoxml.XMLElement#XMLElement(boolean)
+   * @see                          com.l2fprod.contrib.nanoxml.XMLElement#XMLElement(java.util.Properties)
    */
   public XMLElement(Properties conversionTable,
       boolean skipLeadingWhitespace) {
@@ -265,10 +265,10 @@ public class XMLElement
    * @param conversionTable        Description of Parameter
    * @param skipLeadingWhitespace  Description of Parameter
    * @param ignoreCase             Description of Parameter
-   * @see                          nanoxml.XMLElement#XMLElement()
-   * @see                          nanoxml.XMLElement#XMLElement(boolean)
-   * @see                          nanoxml.XMLElement#XMLElement(java.util.Properties)
-   * @see                          nanoxml.XMLElement#XMLElement(java.util.Properties,boolean)
+   * @see                          com.l2fprod.contrib.nanoxml.XMLElement#XMLElement()
+   * @see                          com.l2fprod.contrib.nanoxml.XMLElement#XMLElement(boolean)
+   * @see                          com.l2fprod.contrib.nanoxml.XMLElement#XMLElement(java.util.Properties)
+   * @see                          com.l2fprod.contrib.nanoxml.XMLElement#XMLElement(java.util.Properties,boolean)
    */
   public XMLElement(Properties conversionTable,
       boolean skipLeadingWhitespace,
@@ -299,10 +299,10 @@ public class XMLElement
    * @param skipLeadingWhitespace     Description of Parameter
    * @param fillBasicConversionTable  Description of Parameter
    * @param ignoreCase                Description of Parameter
-   * @see                             nanoxml.XMLElement#XMLElement()
-   * @see                             nanoxml.XMLElement#XMLElement(boolean)
-   * @see                             nanoxml.XMLElement#XMLElement(java.util.Properties)
-   * @see                             nanoxml.XMLElement#XMLElement(java.util.Properties,boolean)
+   * @see                             com.l2fprod.contrib.nanoxml.XMLElement#XMLElement()
+   * @see                             com.l2fprod.contrib.nanoxml.XMLElement#XMLElement(boolean)
+   * @see                             com.l2fprod.contrib.nanoxml.XMLElement#XMLElement(java.util.Properties)
+   * @see                             com.l2fprod.contrib.nanoxml.XMLElement#XMLElement(java.util.Properties,boolean)
    */
   protected XMLElement(Properties conversionTable,
       boolean skipLeadingWhitespace,
@@ -1028,11 +1028,11 @@ public class XMLElement
     out.print(this.tagName);
 
     if (!this.attributes.isEmpty()) {
-      Enumeration enum = this.attributes.keys();
+      Enumeration enumeration = this.attributes.keys();
 
-      while (enum.hasMoreElements()) {
+      while (enumeration.hasMoreElements()) {
         out.print(' ');
-        String key = (String) (enum.nextElement());
+        String key = (String) (enumeration.nextElement());
         String value = (String) (this.attributes.get(key));
         out.print(key);
         out.print("=\"");
@@ -1069,10 +1069,10 @@ public class XMLElement
     }
     else {
       out.println('>');
-      Enumeration enum = this.enumerateChildren();
+      Enumeration enumeration = this.enumerateChildren();
 
-      while (enum.hasMoreElements()) {
-        XMLElement child = (XMLElement) (enum.nextElement());
+      while (enumeration.hasMoreElements()) {
+        XMLElement child = (XMLElement) (enumeration.nextElement());
         child.write(writer, indent + 4);
       }
 
@@ -1096,7 +1096,7 @@ public class XMLElement
    * @param contentSize                    Description of Parameter
    * @param contentLineNr                  Description of Parameter
    * @exception XMLParseException          Description of Exception
-   * @see                                  nanoxml.XMLElement#parseCharArray
+   * @see                                  com.l2fprod.contrib.nanoxml.XMLElement#parseCharArray(char[], int, int, int[])
    */
   protected void scanChildren(char[] input,
       int contentOffset,
@@ -1381,7 +1381,7 @@ public class XMLElement
    * @param contentSize                    Description of Parameter
    * @param contentLineNr                  Description of Parameter
    * @exception XMLParseException          Description of Exception
-   * @see                                  nanoxml.XMLElement#decodeString
+   * @see                                  com.l2fprod.contrib.nanoxml.XMLElement#decodeString
    */
   private void processContents(char[] input,
       int contentOffset,
@@ -1441,7 +1441,7 @@ public class XMLElement
    * @return                               the offset in the string following
    *      the attributes, so that input[offset] in { '/', '>' }
    * @exception XMLParseException          Description of Exception
-   * @see                                  nanoxml.XMLElement#scanOneAttribute
+   * @see                                  com.l2fprod.contrib.nanoxml.XMLElement#scanOneAttribute
    */
   private int scanAttributes(char[] input,
       int offset,
@@ -1693,7 +1693,7 @@ public class XMLElement
    * @return                               the string found, without delimiting
    *      double quotes; or null if offset didn't point to a valid string
    * @exception XMLParseException          Description of Exception
-   * @see                                  nanoxml.XMLElement#scanIdentifier
+   * @see                                  com.l2fprod.contrib.nanoxml.XMLElement#scanIdentifier
    */
   private String scanString(char[] input,
       int offset,

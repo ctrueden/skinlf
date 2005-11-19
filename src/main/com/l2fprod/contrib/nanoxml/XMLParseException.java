@@ -51,8 +51,8 @@ package com.l2fprod.contrib.nanoxml;
  * An XMLParseException is thrown when an error occures while parsing an XML
  * string. <P>
  *
- * $Revision: 1.1 $<BR>
- * $Date: 2003-08-01 20:11:46 $<P>
+ * $Revision: 1.2 $<BR>
+ * $Date: 2005-11-19 09:15:30 $<P>
  *
  *
  *
@@ -60,7 +60,7 @@ package com.l2fprod.contrib.nanoxml;
  *      HREF="mailto:Marc.DeScheemaecker@advalvas.be" >
  *      Marc.DeScheemaecker@advalvas.be</A> &gt;
  * @created   27 avril 2002
- * @see       nanoxml.XMLElement
+ * @see       com.l2fprod.contrib.nanoxml.XMLElement
  * @version   1.6
  */
 public class XMLParseException
