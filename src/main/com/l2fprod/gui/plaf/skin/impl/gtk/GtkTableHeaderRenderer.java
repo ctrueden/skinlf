@@ -51,8 +51,10 @@ import com.l2fprod.gui.plaf.skin.DefaultButton;
 
 import java.awt.Component;
 import java.awt.Graphics;
+import java.awt.Insets;
 
 import javax.swing.JTable;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 
@@ -113,6 +115,15 @@ public class GtkTableHeaderRenderer
     this.isSelected = isSelected;
     this.hasFocus = hasFocus;
     setText((value == null) ? "" : value.toString());
+    
+    Insets insets;
+    if (isSelected || hasFocus) {
+      insets = itemSelected.getInsets();
+    } else {
+      insets = itemUnselected.getInsets();
+    }
+    setBorder(new EmptyBorder(insets));
+    
     return this;
   }
 
