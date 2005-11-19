@@ -56,13 +56,12 @@ import javax.swing.*;
 import javax.swing.plaf.*;
 import javax.swing.plaf.basic.*;
 import javax.swing.plaf.metal.MetalComboBoxButton;
-import javax.swing.plaf.metal.MetalComboBoxUI.MetalPropertyChangeListener;
 
 import com.l2fprod.gui.icon.ArrowIcon;
 
 /**
  * @author    $Author: l2fprod $
- * @version   $Revision: 1.3 $, $Date: 2005-10-09 13:15:00 $
+ * @version   $Revision: 1.4 $, $Date: 2005-11-19 09:24:27 $
  */
 public final class SkinComboBoxUI extends BasicComboBoxUI {
 
@@ -71,6 +70,29 @@ public final class SkinComboBoxUI extends BasicComboBoxUI {
   private boolean rollover = false;
 
   private MouseListener rolloverListener;
+
+  public SkinComboBoxUI() {
+    // Install a new renderer for the selected value which will work with
+    // both Java 1.4 and 1.5.
+    currentValuePane = new CellRendererPane() {
+      public void paintComponent(
+          Graphics g,
+          Component c,
+          Container p,
+          int x,
+          int y,
+          int w,
+          int h,
+          boolean shouldValidate) {
+        JComponent jc = (JComponent) c;
+        jc.setOpaque(false);
+        super.paintComponent(g, c, p, x, y, w, h, shouldValidate);
+        // This is a bit hacky, but restoring this property to it's previous
+        // value does NOT work on J2SE 1.5.0_05 somehow.
+        jc.setOpaque(true);
+      }
+    };
+  }
 
   /**
    * Gets the PreferredSize attribute of the SkinComboBoxUI object
@@ -135,59 +157,6 @@ public final class SkinComboBoxUI extends BasicComboBoxUI {
     skin.getPersonality().paintComboBox(g, comboBox, r, hasFocus, rollover);
     if (!comboBox.isEditable() || editor == null || !editor.isVisible()) {
       paintCurrentValue(g, r, false);
-    }
-  }
-
-  public void paintCurrentValue(Graphics g,Rectangle bounds,boolean hasFocus) {
-    ListCellRenderer renderer = comboBox.getRenderer();
-    Component c;
-    
-    if ( comboBox.getSelectedIndex() == -1 ) {
-      return;
-    }
-    
-    if ( hasFocus && !isPopupVisible(comboBox) ) {
-      c = renderer.getListCellRendererComponent( listBox,
-                                                 comboBox.getSelectedItem(),
-                                                 -1,
-                                                 true,
-                                                 false );
-    }
-    else {
-      c = renderer.getListCellRendererComponent( listBox,
-                                                 comboBox.getSelectedItem(),
-                                                 -1,
-                                                 false,
-                                                 false );
-      c.setBackground(UIManager.getColor("ComboBox.background"));
-    }
-    c.setFont(comboBox.getFont());
-    if ( hasFocus && !isPopupVisible(comboBox) ) {
-      c.setForeground(listBox.getSelectionForeground());
-      c.setBackground(listBox.getSelectionBackground());
-    }
-    else {
-      if ( comboBox.isEnabled() ) {
-        c.setForeground(comboBox.getForeground());
-        c.setBackground(comboBox.getBackground());
-            }
-      else {
-        c.setForeground(UIManager.getColor("ComboBox.disabledForeground"));
-        c.setBackground(UIManager.getColor("ComboBox.disabledBackground"));
-      }
-    }
-
-    // WORKAROUND for BUG 605424
-    // http://sourceforge.net/tracker/index.php?func=detail&aid=605424&group_id=4048&atid=104048
-    boolean wasOpaque = true;
-    if (c instanceof JComponent) {
-      wasOpaque = ((JComponent)c).isOpaque();
-      ((JComponent)c).setOpaque(false);
-    }    
-    currentValuePane.paintComponent(g,c,comboBox,bounds.x,bounds.y,
-                                    bounds.width,bounds.height);
-    if (wasOpaque && (c instanceof JComponent)) {
-      ((JComponent)c).setOpaque(true);
     }
   }
   
@@ -255,15 +224,6 @@ public final class SkinComboBoxUI extends BasicComboBoxUI {
    */
   protected LayoutManager createLayoutManager() {
     return new SkinComboBoxLayoutManager();
-  }
-
-  /**
-   * Description of the Method
-   *
-   * @return   Description of the Returned Value
-   */
-  protected ListCellRenderer createRenderer() {
-    return new SkinComboBoxRenderer();
   }
 
   protected JComboBox comboBox() {

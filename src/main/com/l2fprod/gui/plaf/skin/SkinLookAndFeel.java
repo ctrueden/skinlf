@@ -84,7 +84,7 @@ import javax.swing.text.JTextComponent;
  * website</a> for the complete description of a theme pack.
  * 
  * @author $Author: l2fprod $
- * @version $Revision: 1.15 $, $Date: 2005-10-09 13:35:56 $
+ * @version $Revision: 1.16 $, $Date: 2005-11-19 09:24:27 $
  */
 public class SkinLookAndFeel extends BasicLookAndFeel {
 
@@ -364,6 +364,16 @@ public class SkinLookAndFeel extends BasicLookAndFeel {
         new Integer(KeyEvent.VK_N),
         "FileChooser.filesOfTypeLabelMnemonic",
         new Integer(KeyEvent.VK_T),
+        "FileChooser.usesSingleFilePane",
+        Boolean.TRUE,
+        "FileChooser.ancestorInputMap",
+           new UIDefaults.LazyInputMap(new Object[] {
+                 "ESCAPE", "cancelSelection",
+                 "F2", "editFileName",
+                 "F5", "refresh",
+                 "BACK_SPACE", "Go Up",
+                 "ENTER", "approveSelection"
+             }),
         "InternalFrame.minimizeIconBackground",
         table.get("control"),
         "InternalFrame.resizeIconHighlight",
