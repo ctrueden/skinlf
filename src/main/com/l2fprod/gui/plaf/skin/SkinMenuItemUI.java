@@ -56,34 +56,27 @@ import java.awt.*;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.2 $, $Date: 2003-12-06 21:46:58 $
+ * @version   $Revision: 1.3 $, $Date: 2005-11-19 09:22:37 $
  */
 public class SkinMenuItemUI extends BasicMenuItemUI {
 
   private Skin skin = SkinLookAndFeel.getSkin();
 
-  /**
-   * Description of the Method
-   *
-   * @param g  Description of Parameter
-   * @param c  Description of Parameter
-   */
-  public void paint(Graphics g, JComponent c) {
-    Graphics2D g2d = (Graphics2D) g;
-    AlphaComposite alpha = (AlphaComposite) ((JComponent) c.getParent()).getClientProperty("alpha");
+  protected void paintBackground(Graphics g, JMenuItem menuItem, Color bgColor) {
+    Graphics2D g2d = (Graphics2D)g;
+    AlphaComposite alpha = (AlphaComposite)((JComponent)menuItem.getParent())
+      .getClientProperty("alpha");
     Composite oldComposite = g2d.getComposite();
     if (alpha != null) {
       g2d.setComposite(alpha);
     }
     // end of if (alpha == null)
 
-    skin.getPersonality().paintMenuItem(g, (JMenuItem) c);
+    skin.getPersonality().paintMenuItem(g, menuItem);
 
     if (alpha != null) {
       g2d.setComposite(oldComposite);
     }
-
-    super.paint(g, c);
   }
 
   /**

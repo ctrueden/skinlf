@@ -47,6 +47,7 @@
  */
 package com.l2fprod.gui.plaf.skin;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 import javax.swing.JComponent;
@@ -64,17 +65,10 @@ public final class SkinMenuUI extends BasicMenuUI {
 
   private Skin skin = SkinLookAndFeel.getSkin();
 
-  /**
-   * Description of the Method
-   *
-   * @param g  Description of Parameter
-   * @param c  Description of Parameter
-   */
-  public void paint(Graphics g, JComponent c) {
-    skin.getPersonality().paintMenuItem(g, (JMenuItem) c);
-    super.paint(g, c);
+  protected void paintBackground(Graphics g, JMenuItem menuItem, Color bgColor) {
+    skin.getPersonality().paintMenuItem(g, menuItem);
   }
-
+  
   /**
    * Description of the Method
    */
