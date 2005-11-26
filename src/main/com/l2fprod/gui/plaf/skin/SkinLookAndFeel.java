@@ -48,7 +48,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Insets;
-import java.awt.event.KeyEvent;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -84,7 +83,7 @@ import javax.swing.text.JTextComponent;
  * website</a> for the complete description of a theme pack.
  * 
  * @author $Author: l2fprod $
- * @version $Revision: 1.16 $, $Date: 2005-11-19 09:24:27 $
+ * @version $Revision: 1.17 $, $Date: 2005-11-26 11:30:15 $
  */
 public class SkinLookAndFeel extends BasicLookAndFeel {
 
@@ -242,7 +241,7 @@ public class SkinLookAndFeel extends BasicLookAndFeel {
         "ToolBarUI",
         SkinToolBarUI.class.getName(),
       //	    "ListUI", SkinListUI.class.getName(),
-      "PopupMenuUI",
+        "PopupMenuUI",
         SkinPopupMenuUI.class.getName(),
         "RadioButtonUI",
         SkinRadioButtonUI.class.getName(),
@@ -358,12 +357,6 @@ public class SkinLookAndFeel extends BasicLookAndFeel {
         table.get("textText"),
         "Tree.textBackground",
         table.get("window"),
-        "FileChooser.lookInLabelMnemonic",
-        new Integer(KeyEvent.VK_I),
-        "FileChooser.fileNameLabelMnemonic",
-        new Integer(KeyEvent.VK_N),
-        "FileChooser.filesOfTypeLabelMnemonic",
-        new Integer(KeyEvent.VK_T),
         "FileChooser.usesSingleFilePane",
         Boolean.TRUE,
         "FileChooser.ancestorInputMap",
@@ -774,8 +767,17 @@ public class SkinLookAndFeel extends BasicLookAndFeel {
     Enumeration iter = bundle.getKeys();
     while (iter.hasMoreElements()) {
       String key = (String)iter.nextElement();
-      table.put(key, bundle.getObject(key));
+      table.put(key, fixMnemonic(key, bundle.getObject(key)));
     }
+  }
+
+  private Object fixMnemonic(String key, Object value) {
+    if (key.endsWith("Mnemonic") && value instanceof String) {
+      try {
+        return Integer.decode((String) value);
+      } catch (NumberFormatException ignored) {}
+    }
+    return value;
   }
 
   /**
