@@ -47,21 +47,38 @@
  */
 package com.l2fprod.gui.plaf.skin;
 
-import java.awt.*;
-import java.awt.event.*;
+import com.l2fprod.gui.icon.ArrowIcon;
+
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Insets;
+import java.awt.LayoutManager;
+import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import javax.swing.*;
-import javax.swing.plaf.*;
-import javax.swing.plaf.basic.*;
-import javax.swing.plaf.metal.MetalComboBoxButton;
-
-import com.l2fprod.gui.icon.ArrowIcon;
+import javax.swing.CellRendererPane;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
+import javax.swing.KeyStroke;
+import javax.swing.plaf.ComponentUI;
+import javax.swing.plaf.UIResource;
+import javax.swing.plaf.basic.BasicComboBoxUI;
 
 /**
  * @author    $Author: l2fprod $
- * @version   $Revision: 1.4 $, $Date: 2005-11-19 09:24:27 $
+ * @version   $Revision: 1.5 $, $Date: 2005-12-04 15:34:37 $
  */
 public final class SkinComboBoxUI extends BasicComboBoxUI {
 
@@ -369,11 +386,7 @@ public final class SkinComboBoxUI extends BasicComboBoxUI {
       super.propertyChange(e);
       String propertyName = e.getPropertyName();
 
-      if (propertyName.equals("editable")) {
-        MetalComboBoxButton button = (MetalComboBoxButton)arrowButton;
-        button.setIconOnly(comboBox.isEditable());
-        comboBox.repaint();
-      } else if (propertyName.equals("background")) {
+      if (propertyName.equals("background")) {
         Color color = (Color)e.getNewValue();
         arrowButton.setBackground(color);
         listBox.setBackground(color);
