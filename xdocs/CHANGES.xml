@@ -5,6 +5,14 @@
     <person name="Frederic Lavigne" email="fred@L2FProd.com" id="FL"/>
   </devs>
 
+  <release version="6.2" date="11 February 2006">
+    <action type="fix">Fix for editable JComboBox</action>
+    <action type="add">German resource file</action>
+    <action type="fix">Minor fix in NativeSkin, window was 1pixel wider.</action>
+    <action type="update">Dropped JDK1.3 support in NativeSkin</action>
+    <action type="fix">Better JFileChooser implementation for JDK 1.4 and 1.5</action>
+  </release>
+
   <release version="1.2.12" date="9 October 2005">
     <action type="fix">Fixed an issue with the list renderer used by a ComboBox, background and foreground were not used, renderer was not replaced when switching skins or lookandfeels</action>
   </release>
