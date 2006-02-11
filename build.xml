@@ -14,8 +14,8 @@
 
   <!-- Project Identification -->
   <property name="project" value="skinlf"/>
-  <property name="version" value="1.2.12"/>
-  <property name="year"    value="2000-2005"/>
+  <property name="version" value="6.2"/>
+  <property name="year"    value="2000-2006"/>
   <property name="project.fullname" value="Skin Look And Feel"/>
   <property name="project.nativeskin" value="nativeskin"/>
 
@@ -50,6 +50,14 @@
 	 usetimestamp="true"/>
     <get src="http://www.ibiblio.org/maven/xml-apis/jars/xml-apis-2.0.2.jar"
 	 dest="lib/xml-apis.jar"
+	 verbose="true"
+	 usetimestamp="true"/>
+    <get src="https://laf-plugin.dev.java.net/files/documents/4261/23747/laf-plugin.jar"
+         dest="lib/laf-plugin.jar"
+	 verbose="true"
+	 usetimestamp="true"/>
+    <get src="https://laf-plugin.dev.java.net/files/documents/4261/23748/laf-plugin-src.jar"
+         dest="lib/laf-plugin-src.jar"
 	 verbose="true"
 	 usetimestamp="true"/>
   </target>
@@ -294,6 +302,33 @@
 	 basedir="src/themepacks/aquathemepack"/>
     <zip destfile="${build.www.themedir}/alloythemepack.zip"
 	 basedir="src/themepacks/alloythemepack"/>
+  </target>
+
+  <target name="nativeskin">
+    <javah destdir="src/native/x11" classpath="${build.classes}"
+           class="com.l2fprod.gui.nativeskin.x11.X11NativeSkin"/>
+    <javah class="com.l2fprod.gui.nativeskin.win32.Win32NativeSkin"
+           destdir="src/native/win32"
+           classpath="${build.classes}"/>
+    <antcall target="createdll">
+       <param name="java.home" value="${jdk14.home}"/>
+       <param name="dir" value="src\native\win32"/>
+       <param name="file" value="regionJAWT"/>
+       <param name="dll" value="nativeskinwin32JAWT.dll"/>
+    </antcall>
+  </target>
+
+  <target name="createdll">
+    <exec executable="${bcc55.home}\bin\bcc32.exe" dir="${dir}">
+      <arg line="-w-"/>
+      <arg value="-I${bcc55.home}\include;${java.home}\include;${java.home}\include\win32"/>
+      <arg value="-c"/>
+      <arg value="${file}.c"/>
+    </exec>
+    <exec executable="${bcc55.home}\bin\ilink32.exe" dir="${dir}">
+      <arg value="-L${bcc55.home}\lib;${bcc55.home}\lib\psdk;${java.home}\lib;${basedir}\..\common\lib"/>
+      <arg line="-Gn -Tpd -x c0d32.obj ${file}.obj ,${dll},,user32 gdi32 bccjawt import32 cw32mt,,"/>
+    </exec>
   </target>
 
 </project>
