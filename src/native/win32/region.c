@@ -10,7 +10,7 @@
  * @author $Author: l2fprod $
  * @author Herve Lemaitre (setWindowImageRegion0)
  *
- * @version $Revision: 1.1 $, $Date: 2003-08-01 20:18:11 $
+ * @version $Revision: 1.2 $, $Date: 2006-02-11 12:03:47 $
  */
 
 
@@ -172,7 +172,7 @@ JNIEXPORT jlong JNICALL Java_com_l2fprod_gui_nativeskin_win32_Win32NativeSkin_cr
         }
         
         if (x > firstx) {
-          SetRectRgn(hRgnTemp, firstx, y, x + 1, y + 1);
+          SetRectRgn(hRgnTemp, firstx, y, x, y + 1);
           CombineRgn(hRgnOut, hRgnOut, hRgnTemp, RGN_OR);
           if (x >= width) {
             // i may have been incremented too much
