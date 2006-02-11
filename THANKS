@@ -29,5 +29,10 @@ I was going to "kill" SkinLF, he saved it :)
 
 Francis Perreault for submitting fixes.
 
+Christian Schlichtherle for providing JFileChooser patches for JDK1.5
+compatibility and german resources
+
+Michael Brackx for providing a fix for the NativeSkin.
+
 and many others submitting screenshots, suggestions, bug fixes...
 
