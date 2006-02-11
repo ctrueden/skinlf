@@ -82,26 +82,24 @@ public abstract class NativeSkin {
       String impl = null;
       String library = null;
 
-      if (OS.isWindows()) {
-        impl = "com.l2fprod.gui.nativeskin.win32.Win32NativeSkin";
-        if (OS.isOneDotFourOrMore()) {
+      if (OS.isOneDotFourOrMore()) {
+        if (OS.isWindows()) {
+          impl = "com.l2fprod.gui.nativeskin.win32.Win32NativeSkin";
           library = "nativeskinwin32JAWT";
-        } else {
-          library = "nativeskinwin32";
         }        
       }
+      
       /* NOT YET COMPILED
-      else if (OS.isUnix()) {
-        impl = "com.l2fprod.gui.nativeskin.x11.X11NativeSkin";
-        if (OS.isSolaris()) {
-          library = "nativeskinsolaris";
-        }
-        else if (OS.isLinux()) {
+        if (OS.isUnix()) {
+          impl = "com.l2fprod.gui.nativeskin.x11.X11NativeSkin";
+          if (OS.isSolaris()) {
+            library = "nativeskinsolaris";
+          } else if (OS.isLinux()) {
           library = "nativeskinlinux";
         }
-      }
+        }
       */
-      else {
+      if (library == null) {
         throw new Error("NativeSkin is not yet available for your platform: "
             + System.getProperty("os.name"));
       }
