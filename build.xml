@@ -14,7 +14,7 @@
 
   <!-- Project Identification -->
   <property name="project" value="skinlf"/>
-  <property name="version" value="6.2"/>
+  <property name="version" value="6.3-SNAPSHOT"/>
   <property name="year"    value="2000-2006"/>
   <property name="project.fullname" value="Skin Look And Feel"/>
   <property name="project.nativeskin" value="nativeskin"/>
@@ -52,11 +52,11 @@
 	 dest="lib/xml-apis.jar"
 	 verbose="true"
 	 usetimestamp="true"/>
-    <get src="https://laf-plugin.dev.java.net/files/documents/4261/23747/laf-plugin.jar"
+    <get src="https://www.dev.java.net/files/documents/4261/23747/laf-plugin.jar"
          dest="lib/laf-plugin.jar"
 	 verbose="true"
 	 usetimestamp="true"/>
-    <get src="https://laf-plugin.dev.java.net/files/documents/4261/23748/laf-plugin-src.jar"
+    <get src="https://www.dev.java.net/files/documents/4261/23748/laf-plugin-src.jar"
          dest="lib/laf-plugin-src.jar"
 	 verbose="true"
 	 usetimestamp="true"/>
@@ -104,8 +104,11 @@
 
   <!-- Dist targets -->
   <target name="jar" depends="compile.java">
+    <!-- uncompress laf-plugin jar -->
+    <unjar src="lib/laf-plugin.jar" dest="${build.classes}/"/>
+
     <jar destfile="${build.dir}/${project}.jar">
-      <fileset dir="${build.classes}" includes="*.class,com/**/*.class" excludes="**/region/**,**/nativeskin/**"/>
+      <fileset dir="${build.classes}" includes="*.class,org/jvnet/**,com/**/*.class" excludes="**/region/**,**/nativeskin/**"/>
       <fileset dir="${java.src.dir}" includes="com/**/*.properties"/>
       <fileset dir="${java.src.dir}" includes="com/**/*.template"/>
       <fileset dir="${java.src.dir}" includes="com/**/*.gif"/>

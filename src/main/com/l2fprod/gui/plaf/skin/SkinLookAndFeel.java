@@ -83,10 +83,10 @@ import javax.swing.text.JTextComponent;
  * website</a> for the complete description of a theme pack.
  * 
  * @author $Author: l2fprod $
- * @version $Revision: 1.17 $, $Date: 2005-11-26 11:30:15 $
+ * @version $Revision: 1.18 $, $Date: 2006-02-22 15:55:49 $
  */
 public class SkinLookAndFeel extends BasicLookAndFeel {
-
+ 
   /**
    * Description of the Field
    * 
@@ -279,6 +279,8 @@ public class SkinLookAndFeel extends BasicLookAndFeel {
     Object[] results = new Object[list.size()];
     list.copyInto(results);
     table.putDefaults(results);
+    
+    LafPluginSupport.initClassDefaults(table);
   }
 
   /**
@@ -754,8 +756,16 @@ public class SkinLookAndFeel extends BasicLookAndFeel {
       table.put("TextPane.keyBindings", multilineBindings);
       table.put("EditorPane.keyBindings", multilineBindings);
     }
+
+    LafPluginSupport.initComponentDefaults(table);
   }
 
+  public void initialize() {
+    super.initialize();
+    
+    LafPluginSupport.initialize();
+  }
+  
   /**
    * Description of the Method
    * 
@@ -786,7 +796,7 @@ public class SkinLookAndFeel extends BasicLookAndFeel {
    * @param skin a skin
    */
   public static void setSkin(Skin skin) {
-    c_CurrentSkin = skin;
+    c_CurrentSkin = skin;    
   }
 
   /**
