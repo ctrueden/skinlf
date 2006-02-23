@@ -53,14 +53,6 @@
 	 dest="lib/xml-apis.jar"
 	 verbose="true"
 	 usetimestamp="true"/>
-    <get src="https://www.dev.java.net/files/documents/4261/23747/laf-plugin.jar"
-         dest="lib/laf-plugin.jar"
-	 verbose="true"
-	 usetimestamp="true"/>
-    <get src="https://www.dev.java.net/files/documents/4261/23748/laf-plugin-src.jar"
-         dest="lib/laf-plugin-src.jar"
-	 verbose="true"
-	 usetimestamp="true"/>
   </target>
 
   <target name="compile.javacc" depends="init">
