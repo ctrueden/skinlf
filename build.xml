@@ -27,6 +27,7 @@
     <pathelement location="lib/xalan.jar"/>
     <pathelement location="lib/xercesImpl.jar"/>
     <pathelement location="lib/xml-apis.jar"/>
+    <pathelement location="lib/laf-plugin.jar"/>
   </path>
 
   <property name="classpath.asprop" refid="classpath"/>
