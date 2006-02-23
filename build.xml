@@ -101,7 +101,7 @@
     <unjar src="lib/laf-plugin.jar" dest="${build.classes}/"/>
 
     <jar destfile="${build.dir}/${project}.jar">
-      <fileset dir="${build.classes}" includes="*.class,org/jvnet/**,com/**/*.class" excludes="**/region/**,**/nativeskin/**"/>
+      <fileset dir="${build.classes}" includes="*.class,nanoxml/**,org/jvnet/**,com/**/*.class" excludes="**/region/**,**/nativeskin/**"/>
       <fileset dir="${java.src.dir}" includes="com/**/*.properties"/>
       <fileset dir="${java.src.dir}" includes="com/**/*.template"/>
       <fileset dir="${java.src.dir}" includes="com/**/*.gif"/>
