@@ -51,9 +51,12 @@ import java.awt.AlphaComposite;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JComponent;
 import javax.swing.JPopupMenu;
+import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
@@ -188,71 +191,56 @@ public final class SkinPopupMenuUI extends BasicPopupMenuUI {
   }
 
   /**
-   * Description of the Class
+   * <p>Responsible for the fade-in effect of menus.</p>
+   * <p>I re-wrote it using javax.swing.timer because the old version accessed
+   * Swing components from outside of the event thread, which could
+   * theoretically lead to data corruption. --William Tracy, 2/20/04</p>
    *
    * @author    fred
    * @created   27 avril 2002
+   * @author William Tracy
    */
   class SkinPopupMenuListener implements PopupMenuListener {
-    Thread popupAnimator = null;
-
-    /**
-     * Description of the Method
-     *
-     * @param e  Description of Parameter
-     */
-    public void popupMenuCanceled(PopupMenuEvent e) {
-      if (popupAnimator != null) {
-        popupAnimator.interrupt();
-      }
-      // end of if (popupAnimator != null)
-      popupMenu().putClientProperty("alpha", null);
-    }
-
-    /**
-     * Description of the Method
-     *
-     * @param e  Description of Parameter
-     */
-    public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
-      if (popupAnimator != null) {
-        popupAnimator.interrupt();
-      }
-      // end of if (popupAnimator != null)
-      popupMenu().putClientProperty("alpha", null);
-    }
-
-    /**
-     * Description of the Method
-     *
-     * @param e  Description of Parameter
-     */
-    public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
-      popupMenu().putClientProperty("alpha",
-          AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.0f));
-      if (popupAnimator != null) {
-        popupAnimator.interrupt();
-      }
-      // end of if (popupAnimator != null)
-      popupAnimator =
-        new Thread("PopupAnimator") {
-          public void run() {
-            try {
-              AlphaComposite current =
-                  (AlphaComposite) popupMenu().getClientProperty("alpha");
-              while (current != null && current.getAlpha() < 0.75) {
-                Thread.sleep(25);
+    AlphaComposite current;
+    Timer timer = new Timer(25, new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            if (current == null || current.getAlpha() >= 0.75) {
+                timer.stop();
+            } else {
                 current = AlphaComposite.getInstance(current.getRule(), current.getAlpha() + 0.05f);
                 popupMenu().putClientProperty("alpha", current);
                 popupMenu().repaint();
-              }
-              // end of if (current.floatValue() < 1.0)
-            } catch (InterruptedException e) {
             }
-            popupAnimator = null;
-          }
-        };
-      popupAnimator.start();
+        }
+    });
+
+    /**
+     * Called if menu is canceled.
+     *
+     * @param e  Cancelling event
+     */
+    public void popupMenuCanceled(PopupMenuEvent e) {
+      timer.stop();
+    }
+
+    /**
+     * Called if menu will become invisible.
+     *
+     * @param e  Event which causes menu to become invisible
+     */
+    public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+      timer.stop();
+    }
+
+    /**
+     * Called if menu will become visible. Sets the starting fade-in color and
+     * starts the fade timer.
+     *
+     * @param e  Event which causes the menu to become visible
+     */
+    public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+      current = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.0f);
+      timer.start();
     }
   }
 

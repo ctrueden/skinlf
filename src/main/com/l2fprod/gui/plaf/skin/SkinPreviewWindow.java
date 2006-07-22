@@ -52,6 +52,8 @@ import com.l2fprod.util.WindowUtils;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -80,6 +82,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JToggleButton;
 import javax.swing.JTree;
+import javax.swing.Timer;
 import javax.swing.UIManager;
 
 /**
@@ -88,7 +91,7 @@ import javax.swing.UIManager;
  *
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.2 $, $Date: 2003-12-06 21:53:26 $
+ * @version   $Revision: 1.3 $, $Date: 2006-07-22 08:47:19 $
  */
 public class SkinPreviewWindow extends JFrame {
 
@@ -132,7 +135,7 @@ public class SkinPreviewWindow extends JFrame {
   }
 
   /**
-   * The main program for the SkinPreviewWindow class
+   * Runs the skin preview demo.
    *
    * @param args           The command line arguments
    * @exception Exception  Description of Exception
@@ -155,10 +158,7 @@ public class SkinPreviewWindow extends JFrame {
   }
 
   /**
-   * Description of the Class
-   *
-   * @author    fred
-   * @created   27 avril 2002
+   * Demonstrates buttons.
    */
   static class ButtonTest extends JPanel {
     /**
@@ -177,10 +177,7 @@ public class SkinPreviewWindow extends JFrame {
   }
 
   /**
-   * Description of the Class
-   *
-   * @author    fred
-   * @created   27 avril 2002
+   * Demonstrates check boxes.
    */
   static class CheckBoxTest extends JPanel {
     /**
@@ -189,8 +186,6 @@ public class SkinPreviewWindow extends JFrame {
     CheckBoxTest() {
       setLayout(new BorderLayout());
       Box p = new Box(BoxLayout.Y_AXIS);
-      //	    JPanel p = new JPanel();
-      //	    p.setLayout(new GridLayout(4, 1));
       p.add(new JCheckBox("Hello ???"));
       p.add(Box.createVerticalStrut(3));
       p.add(new JComboBox(new String[]{"1", "2", "4", "8"}));
@@ -220,10 +215,7 @@ public class SkinPreviewWindow extends JFrame {
   }
 
   /**
-   * Description of the Class
-   *
-   * @author    fred
-   * @created   27 avril 2002
+   * Demonstrates radio buttons.
    */
   static class RadioTest extends JPanel {
     /**
@@ -246,10 +238,7 @@ public class SkinPreviewWindow extends JFrame {
   }
 
   /**
-   * Description of the Class
-   *
-   * @author    fred
-   * @created   27 avril 2002
+   * Demonstrates slider controlls and progress bars.
    */
   static class ProgressTest extends JPanel {
     /**
@@ -273,31 +262,24 @@ public class SkinPreviewWindow extends JFrame {
       progress.setModel(model);
       add("East", progress);
 
-      Thread th =
-        new Thread() {
-          public void run() {
-            try {
-              while (true) {
-                Thread.sleep(50);
-                model.setValue(model.getValue() + 2);
-                if (model.getValue() >= 100) {
-                  Thread.sleep(1000);
-                  model.setValue(0);
-                }
-              }
-            } catch (Exception e) {
-            }
+      new Timer(50, new ActionListener() {
+        int counter = 0;
+
+        public void actionPerformed(ActionEvent e) {
+          if (model.getValue() >= 100) {
+            counter += 20;
+            if (counter >= 500) model.setValue(0);
+          } else {
+            model.setValue(model.getValue() + 2);
+            counter = 0;
           }
-        };
-      th.start();
+        }
+      }).start();
     }
   }
 
   /**
-   * Description of the Class
-   *
-   * @author    fred
-   * @created   27 avril 2002
+   * Tests internal frames.
    */
   static class InternalTest extends JPanel {
     /**
@@ -326,10 +308,7 @@ public class SkinPreviewWindow extends JFrame {
   }
 
   /**
-   * Description of the Class
-   *
-   * @author    fred
-   * @created   27 avril 2002
+   * Tests scrollbars.
    */
   static class ScrollTest extends JPanel {
     /**
@@ -342,10 +321,7 @@ public class SkinPreviewWindow extends JFrame {
   }
 
   /**
-   * Description of the Class
-   *
-   * @author    fred
-   * @created   27 avril 2002
+   * Tests lists.
    */
   static class ListTest extends JPanel {
     /**
@@ -362,10 +338,7 @@ public class SkinPreviewWindow extends JFrame {
   }
 
   /**
-   * Description of the Class
-   *
-   * @author    fred
-   * @created   27 avril 2002
+   * Tests tables.
    */
   static class TableTest extends JPanel {
     /**
