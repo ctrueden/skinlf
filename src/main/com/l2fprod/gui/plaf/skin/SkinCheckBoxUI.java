@@ -60,12 +60,20 @@ import javax.swing.plaf.ComponentUI;
  */
 public final class SkinCheckBoxUI extends SkinRadioButtonUI {
 
-  private boolean defaults_initialized = false;
-
-  final static SkinCheckBoxUI buttonUI = new SkinCheckBoxUI();
-
   private final static String propertyPrefix = "CheckBox" + ".";
 
+  // ********************************
+  //          Create PLAF
+  // ********************************
+  /**
+   * Description of the Method
+   *
+   * @param c  Description of Parameter
+   * @return   Description of the Returned Value
+   */
+  public static ComponentUI createUI(JComponent c) {
+    return new SkinCheckBoxUI();
+  }
 
   /**
    * Gets the PropertyPrefix attribute of the SkinCheckBoxUI object
@@ -86,35 +94,7 @@ public final class SkinCheckBoxUI extends SkinRadioButtonUI {
    */
   public void installDefaults(AbstractButton b) {
     super.installDefaults(b);
-    if (!defaults_initialized) {
-      icon = UIManager.getIcon(getPropertyPrefix() + "icon");
-      defaults_initialized = true;
-    }
-  }
-
-  /**
-   * Description of the Method
-   *
-   * @param b  Description of Parameter
-   */
-  public void uninstallDefaults(AbstractButton b) {
-    super.uninstallDefaults(b);
-    defaults_initialized = false;
-  }
-
-  // ********************************
-  //          Create PLAF
-  // ********************************
-  /**
-   * Description of the Method
-   *
-   * @param c  Description of Parameter
-   * @return   Description of the Returned Value
-   */
-  public static ComponentUI createUI(JComponent c) {
-    buttonUI.skin = SkinLookAndFeel.getSkin();
-    buttonUI.defaults_initialized = false;
-    return buttonUI;
+    icon = UIManager.getIcon(getPropertyPrefix() + "icon");
   }
 
 }

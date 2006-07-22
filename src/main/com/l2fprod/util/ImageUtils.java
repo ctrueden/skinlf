@@ -75,7 +75,7 @@ import javax.swing.plaf.ColorUIResource;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.7 $, $Date: 2005-10-09 13:27:31 $
+ * @version   $Revision: 1.8 $, $Date: 2006-07-22 09:52:13 $
  */
 public final class ImageUtils implements SwingConstants {
 
@@ -144,7 +144,7 @@ public final class ImageUtils implements SwingConstants {
 	 * @return         The DisabledIcon value
 	 */
 	public static ImageIcon getDisabledIcon(Image anImage) {
-		return new ImageIcon(getDisabledImage(anImage));
+		return new WeakImageIcon(getDisabledImage(anImage));
 	}
 
 	/**

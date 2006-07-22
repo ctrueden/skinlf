@@ -47,16 +47,19 @@
  */
 package com.l2fprod.gui.plaf.skin;
 
-import java.awt.*;
-import javax.swing.plaf.*;
-import javax.swing.*;
+import java.awt.Component;
+import java.awt.Graphics;
+
+import javax.swing.AbstractButton;
+import javax.swing.Icon;
+import javax.swing.plaf.UIResource;
 
 /**
  * Created on 05/04/2000 by Frederic Lavigne, fred@L2FProd.com
  *
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.2 $, $Date: 2003-12-06 21:46:29 $
+ * @version   $Revision: 1.3 $, $Date: 2006-07-22 09:52:08 $
  */
 final class SkinCheckBoxIcon implements Icon, java.io.Serializable, UIResource {
 

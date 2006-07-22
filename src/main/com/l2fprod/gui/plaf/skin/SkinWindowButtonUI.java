@@ -56,14 +56,26 @@ import java.awt.*;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.4 $, $Date: 2004-07-18 16:55:27 $
+ * @version   $Revision: 1.5 $, $Date: 2006-07-22 09:52:07 $
  */
 public final class SkinWindowButtonUI extends BasicButtonUI {
 
-  private final static SkinWindowButtonUI buttonUI = new SkinWindowButtonUI();
-
   private static Rectangle iconRect = new Rectangle();
 
+
+  // ********************************
+  //          Create PLAF
+  // ********************************
+  /**
+   * Description of the Method
+   *
+   * @param c  Description of Parameter
+   * @return   Description of the Returned Value
+   */
+  public static ComponentUI createUI(JComponent c) {
+    return new SkinWindowButtonUI();
+  }
+  
   // ********************************
   //          Paint Methods
   // ********************************
@@ -127,19 +139,6 @@ public final class SkinWindowButtonUI extends BasicButtonUI {
     b.setOpaque(true);
     b.setBorderPainted(true);
     b.setFocusPainted(true);
-  }
-
-  // ********************************
-  //          Create PLAF
-  // ********************************
-  /**
-   * Description of the Method
-   *
-   * @param c  Description of Parameter
-   * @return   Description of the Returned Value
-   */
-  public static ComponentUI createUI(JComponent c) {
-    return buttonUI;
   }
 
 }

@@ -81,10 +81,6 @@ public class SkinRadioButtonUI extends BasicRadioButtonUI {
    */
   protected Skin skin = SkinLookAndFeel.getSkin();
 
-  private boolean initialized = false;
-
-  final static SkinRadioButtonUI buttonUI = new SkinRadioButtonUI();
-
   // ********************************
   //          Paint Methods
   // ********************************
@@ -100,6 +96,20 @@ public class SkinRadioButtonUI extends BasicRadioButtonUI {
   private static Rectangle iconRect = new Rectangle();
   private static Rectangle textRect = new Rectangle();
 
+
+  // ********************************
+  //          Create PLAF
+  // ********************************
+  /**
+   * Description of the Method
+   *
+   * @param c  Description of Parameter
+   * @return   Description of the Returned Value
+   */
+  public static ComponentUI createUI(JComponent c) {
+    return new SkinRadioButtonUI();
+  }
+
   // ********************************
   //           Defaults
   // ********************************
@@ -110,15 +120,12 @@ public class SkinRadioButtonUI extends BasicRadioButtonUI {
    */
   public void installDefaults(AbstractButton b) {
     super.installDefaults(b);
-    if (!initialized) {
-      //    dashedRectGapX = ((Integer)UIManager.get("Button.dashedRectGapX")).intValue();
-      //	    dashedRectGapY = ((Integer)UIManager.get("Button.dashedRectGapY")).intValue();
-      //	    dashedRectGapWidth = ((Integer)UIManager.get("Button.dashedRectGapWidth")).intValue();
-      //	    dashedRectGapHeight = ((Integer)UIManager.get("Button.dashedRectGapHeight")).intValue();
-      focusColor = Color.black;
-      //UIManager.getColor(getPropertyPrefix() + "focus");
-      initialized = true;
-    }
+    //    dashedRectGapX = ((Integer)UIManager.get("Button.dashedRectGapX")).intValue();
+    //	    dashedRectGapY = ((Integer)UIManager.get("Button.dashedRectGapY")).intValue();
+    //	    dashedRectGapWidth = ((Integer)UIManager.get("Button.dashedRectGapWidth")).intValue();
+    //	    dashedRectGapHeight = ((Integer)UIManager.get("Button.dashedRectGapHeight")).intValue();
+    focusColor = Color.black;
+    //UIManager.getColor(getPropertyPrefix() + "focus");
     b.setOpaque(false);
   }
 
@@ -235,21 +242,6 @@ public class SkinRadioButtonUI extends BasicRadioButtonUI {
   protected void paintFocus(Graphics g, Rectangle textRect, Dimension d) {
     g.setColor(getFocusColor());
     BasicGraphicsUtils.drawDashedRect(g, textRect.x, textRect.y, textRect.width, textRect.height);
-  }
-
-  // ********************************
-  //          Create PLAF
-  // ********************************
-  /**
-   * Description of the Method
-   *
-   * @param c  Description of Parameter
-   * @return   Description of the Returned Value
-   */
-  public static ComponentUI createUI(JComponent c) {
-    buttonUI.skin = SkinLookAndFeel.getSkin();
-    buttonUI.initialized = false;
-    return buttonUI;
   }
 
 }

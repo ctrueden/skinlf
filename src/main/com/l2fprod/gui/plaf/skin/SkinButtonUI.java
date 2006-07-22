@@ -57,7 +57,7 @@ import java.awt.*;
 /**
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.2 $, $Date: 2003-12-06 21:45:20 $
+ * @version   $Revision: 1.3 $, $Date: 2006-07-22 09:52:08 $
  */
 public class SkinButtonUI extends BasicButtonUI {
 
@@ -87,9 +87,18 @@ public class SkinButtonUI extends BasicButtonUI {
    */
   protected Skin skin = SkinLookAndFeel.getSkin();
 
-  private boolean defaults_initialized = false;
-
-  final static SkinButtonUI buttonUI = new SkinButtonUI();
+  // ********************************
+  //          Create PLAF
+  // ********************************
+  /**
+   * Description of the Method
+   *
+   * @param c  Description of Parameter
+   * @return   Description of the Returned Value
+   */
+  public static ComponentUI createUI(JComponent c) {
+    return new SkinButtonUI();
+  }
 
   // ********************************
   //         Paint Methods
@@ -201,15 +210,13 @@ public class SkinButtonUI extends BasicButtonUI {
    */
   protected void installDefaults(final AbstractButton b) {
     super.installDefaults(b);
-    if (!defaults_initialized) {
-      String pp = getPropertyPrefix();
-      dashedRectGapX = UIManager.getInt(pp + "dashedRectGapX");
-      dashedRectGapY = UIManager.getInt(pp + "dashedRectGapY");
-      dashedRectGapWidth = UIManager.getInt(pp + "dashedRectGapWidth");
-      dashedRectGapHeight = UIManager.getInt(pp + "dashedRectGapHeight");
-      focusColor = UIManager.getColor(pp + "focus");
-      defaults_initialized = true;
-    }
+
+    String pp = getPropertyPrefix();
+    dashedRectGapX = UIManager.getInt(pp + "dashedRectGapX");
+    dashedRectGapY = UIManager.getInt(pp + "dashedRectGapY");
+    dashedRectGapWidth = UIManager.getInt(pp + "dashedRectGapWidth");
+    dashedRectGapHeight = UIManager.getInt(pp + "dashedRectGapHeight");
+    focusColor = UIManager.getColor(pp + "focus");
 
     b.setBorderPainted(false);
     b.setFocusPainted(true);
@@ -227,7 +234,6 @@ public class SkinButtonUI extends BasicButtonUI {
    */
   protected void uninstallDefaults(AbstractButton b) {
     super.uninstallDefaults(b);
-    defaults_initialized = false;
     b.setBorderPainted(true);
     b.setFocusPainted(true);
     b.setOpaque(true);
@@ -259,21 +265,6 @@ public class SkinButtonUI extends BasicButtonUI {
    */
   protected void paintButtonPressed(Graphics g, AbstractButton b) {
     setTextShiftOffset();
-  }
-
-  // ********************************
-  //          Create PLAF
-  // ********************************
-  /**
-   * Description of the Method
-   *
-   * @param c  Description of Parameter
-   * @return   Description of the Returned Value
-   */
-  public static ComponentUI createUI(JComponent c) {
-    buttonUI.skin = SkinLookAndFeel.getSkin();
-    buttonUI.defaults_initialized = false;
-    return buttonUI;
   }
 
 }
