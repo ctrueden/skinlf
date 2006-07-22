@@ -83,7 +83,7 @@ import javax.swing.text.JTextComponent;
  * website</a> for the complete description of a theme pack.
  * 
  * @author $Author: l2fprod $
- * @version $Revision: 1.18 $, $Date: 2006-02-22 15:55:49 $
+ * @version $Revision: 1.19 $, $Date: 2006-07-22 10:04:33 $
  */
 public class SkinLookAndFeel extends BasicLookAndFeel {
  
@@ -278,9 +278,7 @@ public class SkinLookAndFeel extends BasicLookAndFeel {
 
     Object[] results = new Object[list.size()];
     list.copyInto(results);
-    table.putDefaults(results);
-    
-    LafPluginSupport.initClassDefaults(table);
+    table.putDefaults(results);    
   }
 
   /**
@@ -757,7 +755,7 @@ public class SkinLookAndFeel extends BasicLookAndFeel {
       table.put("EditorPane.keyBindings", multilineBindings);
     }
 
-    LafPluginSupport.initComponentDefaults(table);
+    LafPluginSupport.initAllDefaultsEntries(table);
   }
 
   public void initialize() {
@@ -1203,7 +1201,7 @@ public class SkinLookAndFeel extends BasicLookAndFeel {
     int[] dim = new int[2];
     Arrays.fill(dim, 0);
     String[] dimStrings = StringUtils.splitString(str, "{,}");
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < dim.length; i++) {
       dim[i] = Integer.parseInt(dimStrings[i]);
     }
     return new Dimension(dim[0], dim[1]);
@@ -1219,7 +1217,7 @@ public class SkinLookAndFeel extends BasicLookAndFeel {
     int[] insets = new int[4];
     Arrays.fill(insets, 0);
     String[] insetsString = StringUtils.splitString(str, "{,}");
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < insets.length; i++) {
       insets[i] = Integer.parseInt(insetsString[i]);
     }
     return new Insets(insets[0], insets[1], insets[2], insets[3]);

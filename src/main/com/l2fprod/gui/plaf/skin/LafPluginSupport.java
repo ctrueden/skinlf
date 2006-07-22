@@ -19,7 +19,7 @@ package com.l2fprod.gui.plaf.skin;
 
 import javax.swing.UIDefaults;
 
-import org.jvnet.lafplugin.PluginManager;
+import org.jvnet.lafplugin.ComponentPluginManager;
 
 /**
  * Implements support for the laf-plugin project.
@@ -30,21 +30,13 @@ public class LafPluginSupport {
 
   public static final String PLUGIN_XML = "META-INF/skinlf-plugin.xml";
 
-  private static PluginManager pluginManager = new PluginManager(PLUGIN_XML,
-    "laf-plugin", "plugin-class");
-
-  /**
-   * Called by {@link SkinLookAndFeel#initClassDefaults(UIDefaults)}
-   */
-  public static void initClassDefaults(UIDefaults table) {
-    pluginManager.processAllUiDelegateEntries(table);
-  }
+  private static ComponentPluginManager pluginManager = new ComponentPluginManager(
+    PLUGIN_XML);
 
   /**
    * Called by {@link SkinLookAndFeel#initComponentDefaults(UIDefaults)}
    */
-  public static void initComponentDefaults(UIDefaults table) {
-    pluginManager.processAllFontEntries(table);
+  public static void initAllDefaultsEntries(UIDefaults table) {
     pluginManager.processAllDefaultsEntries(table, SkinLookAndFeel.getSkin());
   }
 
