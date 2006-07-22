@@ -72,7 +72,7 @@ import javax.swing.table.TableColumn;
  *
  * @author    $Author: l2fprod $
  * @created   27 avril 2002
- * @version   $Revision: 1.11 $, $Date: 2005-10-09 13:28:15 $
+ * @version   $Revision: 1.12 $, $Date: 2006-07-22 11:41:19 $
  */
 public class demoPanel extends JPanel {
 
@@ -105,7 +105,14 @@ public class demoPanel extends JPanel {
               invoke(fileOpenService, new Object[]{null, null});
           } catch (Exception e) {
             System.err.println("Error trying JavaWebStart, will default to JFileChooser:" + e.getMessage());
-            new JFileChooser().showDialog(demoPanel.this, "Ok");
+            JFileChooser chooser = new JFileChooser();
+            chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+            if (JFileChooser.APPROVE_OPTION==chooser.showDialog(demoPanel.this, "Ok")) {
+              JOptionPane.showMessageDialog(demoPanel.this, "You selected "
+              + chooser.getSelectedFile());
+            } else {
+              JOptionPane.showMessageDialog(demoPanel.this, "You pressed Cancel");
+            }            
           }
         }
       });

@@ -14,7 +14,7 @@
 
   <!-- Project Identification -->
   <property name="project" value="skinlf"/>
-  <property name="version" value="6.3-SNAPSHOT"/>
+  <property name="version" value="6.7"/>
   <property name="year"    value="2000-2006"/>
   <property name="project.fullname" value="Skin Look And Feel"/>
   <property name="project.nativeskin" value="nativeskin"/>

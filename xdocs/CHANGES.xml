@@ -5,6 +5,12 @@
     <person name="Frederic Lavigne" email="fred@L2FProd.com" id="FL"/>
   </devs>
 
+  <release version="6.7" date="22 July 2006">
+    <action type="update">Updated to LafPlugin 0.2</action>
+    <action type="fix">Applied patch for threading issue in popupmenu animation</action>
+    <action type="fix">Attempt to reduce memory leak (https://skinlf.dev.java.net/issues/show_bug.cgi?id=7)</action>
+  </release>
+
   <release version="6.2" date="11 February 2006">
     <action type="fix">Fix for editable JComboBox</action>
     <action type="add">German resource file</action>
