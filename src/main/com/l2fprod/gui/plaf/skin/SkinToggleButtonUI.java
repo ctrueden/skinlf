@@ -97,7 +97,7 @@ public final class SkinToggleButtonUI extends SkinButtonUI {
         c, fm, b.getText(), b.getIcon(),
         b.getVerticalAlignment(), b.getHorizontalAlignment(),
         b.getVerticalTextPosition(), b.getHorizontalTextPosition(),
-        viewRect, iconRect, textRect, b.getText() == null ? 0 : getDefaultTextIconGap(b)
+        viewRect, iconRect, textRect, b.getText() == null ? 0 : b.getIconTextGap()
         );
 
     g.setColor(b.getBackground());
