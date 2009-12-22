@@ -25,9 +25,9 @@ import javax.swing.UIDefaults;
  * Default Skin Support. <br>
  *
  *
- * @author    $Author: l2fprod $
+ * @author    $Author: zombi $
  * @created   27 avril 2002
- * @version   $Revision: 1.2 $, $Date: 2009-05-01 13:21:42 $
+ * @version   $Revision: 1.3 $, $Date: 2009-12-22 10:25:06 $
  */
 public class AbstractSkin implements Skin {
 
@@ -71,6 +71,8 @@ public class AbstractSkin implements Skin {
    * Description of the Field
    */
   protected java.util.Hashtable resources = new java.util.Hashtable();
+  
+  protected UIDefaults defaults; 
 
   /**
    * Gets the Personality attribute of the AbstractSkin object
@@ -178,7 +180,13 @@ public class AbstractSkin implements Skin {
   public void unload() {
   }
 
-  public void initComponentDefaults(UIDefaults table) {
-  }
-
+	public void initComponentDefaults(UIDefaults table) {
+	  this.defaults = table;
+	}
+  
+  
+	public UIDefaults getUIDefaults() {
+		return defaults;
+	}
+  	
 }

@@ -48,9 +48,9 @@ import com.l2fprod.gui.plaf.skin.impl.gtk.parser.*;
  * <BR>
  * Created on 28/01/2000 by Frederic Lavigne, fred@L2FProd.com
  *
- * @author    $Author: l2fprod $
+ * @author    $Author: zombi $
  * @created   27 avril 2002
- * @version   $Revision: 1.3 $, $Date: 2009-05-01 13:21:08 $
+ * @version   $Revision: 1.4 $, $Date: 2009-12-22 10:25:05 $
  */
 public final class GtkSkin extends AbstractSkin {
 
@@ -291,8 +291,9 @@ public final class GtkSkin extends AbstractSkin {
      javax.swing.border.Border tooltipBorder;
   */
   public void initComponentDefaults(UIDefaults table) {
+    super.initComponentDefaults(table);
     // set border on components but based on property (for now)
-    if (Boolean.TRUE.equals(UIManager.get("EnableBorders"))) {
+    if (Boolean.TRUE.equals(table.get("EnableBorders"))) {
       if (textBorder != null) {
         table.put("TextField.border", textBorder);
         table.put("PasswordField.border", textBorder);

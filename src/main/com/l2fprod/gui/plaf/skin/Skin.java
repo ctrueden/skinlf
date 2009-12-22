@@ -23,9 +23,9 @@ import javax.swing.UIDefaults;
  * Skin Entry Class. <br>
  *
  *
- * @author    $Author: l2fprod $
+ * @author    $Author: zombi $
  * @created   27 avril 2002
- * @version   $Revision: 1.2 $, $Date: 2009-05-01 13:24:43 $
+ * @version   $Revision: 1.3 $, $Date: 2009-12-22 10:25:06 $
  */
 public interface Skin {
 
@@ -113,4 +113,7 @@ public interface Skin {
   public Object getResource(Object key);
 
   public void initComponentDefaults(UIDefaults table);
+  
+  public UIDefaults getUIDefaults();
+  
 }

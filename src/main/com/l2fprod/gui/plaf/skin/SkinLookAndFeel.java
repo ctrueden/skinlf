@@ -35,6 +35,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.Enumeration;
+import java.util.Iterator;
 import java.util.ResourceBundle;
 
 import javax.swing.BorderFactory;
@@ -62,8 +63,8 @@ import javax.swing.text.JTextComponent;
  * or to load skins. <br>See <a href="http://www.L2FProd.com/">L2FProd.com
  * website</a> for the complete description of a theme pack.
  * 
- * @author $Author: l2fprod $
- * @version $Revision: 1.20 $, $Date: 2009-11-17 18:53:47 $
+ * @author $Author: zombi $
+ * @version $Revision: 1.21 $, $Date: 2009-12-22 10:25:06 $
  */
 public class SkinLookAndFeel extends BasicLookAndFeel {
  
@@ -286,6 +287,7 @@ public class SkinLookAndFeel extends BasicLookAndFeel {
   protected void initComponentDefaults(UIDefaults table) {
     super.initComponentDefaults(table);
 
+    loadSkinConfiguration(table);
     loadResourceBundle(table);
 
     // *** Tree
@@ -738,7 +740,8 @@ public class SkinLookAndFeel extends BasicLookAndFeel {
     LafPluginSupport.initAllDefaultsEntries(table);
   }
 
-  public void initialize() {
+
+public void initialize() {
     super.initialize();
     
     LafPluginSupport.initialize();
@@ -757,6 +760,18 @@ public class SkinLookAndFeel extends BasicLookAndFeel {
       String key = (String)iter.nextElement();
       table.put(key, fixMnemonic(key, bundle.getObject(key)));
     }
+  }
+
+  /**
+   * load the skin configuration properties into the given table.
+   * @param table
+   */
+  private void loadSkinConfiguration(UIDefaults table) {
+	UIDefaults uiDefaults = getSkin().getUIDefaults();
+	for (Iterator keys = uiDefaults.keySet().iterator();keys.hasNext();) {
+		Object key = keys.next();
+		table.put(key, uiDefaults.get(key));
+	}
   }
 
   private Object fixMnemonic(String key, Object value) {
@@ -980,10 +995,11 @@ public class SkinLookAndFeel extends BasicLookAndFeel {
     checkRequiredVersion(element.getProperty("REQUIRE"));
 
     // reset any custom properties that may be set in the skin
-    UIManager.put("JDesktopPane.backgroundEnabled", Boolean.FALSE);
-    UIManager.put("PopupMenu.animation", Boolean.FALSE);
-    UIManager.put("ScrollBar.alternateLayout", Boolean.FALSE);
-    UIManager.put("JSplitPane.alternateUI", Boolean.FALSE);
+    UIDefaults defaults = new UIDefaults();
+    defaults.put("JDesktopPane.backgroundEnabled", Boolean.FALSE);
+    defaults.put("PopupMenu.animation", Boolean.FALSE);
+    defaults.put("ScrollBar.alternateLayout", Boolean.FALSE);
+    defaults.put("JSplitPane.alternateUI", Boolean.FALSE);
 
     Enumeration enumeration = element.enumerateChildren();
     while (enumeration.hasMoreElements()) {
@@ -1000,33 +1016,33 @@ public class SkinLookAndFeel extends BasicLookAndFeel {
           || "".equals(type)
           || "boolean".equalsIgnoreCase(type)
           || "java.lang.Boolean".equalsIgnoreCase(type)) {
-          UIManager.put(
+           defaults.put(
             element.getProperty("NAME"),
             Boolean.valueOf(element.getProperty("VALUE")));
         } else if (
           "int".equalsIgnoreCase(type)
             || "java.lang.Integer".equalsIgnoreCase(type)) {
-          UIManager.put(
+           defaults.put(
             element.getProperty("NAME"),
             Integer.valueOf(element.getProperty("VALUE")));
         } else if (
           "String".equalsIgnoreCase(type)
             || "java.lang.String".equalsIgnoreCase(type)) {
-          UIManager.put(
+           defaults.put(
             element.getProperty("NAME"),
             element.getProperty("VALUE"));
         } else if (
           "Color".equalsIgnoreCase(type)
             || "java.awt.Color".equalsIgnoreCase(type)) {
           Color color = Color.decode(element.getProperty("VALUE"));
-          UIManager.put(
+          defaults.put(
             element.getProperty("NAME"),
             new ColorUIResource(color));
         } else if (
           "Insets".equalsIgnoreCase(type)
             || "java.awt.Insets".equalsIgnoreCase(type)) {
           Insets insets = parseInsets(element.getProperty("VALUE"));
-          UIManager.put(
+          defaults.put(
             element.getProperty("NAME"),
             new InsetsUIResource(
               insets.top,
@@ -1037,7 +1053,7 @@ public class SkinLookAndFeel extends BasicLookAndFeel {
           "Dimension".equalsIgnoreCase(type)
             || "java.awt.Dimension".equalsIgnoreCase(type)) {
           Dimension dim = parseDimension(element.getProperty("VALUE"));
-          UIManager.put(
+          defaults.put(
             element.getProperty("NAME"),
             new DimensionUIResource(dim.width, dim.height));
         } else if (
@@ -1082,7 +1098,7 @@ public class SkinLookAndFeel extends BasicLookAndFeel {
                   padding,
                   padding));
           }
-          UIManager.put(
+          defaults.put(
             element.getProperty("NAME"),
             new BorderUIResource(border));
         } else if (
@@ -1090,7 +1106,7 @@ public class SkinLookAndFeel extends BasicLookAndFeel {
             || "javax.swing.border.EmptyBorder".equalsIgnoreCase(type)) {
           Insets insets = parseInsets(element.getProperty("VALUE"));
           Border border = new javax.swing.border.EmptyBorder(insets);
-          UIManager.put(
+          defaults.put(
             element.getProperty("NAME"),
             new BorderUIResource(border));
         }
@@ -1104,21 +1120,22 @@ public class SkinLookAndFeel extends BasicLookAndFeel {
             Integer.parseInt(fontStyle[2]));
         if (f != null) {
           if ("Global".equalsIgnoreCase(element.getProperty("NAME"))) {
-            SkinUtils.setFont(new FontUIResource(f));
+            SkinUtils.setGlobalFont(defaults, new FontUIResource(f));
           } else {
-            UIManager.put(element.getProperty("NAME"), new FontUIResource(f));
+        	defaults.put(element.getProperty("NAME"), new FontUIResource(f));
           }
         }
       } else if ("icon".equalsIgnoreCase(tagName)) {
         final URL iconURL = new URL(url, element.getProperty("VALUE"));
         ImageIcon icon = new ImageIcon(SkinUtils.loadImage(iconURL));
-        UIManager.put(element.getProperty("NAME"), new IconUIResource(icon));
+        defaults.put(element.getProperty("NAME"), new IconUIResource(icon));
         // put the default internal icon at work for JOptionPane too
         if ("InternalFrame.icon".equals(element.getProperty("NAME"))) {
           JOptionPane.getRootFrame().setIconImage(icon.getImage());
         }
       }
     }
+    skin.initComponentDefaults(defaults);
     return skin;
   }
 

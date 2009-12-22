@@ -33,9 +33,9 @@ import javax.swing.UIManager;
 import javax.swing.plaf.FontUIResource;
 
 /**
- * @author    $Author: l2fprod $
+ * @author    $Author: zombi $
  * @created   27 avril 2002
- * @version   $Revision: 1.7 $, $Date: 2009-05-01 13:24:43 $
+ * @version   $Revision: 1.8 $, $Date: 2009-12-22 10:25:06 $
  */
 public final class SkinUtils {
 
@@ -64,21 +64,30 @@ public final class SkinUtils {
    */
   public static void setFont(Font f) {
     UIDefaults defs = UIManager.getDefaults();
-    for (Enumeration keys = defs.keys(); keys.hasMoreElements();) {
-      Object o = keys.nextElement();
-      if (o instanceof String) {
-        String aKey = (String) o;
-        if (aKey.endsWith(".font")
-            || aKey.endsWith(".titleFont")
-            || aKey.endsWith(".acceleratorFont")) {
-          if (defs.get(aKey) instanceof FontUIResource) {
-            UIManager.put(aKey, f);
-          }
-        }
-      }
-    }
+    setGlobalFont(defs, f);
   }
 
+  /**
+   * Set every font to the specified one.
+   * @param defs
+   * @param f
+   */
+	public static void setGlobalFont(UIDefaults defs, Font f) {
+		for (Enumeration keys = defs.keys(); keys.hasMoreElements();) {
+			Object o = keys.nextElement();
+			if (o instanceof String) {
+				String aKey = (String) o;
+				if (aKey.endsWith(".font") || aKey.endsWith(".titleFont")
+						|| aKey.endsWith(".acceleratorFont")) {
+					if (defs.get(aKey) instanceof FontUIResource) {
+						UIManager.put(aKey, f);
+					}
+				}
+			}
+		}
+	}  
+  
+  
   /**
    * Gets the Font attribute of the SkinUtils class
    *

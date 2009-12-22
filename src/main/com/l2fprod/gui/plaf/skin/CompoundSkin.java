@@ -28,9 +28,9 @@ import com.l2fprod.gui.plaf.skin.impl.AbstractSkin;
  * Assembles two skins to create a new one. <br>
  * This can be used to combine features from two skins.
  *
- * @author    $Author: l2fprod $
+ * @author    $Author: zombi $
  * @created   27 avril 2002
- * @version   $Revision: 1.5 $, $Date: 2009-05-01 13:24:42 $
+ * @version   $Revision: 1.6 $, $Date: 2009-12-22 10:25:06 $
  */
 public final class CompoundSkin extends AbstractSkin {
 
@@ -93,11 +93,13 @@ public final class CompoundSkin extends AbstractSkin {
     return (value != null ? value : skinb.getResource(key));
   }
 
-  public void initComponentDefaults(UIDefaults table) {
-    skina.initComponentDefaults(table);
-    skinb.initComponentDefaults(table);
-  }
-
+	public void initComponentDefaults(UIDefaults table) {
+		super.initComponentDefaults(table);
+		skina.initComponentDefaults(table);
+		skinb.initComponentDefaults(table);
+	}
+  
+  
   /**
    * Adds a feature to the Colors attribute of the CompoundSkin object
    *
