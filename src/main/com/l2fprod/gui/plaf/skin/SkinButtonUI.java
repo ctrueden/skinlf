@@ -25,9 +25,9 @@ import javax.swing.text.View;
 import java.awt.*;
 
 /**
- * @author    $Author: l2fprod $
+ * @author    $Author: zombi $
  * @created   27 avril 2002
- * @version   $Revision: 1.4 $, $Date: 2009-05-01 13:24:44 $
+ * @version   $Revision: 1.5 $, $Date: 2009-12-22 10:27:33 $
  */
 public class SkinButtonUI extends BasicButtonUI {
 
@@ -119,7 +119,7 @@ public class SkinButtonUI extends BasicButtonUI {
         b.getVerticalAlignment(), b.getHorizontalAlignment(),
         b.getVerticalTextPosition(), b.getHorizontalTextPosition(),
         viewRect, iconRect, textRect,
-        b.getText() == null ? 0 : defaultTextIconGap
+        b.getText() == null ? 0 : b.getIconTextGap()
         );
 
     clearTextShiftOffset();
