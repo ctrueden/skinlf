@@ -64,7 +64,7 @@ import javax.swing.text.JTextComponent;
  * website</a> for the complete description of a theme pack.
  * 
  * @author $Author: zombi $
- * @version $Revision: 1.21 $, $Date: 2009-12-22 10:25:06 $
+ * @version $Revision: 1.22 $, $Date: 2009-12-28 01:13:54 $
  */
 public class SkinLookAndFeel extends BasicLookAndFeel {
  
@@ -1128,7 +1128,7 @@ public void initialize() {
       } else if ("icon".equalsIgnoreCase(tagName)) {
         final URL iconURL = new URL(url, element.getProperty("VALUE"));
         ImageIcon icon = new ImageIcon(SkinUtils.loadImage(iconURL));
-        defaults.put(element.getProperty("NAME"), new IconUIResource(icon));
+        defaults.put(element.getProperty("NAME"), new SkinIconUIResource(icon));
         // put the default internal icon at work for JOptionPane too
         if ("InternalFrame.icon".equals(element.getProperty("NAME"))) {
           JOptionPane.getRootFrame().setIconImage(icon.getImage());
