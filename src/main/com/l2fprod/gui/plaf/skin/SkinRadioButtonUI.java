@@ -120,22 +120,24 @@ public class SkinRadioButtonUI extends BasicRadioButtonUI {
     iconRect.x = iconRect.y = iconRect.width = iconRect.height = 0;
     textRect.x = textRect.y = textRect.width = textRect.height = 0;
 
-    Icon icon;
-    if (b.isSelected()) {
-      icon = b.getSelectedIcon();
-    }
-    else {
-      icon = b.getIcon();
-    }
+    Icon icon = null;
 
-    if (b.isRolloverEnabled() && model.isRollover()) {
-      if (b.isSelected()) {
-        icon = b.getRolloverSelectedIcon();
-      }
-      else {
-        icon = b.getRolloverIcon();
-      }
-    }
+	if (b.isSelected()) {
+		if (b.isRolloverEnabled() && model.isRollover()) {
+			icon = b.getRolloverSelectedIcon();
+			if (icon == null) {
+				icon = b.getSelectedIcon();
+			}
+		} else {
+			icon = b.getSelectedIcon();
+		}
+	} else if (b.isRolloverEnabled() && model.isRollover()) {
+           icon = b.getRolloverIcon();
+    } 
+		
+	if (icon == null) {
+		icon = b.getIcon();
+	}
 
     if (icon == null) {
       icon = skin.getButton().getRadioIcon(b);
